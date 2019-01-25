@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e31a430e-6943-4a61-a096-f8b69cce855e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-    </list>
+    <list default="true" id="e31a430e-6943-4a61-a096-f8b69cce855e" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -76,6 +74,12 @@
               <item name="cs5610-zhexuansong-assign1" type="462c0819:PsiDirectoryNode" />
               <item name="dist" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="cs5610-zhexuansong-assign1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cs5610-zhexuansong-assign1" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
+              <item name="my-project" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -147,16 +151,15 @@
       <option name="presentableId" value="Default" />
       <updated>1548393338267</updated>
       <workItem from="1548393339834" duration="237000" />
-      <workItem from="1548393589361" duration="372000" />
+      <workItem from="1548393589361" duration="631000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="609000" />
+    <option name="totallyTimeSpent" value="868000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="40" y="23" width="1400" height="761" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24945612" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
