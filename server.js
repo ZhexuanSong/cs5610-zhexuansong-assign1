@@ -20,12 +20,12 @@ app.use(function(req, res, next) {
   next();
 });
 
-const port = process.env.PORT || '3200';
+const port = process.env.PORT || '8888';
 app.set('port', port);
 
 
 // Create HTTP server
 const server = http.createServer(app);
-server.listen( port , () => console.log('Running on port 3200'));
+server.listen( port , () => console.log('Running on port 8888'));
 
 //require('./assignment/app')(app);
