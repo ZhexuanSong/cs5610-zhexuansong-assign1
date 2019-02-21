@@ -1,0 +1,103 @@
+<nav class="navbar navbar-fixed-top navbar-light bg-secondary">
+  <a class="btn navbar-brand" routerLink="/user/{{userId}}/website/{{websiteId}}/page">
+    <span class="glyphicon glyphicon-chevron-left text-dark"></span>
+  </a>
+  <div class="navbar-brand font-weight-bold">
+    Widgets
+  </div>
+  <a class="btn navbar-brand pull-right" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new">
+    <span class="glyphicon glyphicon-plus text-dark"></span>
+  </a>
+</nav>
+
+<div class="cl-body-padding">
+  <div *ngFor="let widget of widgets">
+    <div *ngIf="widget.widgetType == 'HEADER'">
+      <div class="pull-right">
+        <a [routerLink]="['/#']" class="pull-right">
+          <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </a>
+        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
+          <span class="glyphicon glyphicon-cog"></span>
+        </a>
+      </div>
+      <h1>{{widget.text}}</h1>
+    </div>
+
+    <div *ngIf="widget.widgetType == 'IMAGE'">
+      <div>
+        <a [routerLink]="['/#']" class="pull-right">
+          <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </a>
+        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}" class="pull-right">
+          <span class="glyphicon glyphicon-cog"></span>
+        </a>
+        <img class="img-responsive cl-widget-images" src="{{widget.url}}" alt="alt" width="{{widget.width}}">
+      </div>
+      <br>
+    </div>
+
+    <div class="embed-responsive embed-responsive-16by9" *ngIf="widget.widgetType == 'YOUTUBE'">
+      <div>
+        <iframe width="{{widget.width}}" height="360" [src]="photoURL(widget.url)" frameborder="0" allowfullscreen>
+        </iframe>
+        <a [routerLink]="['/#']" class="pull-right">
+          <span class="glyphicon glyphicon-menu-hamburger" style="background-color: white"></span>
+        </a>
+        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}" class="pull-right">
+          <span class="glyphicon glyphicon-cog" style="background-color: white"></span>
+        </a>
+      </div>
+      <br>
+    </div>
+  </div>
+</div>
+<!-- <div class="container-fluid cl-body-padding">
+  <div>
+    <div class="pull-right">
+      <a [routerLink]="['/#']" class="pull-right">
+        <span class="glyphicon glyphicon-menu-hamburger"></span>
+      </a>
+      <a [routerLink]="['/widget-heading']">
+        <span class="glyphicon glyphicon-cog"></span>
+      </a>
+    </div>
+    <h1>GIZMODO!</h1>
+  </div>
+
+  <div>
+    <a [routerLink]="['/#']" class="pull-right">
+      <span class="glyphicon glyphicon-menu-hamburger"></span>
+    </a>
+    <a [routerLink]="['/widget-image']" class="pull-right">
+      <span class="glyphicon glyphicon-cog"></span>
+    </a>
+    <img class="img-responsive cl-widget-images" src="https://farm4.staticflickr.com/3564/3326257352_f3e3de5b6e.jpg" alt="corgi-dog">
+  </div>
+
+  <br>
+  <div class="embed-responsive embed-responsive-16by9">
+    <iframe width="640" height="360" src="https://www.youtube.com/embed/LnIXQqldC7o" frameborder="0" allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+    <a [routerLink]="['/#']" class="pull-right">
+      <span class="glyphicon glyphicon-menu-hamburger" style="background-color: white"></span>
+    </a>
+    <a [routerLink]="['/widget-youtube']" class="pull-right">
+      <span class="glyphicon glyphicon-cog" style="background-color: white"></span>
+    </a>
+  </div>
+
+</div> -->
+
+<nav class="navbar navbar-fixed-bottom navbar-light bg-secondary">
+  <a [routerLink]="['/#']" class="navbar-brand">
+    <span class="glyphicon glyphicon-play text-dark"></span>
+  </a>
+  <a [routerLink]="['/#']" class="navbar-brand">
+    <span class="glyphicon glyphicon-eye-open text-dark"></span>
+  </a>
+  <a class="btn navbar-brand pull-right" routerLink="/user/{{userId}}">
+    <span class="glyphicon glyphicon-user text-primary"></span>
+  </a>
+</nav>

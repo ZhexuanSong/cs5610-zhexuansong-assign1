@@ -1,0 +1,91 @@
+<nav class="navbar navbar-fixed-top navbar-light bg-primary">
+  <div class="col-xs-5 hidden-xs">
+    <div class="navbar-text pull-left">
+      <a routerLink="/user/{{developerId}}/website/" class="navbar-link text-white">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+    </div>
+
+    <div class="text-white navbar-brand font-weight-bold" [routerLink]="['/#']">
+      Websites
+    </div>
+    <a [routerLink]="['/#']" class="navbar-link navbar-text pull-right text-white">
+      <span class="glyphicon glyphicon-plus"></span>
+    </a>
+
+  </div>
+  <div class="col-xs-7">
+    <div class="navbar-text pull-left visible-xs">
+      <a routerLink="/user/{{developerId}}/website/" class="navbar-link text-white">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+    </div>
+
+    <div class="text-white navbar-brand font-weight-bold" [routerLink]="['/#']">
+      Edit Website
+    </div>
+    <a (click)="updateWebsite(updatedWebsite)" class="navbar-link navbar-text pull-right text-white">
+      <span class="glyphicon glyphicon-ok"></span>
+    </a>
+
+  </div>
+</nav>
+
+<div class="col-xs-4 hidden-xs cl-body-padding cl-full-height">
+
+  <div class="row extra-padding" *ngFor="let website of websites">
+    <a class="extra-left-padding" routerLink="/user/{{developerId}}/website/{{website._id}}/page">{{website.name}}</a>
+    <a class="pull-right" routerLink="/user/{{userId}}/website/{{website._id}}">
+      <i class="glyphicon glyphicon-cog text-primary extra-right-padding"></i>
+    </a>
+  </div>
+
+  <!-- <div class="row extra-padding">
+    <a class="cl-left-padding" [routerLink]="['/page-list']">Blogging App</a>
+    <a class="pull-right" [routerLink]="['/website-edit']">
+      <i class="glyphicon glyphicon-cog text-primary right-padding"></i>
+    </a>
+  </div>
+  <div class="row extra-padding">
+    <a class="cl-left-padding" [routerLink]="['/page-list']">Address Book App</a>
+    <a class="pull-right" [routerLink]="['/website-edit']">
+      <i class="glyphicon glyphicon-cog text-primary right-padding"></i>
+    </a>
+  </div>
+  <div class="row extra-padding">
+    <a class="cl-left-padding" [routerLink]="['/page-list']">Script Testing App</a>
+    <a class="pull-right" [routerLink]="['/website-edit']">
+      <i class="glyphicon glyphicon-cog text-primary right-padding"></i>
+    </a>
+  </div>
+  <div class="row extra-padding">
+    <a class="cl-left-padding" [routerLink]="['/page-list']">Blogger</a>
+    <a class="pull-right" [routerLink]="['/website-edit']">
+      <i class="glyphicon glyphicon-cog text-primary right-padding"></i>
+    </a>
+  </div> -->
+</div>
+
+<div class="col-xs-1 hidden-xs cl-full-height cl-right-divider"></div>
+
+<div class="col-xs-7 cl-body-padding">
+  <form>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input [(ngModel)]="updatedWebsite.name" type="text" class="form-control" name="name" value="Blogger" placeholder="Name" ngModel required>
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea [(ngModel)]="updatedWebsite.description" name="description" class="form-control" rows="5" placeholder="Description"></textarea>
+    </div>
+    <div class="form-group">
+      <a (click)="deleteWebsite()" class="btn btn-block btn-danger">Delete</a>
+    </div>
+  </form>
+</div>
+
+<nav class="navbar navbar-fixed-bottom navbar-light bg-primary">
+  <a class="navbar-brand pull-right" routerLink="/user/{{developerId}}">
+    <i class="glyphicon glyphicon-user text-white"></i>
+  </a>
+</nav>

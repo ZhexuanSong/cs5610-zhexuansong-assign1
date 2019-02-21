@@ -1,0 +1,25 @@
+<nav class="navbar navbar-fixed-top navbar-light bg-secondary">
+  <a class="navbar-brand" routerLink="/user/{{userId}}/website">
+    <span class="glyphicon glyphicon-chevron-left text-dark"></span>
+  </a>
+  <div class="navbar-brand font-weight-bold">
+    Pages
+  </div>
+  <a class="navbar-brand pull-right" routerLink="/user/{{userId}}/website/{{websiteId}}/page/new">
+    <span class="glyphicon glyphicon-plus text-dark"></span>
+  </a>
+</nav>
+<div class="container-fluid cl-body-padding">
+
+  <div class="row extra-padding" *ngFor="let page of pages">
+    <a class="extra-left-padding" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{page._id}}/widget">{{page.name}}</a>
+    <a class="pull-right" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{page._id}}">
+      <i class="glyphicon glyphicon-cog text-primary extra-right-padding"></i>
+    </a>
+  </div>
+</div>
+<nav class="navbar navbar-fixed-bottom navbar-light bg-secondary">
+  <a class="navbar-brand pull-right" routerLink="/user/{{userId}}">
+    <span class="glyphicon glyphicon-user text-primary"></span>
+  </a>
+</nav>

@@ -1,3 +1,4 @@
+
 // Get the dependencies
 
 const express = require('express');
@@ -9,8 +10,13 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+
+
 // Point static path to dist -- For building -- REMOVE
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'dist')));
+
+
 
 // CORS
 app.use(function(req, res, next) {
@@ -20,12 +26,24 @@ app.use(function(req, res, next) {
   next();
 });
 
-const port = process.env.PORT || '8888';
+
+
+
+const port = process.env.PORT || '5000';
 app.set('port', port);
 
 
 // Create HTTP server
 const server = http.createServer(app);
-server.listen( port , () => console.log('Running on port 8888'));
 
-//require('./assignment/app')(app);
+
+
+/*
+// For Build: Catch all other routes and return the index file -- BUILDING
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
+});
+*/
+
+
+server.listen( port , () => console.log('Running on port 5000'));

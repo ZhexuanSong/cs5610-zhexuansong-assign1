@@ -1,0 +1,28 @@
+<nav class="navbar navbar-fixed-top navbar-light bg-secondary">
+  <a class="navbar-brand" routerLink="/user/{{userId}}/website/{{websiteId}}/page">
+    <span class="glyphicon glyphicon-chevron-left text-dark"></span>
+  </a>
+  <div class="navbar-brand font-weight-bold">
+    New Page
+  </div>
+  <a class="btn navbar-brand pull-right" (click)="createPage(newPage)">
+    <span class="glyphicon glyphicon-ok text-dark"></span>
+  </a>
+</nav>
+<div class="container-fluid cl-body-padding">
+  <form>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input [(ngModel)]="newPage.name" type="text" class="form-control" name="name" placeholder="Page Name" ngModel required>
+    </div>
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input [(ngModel)]="newPage.title" type="text" class="form-control" name="title" placeholder="Page Title" ngModel required>
+    </div>
+  </form>
+</div>
+<nav class="navbar navbar-fixed-bottom navbar-light bg-secondary">
+  <a class="navbar-brand pull-right" routerLink="/user/{{userId}}">
+    <span class="glyphicon glyphicon-user text-primary"></span>
+  </a>
+</nav>
