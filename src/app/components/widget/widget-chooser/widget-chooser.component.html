@@ -1,0 +1,81 @@
+<nav class="navbar navbar-light bg-light pb-2">
+
+  <a (click)="goBack()">
+    <span>
+      <i class="fas fa-chevron-left dark"></i>
+    </span>
+  </a>
+
+  <span class="navbar-brand font-weight-bold mr-auto ml-3 dark">Choose Widget</span>
+
+</nav>
+
+<div class="container-fluid pt-2">
+  <table class="table table-borderless">
+    <tbody>
+    <tr>
+      <td>
+        <div><a (click)="goToHeader()">Header</a></div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <div><a href="#">Label</a></div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <div><a href="#">HTML</a></div>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td>
+        <div><a href="#">Text Input</a></div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <div><a href="#">Link</a></div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <div><a href="#">Button</a></div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <div><a (click)="goToImage()">Image</a></div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <div><a (click)="goToYoutube()">YouTube</a></div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <div><a href="#">Data Table</a></div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <div><a href="#">Repeater</a></div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div> <!-- container-fluid.// -->
+
+<app-profilebar [curUserId]="userId"></app-profilebar>

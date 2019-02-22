@@ -1,0 +1,74 @@
+<nav class="navbar navbar-light bg-light pb-2">
+
+  <a (click)="goBack()">
+    <span>
+      <i class="fas fa-chevron-left dark"></i>
+    </span>
+  </a>
+
+  <span class="navbar-brand font-weight-bold mr-auto ml-3 dark">Widget Edit</span>
+
+  <a class="ml-auto" (click)="updateWidget()" >
+    <span>
+      <i class="fas fa-check fa-inverse"></i>
+    </span>
+  </a>
+</nav>
+
+<!--main body-->
+<div class="container-fluid pt-2">
+
+  <form #f="ngForm">
+    <div class="form-group">
+      <label for="videoname" class="font-weight-bold">Name</label>
+      <input id="videoname"
+             name="newName"
+             type="text"
+             class="form-control"
+             placeholder="Header Name">
+    </div> <!-- form-group// -->
+
+    <div class="form-group">
+      <label for="videotext" class="font-weight-bold">Text</label>
+      <input id="videotext"
+             type="text"
+             class="form-control"
+             placeholder="Youtube Text"
+             name="newText"
+             [ngModel]="displayWidgetText()"
+             ngModel
+             #newText="ngModel">
+    </div> <!-- form-group// -->
+
+    <div class="form-group">
+      <label for="videourl" class="font-weight-bold">URL</label>
+      <input id="videourl"
+             type="text"
+             class="form-control"
+             placeholder="Youtube URL"
+             name="newUrl"
+             [ngModel]="displayWidgetUrl()"
+             ngModel
+             #newUrl="ngModel">
+    </div> <!-- form-group// -->
+
+    <div class="form-group">
+      <label for="videowidth" class="font-weight-bold">Width</label>
+      <input id="videowidth"
+             type="text"
+             class="form-control"
+             placeholder="Video Width"
+             name="newWidth"
+             [ngModel]="displayWidgetWidth()"
+             ngModel
+             #newWidth="ngModel">
+    </div> <!-- form-group// -->
+
+    <div class="form-group">
+      <a class="btn btn-danger btn-block" (click)="deleteWidget()" role="button">Delete</a>
+    </div>
+  </form>
+
+</div>
+
+<app-profilebar [curUserId]="userId"></app-profilebar>

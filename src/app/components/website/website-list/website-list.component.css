@@ -1,0 +1,7 @@
+.scrollable-body{
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.body {
+  overflow: hidden;
+}

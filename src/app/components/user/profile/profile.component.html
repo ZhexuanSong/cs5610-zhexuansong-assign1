@@ -1,0 +1,65 @@
+<div>
+  <nav class="navbar navbar-dark bg-primary">
+    <a class="navbar-brand font-weight-bold" href="#">Profile</a>
+  </nav>
+</div>
+
+<div class="container-fluid pt-2">
+  <form #f="ngForm">
+    <div class="form-group">
+      <label for="username" class="font-weight-bold">Username</label>
+      <input [ngModel]="user.username"
+             name="username"
+             type="text"
+             class="form-control"
+             id="username"
+             ngModel
+             #username="ngModel">
+    </div> <!-- form-group// -->
+
+    <div class="form-group">
+      <label for="email" class="font-weight-bold">Email</label>
+      <input id="email" type="email" class="form-control" value="{{user.email}}">
+    </div> <!-- form-group// -->
+
+    <div class="form-group">
+      <label for="firstname" class="font-weight-bold">First Name</label>
+      <input [ngModel]="user.firstName"
+             name="firstname"
+             type="text"
+             class="form-control"
+             id="firstname"
+             ngModel
+             #firstname="ngModel">
+    </div> <!-- form-group// -->
+
+    <div class="form-group">
+      <label for="lastname" class="font-weight-bold">Last Name</label>
+      <input [ngModel]="user.lastName"
+             name="lastname"
+             type="text"
+             class="form-control"
+             id="lastname"
+             ngModel
+             #lastname="ngModel">
+    </div> <!-- form-group// -->
+
+    <div class="form-group">
+      <button class="btn btn-primary btn-block"
+              (click)="saveAndDisplayWebsites()">Websites</button>
+      <!--<a class="btn btn-primary btn-block" type="submit" role="button">Websites</a>-->
+    </div>
+    <div class="form-group">
+      <a class="btn btn-danger btn-block" routerLink="/login" role="button">Logout</a>
+    </div>
+  </form>
+
+</div> <!-- container-fluid.// -->
+
+
+
+
+<nav class="navbar navbar-dark bg-primary fixed-bottom p-3">
+  <a class="navbar-brand font-weight-bold" href="#"></a>
+</nav>
+

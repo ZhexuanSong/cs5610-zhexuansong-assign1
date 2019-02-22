@@ -1,0 +1,52 @@
+<nav class="navbar navbar-light bg-light">
+
+  <a (click)="goBack()">
+    <span>
+      <i class="fas fa-chevron-left dark"></i>
+    </span>
+  </a>
+
+  <span class="navbar-brand font-weight-bold mr-auto ml-3 dark">Edit Page</span>
+
+  <a class="ml-auto" (click)="updatePage()" >
+    <span>
+      <i class="fas fa-check dark"></i>
+    </span>
+  </a>
+</nav>
+
+<!--main body-->
+<div class="container-fluid pt-2">
+  <form #f="ngForm">
+    <div class="form-group">
+      <label for="pagename" class="font-weight-bold">Name</label>
+      <input id="pagename"
+             name="pageName"
+             type="text"
+             class="form-control"
+             placeholder="Page Name"
+             [ngModel]="displayOldName()"
+             ngModel
+             #pageName="ngModel">
+    </div> <!-- form-group// -->
+
+    <div class="form-group">
+      <label for="pagetitle" class="font-weight-bold">Title</label>
+      <input id="pagetitle"
+             name="pageTitle"
+             type="text"
+             class="form-control"
+             placeholder="Page Title"
+             [ngModel]="displayOldTitle()"
+             ngModel
+             #pageTitle="ngModel">
+    </div> <!-- form-group// -->
+
+    <div class="form-group">
+      <a class="btn btn-danger btn-block" (click)="deletePage()" role="button">Delete</a>
+    </div>
+  </form>
+
+</div>
+
+<app-profilebar [curUserId]="userId"></app-profilebar>

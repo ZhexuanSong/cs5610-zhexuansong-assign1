@@ -1,0 +1,63 @@
+<nav class="navbar navbar-light bg-light pb-2">
+
+  <a (click)="goBack()">
+    <span>
+      <i class="fas fa-chevron-left dark"></i>
+    </span>
+  </a>
+
+  <span class="navbar-brand font-weight-bold mr-auto ml-3 dark">Widget Edit</span>
+
+  <a class="ml-auto" (click)="updateWidget()" >
+    <span>
+      <i class="fas fa-check fa-inverse"></i>
+    </span>
+  </a>
+</nav>
+
+
+<!--main body-->
+<div class="container-fluid pt-2">
+
+  <form #f="ngForm">
+    <div class="form-group">
+      <label for="headername" class="font-weight-bold">Name</label>
+      <input id="headername"
+             name="newName"
+             type="text"
+             class="form-control"
+             placeholder="Header Name">
+    </div> <!-- form-group// -->
+
+    <div class="form-group">
+      <label for="headertext" class="font-weight-bold">Text</label>
+      <input id="headertext"
+             type="text"
+             class="form-control"
+             placeholder="Header Text"
+             name="newText"
+             [ngModel]="displayWidgetText()"
+             ngModel
+             #newText="ngModel">
+    </div> <!-- form-group// -->
+
+    <div class="form-group">
+      <label for="headersize" class="font-weight-bold">Size</label>
+      <input id="headersize"
+             type="text"
+             class="form-control"
+             placeholder="Header Size"
+             name="newSize"
+             [ngModel]="displayWidgetSize()"
+             ngModel
+             #newSize="ngModel">
+    </div> <!-- form-group// -->
+
+    <div class="form-group">
+      <a class="btn btn-danger btn-block" (click)="deleteWidget()" role="button">Delete</a>
+    </div>
+  </form>
+
+</div>
+
+<app-profilebar [curUserId]="userId"></app-profilebar>

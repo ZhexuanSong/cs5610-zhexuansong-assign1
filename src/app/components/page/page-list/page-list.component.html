@@ -1,0 +1,38 @@
+<nav class="navbar navbar-light bg-light">
+
+  <!--Go back to website-list-->
+  <a (click)="goBack()" >
+    <span>
+      <i class="fas fa-chevron-left dark"></i>
+    </span>
+  </a>
+
+  <span class="navbar-brand font-weight-bold mr-auto ml-3 dark">Pages</span>
+
+  <a (click)="createNewPage()" class="ml-auto">
+    <span>
+      <i class="fas fa-plus dark"></i>
+    </span>
+  </a>
+</nav>
+
+<div class="container-fluid scrollable-body"
+     *ngFor="let page of pages">
+  <table class="table table-borderless">
+    <tbody>
+    <tr>
+      <td>
+        <div (click)="goToWidgetList(page._id)">{{page.name}}</div>
+      </td>
+      <td align="right">
+        <a (click)="goToEditPage(page._id)" ><i class="fas fa-cog"></i></a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div> <!-- container-fluid.// -->
+
+
+<app-profilebar [curUserId]="userId"></app-profilebar>
+

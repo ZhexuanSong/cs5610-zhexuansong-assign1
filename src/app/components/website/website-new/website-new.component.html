@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-md-4 d-none d-md-block border-right pr-0">
+    <app-website-list></app-website-list>
+  </div>
+  <div class="col-md-8 pl-0">
+    <nav class="navbar navbar-dark bg-primary">
+      <div class="navbar-brand font-weight-bold">New Website</div>
+        <a class="ml-auto" (click)="saveWebsite()" >
+            <span>
+              <i class="fas fa-check fa-inverse"></i>
+            </span>
+        </a>
+    </nav>
+    <div class="container-fluid pt-2">
+      <form #f="ngForm">
+        <div class="form-group">
+          <label for="name" class="font-weight-bold">Name</label>
+          <input name="newName"
+                 type="text"
+                 class="form-control"
+                 id="name"
+                 placeholder="Name"
+                 ngModel
+                 #newName="ngModel">
+        </div> <!-- form-group// -->
+
+        <div class="form-group">
+          <label for="description" class="font-weight-bold">Description</label>
+          <textarea name="newDescription"
+                    class="form-control"
+                    id="description"
+                    placeholder="Description"
+                    rows="5"
+                    ngModel
+                    #newDescription="ngModel"></textarea>
+        </div> <!-- form-group// -->
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<app-profilebar [curUserId]="userId"></app-profilebar>
+

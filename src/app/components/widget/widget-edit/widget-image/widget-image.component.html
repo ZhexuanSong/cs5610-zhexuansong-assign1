@@ -1,0 +1,87 @@
+<nav class="navbar navbar-light bg-light pb-2">
+
+  <a (click)="goBack()">
+    <span>
+      <i class="fas fa-chevron-left dark"></i>
+    </span>
+  </a>
+
+  <span class="navbar-brand font-weight-bold mr-auto ml-3 dark">Widget Edit</span>
+
+  <a class="ml-auto" (click)="updateWidget()" >
+    <span>
+      <i class="fas fa-check fa-inverse"></i>
+    </span>
+  </a>
+</nav>
+
+<!--main body-->
+<div class="container-fluid pt-2">
+
+  <form #f="ngForm">
+    <div class="form-group">
+      <label for="imagename" class="font-weight-bold">Name</label>
+      <input id="imagename"
+             name="newName"
+             type="text"
+             class="form-control"
+             placeholder="Header Name">
+    </div> <!-- form-group// -->
+
+    <div class="form-group">
+      <label for="imagetext" class="font-weight-bold">Text</label>
+      <input id="imagetext"
+             type="text"
+             class="form-control"
+             placeholder="Image Text"
+             name="newText"
+             [ngModel]="displayWidgetText()"
+             ngModel
+             #newText="ngModel">
+    </div> <!-- form-group// -->
+
+    <div class="form-group">
+      <label for="imageurl" class="font-weight-bold">URL</label>
+      <input id="imageurl"
+             type="text"
+             class="form-control"
+             placeholder="Image URL"
+             name="newUrl"
+             [ngModel]="displayWidgetUrl()"
+             ngModel
+             #newUrl="ngModel">
+    </div> <!-- form-group// -->
+
+    <div class="form-group">
+      <label for="imagewidth" class="font-weight-bold">Width</label>
+      <input id="imagewidth"
+             type="text"
+             class="form-control"
+             placeholder="Image Width"
+             name="newWidth"
+             [ngModel]="displayWidgetWidth()"
+             ngModel
+             #newWidth="ngModel">
+    </div> <!-- form-group// -->
+
+    <div class="form-group">
+      <label for="fileToUpload" class="font-weight-bold">Upload</label>
+    </div>
+    <div class="form-group">
+      <input type="file"
+             name="fileToUpload"
+             id="fileToUpload">
+    </div>
+
+    <div class="form-group">
+      <a class="btn btn-primary btn-block" role="button">Upload Image</a>
+    </div>
+
+    <div class="form-group">
+      <a class="btn btn-danger btn-block" (click)="deleteWidget()" role="button">Delete</a>
+    </div>
+  </form>
+
+</div>
+
+<app-profilebar [curUserId]="userId"></app-profilebar>

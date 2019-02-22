@@ -1,0 +1,68 @@
+<nav class="navbar navbar-light bg-light pb-2">
+
+  <a (click)="goBack()">
+    <span>
+      <i class="fas fa-chevron-left dark"></i>
+    </span>
+  </a>
+
+  <span class="navbar-brand font-weight-bold mr-auto ml-3 dark">Widgets</span>
+
+  <!--to widget choose-->
+  <a class="ml-auto" (click)="goToWidgetChoose()" >
+    <span>
+      <i class="fas fa-plus dark"></i>
+    </span>
+  </a>
+</nav>
+
+
+<!--list and switch-->
+<div class="container-fluid pt-0"
+     *ngFor="let widget of widgets">
+  <table class="table table-borderless">
+    <tbody>
+    <tr>
+      <td>
+        <div [ngSwitch]="widget.widgetType">
+
+          <div *ngSwitchCase="'HEADING'">
+            <!--display the header-->
+            <p [ngStyle]="{'font-size': widget.size+'00%'}">{{widget.text}}</p>
+          </div>
+
+          <div *ngSwitchCase="'YOUTUBE'">
+            <iframe width="640" height="360" [src]="convertToSafeYoutubeUrl(widget.url)" frameborder="0" allowfullscreen></iframe>
+          </div>
+
+          <div *ngSwitchCase="'IMAGE'">
+            <!--display the image-->
+            <img [src]="widget.url"/>
+          </div>
+
+          <div *ngSwitchCase="'HTML'">
+            <!--display the html-->
+            Here should be html embedded page.
+          </div>
+        </div>
+      </td>
+      <td align="right">
+        <a (click)="goToWidgetEdit(widget._id)" ><i class="fas fa-cog"></i></a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div class="p-3">
+
+</div>
+<app-profilebar [curUserId]="userId"></app-profilebar>
+
+
+
+
+
+
+
+
+

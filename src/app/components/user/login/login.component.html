@@ -1,0 +1,48 @@
+<div class="container-fluid pt-5">
+
+  <div *ngIf="errorFlag" class="alert alert-danger">{{errorMsg}}}</div>
+
+  <h1>Login</h1>
+
+  <form (ngSubmit)="login()" #f="ngForm">
+    <div class="form-group">
+      <input placeholder="username"
+             name="username"
+             type="text"
+             class="form-control"
+             ngModel
+             required
+             #username="ngModel"/>
+    </div> <!-- form-group// -->
+    <div class ="help-block" *ngIf="!username.valid && username.touched">Please enter a username</div>
+
+    <div class="form-group">
+      <input placeholder="password"
+             name="password"
+             type="password"
+             class="form-control"
+             ngModel
+             required
+             #password="ngModel">
+    </div> <!-- form-group// -->
+
+    <div class="form-group">
+      <button [disabled]="!f.valid"
+              class="btn btn-primary btn-block"
+              type="submit">Login</button>
+    </div>
+
+    <div class="form-group">
+      <a class="btn btn-success btn-block" routerLink="/register" role="button">Register</a>
+    </div>
+  </form>
+
+</div> <!-- container-fluid.// -->
+
+
+<!--{{username}}}-->
+<!--<input [(ngModel)]="username" type="text" name="username" placeholder="Alice"/>-->
+<!--<button class="btn btn-primary btn-block" (click)="login()">Login</button>-->
+<!--<a class="btn btn-success btn-block" routerLink="/register">Register</a>-->
+
+
