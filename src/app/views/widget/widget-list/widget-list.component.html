@@ -1,0 +1,41 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid ">
+
+
+    <a [routerLink]="['/user',userId,'website',webId,'page']" class="navbar-text pull-left"><span class="glyphicon glyphicon-menu-left"></span></a>
+
+
+    <a class="navbar-brand " [routerLink]="['./']">Widgets</a>
+
+    <a [routerLink]="['/user',userId,'website',webId,'page',pageId,'widget','new']" class="navbar-text pull-right"><span class="glyphicon glyphicon-plus"></span></a>
+  </div>
+</nav>
+
+
+
+
+
+<div class="container container-padding">
+  <div  *ngFor="let widget of widgets">
+    <div [ngSwitch]="widget.widgetType">
+        <div *ngSwitchCase="'HEADING'"><app-heading [widget]="widget"></app-heading></div>
+
+        <div *ngSwitchCase="'IMAGE'"><app-image [widget]="widget"></app-image></div>
+
+        <div *ngSwitchCase="'YOUTUBE'"><app-youtube [widget]="widget"></app-youtube></div>
+
+        <div *ngSwitchCase="'HTML'" [innerHTML]="widget.text"></div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container-fluid ">
+
+    <a [routerLink]="['/user',userId]" class="navbar-text pull-right"><span class="glyphicon glyphicon-user"></span></a>
+
+  </div>
+</nav>

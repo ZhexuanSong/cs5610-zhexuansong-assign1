@@ -1,54 +1,67 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Profile</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous">
-    <link href="../../css/styles.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+  <!-- Meta tags for making website for mobile-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="initial-scale=1.25, user-scalable=no">
+
+  <meta charset="UTF-8">
+  <title>Index</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="../css/style.css" rel="stylesheet"/>
+  <!-- STYLE sheet comes after all the libraries are loaded. Document style-->
 </head>
 
 <body>
-    <nav class="navbar navbar-fixed-top navbar-light bg-primary">
-        <div class="navbar-brand text-white font-weight-bold" href="#">
-            Profile
-        </div>
-        <a class="navbar-brand pull-right" href="profile.html">
-            <span class="glyphicon glyphicon-ok text-white"></span>
-        </a>
-    </nav>
-    <div class="container cl-body-padding">
-        <form action="../website/website-list.html" method="GET">
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" placeholder="jannunzi" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" placeholder="jannunzi@gmail.com" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="firstName">First Name</label>
-                <input type="text" id="firstName" placeholder="Jose" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="lastName">Last Name</label>
-                <input type="text" id="lastName" placeholder="Annunziato" class="form-control">
-            </div>
-            <div class="form-group">
-                <button class="btn btn-primary btn-block">Websites</button>
-            </div>
-            <div class="form-group">
-                <a href="login.html" class="btn btn-danger btn-block">Logout</a>
-            </div>
-        </form>
-    </div>
-    <nav class="navbar navbar-fixed-bottom navbar-light bg-primary">
-        <a class="navbar-brand pull-right" href="#">
-            <i class="glyphicon glyphicon-user text-white"></i>
-        </a>
-    </nav>
+
+<nav class="navbar bg-primary navbar-fixed-top">
+  <div class="container-fluid ">
+
+      <a class="navbar-brand css-text-white" href="#">Profile</a>
+    <a href="profile.html" class="navbar-text pull-right"><span class="glyphicon glyphicon-ok css-text-white"></span></a>
+
+  </div>
+</nav>
+
+
+<div class="container">
+  <!--<h1>Profile</h1>-->
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" id="username" class="form-control" placeholder="Jane">
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="password" id="email" class="form-control" placeholder="jane@gmail.com">
+  </div>
+  <div class="form-group">
+    <label for="firstName">First Name</label>
+    <input type="password" id="firstName" class="form-control" placeholder="Jane">
+  </div>
+  <div class="form-group">
+    <label for="lastName">Last Name</label>
+    <input type="password" id="lastName" class="form-control" placeholder="Potter">
+  </div>
+  <div class="form-group">
+    <a class="btn btn-primary form-control" href="../website/website-list.html">Website</a>
+  </div>
+  <div class="form-group">
+    <a class="btn btn-danger form-control" href="login.html">Log out</a>
+  </div>
+
+
+</div>
+
+
+<nav class="navbar bg-primary navbar-fixed-bottom">
+  <div class="container-fluid ">
+
+    <a href="#" class="navbar-text pull-right"><span class="glyphicon glyphicon-user css-text-white"></span></a>
+
+  </div>
+</nav>
+
 </body>
 
 </html>

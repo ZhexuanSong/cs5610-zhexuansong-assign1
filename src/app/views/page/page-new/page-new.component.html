@@ -1,0 +1,67 @@
+<div class="container-fluid">
+
+
+  <div class="col-xs-4 hidden-xs">
+    <div class="container-fluid">
+      <app-page-list></app-page-list>
+    </div>
+  </div>
+
+
+  <div class="col-sm-8 div-border">
+    <div class="container-fluid">
+
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="row">
+
+          <div class="col-xs-4 hidden-xs">
+            <div class="container-fluid">
+              <a routerLink="../" class="navbar-text pull-left"><span class="glyphicon glyphicon-menu-left "></span></a>
+              <a class="navbar-brand css-text-white " routerLink="./">Pages</a>
+              <a [routerLink]="['/user',userId,'website',webId,'page','new']" class="pull-right navbar-text" ><span class="glyphicon glyphicon-plus css-text-white"></span></a>
+            </div>
+          </div>
+
+          <div class="col-sm-8">
+            <div class="container-fluid">
+              <a class="navbar-brand " routerLink="./">New Page</a>
+              <a (click)="createPage()" class="pull-right navbar-text" ><span class="glyphicon glyphicon-ok"></span></a>
+            </div>
+
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid">
+        <form (ngSubmit)="createPage()" #newPageForm="ngForm">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" ngModel name="pageName" class="form-control" id="name" placeholder="page name">
+          </div>
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" ngModel name="pageTitle" class="form-control" placeholder="title" id="title">
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+
+
+<nav class="navbar navbar-primary navbar-fixed-bottom">
+  <div class="container-fluid ">
+
+    <a [routerLink]="['/user',userId]" class="navbar-text pull-right" ><span class="glyphicon glyphicon-user"></span></a>
+
+  </div>
+</nav>
+
+
+
+
+
+
