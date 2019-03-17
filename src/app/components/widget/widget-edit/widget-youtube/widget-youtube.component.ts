@@ -14,6 +14,7 @@ export class WidgetYoutubeComponent implements OnInit {
   @Input() userId: String;
   @Input() websiteId: String;
   @Input() pageId: String;
+  @Input() widgetId: String;
   @Input() widget: Widget;
   constructor(private widgetService: WidgetService, private router: Router) { }
 

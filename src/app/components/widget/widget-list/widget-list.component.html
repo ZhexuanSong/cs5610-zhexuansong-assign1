@@ -18,6 +18,7 @@
 
 
 <!--list and switch-->
+<div appSortable (newIndexes) = "onNewIndexes($event)">
 <div class="container-fluid pt-0"
      *ngFor="let widget of widgets">
   <table class="table table-borderless">
@@ -37,7 +38,7 @@
 
           <div *ngSwitchCase="'IMAGE'">
             <!--display the image-->
-            <img [src]="widget.url"/>
+            <img [src]="convertToSafeUrl(widget.url)"/>
           </div>
 
           <div *ngSwitchCase="'HTML'">
@@ -53,6 +54,8 @@
     </tbody>
   </table>
 </div>
+</div>
+
 <div class="p-3">
 
 </div>

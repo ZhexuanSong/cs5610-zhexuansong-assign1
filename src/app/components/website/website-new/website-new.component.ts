@@ -14,18 +14,18 @@ export class WebsiteNewComponent implements OnInit {
   @ViewChild('f') websiteForm: NgForm;
   userId: String;
 
-  constructor(private websiteService : WebsiteService,
+  constructor(private websiteService: WebsiteService,
               private activatedRoute: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit() {
     this.activatedRoute.params
-      .subscribe( (params: any) => { this.userId = params['uid']});
+      .subscribe( (params: any) => { this.userId = params['uid'];});
   }
   saveWebsite() {
-    let website = new Website("", this.websiteForm.value.newName, this.userId, this.websiteForm.value.newDescription);
+    const website = new Website('', this.websiteForm.value.newName, this.userId, this.websiteForm.value.newDescription);
     this.websiteService.createWebsite(website, this.userId).subscribe(
-      (website) => this.router.navigate(['/user', this.userId, 'website'])
+      () => this.router.navigate(['/user', this.userId, 'website'])
     );
 
 

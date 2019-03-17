@@ -14,9 +14,9 @@ export class ProfileComponent implements OnInit {
 
   @ViewChild('f') profileForm: NgForm;
   user: User;
-  
+
   constructor(private userService: UserService, private router: ActivatedRoute, private outRouter: Router) {
-    this.user = new User("","","","","");
+    this.user = new User('', '', '', '', '');
   }
 
   ngOnInit() {
@@ -27,15 +27,15 @@ export class ProfileComponent implements OnInit {
 
   }
   saveAndDisplayWebsites() {
-    let username = this.profileForm.value.username;
-    let firstname = this.profileForm.value.firstname;
-    let lastname = this.profileForm.value.lastname;
-    let newUser = new User(this.user._id, username, this.user.password, firstname, lastname);
+    const username = this.profileForm.value.username;
+    const firstname = this.profileForm.value.firstname;
+    const lastname = this.profileForm.value.lastname;
+    const newUser = new User(this.user._id, username, this.user.password, firstname, lastname);
     this.userService.updateUser(this.user._id, newUser)
       .subscribe(
         () => this.outRouter.navigate(['/user', this.user._id, 'website']));
   }
-  
+
 
 
 }

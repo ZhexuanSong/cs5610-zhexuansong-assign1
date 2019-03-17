@@ -12,25 +12,24 @@ import {User} from 'src/app/model/User';
 export class LoginComponent implements OnInit {
 
   @ViewChild('f')
-  loginForm: NgForm
-  errorFlag: boolean
-  errorMsg: string
-  
+  loginForm: NgForm;
+  errorFlag: boolean;
+  errorMsg: string;
   constructor(private router: Router, private userService: UserService) { }
 
   login() {
-    let username = this.loginForm.value.username;
-    let password = this.loginForm.value.password;
+    const username = this.loginForm.value.username;
+    const password = this.loginForm.value.password;
 
     this.userService.findUserByCredentials(username, password)
       .subscribe(
         (user: User) => {
           if (user) {
-            //console.log(user);
+            // console.log(user);
             this.router.navigate(['/user', user._id]);
           } else {
             this.errorFlag = true;
-            this.errorMsg = "Login Failed.";
+            this.errorMsg = 'Login Failed.';
           }
         }
       );

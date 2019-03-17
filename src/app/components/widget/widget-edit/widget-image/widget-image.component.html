@@ -10,7 +10,7 @@
 
   <a class="ml-auto" (click)="updateWidget()" >
     <span>
-      <i class="fas fa-check fa-inverse"></i>
+      <i class="fas fa-check dark"></i>
     </span>
   </a>
 </nav>
@@ -67,14 +67,20 @@
     <div class="form-group">
       <label for="fileToUpload" class="font-weight-bold">Upload</label>
     </div>
-    <div class="form-group">
-      <input type="file"
-             name="fileToUpload"
-             id="fileToUpload">
-    </div>
+
+
+    <form ngNoForm action="{{baseUrl}}/api/upload" method="post" enctype="multipart/form-data">
+      <input id="fileToUpload" name="imageAdded" type="file" class="form-control"/>
+      <input name="widgetId" value="{{widgetId}}" style="display: none"/>
+      <input name="websiteId" value="{{websiteId}}" style="display: none"/>
+      <input name="pageId" value="{{pageId}}" style="display: none"/>
+      <input name="userId" value="{{userId}}" style="display: none"/>
+      <button type="submit" class="btn btn-block btn-primary">Upload Image</button>
+      <br/>
+    </form>
 
     <div class="form-group">
-      <a class="btn btn-primary btn-block" role="button">Upload Image</a>
+      <a class="btn btn-success btn-block" (click)="goToFlickrSearch()" role="button">Flickr!</a>
     </div>
 
     <div class="form-group">
@@ -84,4 +90,7 @@
 
 </div>
 
+<div class="p-3">
+
+</div>
 <app-profilebar [curUserId]="userId"></app-profilebar>

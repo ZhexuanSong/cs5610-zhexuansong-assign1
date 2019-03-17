@@ -10,12 +10,12 @@ import {Page} from 'src/app/model/Page';
 })
 export class PageListComponent implements OnInit {
 
-  userId : String;
+  userId: String;
   websiteId: String;
   pages: Page[];
 
-  constructor(private activatedRoute: ActivatedRoute, 
-              private router: Router, 
+  constructor(private activatedRoute: ActivatedRoute,
+              private router: Router,
               private pageService: PageService) { }
 
   ngOnInit() {

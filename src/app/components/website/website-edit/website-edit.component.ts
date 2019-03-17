@@ -12,15 +12,15 @@ import {NgForm} from '@angular/forms';
 export class WebsiteEditComponent implements OnInit {
 
   @ViewChild('f') websiteForm: NgForm;
-  oldWebsite : Website;
+  oldWebsite: Website;
   websiteId: String;
   userId: String;
 
 
-  constructor(private websiteService : WebsiteService,
+  constructor(private websiteService: WebsiteService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) { 
-    this.oldWebsite = new Website("", "", "", "");
+              private router: Router) {
+    this.oldWebsite = new Website('', '', '', '');
   }
 
 
@@ -36,7 +36,7 @@ export class WebsiteEditComponent implements OnInit {
         website => this.oldWebsite = website);
   }
   updateWebsite() {
-    let website = new Website(this.websiteId, this.websiteForm.value.newName, this.userId, this.websiteForm.value.newDescription);
+    const website = new Website(this.websiteId, this.websiteForm.value.newName, this.userId, this.websiteForm.value.newDescription);
     this.websiteService.updateWebsite(this.websiteId, website)
       .subscribe(
         () => this.goBack());

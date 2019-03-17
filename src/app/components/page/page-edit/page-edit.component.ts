@@ -19,7 +19,7 @@ export class PageEditComponent implements OnInit {
   constructor(private pageService: PageService,
               private activatedRoute: ActivatedRoute,
               private router: Router) {
-    this.oldPage = new Page("", "", "", "");
+    this.oldPage = new Page('', '', '', '');
 
   }
 
@@ -33,13 +33,13 @@ export class PageEditComponent implements OnInit {
       });
     this.pageService.findPageById(this.pageId).subscribe(
       page => this.oldPage = page
-    )
+    );
   }
 
   updatePage() {
-    let newName = this.pageForm.value.pageName;
-    let newTitle = this.pageForm.value.pageTitle;
-    let page = new Page(this.pageId, newName, this.websiteId, newTitle);
+    const newName = this.pageForm.value.pageName;
+    const newTitle = this.pageForm.value.pageTitle;
+    const page = new Page(this.pageId, newName, this.websiteId, newTitle);
     this.pageService.updatePage(this.pageId, page).subscribe(
       () => this.goBack()
     );

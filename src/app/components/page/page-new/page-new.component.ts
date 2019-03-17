@@ -27,9 +27,9 @@ export class PageNewComponent implements OnInit {
       });
   }
   savePage() {
-    let name = this.pageForm.value.pageName;
-    let title = this.pageForm.value.pageTitle;
-    let page = new Page("", name, this.websiteId, title);
+    const name = this.pageForm.value.pageName;
+    const title = this.pageForm.value.pageTitle;
+    const page = new Page('', name, this.websiteId, title);
     this.pageService.createPage(page, this.websiteId).subscribe(
       page => this.goBack()
     );

@@ -27,6 +27,9 @@ import {WidgetService} from './widget.service';
 import {RouterModule} from '@angular/router';
 import {ProfilebarComponent} from './components/profilebar/profilebar.component';
 import {HttpClientModule} from '@angular/common/http';
+import { SortableDirective } from './sortable.directive';
+import { FlickrImageSearchComponent } from './components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
+import {FlickrService} from "./flickr.service";
 
 
 @NgModule({
@@ -47,7 +50,9 @@ import {HttpClientModule} from '@angular/common/http';
     WidgetHeaderComponent,
     WidgetImageComponent,
     WidgetYoutubeComponent,
-    ProfilebarComponent
+    ProfilebarComponent,
+    SortableDirective,
+    FlickrImageSearchComponent
   ],
   imports: [
     RouterModule,
@@ -56,7 +61,7 @@ import {HttpClientModule} from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  providers: [UserService, WebsiteService, PageService, WidgetService],
+  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService],
   bootstrap: [AppComponent]
 })
 // @NgModule({
