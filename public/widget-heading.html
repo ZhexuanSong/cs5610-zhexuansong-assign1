@@ -1,82 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Widget Edit</title>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-  <!--<link rel="stylesheet" type="text/css" href="styles.css">-->
   <link href="css/style.css" rel="stylesheet"/>
 </head>
+
 <body>
 
-<!-- Image and text -->
-<!--navigation bar-->
-<nav class="navbar navbar-light bg-light justify-content-start">
-
-  <a href="#" class="float-left">
-    <span>
-      <i class="fas fa-chevron-left dark"></i>
-    </span>
-  </a>
-
-
-  <ul class="navbar-nav mr-auto ml-3">
-    <li class="nav-item active">
-      <a class="navbar-brand dark font-weight-bold">Widget Edit</a>
-    </li>
-  </ul>
-
-  <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-      <a href="widget-ulst.html" class="float-right">
-        <span>
-          <i class="fas fa-check dark"></i>
-        </span>
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <div class="navbar-collapse collapse mr-auto" id="collapsingNavbar">
+    <ul class="navbar-nav">
+      <a class="nav-link cl-icon-padding" href="widget-list.html">
+        <i class="fa fa-chevron-left"></i>
       </a>
-    </li>
-  </ul>
-
-
-</nav>
-
-<!--main body-->
-<div class="container-fluid pt-2">
-
-  <form>
-    <div class="form-group">
-      <label for="headername" class="font-weight-bold">Name</label>
-      <input id="headername" type="text" class="form-control" placeholder="Header Name">
-    </div> <!-- form-group// -->
-
-    <div class="form-group">
-      <label for="headertext" class="font-weight-bold">Text</label>
-      <input id="headertext" type="text" class="form-control" placeholder="Header Title">
-    </div> <!-- form-group// -->
-
-    <div class="form-group">
-      <label for="headersize" class="font-weight-bold">Size</label>
-      <input id="headersize" type="text" class="form-control" placeholder="Header Size">
-    </div> <!-- form-group// -->
-
-    <div class="form-group">
-      <a class="btn btn-danger btn-block" href="#" role="button">Delete</a>
-    </div>
-  </form>
-
-</div>
-
-<nav class="navbar navbar-light bg-light fixed-bottom">
-  <a class="navbar-brand font-weight-bold" href="#"></a>
-  <div class="text-right">
-    <a href="profile.html" class="float-right">
-    <span>
-      <i class="fas fa-user"></i>
-    </span>
-    </a>
+      <a class="navbar-brand brand cl-icon-padding" href="#">Widgets Edit</a>
+    </ul>
   </div>
 
+  <div>
+    <ul class="navbar-nav ml-auto">
+      <a class="nav-link cl-icon-padding" href="website-list.html"><i class="fa fa-check"></i></a>
+    </ul>
+  </div>
+</nav>
+
+<div class="container cl-container-padding">
+  <form>
+    <div class="form-group">
+      <label for="heading-name">Name</label>
+      <input type="text" class="form-control" id="heading-name" placeholder="Name">
+    </div>
+    <div class="form-group">
+      <label for="heading-text">Text</label>
+      <input type="text" class="form-control" id="heading-text" placeholder="Text">
+    </div>
+    <div class="form-group">
+      <label for="heading-size">Size</label>
+      <input type="text" class="form-control" id="heading-size" placeholder="Size">
+    </div>
+  </form>
+  <a class="btn btn-danger  btn-block" href="widget-list.html">Delete</a>
+</div>
+
+<nav class="navbar fixed-bottom navbar-light bg-light">
+  <ul class="navbar-nav ml-auto">
+    <a href="profile.html" class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
+      <i class="fa fa-user"></i>
+    </a>
+  </ul>
 </nav>
 </body>
 </html>

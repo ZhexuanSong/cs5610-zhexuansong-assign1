@@ -1,44 +1,71 @@
-<div class="row">
-  <div class="col-md-4 d-none d-md-block border-right pr-0">
-    <app-website-list></app-website-list>
+<nav class="navbar navbar-expand-md navbar-custom">
+  <div class="col-1">
+    <a class="navbar-text pull-left" routerLink=".."><i class="fa fa-chevron-left"></i></a>
   </div>
-  <div class="col-md-8 pl-0">
-    <nav class="navbar navbar-dark bg-primary">
-      <div class="navbar-brand font-weight-bold">New Website</div>
-        <a class="ml-auto" (click)="saveWebsite()" >
-            <span>
-              <i class="fas fa-check fa-inverse"></i>
-            </span>
-        </a>
-    </nav>
-    <div class="container-fluid pt-2">
-      <form #f="ngForm">
+
+  <div class="col-3 d-none d-sm-block">
+    <a class="navbar-brand cl-icon-padding" routerLink="..">Websites</a>
+    <a class="navbar-text pull-right" routerLink="../new"><i class="fa fa-plus"></i></a>
+  </div>
+
+  <div class="col-8">
+    <a class="navbar-brand cl-icon-padding" routerLink=".">New Website</a>
+    <button class="navbar-text pull-right"
+       routerLink=".."
+       (click)="f.ngSubmit.emit()"
+        [disabled]="!f.valid">
+      <i class="fa fa-check"></i>
+    </button>
+  </div>
+</nav>
+
+<div class="container-fluid cl-container-padding">
+  <div class="row">
+    <div class="col-sm-4 d-none d-sm-block">
+      <ul class="list-group cl-list-group-borderless">
+        <li *ngFor="let website of websites" class="list-group-item cl-list-item-borderless">
+          <a routerLink="../{{website._id}}" class="cl-text-blue"><i class="fa fa-cog float-right"></i></a>
+          <a routerLink="../{{website._id}}" class="cl-text-blue">{{website.name}}</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-xs-12 col-sm-8">
+      <form (ngSubmit)="createWebsite()" #f="ngForm">
         <div class="form-group">
-          <label for="name" class="font-weight-bold">Name</label>
-          <input name="newName"
-                 type="text"
+          <label for="website-name">Name</label>
+          <input type="text"
                  class="form-control"
-                 id="name"
+                 id="website-name"
                  placeholder="Name"
-                 ngModel
-                 #newName="ngModel">
-        </div> <!-- form-group// -->
+                 name="name"
+                 ngModel required
+                 #name="ngModel">
+        </div>
+
+        <span class="help-block" *ngIf="!name.valid && name.touched">
+          Please enter a website name!
+        </span>
 
         <div class="form-group">
-          <label for="description" class="font-weight-bold">Description</label>
-          <textarea name="newDescription"
-                    class="form-control"
-                    id="description"
+          <label for="website-description">Description</label>
+          <textarea [(ngModel)]="website.description"
+                    id="website-description"
+                    class="form-control" rows="5"
                     placeholder="Description"
-                    rows="5"
-                    ngModel
-                    #newDescription="ngModel"></textarea>
-        </div> <!-- form-group// -->
+                    name="description"></textarea>
+        </div>
 
       </form>
     </div>
   </div>
+
 </div>
 
-<app-profilebar [curUserId]="userId"></app-profilebar>
-
+<nav class="navbar fixed-bottom navbar-light navbar-custom">
+  <ul class="navbar-nav ml-auto">
+    <a routerLink="../.." class="navbar-link navbar-text pull-right cl-text-white">
+      <i class="fa fa-user"></i>
+    </a>
+  </ul>
+</nav>

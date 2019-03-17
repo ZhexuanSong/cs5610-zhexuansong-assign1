@@ -1,52 +1,59 @@
-<nav class="navbar navbar-light bg-light">
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <div class="navbar-collapse collapse mr-auto" id="collapsingNavbar">
+    <ul class="navbar-nav">
+      <a class="nav-link cl-icon-padding" routerLink="..">
+        <i class="fa fa-chevron-left"></i>
+      </a>
+      <a class="navbar-brand cl-icon-padding" routerLink=".">Edit Page</a>
+    </ul>
+  </div>
 
-  <a (click)="goBack()">
-    <span>
-      <i class="fas fa-chevron-left dark"></i>
-    </span>
-  </a>
-
-  <span class="navbar-brand font-weight-bold mr-auto ml-3 dark">Edit Page</span>
-
-  <a class="ml-auto" (click)="updatePage()" >
-    <span>
-      <i class="fas fa-check dark"></i>
-    </span>
-  </a>
+  <div>
+    <ul class="navbar-nav ml-auto">
+      <button class="nav-link cl-icon-padding"
+         (click)="updatePage()"
+         routerLink=".."><i class="fa fa-check"></i></button>
+    </ul>
+  </div>
 </nav>
 
-<!--main body-->
-<div class="container-fluid pt-2">
-  <form #f="ngForm">
-    <div class="form-group">
-      <label for="pagename" class="font-weight-bold">Name</label>
-      <input id="pagename"
-             name="pageName"
-             type="text"
+<div class="container cl-container-padding">
+
+  <form>
+
+    <div class="form-group" *ngIf="page">
+      <label for="page-name">Name</label>
+      <input type="text"
              class="form-control"
+             id="page-name"
              placeholder="Page Name"
-             [ngModel]="displayOldName()"
+             [(ngModel)]="page.name"
              ngModel
-             #pageName="ngModel">
-    </div> <!-- form-group// -->
-
-    <div class="form-group">
-      <label for="pagetitle" class="font-weight-bold">Title</label>
-      <input id="pagetitle"
-             name="pageTitle"
-             type="text"
-             class="form-control"
-             placeholder="Page Title"
-             [ngModel]="displayOldTitle()"
-             ngModel
-             #pageTitle="ngModel">
-    </div> <!-- form-group// -->
-
-    <div class="form-group">
-      <a class="btn btn-danger btn-block" (click)="deletePage()" role="button">Delete</a>
+             required
+             #name="ngModel"
+             [ngModelOptions]="{standalone: true}"/>
     </div>
-  </form>
 
+    <div class="form-group" *ngIf="page">
+      <label for="page-title">Title</label>
+      <input type="text"
+             class="form-control"
+             id="page-title"
+             placeholder="Page Title"
+             [(ngModel)]="page.title"
+             [ngModelOptions]="{standalone: true}"/>
+    </div>
+
+  </form>
+  <button class="btn btn-danger btn-block"
+     (click)="deletePage()"
+     routerLink="..">Delete</button>
 </div>
 
-<app-profilebar [curUserId]="userId"></app-profilebar>
+<nav class="navbar fixed-bottom navbar-light bg-light">
+  <ul class="navbar-nav ml-auto">
+    <a routerLink="../../../.." class="navbar-link navbar-text pull-right cl-icon-padding">
+      <i class="fa fa-user"></i>
+    </a>
+  </ul>
+</nav>

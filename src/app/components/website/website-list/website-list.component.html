@@ -1,37 +1,39 @@
-<nav class="navbar navbar-dark bg-primary">
+<nav class="navbar navbar-expand-md navbar-custom">
+  <div class="navbar-collapse collapse mr-auto" id="collapsingNavbar">
+    <ul class="navbar-nav">
+      <a class="nav-link cl-icon-padding" routerLink="..">
+        <i class="fa fa-chevron-left"></i>
+      </a>
+      <a class="navbar-brand cl-icon-padding" routerLink=".">Websites</a>
+    </ul>
+  </div>
 
-  <a (click)="goBack()" >
-    <span>
-      <i class="fas fa-chevron-left fa-inverse"></i>
-    </span>
-  </a>
-
-  <span class="navbar-brand font-weight-bold mr-auto ml-3">Websites</span>
-
-  <a (click)="createNewWebsite()" class="ml-auto">
-    <span>
-      <i class="fas fa-plus fa-inverse"></i>
-    </span>
-  </a>
+  <div>
+    <ul class="navbar-nav ml-auto">
+      <a class="nav-link cl-icon-padding" routerLink="./new">
+        <i class="fa fa-plus"></i>
+      </a>
+    </ul>
+  </div>
 </nav>
 
-<div class="container-fluid scrollable-body"
-     *ngFor="let website of websites">
-  <table class="table table-borderless">
-    <tbody>
-    <tr>
-      <td>
-        <div (click)="goToPageList(website._id)">{{website.name}}</div>
-      </td>
-      <td align="right">
-        <a (click)="goToEditWebsite(website._id)" ><i class="fas fa-cog"></i></a>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+<div class="container cl-container-padding">
+  <ul class="list-group cl-list-group-borderless">
+    <li *ngFor="let website of websites" class="list-group-item cl-list-item-borderless">
+      <a routerLink="./{{website._id}}">
+        <i class="fa fa-cog pull-right icon-padding"></i>
+      </a>
+      <a routerLink="./{{website._id}}/page">
+        {{website.name}}
+      </a>
+    </li>
+  </ul>
+</div>
 
-</div> <!-- container-fluid.// -->
-
-<app-profilebar [curUserId]="userId"></app-profilebar>
-
-
+<nav class="navbar fixed-bottom navbar-light navbar-custom">
+  <ul class="navbar-nav ml-auto">
+    <a routerLink=".." class="navbar-link navbar-text pull-right cl-text-white">
+      <i class="fa fa-user"></i>
+    </a>
+  </ul>
+</nav>

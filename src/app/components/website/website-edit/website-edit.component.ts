@@ -1,8 +1,7 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import {WebsiteService} from 'src/app/website.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Website} from 'src/app/model/Website';
-import {NgForm} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import {Website} from '../../../models/website.model.client';
+import {WebsiteService} from '../../../services/website.service.client';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-website-edit',
@@ -11,53 +10,51 @@ import {NgForm} from '@angular/forms';
 })
 export class WebsiteEditComponent implements OnInit {
 
-  @ViewChild('f') websiteForm: NgForm;
-  oldWebsite: Website;
-  websiteId: String;
+  website: Website;
   userId: String;
+  websites: Website[] = [];
 
+  constructor(private websiteService: WebsiteService, private activatedRoute: ActivatedRoute) { }
 
-  constructor(private websiteService: WebsiteService,
-              private activatedRoute: ActivatedRoute,
-              private router: Router) {
-    this.oldWebsite = new Website('', '', '', '');
-  }
-
-
-  ngOnInit() {
-    this.activatedRoute.params
-      .subscribe((params: any) => {
-        console.log(params);
-        this.userId = params['uid'];
-        this.websiteId = params['wid'];
-      });
-    this.websiteService.findWebsiteById(this.websiteId)
-      .subscribe(
-        website => this.oldWebsite = website);
-  }
   updateWebsite() {
-    const website = new Website(this.websiteId, this.websiteForm.value.newName, this.userId, this.websiteForm.value.newDescription);
-    this.websiteService.updateWebsite(this.websiteId, website)
-      .subscribe(
-        () => this.goBack());
-
-
-  }
-  deleteWebsite() {
-    this.websiteService.deleteWebsite(this.websiteId).subscribe(
-      () => this.goBack()
+    this.websiteService.updateWebsite(this.website._id, this.website).subscribe(
+      (website: Website) => {
+        console.log(website);
+      },
+      (error: any) => {
+        console.log(error);
+      }
     );
+  }
 
+  deleteWebsite() {
+    this.websiteService.deleteWebsite(this.website._id).subscribe(
+      (data: Website) => {
+        console.log('deleted website: ' + data._id);
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
-  goBack() {
-    this.router.navigate(['/user', this.userId, 'website']);
-
-  }
-  displayOldName() {
-    return this.oldWebsite.name;
-  }
-  displayOldDescription() {
-    return this.oldWebsite.description;
+  ngOnInit() {
+    this.activatedRoute.params.subscribe((params: any) => {
+      this.websiteService.findWebsitesByUser(params['uid']).subscribe(
+        (websites: any) => {
+          this.websites = websites;
+        },
+        (error: any) => {
+          console.log(error);
+        });
+      this.websiteService.findWebsitesById(params['wid']).subscribe(
+        (website: Website) => {
+          this.website = website;
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
+    });
   }
 
 }

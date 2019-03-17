@@ -1,47 +1,81 @@
-<div class="row">
-  <div class="col-md-4 d-none d-md-block border-right pr-0">
-    <app-website-list></app-website-list>
-  </div>
-  <div class="col-md-8 pl-0">
-    <nav class="navbar navbar-dark bg-primary">
-      <div class="navbar-brand font-weight-bold">Edit Website</div>
-      <a class="ml-auto" (click)="updateWebsite()" >
-            <span>
-              <i class="fas fa-check fa-inverse"></i>
-            </span>
-      </a>
-    </nav>
-    <div class="container-fluid pt-2">
-      <form #f="ngForm">
-        <div class="form-group">
-          <label for="name" class="font-weight-bold">Website Name</label>
-          <input name="newName"
-                 type="text"
-                 class="form-control"
-                 id="name"
-                 [ngModel]="displayOldName()"
-                 ngModel
-                 #newName="ngModel">
-        </div> <!-- form-group// -->
 
-        <div class="form-group">
-          <label for="description" class="font-weight-bold">Website Description</label>
-          <textarea name="newDescription"
-                    class="form-control"
-                    id="description"
-                    rows="5"
-                    [ngModel]="displayOldDescription()"
-                    ngModel
-                    #newDescription="ngModel"></textarea>
-        </div> <!-- form-group// -->
-        <div class="form-group">
-          <a class="btn btn-danger btn-block" (click)="deleteWebsite()" role="button">Delete</a>
+<nav class="navbar navbar-expand-md navbar-light navbar-custom">
+
+  <div class="container-fluid">
+    <div class="col-1">
+      <a class="navbar-text pull-left" routerLink="..">
+        <i class="fa fa-chevron-left"></i>
+      </a>
+    </div>
+
+    <div class="col-3 d-none d-sm-block">
+      <a class="navbar-brand cl-icon-padding" routerLink="../new">Websites</a>
+      <a class="navbar-text pull-right" routerLink="/profile/{{userId}}/website/new">
+        <i class="fa fa-plus"></i>
+      </a>
+    </div>
+
+    <div class="col-8">
+      <a class="navbar-brand cl-icon-padding" routerLink=".">Edit Website</a>
+      <button (click)="updateWebsite()" routerLink=".." >
+        <i class="fa fa-check"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid cl-container-padding">
+  <div class="row">
+
+    <div class="col-sm-4 d-none d-sm-block">
+      <ul class="list-group cl-list-group-borderless">
+        <li *ngFor="let website_li of websites" class="list-group-item cl-list-item-borderless">
+          <a routerLink="../{{website_li._id}}">
+            <i class="fa fa-cog pull-right cl-icon-padding"></i>
+          </a>
+
+          <a routerLink="../{{website_li._id}}/page">
+            {{website_li.name}}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-xs-12 col-sm-8">
+      <form>
+
+        <div class="form-group" *ngIf="website">
+          <label for="website-name">Website Name</label>
+          <input type="text"
+                 class="form-control"
+                 id="website-name"
+                 placeholder="Name"
+                 [ngModelOptions]="{standalone: true}"
+                 [(ngModel)]="website.name"/>
         </div>
 
+        <div class="form-group" *ngIf="website">
+          <label for="website-description">Website Description</label>
+          <textarea id="website-description"
+                    class="form-control" rows="5"
+                    placeholder="Description"
+                    [(ngModel)]="website.description"
+                    [ngModelOptions]="{standalone: true}"></textarea>
+        </div>
+
+        <button class="btn btn-danger  btn-block"
+           (click)="deleteWebsite()"
+           routerLink="..">Delete</button>
       </form>
     </div>
   </div>
+
 </div>
 
-<app-profilebar [curUserId]="userId"></app-profilebar>
-
+<nav class="navbar fixed-bottom navbar-light navbar-custom">
+  <ul class="navbar-nav ml-auto">
+    <a routerLink="../.." class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
+      <i class="fa fa-user"></i>
+    </a>
+  </ul>
+</nav>

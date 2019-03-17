@@ -1,4 +1,6 @@
-# MyProject
+# cs5610-project
+
+I gave the repo the wrong name. This year is 2019. It should be 2019. 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.3.
 

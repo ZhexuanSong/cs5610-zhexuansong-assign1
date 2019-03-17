@@ -1,38 +1,38 @@
-<nav class="navbar navbar-light bg-light">
 
-  <!--Go back to website-list-->
-  <a (click)="goBack()" >
-    <span>
-      <i class="fas fa-chevron-left dark"></i>
-    </span>
-  </a>
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <div class="navbar-collapse collapse mr-auto" id="collapsingNavbar">
+    <ul class="navbar-nav">
+      <a class="nav-link cl-icon-padding" routerLink="../..">
+        <i class="fa fa-chevron-left"></i>
+      </a>
+      <a class="navbar-brand brand cl-icon-padding" routerLink=".">Pages</a>
+    </ul>
+  </div>
 
-  <span class="navbar-brand font-weight-bold mr-auto ml-3 dark">Pages</span>
-
-  <a (click)="createNewPage()" class="ml-auto">
-    <span>
-      <i class="fas fa-plus dark"></i>
-    </span>
-  </a>
+  <div>
+    <ul class="navbar-nav ml-auto">
+      <a class="nav-link cl-icon-padding" routerLink="./new"><i class="fa fa-plus"></i></a>
+    </ul>
+  </div>
 </nav>
 
-<div class="container-fluid scrollable-body"
-     *ngFor="let page of pages">
-  <table class="table table-borderless">
-    <tbody>
-    <tr>
-      <td>
-        <div (click)="goToWidgetList(page._id)">{{page.name}}</div>
-      </td>
-      <td align="right">
-        <a (click)="goToEditPage(page._id)" ><i class="fas fa-cog"></i></a>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+<div class="container-fluid cl-container-padding-more">
+  <ul class="list-group cl-list-group-borderless">
+    <li *ngFor="let page of pages" class="list-group-item cl-list-item-borderless">
+      <a routerLink="./{{page._id}}/widget">
+        {{page.name}}
+      </a>
+      <a routerLink="./{{page._id}}">
+        <span class="fa fa-cog pull-right icon-padding"></span>
+      </a>
+    </li>
+  </ul>
+</div>
 
-</div> <!-- container-fluid.// -->
-
-
-<app-profilebar [curUserId]="userId"></app-profilebar>
-
+<nav class="navbar fixed-bottom navbar-light bg-light">
+  <ul class="navbar-nav ml-auto">
+    <a routerLink="../../.." class="navbar-link navbar-text pull-right cl-icon-padding">
+      <i class="fa fa-user"></i>
+    </a>
+  </ul>
+</nav>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {PageService} from 'src/app/page.service';
-import {Page} from 'src/app/model/Page';
+import {ActivatedRoute} from '@angular/router';
+import {PageService} from '../../../services/page.service.client';
+import {Page} from '../../../models/page.model.client';
 
 @Component({
   selector: 'app-page-list',
@@ -10,38 +10,19 @@ import {Page} from 'src/app/model/Page';
 })
 export class PageListComponent implements OnInit {
 
-  userId: String;
-  websiteId: String;
-  pages: Page[];
+  webId: String;
+  pages: Page[] = [];
 
-  constructor(private activatedRoute: ActivatedRoute,
-              private router: Router,
-              private pageService: PageService) { }
+  constructor(private pageService: PageService, private activateRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.activatedRoute.params
-      .subscribe( (params: any) => {
-        this.userId = params['uid'];
-        this.websiteId = params['wid'];
-
-      });
-    this.pageService.findPagesByWebsite(this.websiteId).subscribe(
-      pages => this.pages = pages
+    this.activateRoute.params.subscribe((params: any) => {
+        this.pageService.findPageByWebsiteId(params['wid']).subscribe(
+          (pages: any) => {
+            this.pages = pages;
+          }
+        );
+      }
     );
-
-    // console.log(this.pages);
   }
-  goBack() {
-    this.router.navigate(['user', this.userId, 'website']);
-  }
-  createNewPage() {
-    this.router.navigate(['user', this.userId, 'website', this.websiteId, 'page', 'new']);
-  }
-  goToEditPage(pageId) {
-    this.router.navigate(['user', this.userId, 'website', this.websiteId, 'page', pageId]);
-  }
-  goToWidgetList(pageId) {
-    this.router.navigate(['user', this.userId, 'website', this.websiteId, 'page', pageId, 'widget']);
-  }
-
 }

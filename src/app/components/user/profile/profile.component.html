@@ -1,65 +1,92 @@
-<div>
-  <nav class="navbar navbar-dark bg-primary">
-    <a class="navbar-brand font-weight-bold" href="#">Profile</a>
-  </nav>
-</div>
 
-<div class="container-fluid pt-2">
-  <form #f="ngForm">
-    <div class="form-group">
-      <label for="usernameInput" class="font-weight-bold">Username</label>
-      <input name="username"
-             type="text"
+<nav class="navbar navbar-expand-md navbar-custom">
+  <div class="navbar-collapse collapse mr-auto" id="collapsingNavbar">
+    <ul class="navbar-nav">
+      <a class="navbar-brand" routerLink="/user/{{user?._id}}">
+        Profile
+      </a>
+      <!--<a (click)="updateUser()"-->
+         <!--routerLink="/user/{{user?._id}}"-->
+         <!--class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">-->
+        <!--<span class="fa fa-ok"></span>-->
+      <!--</a>-->
+    </ul>
+  </div>
+</nav>
+
+
+<div class="container cl-container-padding">
+
+  <div *ngIf="updateFlag" class="alert alert-success">
+    {{updateMsg}}
+  </div>
+
+  <div *ngIf="userErrorFlag" class="alert alert-danger">
+    {{userErrorMsg}}
+  </div>
+
+  <form>
+
+    <div class="form-group" *ngIf="user">
+      <label for="username">Username</label>
+      <input type="text"
              class="form-control"
-             id="usernameInput"
-             ngModel
-             [(ngModel)]="user.username"
-             #username="ngModel">
-    </div> <!-- form-group// -->
-
-    <div class="form-group">
-      <label for="email" class="font-weight-bold">Email</label>
-      <input id="email" type="email" class="form-control" placeholder="Email">
-    </div> <!-- form-group// -->
-
-    <div class="form-group">
-      <label for="firstnameInput" class="font-weight-bold">First Name</label>
-      <input [(ngModel)]="user.firstName"
-             name="firstname"
-             type="text"
-             class="form-control"
-             id="firstnameInput"
-             ngModel
-             #firstname="ngModel">
-    </div> <!-- form-group// -->
-
-    <div class="form-group">
-      <label for="lastnameInput" class="font-weight-bold">Last Name</label>
-      <input [(ngModel)]="user.lastName"
-             name="lastname"
-             type="text"
-             class="form-control"
-             id="lastnameInput"
-             ngModel
-             #lastname="ngModel">
-    </div> <!-- form-group// -->
-
-    <div class="form-group">
-      <button class="btn btn-primary btn-block"
-              (click)="saveAndDisplayWebsites()">Websites</button>
-      <!--<a class="btn btn-primary btn-block" type="submit" role="button">Websites</a>-->
+             id="username"
+             placeholder="Username"
+             [(ngModel)]="username"
+             [ngModelOptions]="{standalone: true}"/>
     </div>
-    <div class="form-group">
-      <a class="btn btn-danger btn-block" routerLink="/login" role="button">Logout</a>
+
+    <div class="form-group" *ngIf="user">
+      <label for="email">Email address</label>
+      <input [ngModelOptions]="{standalone: true}"
+             type="email"
+             class="form-control"
+             id="email"
+             placeholder="alice@wonderland.com"
+             [(ngModel)]="user.email"
+             [ngModelOptions]="{standalone: true}"/>
+    </div>
+
+    <div class="form-group" *ngIf="user">
+      <label for="first-name">First Name</label>
+      <input [ngModelOptions]="{standalone: true}"
+             type="text"
+             class="form-control"
+             id="first-name"
+             placeholder="Alice"
+             [(ngModel)]="user.firstName"
+             [ngModelOptions]="{standalone: true}"/>
+    </div>
+
+    <div class="form-group" *ngIf="user">
+      <label for="last-name">Last Name</label>
+      <input type="text"
+             class="form-control"
+             id="last-name"
+             placeholder="Wonderland"
+             [ngModelOptions]="{standalone: true}"
+             [(ngModel)]="user.lastName"/>
     </div>
   </form>
 
-</div> <!-- container-fluid.// -->
+  <a class="btn btn-primary btn-block"
+     routerLink="./website">Websites</a>
 
+  <a class="btn btn-danger  btn-block"
+     routerLink="/login">Logout</a>
 
+  <button class="btn btn-danger btn-block"
+          (click)="delete()"
+          type="button">Delete User</button>
 
+</div>
 
-<nav class="navbar navbar-dark bg-primary fixed-bottom p-3">
-  <a class="navbar-brand font-weight-bold" href="#"></a>
+<nav class="navbar fixed-bottom navbar-light navbar-custom">
+  <ul class="navbar-nav ml-auto">
+    <a routerLink="/user/:uid" class="navbar-link navbar-text pull-right cl-icon-padding">
+      <i class="fa fa-user"></i>
+    </a>
+  </ul>
 </nav>
 

@@ -1,99 +1,106 @@
-
 module.exports = function(app) {
-  // fake data
-  var users= [
-    {_id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder" },
-    {_id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley" },
-    {_id: "345", username: "charly", password: "charly", firstName: "Charly", lastName: "Garcia" },
-    {_id: "456", username: "jan", password: "jan", firstName: "Jose", lastName: "Annunzi" }
-    ];
-  // var users = [
-  //   new User("123", "alice", "alice", "Alice", "Wonder"),
-  //   new User("234", "bob", "bob", "Bob", "Marley"),
-  //   new User("345", "charly", "charly", "Charly", "Garcia"),
-  //   new User("456", "jan", "jan", "Jose", "Annunzi" )
-  // ];
 
-  // api list
-  app.post('/api/user', createUser);
-  app.get('/api/user/', findUserByUsername);
-  app.get('/api/user/', findUserByCred);
-  app.get('/api/user/:userid', findUserById);
-  app.put('/api/user/:userid', updateUser);
-  app.delete('/api/user/:userid', deleteUser);
+  app.post("/api/user", createUser);
+  app.get("/api/user?", findUser);
+  app.get("/api/user/:userId", findUserById);
+  app.put("/api/user/:userId", updateUser);
+  app.delete("/api/user/:userId", deleteUser);
 
+  const users = [
+    {_id: '123', username: 'alice', password: 'alice', email: 'alice@test.com', firstName: 'Alice', lastName: 'Wonder'},
+    {_id: '234', username: 'bob', password: 'bob', email: 'bob@test.com', firstName: 'Bod', lastName: 'Marley'},
+    {
+      _id: '345',
+      username: 'charlie',
+      password: 'charly',
+      email: 'charlie@test.com',
+      firstName: 'Charly',
+      lastName: 'Garcia'
+    },
+    {
+      _id: '456',
+      username: 'jannunzi',
+      password: 'jannunzi',
+      email: 'jannunzi@test.com',
+      firstName: 'Jose',
+      lastName: 'Annunzi'
+    }
+  ];
 
-  // functions
   function createUser(req, res) {
-    var user = req.body;
-    var lastId = users[users.length-1]._id;
-    user._id = (+(lastId)+1).toString();
+    const user = req.body;
+    user._id = (new Date()).getTime().toString();
+    console.log('create user: ' + user._id + " " + user.username);
     users.push(user);
-    res.status(200).send(user);
+    res.json(user);
   }
-  
-  function findUserByUsername (req, res) {
-    var username = req.query.username;
+
+  function findUser(req, res) {
+    const username = req.query['username'];
+    const password = req.query['password'];
     let user = null;
-    for (var i = 0; i < users.length; i++) {
-      if (users[i].username === username) {
-        user = users[i];
-      }
+    if (username && password) {
+      user = users.find(function (user) {
+        return user.username === username && user.password === password;
+      });
+    } else if (username) {
+      user = users.find(function (user) {
+        return user.username === username;
+      });
     }
-    if (user == null) res.status(404).send("User not found by username");
-    else res.status(200).send(user);
+    if (user) {
+      console.log("find user: " + user._id + " " + user.username);
+      res.json(user);
+    } else {
+      console.log("find user: not found");
+      res.json({});
+    }
   }
 
-  function findUserByCred (req, res) {
-    var username = req.query.username;
-    var password = req.query.password;
-    for (var i = 0; i < users.length; i++) {
-      if (users[i].username === username && users[i].password === password) {
-        res.status(200).send(users[i]);
-        return;
-      }
+  function findUserById(req, res) {
+    const userId = req.params['userId'];
+    const user = users.find(function (user) {
+      return user._id === userId;
+    });
+    if (user) {
+      console.log("find user by id: " + user._id + " " + user.username);
+      res.json(user);
+    } else {
+      console.log("find user by id: not found");
+      res.json({});
     }
-    res.status(404).send("User not found by credential");
-  }
-  
-  function findUserById (req, res) {
-    // params must be the thing in the url placeholder
-    var userId = req.params["userid"];
-    for (var i = 0; i < users.length; i++)  {
-      if (users[i]._id === userId) {
-        res.status(200).send(users[i]);
-        return;
-      }
-    }
-    res.status(404).send("User not found by id");
-
   }
 
   function updateUser(req, res) {
+    const userId = req.params['userId'];
+    const user = req.body;
 
-    var userId = req.params["userid"];
-    var user = req.body;
-    for (var i = 0; i < users.length; i++) {
+    for(let i = 0; i < users.length; i++) {
       if (users[i]._id === userId) {
-        users[i] = user;
+        console.log(req.body);
+        console.log("update user: " + userId + " " + user.username);
+
+        users[i].username = user.username;
+        users[i].firstName = user.firstName;
+        users[i].lastName = user.lastName;
+        users[i].email = user.email;
         res.status(200).send(user);
         return;
       }
     }
-    res.status(404).send("User not fount by delete user");
+    res.status(404).send("not found!");
   }
-  
+
   function deleteUser(req, res) {
-    var userId = req.params["userid"];
-    for (var i = 0; i < users.length; i++) {
+    const userId = req.params['userId'];
+    for (const i in users) {
       if (users[i]._id === userId) {
-        users.splice(i,1);
-        res.status(200).send(users);
+        const j = +i;
+        res.json(users[i]);
+        console.log('delete user: ' + userId);
+        users.splice(j, 1);
         return;
       }
     }
-    res.status(404).send("User not fount by delete user");
   }
-
-
-}
+};

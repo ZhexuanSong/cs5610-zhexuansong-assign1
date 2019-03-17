@@ -1,62 +1,44 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {Page} from 'src/app/model/Page';
-import {PageService} from 'src/app/page.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Page } from '../../../models/page.model.client';
+import { PageService } from '../../../services/page.service.client';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-page-edit',
   templateUrl: './page-edit.component.html',
   styleUrls: ['./page-edit.component.css']
 })
+
 export class PageEditComponent implements OnInit {
+  page: Page;
+   _id: String;
+  constructor(private pageService: PageService, private activatedRoute: ActivatedRoute) { }
 
-  @ViewChild('f') pageForm: NgForm;
-  oldPage: Page;
-  websiteId: String;
-  userId: String;
-  pageId: String;
-  constructor(private pageService: PageService,
-              private activatedRoute: ActivatedRoute,
-              private router: Router) {
-    this.oldPage = new Page('', '', '', '');
+  updatePage() {
+    this.pageService.updatePage(this.page._id, this.page).subscribe(
+      (page: Page) => {
+        this.page = page;
+        console.log('update page: ' + page._id + ' ' + page.name);
+      }
+    );
+  }
 
+  deletePage() {
+    this.pageService.deletePage(this.page._id).subscribe(
+      (data: Page) => {
+        console.log('delete page: ' + this.page._id);
+      },
+      (error: any) => console.log(error)
+    );
   }
 
   ngOnInit() {
-    this.activatedRoute.params
-      .subscribe((params: any) => {
-        // console.log(params);
-        this.userId = params['uid'];
-        this.websiteId = params['wid'];
-        this.pageId = params['pid'];
-      });
-    this.pageService.findPageById(this.pageId).subscribe(
-      page => this.oldPage = page
-    );
+    this.activatedRoute.params.subscribe((params: any) => {
+      this.pageService.findPageById(params['pid']).subscribe(
+        (page: Page) => {
+          this.page = page;
+        }
+      );
+    });
   }
-
-  updatePage() {
-    const newName = this.pageForm.value.pageName;
-    const newTitle = this.pageForm.value.pageTitle;
-    const page = new Page(this.pageId, newName, this.websiteId, newTitle);
-    this.pageService.updatePage(this.pageId, page).subscribe(
-      () => this.goBack()
-    );
-  }
-  deletePage() {
-    this.pageService.deletePage(this.pageId).subscribe(
-      () => this.goBack()
-    );
-  }
-  goBack() {
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
-  }
-  displayOldName() {
-    return this.oldPage.name;
-  }
-  displayOldTitle() {
-    return this.oldPage.title;
-  }
-
 }

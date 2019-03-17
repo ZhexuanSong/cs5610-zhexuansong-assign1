@@ -1,71 +1,158 @@
-<nav class="navbar navbar-light bg-light pb-2">
 
-  <a (click)="goBack()">
-    <span>
-      <i class="fas fa-chevron-left dark"></i>
-    </span>
-  </a>
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+    <ul class="navbar-nav">
+      <a class="nav-link cl-icon-padding" routerLink="../..">
+        <i class="fa fa-chevron-left"></i>
+      </a>
+      <a class="navbar-brand cl-icon-padding" routerLink=".">Widgets Edit</a>
+    </ul>
+  </div>
 
-  <span class="navbar-brand font-weight-bold mr-auto ml-3 dark">Widgets</span>
-
-  <!--to widget choose-->
-  <a class="ml-auto" (click)="goToWidgetChoose()" >
-    <span>
-      <i class="fas fa-plus dark"></i>
-    </span>
-  </a>
+  <div>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link cl-icon-padding" routerLink="./new"><i class="fa fa-plus"></i></a>
+      </li>
+    </ul>
+  </div>
 </nav>
 
+<!--<div  id="sortable" class="container container-fluid cl-container-padding-more" appSortable (newIndexes)="reorderItems($event)">-->
+  <!--<div class="container-fluid" *ngFor="let widget of widgets">-->
+    <!--<div [ngSwitch]="widget.type">-->
 
-<!--list and switch-->
-<div appSortable (newIndexes) = "onNewIndexes($event)">
-<div class="container-fluid pt-0"
-     *ngFor="let widget of widgets">
-  <table class="table table-borderless">
-    <tbody>
-    <tr>
-      <td>
-        <div [ngSwitch]="widget.widgetType">
+      <!--<div class="jga-widget-tool">-->
+        <!--<a class="pull-right">-->
+          <!--<span class="fa fa-bars"></span>-->
+        <!--</a>-->
+        <!--<a routerLink="./{{widget._id}}" class="pull-right">-->
+          <!--<span class="fa fa-cog"></span>-->
+        <!--</a>-->
+      <!--</div>-->
 
-          <div *ngSwitchCase="'HEADING'">
-            <!--display the header-->
-            <p [ngStyle]="{'font-size': widget.size+'00%'}">{{widget.text}}</p>
-          </div>
+      <!--<div *ngSwitchCase="'HEADER'">-->
+        <!--&lt;!&ndash;<a routerLink="./{{widget._id}}" class="pull-right">&ndash;&gt;-->
+          <!--&lt;!&ndash;<span class="fa fa-cog whiteBackground"></span>&ndash;&gt;-->
+        <!--&lt;!&ndash;</a>&ndash;&gt;-->
+        <!--&lt;!&ndash;<h2>{{widget.text}}</h2>&ndash;&gt;-->
+        <!--<div [ngSwitch]="widget.size">-->
+          <!--<h1 *ngSwitchCase="'1'">{{widget.text}}</h1>-->
+          <!--<h2 *ngSwitchCase="'2'">{{widget.text}}</h2>-->
+          <!--<h3 *ngSwitchCase="'3'">{{widget.text}}</h3>-->
+          <!--<h4 *ngSwitchCase="'4'">{{widget.text}}</h4>-->
+          <!--<h5 *ngSwitchCase="'5'">{{widget.text}}</h5>-->
+          <!--<h6 *ngSwitchCase="'6'">{{widget.text}}</h6>-->
+          <!--<h1 *ngSwitchDefault>{{widget.text}}</h1>-->
+        <!--</div>-->
+      <!--</div>-->
 
-          <div *ngSwitchCase="'YOUTUBE'">
-            <iframe width="640" height="360" [src]="convertToSafeYoutubeUrl(widget.url)" frameborder="0" allowfullscreen></iframe>
-          </div>
+      <!--<div *ngSwitchCase="'YOUTUBE'">-->
+        <!--&lt;!&ndash;<div class="embed-responsive embed-responsive-16by9">&ndash;&gt;-->
+          <!--&lt;!&ndash;<iframe [src]=getUrl(widget.url)&ndash;&gt;-->
+                  <!--&lt;!&ndash;frameborder="0"&ndash;&gt;-->
+                  <!--&lt;!&ndash;allowfullscreen></iframe>&ndash;&gt;-->
+          <!--&lt;!&ndash;<a routerLink="./{{widget._id}}" class="pull-right">&ndash;&gt;-->
+            <!--&lt;!&ndash;<span class="fa fa-cog whiteBackground"></span>&ndash;&gt;-->
+          <!--&lt;!&ndash;</a>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--<div class="embed-responsive embed-responsive-16by9">-->
+          <!--<iframe [src]=getUrl(widget.url)-->
+                  <!--width="560" height="315"-->
+                  <!--frameborder="0"-->
+                  <!--allowfullscreen></iframe>-->
+        <!--</div>-->
+      <!--</div>-->
 
-          <div *ngSwitchCase="'IMAGE'">
-            <!--display the image-->
-            <img [src]="convertToSafeUrl(widget.url)"/>
-          </div>
+      <!--<div *ngSwitchCase="'IMAGE'">-->
+        <!--&lt;!&ndash;<a routerLink="./{{widget._id}}" class="pull-right">&ndash;&gt;-->
+          <!--&lt;!&ndash;<span class="fa fa-cog whiteBackground"></span>&ndash;&gt;-->
+        <!--&lt;!&ndash;</a>&ndash;&gt;-->
+        <!--&lt;!&ndash;<img class="img-responsive img-rounded cl-widget-images"&ndash;&gt;-->
+             <!--&lt;!&ndash;src="{{widget.url}}">&ndash;&gt;-->
+        <!--<img class="img-responsive img-rounded cl-widget-images"-->
+             <!--[src]="widget.url"-->
+             <!--width="{{widget.width}}">-->
+      <!--</div>-->
+ <!--</div>-->
+<!--</div>-->
+<div id="sortable" class="container-fluid cl-container-padding" appSortable (newIndexes)="reorderItems($event)">
 
-          <div *ngSwitchCase="'HTML'">
-            <!--display the html-->
-            Here should be html embedded page.
-          </div>
+  <div *ngFor="let widget of widgets">
+    <div [ngSwitch]="widget.type">
+
+      <div class="jga-widget-tool">
+        <a class="pull-right">
+          <span class="fa fa-bars"></span>
+        </a>
+        <a routerLink="./{{widget._id}}" class="pull-right">
+          <span class="fa fa-cog"></span>
+        </a>
+      </div>
+
+      <div *ngSwitchCase="'HEADER'">
+        <div [ngSwitch]="widget.size">
+          <h1 *ngSwitchCase="'1'">{{widget.text}}</h1>
+          <h2 *ngSwitchCase="'2'">{{widget.text}}</h2>
+          <h3 *ngSwitchCase="'3'">{{widget.text}}</h3>
+          <h4 *ngSwitchCase="'4'">{{widget.text}}</h4>
+          <h5 *ngSwitchCase="'5'">{{widget.text}}</h5>
+          <h6 *ngSwitchCase="'6'">{{widget.text}}</h6>
+          <h1 *ngSwitchDefault>{{widget.text}}</h1>
         </div>
-      </td>
-      <td align="right">
-        <a (click)="goToWidgetEdit(widget._id)" ><i class="fas fa-cog"></i></a>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+      </div>
+
+      <div *ngSwitchCase="'TEXT'">
+        <div *ngIf="widget.formatted">
+          <!--<quill-editor [(ngModel)]="widget.text"></quill-editor>-->
+        </div>
+
+        <input *ngIf="!widget.formatted && (!widget.rows || widget.rows <= 1)"
+               placeholder="{{widget.placeholder}}"
+               class="form-control"/>
+
+        <textarea *ngIf="!widget.formatted && (widget.rows > 1)"
+                  rows="{{widget.rows}}"
+                  placeholder="{{widget.placeholder}}"
+                  class="form-control">{{widget.text}}</textarea>
+      </div>
+
+      <div *ngSwitchCase="'HTML'" [innerHTML]="widget.text"></div>
+
+      <div *ngSwitchCase="'YOUTUBE'">
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe [src]=getUrl(widget.url)
+                  width="560" height="315"
+                  frameborder="0"
+                  allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div *ngSwitchCase="'IMAGE'">
+        <img class="img-responsive img-rounded cl-widget-images"
+             [src]="widget.url"
+             width="{{widget.width}}">
+      </div>
+
+    </div>
+  </div>
+
 </div>
-</div>
 
-<div class="p-3">
+<nav class="navbar fixed-bottom navbar-light bg-light">
+  <ul>
+    <a routerLink="." class="navbar-link navbar-text cl-icon-padding">
+      <i class="fa fa-play"></i>
+    </a>
+    <a routerLink="." class="navbar-link navbar-text cl-icon-padding">
+      <i class="fa fa-eye"></i>
+    </a>
+  </ul>
+  <ul>
+    <a routerLink="../../../../.." class="navbar-brand navbar-text pull-right cl-icon-padding">
+      <i class="fa fa-user"></i>
+    </a>
+  </ul>
 
-</div>
-<app-profilebar [curUserId]="userId"></app-profilebar>
-
-
-
-
-
-
-
-
+</nav>
 

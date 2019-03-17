@@ -1,63 +1,83 @@
-<nav class="navbar navbar-light bg-light pb-2">
 
-  <a (click)="goBack()">
-    <span>
-      <i class="fas fa-chevron-left dark"></i>
-    </span>
-  </a>
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <div class="navbar-collapse collapse mr-auto" id="collapsingNavbar">
+    <ul class="navbar-nav">
+      <a class="nav-link cl-icon-padding" [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget']">
+        <i class="fa fa-chevron-left"></i>
+      </a>
+      <a class="navbar-brand brand cl-icon-padding" routerLink=".">Widgets Edit</a>
+    </ul>
+  </div>
 
-  <span class="navbar-brand font-weight-bold mr-auto ml-3 dark">Widget Edit</span>
-
-  <a class="ml-auto" (click)="updateWidget()" >
-    <span>
-      <i class="fas fa-check dark"></i>
-    </span>
-  </a>
+  <div>
+    <ul class="navbar-nav ml-auto">
+      <button class="nav-link cl-icon-padding"
+              (click)="updateWidget()">
+        <i class="fa fa-check"></i>
+      </button>
+    </ul>
+  </div>
 </nav>
 
+<div class="container cl-container-padding">
 
-<!--main body-->
-<div class="container-fluid pt-2">
+  <div *ngIf="errorFlag" class="alert alert-danger">
+    {{errorMsg}}
+  </div>
 
-  <form #f="ngForm">
-    <div class="form-group">
-      <label for="headername" class="font-weight-bold">Name</label>
-      <input id="headername"
-             name="newName"
+  <form>
+    <div class="form-group" *ngIf="widget">
+      <label for="heading-name">Name</label>
+      <input [(ngModel)]="widget.name"
+             name="name"
              type="text"
              class="form-control"
-             placeholder="Header Name">
-    </div> <!-- form-group// -->
-
-    <div class="form-group">
-      <label for="headertext" class="font-weight-bold">Text</label>
-      <input id="headertext"
-             type="text"
-             class="form-control"
-             placeholder="Header Text"
-             name="newText"
-             [ngModel]="displayWidgetText()"
-             ngModel
-             #newText="ngModel">
-    </div> <!-- form-group// -->
-
-    <div class="form-group">
-      <label for="headersize" class="font-weight-bold">Size</label>
-      <input id="headersize"
-             type="text"
-             class="form-control"
-             placeholder="Header Size"
-             name="newSize"
-             [ngModel]="displayWidgetSize()"
-             ngModel
-             #newSize="ngModel">
-    </div> <!-- form-group// -->
-
-    <div class="form-group">
-      <a class="btn btn-danger btn-block" (click)="deleteWidget()" role="button">Delete</a>
+             id="heading-name"
+             placeholder="name"
+             [ngModelOptions]="{standalone: true}"/>
     </div>
+
+    <div class="form-group" *ngIf="widget">
+      <label for="text">Text</label>
+      <input type="text"
+             name="text"
+             class="form-control"
+             id="text"
+             placeholder="{{widget.text}}"
+             [(ngModel)]="widget.text"
+             ngModel required
+             #text="ngModel"
+             [ngModelOptions]="{standalone: true}"/>
+    </div>
+
+    <!--<span class="help-block" *ngIf="!text.valid && text.touched">-->
+          <!--Please enter text!-->
+    <!--</span>-->
+
+    <div class="form-group">
+      <label for="heading-size">Size</label>
+      <input [(ngModel)]="widget.size"
+             name="name"
+             type="text"
+             class="form-control"
+             id="heading-size"
+             placeholder="3"
+             ngModel required
+             #size="ngModel"
+             [ngModelOptions]="{standalone: true}"/>
+    </div>
+
+    <button class="btn btn-danger btn-block"
+            (click)="deleteWidget()">Delete</button>
+
   </form>
 
 </div>
 
-<app-profilebar [curUserId]="userId"></app-profilebar>
+<nav class="navbar fixed-bottom navbar-light bg-light">
+  <ul class="navbar-nav ml-auto">
+    <a [routerLink]="['/user', userId]" class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
+      <i class="fa fa-user"></i>
+    </a>
+  </ul>
+</nav>

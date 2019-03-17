@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {WidgetService} from '../../../../services/widget.service.client';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Widget} from '../../../../models/widget.model.client';
 import {NgForm} from '@angular/forms';
-import {Widget} from 'src/app/model/Widget';
-import {WidgetService} from 'src/app/widget.service';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-widget-youtube',
@@ -10,44 +10,73 @@ import {Router} from '@angular/router';
   styleUrls: ['./widget-youtube.component.css']
 })
 export class WidgetYoutubeComponent implements OnInit {
-  @ViewChild('f') widgetForm: NgForm;
-  @Input() userId: String;
-  @Input() websiteId: String;
-  @Input() pageId: String;
-  @Input() widgetId: String;
-  @Input() widget: Widget;
-  constructor(private widgetService: WidgetService, private router: Router) { }
+  @ViewChild('f') youtubeForm: NgForm;
+  widgetId: String;
+  pageId: String;
+  websiteId: String;
+  userId: String;
+  widget: Widget;
+  errorFlag: Boolean;
+  errorMsg: String;
 
+  constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute, private route: Router) { }
 
   ngOnInit() {
+    this.errorFlag = false;
+    this.errorMsg = 'Please enter URL!';
+    this.activatedRoute.params.subscribe((params: any) => {
+      console.log('widget._id: ' + params['wgid']);
+      this.widgetId = params['wgid'];
+      this.pageId = params['pid'];
+      this.websiteId = params['wid'];
+      this.userId = params['uid'];
+    });
+    if (this.widgetId === undefined) {
+      this.widget = WidgetService.getNewWidget();
+    } else {
+      this.widgetService.findWidgetById(this.widgetId).subscribe(
+        (widget: Widget) => {
+          this.widget = widget;
+        }
+      );
+    }
   }
-  goBack() {
-    this.router.navigate(['user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
 
+  deleteYoutube() {
+    if (this.widgetId !== undefined) {
+      this.widgetService.deleteWidget(this.widget._id).subscribe(
+        (data: Widget) => {
+          console.log('delete widget youtube');
+        },
+        (error: any) => console.log(error)
+      );
+    }
+    this.route.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
   }
-  updateWidget() {
-    let text = this.widgetForm.value.newText;
-    let url = this.widgetForm.value.newUrl;
-    let width = this.widgetForm.value.newWidth;
-    this.widget.text = text;
-    this.widget.url = url;
-    this.widget.width = width;
-    this.widgetService.updateWidget(this.widget._id, this.widget).subscribe(
-      () => this.goBack()
-    );
-
-  }
-  deleteWidget() {
-    this.widgetService.deleteWidget(this.widget._id).subscribe(
-      () => this.goBack());
-  }
-  displayWidgetText() {
-    return this.widget.text;
-  }
-  displayWidgetWidth(){
-    return this.widget.width;
-  }
-  displayWidgetUrl() {
-    return this.widget.url;
+  updateYoutube() {
+    if (this.widget.url === undefined) {
+      this.errorFlag = true;
+      return;
+    }
+    if (this.widgetId === undefined) {
+      this.widget.type = 'YOUTUBE';
+      this.widget.pageId = this.pageId;
+      this.widgetService.createWidget(this.pageId, this.widget).subscribe(
+        (widget: Widget) => {
+          console.log('create widget youtube: ' + widget._id + ', name: ' + widget.name
+            + ', text: ' + widget.text + ', url: ' + widget.url + ', width: ' + widget.width);
+        },
+        (error: any) => console.log(error)
+      );
+    } else {
+      this.widgetService.updateWidget(this.widget._id, this.widget).subscribe(
+        (widget: Widget) => {
+          console.log('update widget youtube: ' + widget._id + ', name: ' + widget.name
+            + ', text: ' + widget.text + ', url: ' + widget.url + ', width: ' + widget.width);
+        },
+        (error: any) => console.log(error)
+      );
+    }
+    this.route.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
   }
 }

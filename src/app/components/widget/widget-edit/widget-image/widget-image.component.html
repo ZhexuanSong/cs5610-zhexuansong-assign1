@@ -1,96 +1,101 @@
-<nav class="navbar navbar-light bg-light pb-2">
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+    <ul class="navbar-nav">
+      <a class="nav-link cl-icon-padding" [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget']">
+        <i class="fa fa-chevron-left"></i>
+      </a>
+      <a class="navbar-brand cl-icon-padding" routerLink=".">Widgets Edit</a>
+    </ul>
+  </div>
 
-  <a (click)="goBack()">
-    <span>
-      <i class="fas fa-chevron-left dark"></i>
-    </span>
-  </a>
-
-  <span class="navbar-brand font-weight-bold mr-auto ml-3 dark">Widget Edit</span>
-
-  <a class="ml-auto" (click)="updateWidget()" >
-    <span>
-      <i class="fas fa-check dark"></i>
-    </span>
-  </a>
+  <div>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <button class="nav-link cl-icon-padding" (click)="updateImage()">
+          <i class="fa fa-check"></i>
+          </button>
+      </li>
+    </ul>
+  </div>
 </nav>
 
-<!--main body-->
-<div class="container-fluid pt-2">
+<div class="container cl-container-padding">
+  <div *ngIf="errorFlag" class="alert alert-danger">
+    {{errorMsg}}
+  </div>
 
-  <form #f="ngForm">
-    <div class="form-group">
-      <label for="imagename" class="font-weight-bold">Name</label>
-      <input id="imagename"
-             name="newName"
+  <form>
+
+    <div class="form-group" *ngIf="widget">
+      <label for="image-name">Name</label>
+      <input [(ngModel)]="widget.name"
+             name="name"
              type="text"
              class="form-control"
-             placeholder="Header Name">
-    </div> <!-- form-group// -->
-
-    <div class="form-group">
-      <label for="imagetext" class="font-weight-bold">Text</label>
-      <input id="imagetext"
-             type="text"
-             class="form-control"
-             placeholder="Image Text"
-             name="newText"
-             [ngModel]="displayWidgetText()"
-             ngModel
-             #newText="ngModel">
-    </div> <!-- form-group// -->
-
-    <div class="form-group">
-      <label for="imageurl" class="font-weight-bold">URL</label>
-      <input id="imageurl"
-             type="text"
-             class="form-control"
-             placeholder="Image URL"
-             name="newUrl"
-             [ngModel]="displayWidgetUrl()"
-             ngModel
-             #newUrl="ngModel">
-    </div> <!-- form-group// -->
-
-    <div class="form-group">
-      <label for="imagewidth" class="font-weight-bold">Width</label>
-      <input id="imagewidth"
-             type="text"
-             class="form-control"
-             placeholder="Image Width"
-             name="newWidth"
-             [ngModel]="displayWidgetWidth()"
-             ngModel
-             #newWidth="ngModel">
-    </div> <!-- form-group// -->
-
-    <div class="form-group">
-      <label for="fileToUpload" class="font-weight-bold">Upload</label>
+             id="image-name"
+             placeholder="name"/>
     </div>
 
+    <div class="form-group" *ngIf="widget">
+      <label for="image-text">Text</label>
+      <input [(ngModel)]="widget.text"
+             name="text"
+             type="text"
+             class="form-control"
+             id="image-text"
+             placeholder="Text"/>
+    </div>
+
+    <div class="form-group" *ngIf="widget">
+      <label for="image-URL">URL</label>
+      <input type="text"
+             name="url"
+             class="form-control"
+             id="image-URL"
+             placeholder="url"/>
+    </div>
+
+    <!--<span class="help-block" *ngIf="!url.valid && url.touched">-->
+          <!--Please enter URL!-->
+    <!--</span>-->
+
+    <div class="form-group" *ngIf="widget">
+      <label for="image-width">Width</label>
+      <input [(ngModel)]="widget.width"
+             name="width"
+             type="text"
+             class="form-control"
+             id="image-width"
+             placeholder="100%"/>
+    </div>
+
+    <!--<div class="form-group">-->
+      <!--<label for="exampleInputFile">Upload</label>-->
+      <!--<input type="file" class="form-control" id="exampleInputFile">-->
+    <!--</div>-->
 
     <form ngNoForm action="{{baseUrl}}/api/upload" method="post" enctype="multipart/form-data">
-      <input id="fileToUpload" name="imageAdded" type="file" class="form-control"/>
-      <input name="widgetId" value="{{widgetId}}" style="display: none"/>
-      <input name="websiteId" value="{{websiteId}}" style="display: none"/>
-      <input name="pageId" value="{{pageId}}" style="display: none"/>
-      <input name="userId" value="{{userId}}" style="display: none"/>
+      <input  name="myFile"   type="file" class="form-control"/>
+      <input  name="widgetId" value="{{widgetId}}"   style="display: none"/>
+      <input  name="websiteId" value="{{websiteId}}"   style="display: none"/>
+      <input  name="pageId" value="{{pageId}}"   style="display: none"/>
+      <input  name="userId" value="{{userId}}"   style="display: none"/>
+      <input  name="width" value="{{widget?.width}}"   style="display: none"/>
+      <input  name="name" value="{{widget?.name}}"   style="display: none"/>
+      <input  name="text" value="{{widget?.text}}"   style="display: none"/>
       <button type="submit" class="btn btn-block btn-primary">Upload Image</button>
       <br/>
     </form>
-
-    <div class="form-group">
-      <a class="btn btn-success btn-block" (click)="goToFlickrSearch()" role="button">Flickr!</a>
-    </div>
-
-    <div class="form-group">
-      <a class="btn btn-danger btn-block" (click)="deleteWidget()" role="button">Delete</a>
-    </div>
   </form>
 
+  <button class="btn btn-danger  btn-block" (click)="deleteImage()"
+     routerLink="..">Delete</button>
 </div>
 
-<div class="p-3">
-
-</div>
-<app-profilebar [curUserId]="userId"></app-profilebar>
+<nav class="navbar fixed-bottom navbar-light bg-light">
+  <ul class="navbar-nav ml-auto">
+    <a [routerLink]="['/user', userId]" class="navbar-link navbar-text pull-right cl-icon-padding">
+      <i class="fa fa-user"></i>
+    </a>
+  </ul>
+</nav>

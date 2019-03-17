@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import {Widget} from 'src/app/model/Widget';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {WidgetService} from 'src/app/widget.service';
-import {Router} from '@angular/router';
+import {Widget} from '../../../../models/widget.model.client';
+import {WidgetService} from '../../../../services/widget.service.client';
+import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from '../../../../../environments/environment';
 
 @Component({
@@ -10,50 +10,77 @@ import {environment} from '../../../../../environments/environment';
   templateUrl: './widget-image.component.html',
   styleUrls: ['./widget-image.component.css']
 })
-export class WidgetImageComponent implements OnInit {
 
-  @ViewChild('f') widgetForm: NgForm;
-  @Input() userId: String;
-  @Input() websiteId: String;
-  @Input() pageId: String;
-  @Input() widgetId: String;
-  @Input() widget: Widget;
+export class WidgetImageComponent implements OnInit {
+  @ViewChild('f') imageForm: NgForm;
+  widgetId: String;
+  pageId: String;
+  websiteId: String;
+  userId: String;
+  widget: Widget;
+  errorFlag: Boolean;
+  errorMsg: String;
   baseUrl = environment.baseUrl;
-  constructor(private widgetService: WidgetService, private router: Router) { }
+
+  constructor(private widgetService: WidgetService,
+              private activatedRoute: ActivatedRoute,
+              private route: Router) { }
 
   ngOnInit() {
+    this.errorFlag = false;
+    this.errorMsg = 'Please enter URL!';
+    this.activatedRoute.params.subscribe((params: any) => {
+      console.log('widget._id: ' + params['wgid']);
+      this.widgetId = params['wgid'];
+      this.pageId = params['pid'];
+      this.websiteId = params['wid'];
+      this.userId = params['uid'];
+    });
+    if (this.widgetId === undefined) {
+      this.widget = WidgetService.getNewWidget();
+    } else {
+      this.widgetService.findWidgetById(this.widgetId).subscribe(
+        (widget: Widget) => {
+          this.widget = widget;
+        }
+      );
+    }
   }
-  goBack() {
-    this.router.navigate(['user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
 
+  deleteImage() {
+    if (this.widgetId !== undefined) {
+      this.widgetService.deleteWidget(this.widget._id).subscribe(
+        (data: Widget) => {
+          console.log('delete widget image');
+        },
+        (error: any) => console.log(error)
+      );
+    }
+    this.route.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
   }
-  goToFlickrSearch() {
-    this.router.navigate(['user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', this.widgetId, 'flickr']);
-  }
-  updateWidget() {
-    const text = this.widgetForm.value.newText;
-    const url = this.widgetForm.value.newUrl;
-    const width = this.widgetForm.value.newWidth;
-    this.widget.text = text;
-    this.widget.url = url;
-    this.widget.width = width;
-    this.widgetService.updateWidget(this.widget._id, this.widget).subscribe(
-      () => this.goBack()
-    );
 
-  }
-  deleteWidget() {
-    this.widgetService.deleteWidget(this.widget._id).subscribe(
-      () => this.goBack()
-    );
-  }
-  displayWidgetText() {
-    return this.widget.text;
-  }
-  displayWidgetWidth() {
-    return this.widget.width;
-  }
-  displayWidgetUrl() {
-    return this.widget.url;
+  updateImage() {
+    if (this.widget.url === undefined) {
+      this.errorFlag = true;
+      return;
+    }
+    if (this.widgetId === undefined) {
+      this.widget.type = 'IMAGE';
+      this.widget.pageId = this.pageId;
+      this.widgetService.createWidget(this.pageId, this.widget).subscribe(
+        (widget: Widget) => {
+          console.log('create widget image: ' + widget._id + ', name: ' + widget.name
+            + ', text: ' + widget.text + ', url: ' + widget.url + ', width: ' + widget.width);        },
+        (error: any) => console.log(error)
+      );
+    } else {
+      this.widgetService.updateWidget(this.widget._id, this.widget).subscribe(
+        (widget: Widget) => {
+          console.log('update widget image: ' + widget._id + ', name: ' + widget.name
+            + ', text: ' + widget.text + ', url: ' + widget.url + ', width: ' + widget.width);        },
+        (error: any) => console.log(error)
+      );
+    }
+    this.route.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
   }
 }

@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {PageService} from 'src/app/page.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Page} from 'src/app/model/Page';
+import {Page} from '../../../models/page.model.client';
+import {PageService} from '../../../services/page.service.client';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-page-new',
@@ -10,33 +10,29 @@ import {Page} from 'src/app/model/Page';
   styleUrls: ['./page-new.component.css']
 })
 export class PageNewComponent implements OnInit {
-
   @ViewChild('f') pageForm: NgForm;
-  userId: String;
-  websiteId: String;
+  page: Page;
+  webId: String;
 
-  constructor(private pageService: PageService,
-              private activatedRoute: ActivatedRoute,
-              private router: Router) { }
+  constructor(private pageService: PageService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.activatedRoute.params
-      .subscribe((params: any) => {
-        this.userId = params['uid'];
-        this.websiteId = params['wid'];
-      });
+    this.activatedRoute.params.subscribe((params: any) => {
+      this.webId = params['wid'];
+    });
+     this.page = PageService.getNewPage();
   }
-  savePage() {
-    const name = this.pageForm.value.pageName;
-    const title = this.pageForm.value.pageTitle;
-    const page = new Page('', name, this.websiteId, title);
-    this.pageService.createPage(page, this.websiteId).subscribe(
-      page => this.goBack()
+
+  createPage() {
+    this.page.name = this.pageForm.value.name;
+    this.pageService.createPage(this.webId, this.page).subscribe(
+      (page: Page) => {
+        console.log('create page: ' + page._id + ' ' + page.name);
+        this.page = page;
+      },
+      (error: any) => {
+        console.log(error);
+      }
     );
-
   }
-  goBack() {
-    this.router.navigate(['user', this.userId, 'website', this.websiteId, 'page']);
-  }
-
 }

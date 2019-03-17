@@ -1,125 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Edit Website</title>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-  <!--<link rel="stylesheet" type="text/css" href="styles.css">-->
+  <link href="css/style.css" rel="stylesheet"/>
 </head>
+
 <body>
 
-<!-- Image and text -->
-<!--navigation bar-->
-<nav class="navbar navbar-dark bg-primary">
-  <!--left navbar-->
-  <div class="col-md-4 d-none d-md-block container-fluid">
-    <a href="website-ulst.html" class="pull-left">
-        <span>
-          <i class="fas fa-chevron-left fa-inverse"></i>
-        </span>
-    </a>
+<nav class="navbar navbar-expand-md navbar-light navbar-custom">
 
+  <div class="container-fluid">
+    <!--<div class="col-1 col-sm-4">-->
+      <!--<div class="container-fluid row">-->
+        <!--<div class="col-2">-->
+          <!--<a class="navbar-brand pull-left" href="website-list.html"><i class="fa fa-chevron-left"></i></a>-->
+        <!--</div>-->
 
-    <div class="navbar-brand font-weight-bold ml-1">Websites</div>
+        <!--<div class="col-10 d-none d-sm-block">-->
+          <!--<a class="navbar-brand cl-icon-padding" href="#">Websites</a>-->
+          <!--<a class="navbar-brand pull-right" href="website-new.html"><i class="fa fa-plus"></i></a>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <div class="col-1">
+      <a class="navbar-text pull-left" href="website-list.html"><i class="fa fa-chevron-left"></i></a>
+    </div>
 
-    <a href="website-new.html" class="float-right m-2">
-        <span>
-          <i class="fas fa-plus fa-inverse"></i>
-        </span>
-    </a>
+    <div class="col-3 d-none d-sm-block">
+      <a class="navbar-brand cl-icon-padding" href="#">Websites</a>
+      <a class="navbar-text pull-right" href="website-new.html"><i class="fa fa-plus"></i></a>
+    </div>
 
+    <div class="col-8">
+      <a class="navbar-brand cl-icon-padding" href="#">Edit Website</a>
+      <a class="navbar-text pull-right" href="website-list.html"><i class="fa fa-check"></i></a>
+    </div>
   </div>
-
-  <!--right navbar-->
-  <div class="col-md-8 container-fluid">
-    <div class="navbar-brand font-weight-bold">Edit Website</div>
-    <a href="website-ulst.html" class="float-right">
-        <span>
-          <i class="fas fa-check fa-inverse"></i>
-        </span>
-    </a>
-  </div>
-
 </nav>
 
-<!--main body-->
-<div class="row container-fluid pt-2">
-  <!--left screen-->
-  <div class="col-md-4 d-none d-md-block border-right">
-    <table class="table table-borderless">
-      <tbody>
-      <tr>
-        <td>
-          <div><a href="page-ulst.html">Address Book App</a></div>
-        </td>
-        <td align="right">
-          <a href="page-edit.html"><i class="fas fa-cog"></i></a>
-        </td>
-      </tr>
+<div class="container-fluid cl-container-padding">
+  <div class="row">
+    <div class="col-sm-4 d-none d-sm-block">
+      <ul class="list-group cl-list-group-borderless">
+        <li class="list-group-item cl-list-item-borderless">
+          <a href="website-edit.html" class="cl-text-blue"><i class="fa fa-cog pull-right"></i></a>
+          <a href="page-list.html" class="cl-text-blue">Blogging App</a>
+        </li>
+        <li class="list-group-item cl-list-item-borderless">
+          <a href="website-edit.html" class="cl-text-blue"><i class="fa fa-cog pull-right"></i></a>
+          <a href="page-list.html" class="cl-text-blue">Address Book App</a>
+        </li>
+        <li class="list-group-item cl-list-item-borderless">
+          <a href="website-edit.html" class="cl-text-blue"><i class="fa fa-cog pull-right"></i></a>
+          <a href="page-list.html" class="cl-text-blue">Script Testing App</a>
+        </li>
+        <li class="list-group-item cl-list-item-borderless">
+          <a href="website-edit.html" class="cl-text-blue"><i class="fa fa-cog pull-right"></i></a>
+          <a href="page-list.html" class="cl-text-blue">Blogger</a>
+        </li>
+      </ul>
+    </div>
 
-      <tr>
-        <td>
-          <div><a href="page-ulst.html">Blogger</a></div>
-        </td>
-        <td align="right">
-          <a href="page-edit.html"><i class="fas fa-cog"></i></a>
-        </td>
-      </tr>
-
-      <tr>
-        <td>
-          <div><a href="page-ulst.html">Blogging App</a></div>
-        </td>
-        <td align="right">
-          <a href="page-edit.html"><i class="fas fa-cog"></i></a>
-        </td>
-      </tr>
-
-
-      <tr>
-        <td>
-          <div><a href="page-ulst.html">Script Testing App</a></div>
-        </td>
-        <td align="right">
-          <a href="page-edit.html"><i class="fas fa-cog"></i></a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+    <div class="col-xs-12 col-sm-8">
+      <form>
+        <div class="form-group">
+          <label for="website-name">Website Name</label>
+          <input type="text" class="form-control" id="website-name" placeholder="Name">
+        </div>
+        <div class="form-group">
+          <label for="website-description">Website Description</label>
+          <textarea id="website-description" class="form-control" rows="5" placeholder="Description"></textarea>
+        </div>
+        <a class="btn btn-danger  btn-block" href="website-list.html">Delete</a>
+      </form>
+    </div>
   </div>
-  <!--right screen-->
-  <div class="col-md-8">
-    <form>
-      <div class="form-group">
-        <label for="websitename" class="font-weight-bold">Website Name</label>
-        <input id="websitename" type="text" class="form-control" value="Blogger">
-      </div> <!-- form-group// -->
 
-      <div class="form-group">
-        <label for="websitedescription" class="font-weight-bold">Website Description</label>
-        <textarea class="form-control" id="websitedescription" rows="5">No more bill, no more pill,sit there and ready to chill. Upon conversation get your get your life real.Here we go the primal therapy. How should care a piggy? STFU.
-        </textarea>
-      </div> <!-- form-group// -->
-
-      <div class="form-group">
-        <a class="btn btn-danger btn-block" href="#" role="button">Delete</a>
-      </div>
-    </form>
-  </div> <!-- container-fluid.// -->
 </div>
 
-<nav class="navbar navbar-dark bg-primary fixed-bottom">
-  <a class="navbar-brand font-weight-bold" href="#"></a>
-  <div class="text-right">
-    <a href="profile.html" class="float-right">
-    <span>
-      <i class="fas fa-user fa-inverse"></i>
-    </span>
+<nav class="navbar fixed-bottom navbar-light navbar-custom">
+  <ul class="navbar-nav ml-auto">
+    <a href="profile.html" class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
+      <i class="fa fa-user"></i>
     </a>
-  </div>
-
+  </ul>
 </nav>
 </body>
 </html>

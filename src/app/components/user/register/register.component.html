@@ -1,45 +1,58 @@
-<div class="container-fluid pt-5">
+
+<div class="container custom-padding">
+
   <h1>Register</h1>
-  <form (ngSubmit)="createUser()" #f="ngForm">
+
+  <div *ngIf="userErrorFlag" class="alert alert-danger">
+    {{userErrorMsg}}
+  </div>
+
+  <form (ngSubmit)="register()" #f="ngForm">
+
     <div class="form-group">
-      <input placeholder="username"
+      <input id="username"
              name="username"
+             placeholder="username"
              type="text"
              class="form-control"
              ngModel
              required
              #username="ngModel"/>
-    </div> <!-- form-group// -->
+    </div>
 
     <div class="form-group">
-      <input placeholder="password"
+      <input id="password"
              name="password"
+             placeholder="password"
              type="password"
              class="form-control"
              ngModel
              required
-             #password="ngModel">
-    </div> <!-- form-group// -->
+             #password="ngModel"/>
+    </div>
 
     <div class="form-group">
-      <input placeholder="verify password"
-             name="password"
+      <input id="v_password"
+             name="v_password"
+             placeholder="verify password"
              type="password"
              class="form-control"
              ngModel
              required
-             #password="ngModel">
-    </div> <!-- form-group// -->
+             #v_password="ngModel"/>
+    </div>
 
-    <div class="form-group">
-      <button [disabled]="!f.valid"
-              class="btn btn-primary btn-block"
-              type="submit">Register</button>
+    <div *ngIf="pwErrorFlag" class="alert alert-danger">
+      {{pwErrorMsg}}
     </div>
-    <div class="form-group">
-      <a class="btn btn-danger btn-block" routerLink="/login" role="button">Cancel</a>
-    </div>
+
+    <button class="btn btn-primary btn-block"
+            type="submit"
+            [disabled]="!f.valid">Register</button>
+
+    <button class="btn btn-danger btn-block"
+            type="button"
+            (click)="cancel()">Cancel</button>
   </form>
 
-</div> <!-- container-fluid.// -->
-
+</div>
