@@ -7,39 +7,39 @@
 <div class="container-fluid pt-2">
   <form #f="ngForm">
     <div class="form-group">
-      <label for="username" class="font-weight-bold">Username</label>
-      <input [ngModel]="user.username"
-             name="username"
+      <label for="usernameInput" class="font-weight-bold">Username</label>
+      <input name="username"
              type="text"
              class="form-control"
-             id="username"
+             id="usernameInput"
              ngModel
+             [(ngModel)]="user.username"
              #username="ngModel">
     </div> <!-- form-group// -->
 
     <div class="form-group">
       <label for="email" class="font-weight-bold">Email</label>
-      <input id="email" type="email" class="form-control" value="{{user.email}}">
+      <input id="email" type="email" class="form-control" placeholder="Email">
     </div> <!-- form-group// -->
 
     <div class="form-group">
-      <label for="firstname" class="font-weight-bold">First Name</label>
-      <input [ngModel]="user.firstName"
+      <label for="firstnameInput" class="font-weight-bold">First Name</label>
+      <input [(ngModel)]="user.firstName"
              name="firstname"
              type="text"
              class="form-control"
-             id="firstname"
+             id="firstnameInput"
              ngModel
              #firstname="ngModel">
     </div> <!-- form-group// -->
 
     <div class="form-group">
-      <label for="lastname" class="font-weight-bold">Last Name</label>
-      <input [ngModel]="user.lastName"
+      <label for="lastnameInput" class="font-weight-bold">Last Name</label>
+      <input [(ngModel)]="user.lastName"
              name="lastname"
              type="text"
              class="form-control"
-             id="lastname"
+             id="lastnameInput"
              ngModel
              #lastname="ngModel">
     </div> <!-- form-group// -->

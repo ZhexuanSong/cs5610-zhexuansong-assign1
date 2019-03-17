@@ -4,6 +4,7 @@ import {FormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+
 import {LoginComponent} from './components/user/login/login.component';
 import {PageNewComponent} from './components/page/page-new/page-new.component';
 import {PageEditComponent} from './components/page/page-edit/page-edit.component';
@@ -25,6 +26,7 @@ import {PageService} from './page.service';
 import {WidgetService} from './widget.service';
 import {RouterModule} from '@angular/router';
 import {ProfilebarComponent} from './components/profilebar/profilebar.component';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -51,15 +53,16 @@ import {ProfilebarComponent} from './components/profilebar/profilebar.component'
     RouterModule,
     AppRoutingModule,
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [UserService, WebsiteService, PageService, WidgetService],
   bootstrap: [AppComponent]
 })
-@NgModule({
-  imports: [WebsiteListComponent],
-  declarations: [WebsiteNewComponent],
-  providers: [],
-  bootstrap: [AppComponent]
-})
+// @NgModule({
+//   imports: [WebsiteListComponent],
+//   declarations: [WebsiteNewComponent],
+//   providers: [],
+//   bootstrap: [AppComponent]
+// })
 export class AppModule { }

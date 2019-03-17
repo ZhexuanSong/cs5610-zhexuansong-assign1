@@ -1,78 +1,43 @@
 import { Injectable } from '@angular/core';
 import {Widget} from './model/Widget';
-
+import {environment} from '../environments/environment';
+import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http'
 @Injectable({
   providedIn: 'root'
 })
 export class WidgetService {
-  widgets = [
 
-    { "_id": "123", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "GIZMODO"},
+  baseUrl = environment.baseUrl;
+  widgetApiUrl='/api/widget/';
+  pageApiUrl = '/api/page/';
 
-    { "_id": "234", "widgetType": "HEADING", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
-
-    { "_id": "345", "widgetType": "IMAGE", "pageId": "321", "width": "100%",
-
-      "url": "http://lorempixel.com/400/200/"},
-
-    { "_id": "456", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"},
-
-    { "_id": "567", "widgetType": "HEADING", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
-
-    { "_id": "678", "widgetType": "YOUTUBE", "pageId": "321", "width": "100%",
-
-      "url": "https://youtu.be/AM2Ivdi9c4E" },
-
-    { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
-
-  ];
-  constructor() { }
-  createWidget(pageId, widget){
-    var lastId = this.widgets[this.widgets.length-1]._id;
-    widget._id = (+(lastId)+1).toString();
-    widget.pageId = pageId;
-    this.widgets.push(widget);
-    return widget._id;
+  constructor(private http: HttpClient) { }
+  createWidget(widget, pageId){
+    console.log("front widget service createWidget() called");
+    return this.http.post<Widget>(
+      this.baseUrl + this.pageApiUrl + pageId + '/widget',
+      widget);
   }
-  findWidgetsByPageId(pageId) {
-    let res = [];
-    for (var widget of this.widgets) {
-      if (widget.pageId === pageId) {
-        res.push(widget);
-      }
-    }
-    return res;
+
+  findWidgetsByPage(pageId): Observable<Widget[]>{
+    console.log("front widget service findWidgetByPage() called");
+    return this.http.get<Widget[]>(this.baseUrl + this.pageApiUrl + pageId + '/widget');
 
   }
   findWidgetById(widgetId) {
-    for (var w of this.widgets) {
-      if (w._id === widgetId) {
-        let size = (w.size === undefined) ? 1 : w.size;
-        let text = (w.text === undefined) ? "text" : w.text;
-        let width = (w.width === undefined) ? "100%" : w.width;
-        let url = (w.url === undefined) ? "" : w.url;
-        return new Widget(w._id, w.widgetType, w.pageId, size, text, width, url);
-      }
-    }
-    return null;
+    console.log("front widget service findwidgetById() called");
+    // Only need to call server's url to get the data.
+    return this.http.get<Widget>(this.baseUrl + this.widgetApiUrl + widgetId);
 
   }
-  updateWidget(widgetId, widget){
-    for (var i = 0; i < this.widgets.length; i++) {
-      if (this.widgets[i]._id === widgetId) {
-        this.widgets[i] = widget;
-        return;
-      }
-    }
-
+  updateWidget(widgetId, widget) {
+    console.log("front widget service updateWidget() called");
+    return this.http.put<Widget>(this.baseUrl + this.widgetApiUrl + widgetId, widget);
   }
+
   deleteWidget(widgetId){
-    for (var i = 0; i < this.widgets.length; i++) {
-      if (this.widgets[i]._id === widgetId) {
-        this.widgets.splice(i, 1);
-        return;
-      }
-    }
-    
+    console.log("front widget service deleteWidget() called");
+    return this.http.delete<Widget>(this.baseUrl + this.widgetApiUrl + widgetId);
   }
 }

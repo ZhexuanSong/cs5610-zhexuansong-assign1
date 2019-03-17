@@ -1,73 +1,48 @@
 import { Injectable } from '@angular/core';
 import {Website} from './model/Website';
 
+import {environment} from '../environments/environment';
+import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http'
 @Injectable({
   providedIn: 'root'
 })
 export class WebsiteService {
-  
-  websites = [
 
-    { "_id": "123", "name": "Facebook", "developerId": "456", "description": "Lorem" },
+  baseUrl = environment.baseUrl;
+  websiteApiUrl='/api/website/';
+  userApiUrl = '/api/user/';
 
-    { "_id": "234", "name": "Tweeter", "developerId": "456", "description": "Lorem" },
-
-    { "_id": "456", "name": "Gizmodo", "developerId": "456", "description": "Lorem" },
-
-    { "_id": "890", "name": "Go", "developerId": "123", "description": "Lorem" },
-
-    { "_id": "567", "name": "Tic Tac Toe", "developerId": "123", "description": "Lorem" },
-
-    { "_id": "678", "name": "Checkers", "developerId": "123", "description": "Lorem" },
-
-    { "_id": "789", "name": "Chess", "developerId": "234", "description": "Lorem" }
-
-  ];
-  constructor() { }
-  createWebsite(website){
-    var lastId = this.websites[this.websites.length-1]._id;
-    website._id = (+(lastId)+1).toString();
-    this.websites.push(website);
+  constructor(private http: HttpClient) { }
+  createWebsite(website, userId){
+    console.log("front website service createWebsite() called");
+    return this.http.post<Website>(
+      this.baseUrl + this.userApiUrl + userId + '/website', 
+      website);
   }
 
-  
-
-  findWebsitesByUser(userId) {
-    let res = [];
-    for (var website of this.websites)  {
-      if (website.developerId === userId) {
-        res.push(website);
-      }
-    }
-    return res;
+  findWebsitesByUser(userId): Observable<Website[]>{
+    console.log("front website service findWebsiteByUser() called");
+    return this.http.get<Website[]>(this.baseUrl + this.userApiUrl + userId + '/website');
 
   }
+  
   findWebsiteById(websiteId){
-    for (var website of this.websites)  {
-      if (website._id === websiteId) {
-        return website;
-      }
-    }
-    return null;
+    console.log("front website service findwebsiteById() called");
+    // Only need to call server's url to get the data.
+    return this.http.get<Website>(this.baseUrl + this.websiteApiUrl + websiteId);
+
 
   }
 
   updateWebsite(websiteId, website) {
-    for (var i = 0; i < this.websites.length; i++) {
-      if (this.websites[i]._id === websiteId) {
-        this.websites[i] = website;
-        return;
-      }
-    }
+    console.log("front website service updateWebsite() called");
+    return this.http.put<Website>(this.baseUrl + this.websiteApiUrl + websiteId, website);
   }
 
   deleteWebsite(websiteId){
-    for (var i = 0; i < this.websites.length; i++) {
-      if (this.websites[i]._id === websiteId) {
-        this.websites.splice(i,1);
-        return;
-      }
-    }
+    console.log("front website service deleteWebsite() called");
+    return this.http.delete<Website>(this.baseUrl + this.websiteApiUrl + websiteId);
   }
 
 }

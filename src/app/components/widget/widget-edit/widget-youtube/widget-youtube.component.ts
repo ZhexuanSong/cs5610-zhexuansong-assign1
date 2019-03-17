@@ -31,13 +31,14 @@ export class WidgetYoutubeComponent implements OnInit {
     this.widget.text = text;
     this.widget.url = url;
     this.widget.width = width;
-    this.widgetService.updateWidget(this.widget._id, this.widget);
-    this.goBack();
+    this.widgetService.updateWidget(this.widget._id, this.widget).subscribe(
+      () => this.goBack()
+    );
 
   }
   deleteWidget() {
-    this.widgetService.deleteWidget(this.widget._id);
-    this.goBack();
+    this.widgetService.deleteWidget(this.widget._id).subscribe(
+      () => this.goBack());
   }
   displayWidgetText() {
     return this.widget.text;

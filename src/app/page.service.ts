@@ -1,60 +1,46 @@
 import { Injectable } from '@angular/core';
+import {environment} from '../environments/environment';
+import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http'
+import {Page} from './model/Page';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PageService {
-  pages=[
+  baseUrl = environment.baseUrl;
+  pageApiUrl='/api/page/';
+  websiteApiUrl = '/api/website/';
 
-    { "_id": "321", "name": "Post 1", "websiteId": "456", "title": "Lorem" },
+  constructor(private http: HttpClient) { }
+  createPage(page, websiteId){
+    console.log("front page service createPage() called");
+    return this.http.post<Page>(
+      this.baseUrl + this.websiteApiUrl + websiteId + '/page',
+      page);
+  }
 
-    { "_id": "432", "name": "Post 2", "websiteId": "456", "title": "Lorem" },
-
-    { "_id": "543", "name": "Post 3", "websiteId": "456", "title": "Lorem" }
-
-  ];
-
-  constructor() { }
-  createPage(websiteId, page){
-    var lastId = this.pages[this.pages.length-1]._id;
-    page._id = (+(lastId)+1).toString();
-    page.websiteId = websiteId;
-    this.pages.push(page);
+  findPagesByWebsite(websiteId): Observable<Page[]>{
+    console.log("front page service findPageByWebsite() called");
+    return this.http.get<Page[]>(this.baseUrl + this.websiteApiUrl + websiteId + '/page');
 
   }
-  findPageByWebsiteId(websiteId){
-    let res = [];
-    for (var page of this.pages) {
-      if (page.websiteId === websiteId) {
-        res.push(page);
-      }
-    }
-    return res;
 
-  }
   findPageById(pageId){
-    for (var page of this.pages) {
-      if (page._id === pageId) {
-        return page;
-      }
-    }
-    return null;
+    console.log("front page service findpageById() called");
+    // Only need to call server's url to get the data.
+    return this.http.get<Page>(this.baseUrl + this.pageApiUrl + pageId);
+
+
   }
-  updatePage(pageId, page){
-    for (var i = 0; i < this.pages.length; i++) {
-      if (this.pages[i]._id === pageId) {
-        this.pages[i] = page;
-        return;
-      }
-    }
-    
+
+  updatePage(pageId, page) {
+    console.log("front page service updatePage() called");
+    return this.http.put<Page>(this.baseUrl + this.pageApiUrl + pageId, page);
   }
+
   deletePage(pageId){
-    for (var i = 0; i < this.pages.length; i++) {
-      if (this.pages[i]._id === pageId) {
-        this.pages.splice(i, 1);
-        return;
-      }
-    }
+    console.log("front page service deletePage() called");
+    return this.http.delete<Page>(this.baseUrl + this.pageApiUrl + pageId);
   }
 }

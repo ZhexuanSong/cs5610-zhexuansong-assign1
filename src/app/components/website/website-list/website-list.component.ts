@@ -13,13 +13,18 @@ export class WebsiteListComponent implements OnInit {
   userId : String;
   websites: Website[];
 
-  constructor(private websiteService : WebsiteService, private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private websiteService : WebsiteService, 
+              private activatedRoute: ActivatedRoute, 
+              private router: Router) { }
 
   ngOnInit() {
+    
     this.activatedRoute.params
       .subscribe( (params: any) => { this.userId = params['uid']});
-    this.websites = this.websiteService.findWebsitesByUser(this.userId);
-    console.log(this.websites);
+    this.websiteService.findWebsitesByUser(this.userId).subscribe(
+      websites => this.websites = websites
+    );
+    
   }
   goBack() {
     this.router.navigate(['/user', this.userId]);

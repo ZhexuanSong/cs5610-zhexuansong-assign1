@@ -30,8 +30,9 @@ export class PageNewComponent implements OnInit {
     let name = this.pageForm.value.pageName;
     let title = this.pageForm.value.pageTitle;
     let page = new Page("", name, this.websiteId, title);
-    this.pageService.createPage(this.websiteId, page);
-    this.goBack();
+    this.pageService.createPage(page, this.websiteId).subscribe(
+      page => this.goBack()
+    );
 
   }
   goBack() {

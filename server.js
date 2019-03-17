@@ -17,30 +17,32 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    // express will pass the header settings to all
     next();
 });
 
+// Port setting
 const port = process.env.PORT || '8070';
 app.set('port', port);
+
+// test the /api/test url
+require('./test')(app);
+
+// import all the server files needed
+require('./server/app')(app);
+
+
+// For Build: Catch all other routes and return the index file -- BUILDING
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'dist/my-project/index.html'));
+});
 
 
 // Create HTTP server
 const server = http.createServer(app);
 server.listen( port , () => console.log('Running on port 8070'));
 
+
 /*var dbServer = require('./test-mongodb/app');
-dbServer(app);*/
-
 //require('./test-mongodb/app')(app);
-
-
-// For Build: Catch all other routes and return the index file -- BUILDING
-//
-// app.get('*', function (req, res) {
-//   res.sendFile(path.join(__dirname, 'dist/my-project/index.html'));
-// });
-
-
-
-
-// require('./assignment/app')(app);
+dbServer(app);*/

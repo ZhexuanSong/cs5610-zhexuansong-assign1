@@ -18,7 +18,10 @@ export class PageEditComponent implements OnInit {
   pageId: String;
   constructor(private pageService: PageService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) { }
+              private router: Router) {
+    this.oldPage = new Page("", "", "", "");
+
+  }
 
   ngOnInit() {
     this.activatedRoute.params
@@ -27,21 +30,24 @@ export class PageEditComponent implements OnInit {
         this.userId = params['uid'];
         this.websiteId = params['wid'];
         this.pageId = params['pid'];
-        this.oldPage = this.pageService.findPageById(this.pageId);
       });
+    this.pageService.findPageById(this.pageId).subscribe(
+      page => this.oldPage = page
+    )
   }
 
   updatePage() {
     let newName = this.pageForm.value.pageName;
     let newTitle = this.pageForm.value.pageTitle;
     let page = new Page(this.pageId, newName, this.websiteId, newTitle);
-    this.pageService.updatePage(this.pageId, page);
-    this.goBack();
-
+    this.pageService.updatePage(this.pageId, page).subscribe(
+      () => this.goBack()
+    );
   }
   deletePage() {
-    this.pageService.deletePage(this.pageId);
-    this.goBack();
+    this.pageService.deletePage(this.pageId).subscribe(
+      () => this.goBack()
+    );
   }
   goBack() {
     this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);

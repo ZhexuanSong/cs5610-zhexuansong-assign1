@@ -17,7 +17,11 @@ export class WebsiteEditComponent implements OnInit {
   userId: String;
 
 
-  constructor(private websiteService : WebsiteService, private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private websiteService : WebsiteService,
+              private activatedRoute: ActivatedRoute,
+              private router: Router) { 
+    this.oldWebsite = new Website("", "", "", "");
+  }
 
 
   ngOnInit() {
@@ -26,18 +30,28 @@ export class WebsiteEditComponent implements OnInit {
         console.log(params);
         this.userId = params['uid'];
         this.websiteId = params['wid'];
-        this.oldWebsite = this.websiteService.findWebsiteById(this.websiteId);
       });
+    this.websiteService.findWebsiteById(this.websiteId)
+      .subscribe(
+        website => this.oldWebsite = website);
   }
   updateWebsite() {
     let website = new Website(this.websiteId, this.websiteForm.value.newName, this.userId, this.websiteForm.value.newDescription);
-    this.websiteService.updateWebsite(this.websiteId, website);
-    this.router.navigate(['/user', this.userId, 'website']);
+    this.websiteService.updateWebsite(this.websiteId, website)
+      .subscribe(
+        () => this.goBack());
+
 
   }
   deleteWebsite() {
-    this.websiteService.deleteWebsite(this.websiteId);
+    this.websiteService.deleteWebsite(this.websiteId).subscribe(
+      () => this.goBack()
+    );
+
+  }
+  goBack() {
     this.router.navigate(['/user', this.userId, 'website']);
+
   }
   displayOldName() {
     return this.oldWebsite.name;
