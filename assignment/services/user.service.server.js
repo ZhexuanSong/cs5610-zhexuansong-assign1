@@ -7,7 +7,7 @@ module.exports = function(app) {
   app.delete("/api/user/:userId", deleteUser);
 
   const users = [
-    {_id: '123', username: 'alice', password: 'alice', email: 'alice@test.com', firstName: 'Alice', lastName: 'Wonder'},
+    {_id: '123', username: 'xuan', password: '666', email: 'xuan@test.com', firstName: 'Xuan', lastName: 'Song'},
     {_id: '234', username: 'bob', password: 'bob', email: 'bob@test.com', firstName: 'Bod', lastName: 'Marley'},
     {
       _id: '345',
