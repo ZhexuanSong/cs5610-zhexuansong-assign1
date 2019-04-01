@@ -12,7 +12,7 @@ module.exports = function(app) {
   app.delete("/api/user/:userId", deleteUser);
 
   // const users = [
-  //   {_id: '123', username: 'alice', password: 'alice', email: 'alice@test.com', firstName: 'Alice', lastName: 'Wonder'},
+  //   {_id: '123', username: 'xuan', password: 'xuan', email: 'xuan@test.com', firstName: 'xuan', lastName: 'Wonder'},
   //   {_id: '234', username: 'bob', password: 'bob', email: 'bob@test.com', firstName: 'Bod', lastName: 'Marley'},
   //   {
   //     _id: '345',
