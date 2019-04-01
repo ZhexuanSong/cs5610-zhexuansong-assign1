@@ -20,9 +20,9 @@
 </nav>
 
 <div class="container cl-container-padding">
-  <div *ngIf="errorFlag" class="alert alert-danger">
-    {{errorMsg}}
-  </div>
+  <!--<div *ngIf="errorFlag" class="alert alert-danger">-->
+    <!--{{errorMsg}}-->
+  <!--</div>-->
 
   <form>
 
@@ -87,6 +87,9 @@
       <br/>
     </form>
   </form>
+
+  <button class="btn btn-primary btn-block"
+          (click)="chooseFromFlickr()">Choose From Flickr</button>
 
   <button class="btn btn-danger  btn-block" (click)="deleteImage()"
      routerLink="..">Delete</button>

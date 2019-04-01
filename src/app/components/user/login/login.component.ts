@@ -1,14 +1,14 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {Router} from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router} from '@angular/router';
 import {UserService} from '../../../services/user.service.client';
-import {User} from '../../../models/user.model.client';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
   @ViewChild('f') loginForm: NgForm;
   username: String; // see usage as two-way data binding
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   errorFlag: boolean;
   errorMsg: String;
 
-  constructor(private userService: UserService, private route: Router) { }
+  constructor(private userService: UserService, private router: Router) {}
 
   login() {
     this.username = this.loginForm.value.username;
@@ -26,9 +26,9 @@ export class LoginComponent implements OnInit {
     this.userService.findUserByCredentials(this.username, this.password)
       .subscribe(
         (user: any) => {
-          if (typeof user._id !== 'undefined') {
+          if (user != null) {
             console.log(user);
-            this.route.navigate(['/user', user._id]);
+            this.router.navigate(['/user', user._id]);
           } else {
             this.errorFlag = true;
           }
@@ -40,11 +40,12 @@ export class LoginComponent implements OnInit {
   }
 
   register() {
-    this.route.navigate(['/register']);
+    this.router.navigate(['/register']);
   }
 
   ngOnInit() {
     this.errorFlag = false;
     this.errorMsg = 'Invalid username or password!';
   }
+
 }

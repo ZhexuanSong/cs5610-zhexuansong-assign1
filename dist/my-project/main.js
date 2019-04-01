@@ -187,24 +187,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_widget_service_client__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./services/widget.service.client */ "./src/app/services/widget.service.client.ts");
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _components_user_login_login_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/user/login/login.component */ "./src/app/components/user/login/login.component.ts");
-/* harmony import */ var _components_user_register_register_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/user/register/register.component */ "./src/app/components/user/register/register.component.ts");
-/* harmony import */ var _components_user_profile_profile_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/user/profile/profile.component */ "./src/app/components/user/profile/profile.component.ts");
-/* harmony import */ var _components_website_website_new_website_new_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/website/website-new/website-new.component */ "./src/app/components/website/website-new/website-new.component.ts");
-/* harmony import */ var _components_website_website_edit_website_edit_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/website/website-edit/website-edit.component */ "./src/app/components/website/website-edit/website-edit.component.ts");
-/* harmony import */ var _components_website_website_list_website_list_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/website/website-list/website-list.component */ "./src/app/components/website/website-list/website-list.component.ts");
-/* harmony import */ var _components_page_page_new_page_new_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/page/page-new/page-new.component */ "./src/app/components/page/page-new/page-new.component.ts");
-/* harmony import */ var _components_page_page_edit_page_edit_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/page/page-edit/page-edit.component */ "./src/app/components/page/page-edit/page-edit.component.ts");
-/* harmony import */ var _components_page_page_list_page_list_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/page/page-list/page-list.component */ "./src/app/components/page/page-list/page-list.component.ts");
-/* harmony import */ var _components_widget_widget_chooser_widget_chooser_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/widget/widget-chooser/widget-chooser.component */ "./src/app/components/widget/widget-chooser/widget-chooser.component.ts");
-/* harmony import */ var _components_widget_widget_edit_widget_edit_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/widget/widget-edit/widget-edit.component */ "./src/app/components/widget/widget-edit/widget-edit.component.ts");
-/* harmony import */ var _components_widget_widget_list_widget_list_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/widget/widget-list/widget-list.component */ "./src/app/components/widget/widget-list/widget-list.component.ts");
-/* harmony import */ var _components_widget_widget_edit_widget_header_widget_header_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/widget/widget-edit/widget-header/widget-header.component */ "./src/app/components/widget/widget-edit/widget-header/widget-header.component.ts");
-/* harmony import */ var _components_widget_widget_edit_widget_image_widget_image_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/widget/widget-edit/widget-image/widget-image.component */ "./src/app/components/widget/widget-edit/widget-image/widget-image.component.ts");
-/* harmony import */ var _components_widget_widget_edit_widget_youtube_widget_youtube_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/widget/widget-edit/widget-youtube/widget-youtube.component */ "./src/app/components/widget/widget-edit/widget-youtube/widget-youtube.component.ts");
-/* harmony import */ var _components_widget_widget_edit_widget_html_widget_html_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/widget/widget-edit/widget-html/widget-html.component */ "./src/app/components/widget/widget-edit/widget-html/widget-html.component.ts");
-/* harmony import */ var _components_widget_widget_edit_widget_text_widget_text_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/widget/widget-edit/widget-text/widget-text.component */ "./src/app/components/widget/widget-edit/widget-text/widget-text.component.ts");
-/* harmony import */ var _sortable_directive__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./sortable.directive */ "./src/app/sortable.directive.ts");
+/* harmony import */ var ngx_quill_editor__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ngx-quill-editor */ "./node_modules/ngx-quill-editor/index.js");
+/* harmony import */ var _components_user_login_login_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/user/login/login.component */ "./src/app/components/user/login/login.component.ts");
+/* harmony import */ var _components_user_register_register_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/user/register/register.component */ "./src/app/components/user/register/register.component.ts");
+/* harmony import */ var _components_user_profile_profile_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/user/profile/profile.component */ "./src/app/components/user/profile/profile.component.ts");
+/* harmony import */ var _components_website_website_new_website_new_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/website/website-new/website-new.component */ "./src/app/components/website/website-new/website-new.component.ts");
+/* harmony import */ var _components_website_website_edit_website_edit_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/website/website-edit/website-edit.component */ "./src/app/components/website/website-edit/website-edit.component.ts");
+/* harmony import */ var _components_website_website_list_website_list_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/website/website-list/website-list.component */ "./src/app/components/website/website-list/website-list.component.ts");
+/* harmony import */ var _components_page_page_new_page_new_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/page/page-new/page-new.component */ "./src/app/components/page/page-new/page-new.component.ts");
+/* harmony import */ var _components_page_page_edit_page_edit_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/page/page-edit/page-edit.component */ "./src/app/components/page/page-edit/page-edit.component.ts");
+/* harmony import */ var _components_page_page_list_page_list_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/page/page-list/page-list.component */ "./src/app/components/page/page-list/page-list.component.ts");
+/* harmony import */ var _components_widget_widget_chooser_widget_chooser_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/widget/widget-chooser/widget-chooser.component */ "./src/app/components/widget/widget-chooser/widget-chooser.component.ts");
+/* harmony import */ var _components_widget_widget_edit_widget_edit_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/widget/widget-edit/widget-edit.component */ "./src/app/components/widget/widget-edit/widget-edit.component.ts");
+/* harmony import */ var _components_widget_widget_list_widget_list_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/widget/widget-list/widget-list.component */ "./src/app/components/widget/widget-list/widget-list.component.ts");
+/* harmony import */ var _components_widget_widget_edit_widget_header_widget_header_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/widget/widget-edit/widget-header/widget-header.component */ "./src/app/components/widget/widget-edit/widget-header/widget-header.component.ts");
+/* harmony import */ var _components_widget_widget_edit_widget_image_widget_image_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/widget/widget-edit/widget-image/widget-image.component */ "./src/app/components/widget/widget-edit/widget-image/widget-image.component.ts");
+/* harmony import */ var _components_widget_widget_edit_widget_youtube_widget_youtube_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/widget/widget-edit/widget-youtube/widget-youtube.component */ "./src/app/components/widget/widget-edit/widget-youtube/widget-youtube.component.ts");
+/* harmony import */ var _components_widget_widget_edit_widget_html_widget_html_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/widget/widget-edit/widget-html/widget-html.component */ "./src/app/components/widget/widget-edit/widget-html/widget-html.component.ts");
+/* harmony import */ var _components_widget_widget_edit_widget_text_widget_text_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./components/widget/widget-edit/widget-text/widget-text.component */ "./src/app/components/widget/widget-edit/widget-text/widget-text.component.ts");
+/* harmony import */ var _components_widget_widget_edit_widget_image_flickr_image_search_flickr_image_search_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component */ "./src/app/components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component.ts");
+/* harmony import */ var _services_flickr_service_client__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./services/flickr.service.client */ "./src/app/services/flickr.service.client.ts");
+/* harmony import */ var _services_shared_service__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./services/shared.service */ "./src/app/services/shared.service.ts");
+/* harmony import */ var _components_widget_widget_list_oder_by_pipe_pipe__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./components/widget/widget-list/oder-by-pipe.pipe */ "./src/app/components/widget/widget-list/oder-by-pipe.pipe.ts");
+/* harmony import */ var _components_widget_widget_list_sortable_directive__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./components/widget/widget-list/sortable.directive */ "./src/app/components/widget/widget-list/sortable.directive.ts");
 
 
 
@@ -216,7 +221,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// import { QuillModule } from 'ng-quill';
+
+
+
+
+
 
 
 
@@ -242,32 +251,35 @@ var AppModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_10__["AppComponent"],
-                _components_user_login_login_component__WEBPACK_IMPORTED_MODULE_11__["LoginComponent"],
-                _components_user_register_register_component__WEBPACK_IMPORTED_MODULE_12__["RegisterComponent"],
-                _components_user_profile_profile_component__WEBPACK_IMPORTED_MODULE_13__["ProfileComponent"],
-                _components_website_website_new_website_new_component__WEBPACK_IMPORTED_MODULE_14__["WebsiteNewComponent"],
-                _components_website_website_edit_website_edit_component__WEBPACK_IMPORTED_MODULE_15__["WebsiteEditComponent"],
-                _components_website_website_list_website_list_component__WEBPACK_IMPORTED_MODULE_16__["WebsiteListComponent"],
-                _components_page_page_new_page_new_component__WEBPACK_IMPORTED_MODULE_17__["PageNewComponent"],
-                _components_page_page_edit_page_edit_component__WEBPACK_IMPORTED_MODULE_18__["PageEditComponent"],
-                _components_page_page_list_page_list_component__WEBPACK_IMPORTED_MODULE_19__["PageListComponent"],
-                _components_widget_widget_chooser_widget_chooser_component__WEBPACK_IMPORTED_MODULE_20__["WidgetChooserComponent"],
-                _components_widget_widget_edit_widget_edit_component__WEBPACK_IMPORTED_MODULE_21__["WidgetEditComponent"],
-                _components_widget_widget_list_widget_list_component__WEBPACK_IMPORTED_MODULE_22__["WidgetListComponent"],
-                _components_widget_widget_edit_widget_header_widget_header_component__WEBPACK_IMPORTED_MODULE_23__["WidgetHeaderComponent"],
-                _components_widget_widget_edit_widget_image_widget_image_component__WEBPACK_IMPORTED_MODULE_24__["WidgetImageComponent"],
-                _components_widget_widget_edit_widget_youtube_widget_youtube_component__WEBPACK_IMPORTED_MODULE_25__["WidgetYoutubeComponent"],
-                _components_widget_widget_edit_widget_html_widget_html_component__WEBPACK_IMPORTED_MODULE_26__["WidgetHtmlComponent"],
-                _components_widget_widget_edit_widget_text_widget_text_component__WEBPACK_IMPORTED_MODULE_27__["WidgetTextComponent"],
-                _sortable_directive__WEBPACK_IMPORTED_MODULE_28__["SortableDirective"]
+                _components_user_login_login_component__WEBPACK_IMPORTED_MODULE_12__["LoginComponent"],
+                _components_user_register_register_component__WEBPACK_IMPORTED_MODULE_13__["RegisterComponent"],
+                _components_user_profile_profile_component__WEBPACK_IMPORTED_MODULE_14__["ProfileComponent"],
+                _components_website_website_new_website_new_component__WEBPACK_IMPORTED_MODULE_15__["WebsiteNewComponent"],
+                _components_website_website_edit_website_edit_component__WEBPACK_IMPORTED_MODULE_16__["WebsiteEditComponent"],
+                _components_website_website_list_website_list_component__WEBPACK_IMPORTED_MODULE_17__["WebsiteListComponent"],
+                _components_page_page_new_page_new_component__WEBPACK_IMPORTED_MODULE_18__["PageNewComponent"],
+                _components_page_page_edit_page_edit_component__WEBPACK_IMPORTED_MODULE_19__["PageEditComponent"],
+                _components_page_page_list_page_list_component__WEBPACK_IMPORTED_MODULE_20__["PageListComponent"],
+                _components_widget_widget_chooser_widget_chooser_component__WEBPACK_IMPORTED_MODULE_21__["WidgetChooserComponent"],
+                _components_widget_widget_edit_widget_edit_component__WEBPACK_IMPORTED_MODULE_22__["WidgetEditComponent"],
+                _components_widget_widget_list_widget_list_component__WEBPACK_IMPORTED_MODULE_23__["WidgetListComponent"],
+                _components_widget_widget_edit_widget_header_widget_header_component__WEBPACK_IMPORTED_MODULE_24__["WidgetHeaderComponent"],
+                _components_widget_widget_edit_widget_image_widget_image_component__WEBPACK_IMPORTED_MODULE_25__["WidgetImageComponent"],
+                _components_widget_widget_edit_widget_youtube_widget_youtube_component__WEBPACK_IMPORTED_MODULE_26__["WidgetYoutubeComponent"],
+                _components_widget_widget_edit_widget_html_widget_html_component__WEBPACK_IMPORTED_MODULE_27__["WidgetHtmlComponent"],
+                _components_widget_widget_edit_widget_text_widget_text_component__WEBPACK_IMPORTED_MODULE_28__["WidgetTextComponent"],
+                _components_widget_widget_list_sortable_directive__WEBPACK_IMPORTED_MODULE_33__["SortableDirective"],
+                _components_widget_widget_edit_widget_image_flickr_image_search_flickr_image_search_component__WEBPACK_IMPORTED_MODULE_29__["FlickrImageSearchComponent"],
+                _components_widget_widget_list_oder_by_pipe_pipe__WEBPACK_IMPORTED_MODULE_32__["OrderByPipe"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_9__["AppRoutingModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
-                _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"]
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"],
+                ngx_quill_editor__WEBPACK_IMPORTED_MODULE_11__["QuillEditorModule"]
             ],
-            providers: [_services_user_service_client__WEBPACK_IMPORTED_MODULE_5__["UserService"], _services_website_service_client__WEBPACK_IMPORTED_MODULE_6__["WebsiteService"], _services_page_service_client__WEBPACK_IMPORTED_MODULE_7__["PageService"], _services_widget_service_client__WEBPACK_IMPORTED_MODULE_8__["WidgetService"]],
+            providers: [_services_user_service_client__WEBPACK_IMPORTED_MODULE_5__["UserService"], _services_website_service_client__WEBPACK_IMPORTED_MODULE_6__["WebsiteService"], _services_page_service_client__WEBPACK_IMPORTED_MODULE_7__["PageService"], _services_widget_service_client__WEBPACK_IMPORTED_MODULE_8__["WidgetService"], _services_flickr_service_client__WEBPACK_IMPORTED_MODULE_30__["FlickrService"], _services_shared_service__WEBPACK_IMPORTED_MODULE_31__["SharedService"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_10__["AppComponent"]]
         })
     ], AppModule);
@@ -545,18 +557,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginComponent", function() { return LoginComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _services_user_service_client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/user.service.client */ "./src/app/services/user.service.client.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_user_service_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/user.service.client */ "./src/app/services/user.service.client.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 
 
 
 
 
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(userService, route) {
+    function LoginComponent(userService, router) {
         this.userService = userService;
-        this.route = route;
+        this.router = router;
     }
     LoginComponent.prototype.login = function () {
         var _this = this;
@@ -564,9 +576,9 @@ var LoginComponent = /** @class */ (function () {
         this.password = this.loginForm.value.password;
         this.userService.findUserByCredentials(this.username, this.password)
             .subscribe(function (user) {
-            if (typeof user._id !== 'undefined') {
+            if (user != null) {
                 console.log(user);
-                _this.route.navigate(['/user', user._id]);
+                _this.router.navigate(['/user', user._id]);
             }
             else {
                 _this.errorFlag = true;
@@ -576,7 +588,7 @@ var LoginComponent = /** @class */ (function () {
         });
     };
     LoginComponent.prototype.register = function () {
-        this.route.navigate(['/register']);
+        this.router.navigate(['/register']);
     };
     LoginComponent.prototype.ngOnInit = function () {
         this.errorFlag = false;
@@ -584,7 +596,7 @@ var LoginComponent = /** @class */ (function () {
     };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('f'),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_forms__WEBPACK_IMPORTED_MODULE_2__["NgForm"])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgForm"])
     ], LoginComponent.prototype, "loginForm", void 0);
     LoginComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -592,7 +604,7 @@ var LoginComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./login.component.html */ "./src/app/components/user/login/login.component.html"),
             styles: [__webpack_require__(/*! ./login.component.css */ "./src/app/components/user/login/login.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_user_service_client__WEBPACK_IMPORTED_MODULE_4__["UserService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_user_service_client__WEBPACK_IMPORTED_MODULE_3__["UserService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], LoginComponent);
     return LoginComponent;
 }());
@@ -770,7 +782,7 @@ var RegisterComponent = /** @class */ (function () {
         this.userErrorFlag = false;
         this.pwErrorFlag = false;
         this.userService.findUserByUsername(this.user.username).subscribe(function (user) {
-            if (typeof user._id !== 'undefined') {
+            if (user != null) {
                 _this.userErrorFlag = true;
             }
             else if (_this.v_password !== _this.user.password) {
@@ -1328,7 +1340,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-md navbar-light bg-light\">\n  <div class=\"navbar-collapse collapse mr-auto\" id=\"collapsingNavbar\">\n    <ul class=\"navbar-nav\">\n      <a class=\"nav-link cl-icon-padding\" [routerLink]=\"['/user', userId, 'website', websiteId, 'page', pageId, 'widget']\">\n        <i class=\"fa fa-chevron-left\"></i>\n      </a>\n      <a class=\"navbar-brand brand cl-icon-padding\" routerLink=\".\">Widgets Edit</a>\n    </ul>\n  </div>\n\n  <div>\n    <ul class=\"navbar-nav ml-auto\">\n      <button class=\"nav-link cl-icon-padding\"\n              (click)=\"update()\">\n        <i class=\"fa fa-check\"></i>\n      </button>\n    </ul>\n  </div>\n</nav>\n\n<div class=\"container-fluid\">\n\n  <div *ngIf=\"errorFlag\" class=\"alert alert-danger\">\n    {{errorMsg}}\n  </div>\n\n  <form>\n\n    <div class=\"form-group\" *ngIf=\"widget\">\n      <label for=\"heading-name\">Name</label>\n      <input [(ngModel)]=\"widget.name\"\n             type=\"text\"\n             class=\"form-control\"\n             id=\"heading-name\"\n             placeholder=\"name\"\n             [ngModelOptions]=\"{standalone: true}\"/>\n    </div>\n\n    <div class=\"form-group\" *ngIf=\"widget\">\n      <label for=\"html-text\">HTML</label>\n      <input [(ngModel)]=\"widget.text\"\n                    id=\"html-text\"\n                    [ngModelOptions]=\"{standalone: true}\">\n    </div>\n\n    <button class=\"btn btn-danger btn-block\"\n            (click)=\"delete()\">Delete</button>\n\n  </form>\n</div>\n\n<nav class=\"navbar fixed-bottom navbar-light bg-light\">\n  <ul class=\"navbar-nav ml-auto\">\n    <a [routerLink]=\"['/user', userId]\" class=\"navbar-link navbar-text pull-right cl-text-white cl-icon-padding\">\n      <i class=\"fa fa-user\"></i>\n    </a>\n  </ul>\n</nav>\n"
+module.exports = "<nav class=\"navbar navbar-expand-md navbar-light bg-light\">\n  <div class=\"navbar-collapse collapse mr-auto\" id=\"collapsingNavbar\">\n    <ul class=\"navbar-nav\">\n      <a class=\"nav-link cl-icon-padding\" [routerLink]=\"['/user', userId, 'website', websiteId, 'page', pageId, 'widget']\">\n        <i class=\"fa fa-chevron-left\"></i>\n      </a>\n      <a class=\"navbar-brand brand cl-icon-padding\" routerLink=\".\">Widgets Edit</a>\n    </ul>\n  </div>\n\n  <div>\n    <ul class=\"navbar-nav ml-auto\">\n      <button class=\"nav-link cl-icon-padding\"\n              (click)=\"update()\">\n        <i class=\"fa fa-check\"></i>\n      </button>\n    </ul>\n  </div>\n</nav>\n\n<div class=\"container-fluid\">\n\n  <div *ngIf=\"errorFlag\" class=\"alert alert-danger\">\n    {{errorMsg}}\n  </div>\n\n  <form>\n\n    <div class=\"form-group\" *ngIf=\"widget\">\n      <label for=\"heading-name\">Name</label>\n      <input [(ngModel)]=\"widget.name\"\n             type=\"text\"\n             class=\"form-control\"\n             id=\"heading-name\"\n             placeholder=\"name\"\n             [ngModelOptions]=\"{standalone: true}\"/>\n    </div>\n\n    <div class=\"form-group\" *ngIf=\"widget\">\n      <quill-editor [(ngModel)]=\"widget.text\" name=\"text\"></quill-editor>\n    </div>\n\n    <button class=\"btn btn-danger btn-block\"\n            (click)=\"delete()\">Delete</button>\n\n  </form>\n</div>\n\n<nav class=\"navbar fixed-bottom navbar-light bg-light\">\n  <ul class=\"navbar-nav ml-auto\">\n    <a [routerLink]=\"['/user', userId]\" class=\"navbar-link navbar-text pull-right cl-text-white cl-icon-padding\">\n      <i class=\"fa fa-user\"></i>\n    </a>\n  </ul>\n</nav>\n"
 
 /***/ }),
 
@@ -1420,6 +1432,144 @@ var WidgetHtmlComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component.css":
+/*!******************************************************************************************************************!*\
+  !*** ./src/app/components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component.css ***!
+  \******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvd2lkZ2V0L3dpZGdldC1lZGl0L3dpZGdldC1pbWFnZS9mbGlja3ItaW1hZ2Utc2VhcmNoL2ZsaWNrci1pbWFnZS1zZWFyY2guY29tcG9uZW50LmNzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component.html":
+/*!*******************************************************************************************************************!*\
+  !*** ./src/app/components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component.html ***!
+  \*******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<nav class=\"navbar navbar-fixed-top cl-blue-navbar\">\n  <div class=\"container-fluid row\">\n    <div class=\"navbar-text pull-left\">\n      <a [routerLink]=\"['/user', userId, 'website', websiteId, 'page', pageId, 'widget']\"\n         class=\"cl-text-white cl-icon-padding\">\n        <span class=\"fa fa-left\"></span>\n      </a>\n    </div>\n    <a class=\"navbar-brand cl-text-white cl-text-bold\" routerLink=\".\">\n      Search Flickr\n    </a>\n  </div>\n</nav>\n\n<div class=\"container-fluid\">\n\n  <div class=\"input-group\">\n    <input [(ngModel)]=\"searchText\"\n           type=\"text\"\n           class=\"form-control\"\n           placeholder=\"Search Images\"\n           onkeydown = \"if (event.keyCode === 13)\n                      document.getElementById('btnSearch').click()\" >\n    <span class=\"input-group-btn\">\n          <a (click)=\"searchPhotos()\"\n             class=\"btn btn-default\"\n             id = \"btnSearch\"\n             type=\"button\">\n              <span class=\"fa fa-search\"></span>\n          </a>\n      </span>\n  </div>\n\n  <div class=\"row\" *ngIf=\"photos\">\n    <div *ngFor = \"let pic of photos['photo']\"\n         class=\"col-xs-4\">\n      <p></p>\n      <img (click)=\"selectPhoto(pic)\"\n           width=\"100%\"\n           [src] = \"['https://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' + pic.id + '_' + pic.secret + '_s.jpg']\"/>\n    </div>\n  </div>\n\n</div>\n\n<nav class=\"navbar navbar-fixed-bottom cl-blue-navbar\">\n  <div class=\"container-fuild\">\n    <a [routerLink]=\"['/user', userId]\"\n       class=\"navbar-link navbar-text pull-right cl-text-white cl-icon-padding\">\n      <span class=\"fa fa-user\"></span>\n    </a>\n  </div>\n</nav>\n"
+
+/***/ }),
+
+/***/ "./src/app/components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component.ts":
+/*!*****************************************************************************************************************!*\
+  !*** ./src/app/components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component.ts ***!
+  \*****************************************************************************************************************/
+/*! exports provided: FlickrImageSearchComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FlickrImageSearchComponent", function() { return FlickrImageSearchComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_flickr_service_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../services/flickr.service.client */ "./src/app/services/flickr.service.client.ts");
+/* harmony import */ var _services_widget_service_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../services/widget.service.client */ "./src/app/services/widget.service.client.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_shared_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../../services/shared.service */ "./src/app/services/shared.service.ts");
+
+
+
+
+
+
+var FlickrImageSearchComponent = /** @class */ (function () {
+    function FlickrImageSearchComponent(flickrService, widgetService, router, activatedRoute, sharedService) {
+        this.flickrService = flickrService;
+        this.widgetService = widgetService;
+        this.router = router;
+        this.activatedRoute = activatedRoute;
+        this.sharedService = sharedService;
+    }
+    FlickrImageSearchComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        // fetch userId from shared service
+        this.userId = this.sharedService.user['_id'];
+        // fetch userId, pageId and websiteId from url
+        this.activatedRoute.params.subscribe(function (params) {
+            _this.websiteId = params['wid'];
+            _this.pageId = params['pid'];
+            _this.widgetId = params['wgid'];
+            _this.userId = params['uid'];
+            if (_this.widgetId === '') {
+                _this.widget = _services_widget_service_client__WEBPACK_IMPORTED_MODULE_3__["WidgetService"].getNewWidget();
+            }
+            else {
+                _this.widgetService.findWidgetById(_this.widgetId).subscribe(function (widget) {
+                    _this.widget = widget;
+                }, function (error) { return console.log(error); });
+            }
+        });
+    };
+    FlickrImageSearchComponent.prototype.searchPhotos = function () {
+        var _this = this;
+        this.flickrService
+            .searchPhotos(this.searchText)
+            .subscribe(function (data) {
+            var val = data._body;
+            val = val.replace('jsonFlickrApi(', '');
+            val = val.substring(0, val.length - 1);
+            val = JSON.parse(val);
+            _this.photos = val.photos;
+        });
+    };
+    FlickrImageSearchComponent.prototype.selectPhoto = function (photo) {
+        var url = 'https://farm' + photo.farm + '.staticflickr.com/' + photo.server;
+        url += '/' + photo.id + '_' + photo.secret + '_b.jpg';
+        this.widget.url = url;
+        if (this.widgetId === '') {
+            this.widget.type = 'Image';
+            this.widget.pageId = this.pageId;
+            this.create(this.widget);
+        }
+        else {
+            this.update(this.widget);
+        }
+    };
+    FlickrImageSearchComponent.prototype.create = function (widget) {
+        var _this = this;
+        this.widgetService.createWidget(this.pageId, widget).subscribe(function (widgets) {
+            _this.widgetId = widgets[widgets.length - 1]._id;
+            console.log('create new widget Image');
+            _this.route();
+        }, function (error) { return console.log(error); });
+    };
+    FlickrImageSearchComponent.prototype.update = function (widget) {
+        var _this = this;
+        this.widgetService
+            .updateWidget(this.widgetId, widget)
+            .subscribe(function (response) {
+            console.log('updated Image url using Flickr');
+            _this.route();
+        }, function (error) {
+            console.log(error);
+        });
+    };
+    FlickrImageSearchComponent.prototype.route = function () {
+        this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', this.widgetId]);
+    };
+    FlickrImageSearchComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-flickr-image-search',
+            template: __webpack_require__(/*! ./flickr-image-search.component.html */ "./src/app/components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component.html"),
+            styles: [__webpack_require__(/*! ./flickr-image-search.component.css */ "./src/app/components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_flickr_service_client__WEBPACK_IMPORTED_MODULE_2__["FlickrService"],
+            _services_widget_service_client__WEBPACK_IMPORTED_MODULE_3__["WidgetService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"],
+            _services_shared_service__WEBPACK_IMPORTED_MODULE_5__["SharedService"]])
+    ], FlickrImageSearchComponent);
+    return FlickrImageSearchComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/components/widget/widget-edit/widget-image/widget-image.component.css":
 /*!***************************************************************************************!*\
   !*** ./src/app/components/widget/widget-edit/widget-image/widget-image.component.css ***!
@@ -1438,7 +1588,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-md navbar-light bg-light\">\n  <div class=\"navbar-collapse collapse\" id=\"collapsingNavbar\">\n    <ul class=\"navbar-nav\">\n      <a class=\"nav-link cl-icon-padding\" [routerLink]=\"['/user', userId, 'website', websiteId, 'page', pageId, 'widget']\">\n        <i class=\"fa fa-chevron-left\"></i>\n      </a>\n      <a class=\"navbar-brand cl-icon-padding\" routerLink=\".\">Widgets Edit</a>\n    </ul>\n  </div>\n\n  <div>\n    <ul class=\"navbar-nav ml-auto\">\n      <li class=\"nav-item\">\n        <button class=\"nav-link cl-icon-padding\" (click)=\"updateImage()\">\n          <i class=\"fa fa-check\"></i>\n          </button>\n      </li>\n    </ul>\n  </div>\n</nav>\n\n<div class=\"container cl-container-padding\">\n  <div *ngIf=\"errorFlag\" class=\"alert alert-danger\">\n    {{errorMsg}}\n  </div>\n\n  <form>\n\n    <div class=\"form-group\" *ngIf=\"widget\">\n      <label for=\"image-name\">Name</label>\n      <input [(ngModel)]=\"widget.name\"\n             name=\"name\"\n             type=\"text\"\n             class=\"form-control\"\n             id=\"image-name\"\n             placeholder=\"name\"/>\n    </div>\n\n    <div class=\"form-group\" *ngIf=\"widget\">\n      <label for=\"image-text\">Text</label>\n      <input [(ngModel)]=\"widget.text\"\n             name=\"text\"\n             type=\"text\"\n             class=\"form-control\"\n             id=\"image-text\"\n             placeholder=\"Text\"/>\n    </div>\n\n    <div class=\"form-group\" *ngIf=\"widget\">\n      <label for=\"image-URL\">URL</label>\n      <input type=\"text\"\n             name=\"url\"\n             class=\"form-control\"\n             id=\"image-URL\"\n             placeholder=\"url\"/>\n    </div>\n\n    <!--<span class=\"help-block\" *ngIf=\"!url.valid && url.touched\">-->\n          <!--Please enter URL!-->\n    <!--</span>-->\n\n    <div class=\"form-group\" *ngIf=\"widget\">\n      <label for=\"image-width\">Width</label>\n      <input [(ngModel)]=\"widget.width\"\n             name=\"width\"\n             type=\"text\"\n             class=\"form-control\"\n             id=\"image-width\"\n             placeholder=\"100%\"/>\n    </div>\n\n    <!--<div class=\"form-group\">-->\n      <!--<label for=\"exampleInputFile\">Upload</label>-->\n      <!--<input type=\"file\" class=\"form-control\" id=\"exampleInputFile\">-->\n    <!--</div>-->\n\n    <form ngNoForm action=\"{{baseUrl}}/api/upload\" method=\"post\" enctype=\"multipart/form-data\">\n      <input  name=\"myFile\"   type=\"file\" class=\"form-control\"/>\n      <input  name=\"widgetId\" value=\"{{widgetId}}\"   style=\"display: none\"/>\n      <input  name=\"websiteId\" value=\"{{websiteId}}\"   style=\"display: none\"/>\n      <input  name=\"pageId\" value=\"{{pageId}}\"   style=\"display: none\"/>\n      <input  name=\"userId\" value=\"{{userId}}\"   style=\"display: none\"/>\n      <input  name=\"width\" value=\"{{widget?.width}}\"   style=\"display: none\"/>\n      <input  name=\"name\" value=\"{{widget?.name}}\"   style=\"display: none\"/>\n      <input  name=\"text\" value=\"{{widget?.text}}\"   style=\"display: none\"/>\n      <button type=\"submit\" class=\"btn btn-block btn-primary\">Upload Image</button>\n      <br/>\n    </form>\n  </form>\n\n  <button class=\"btn btn-danger  btn-block\" (click)=\"deleteImage()\"\n     routerLink=\"..\">Delete</button>\n</div>\n\n<nav class=\"navbar fixed-bottom navbar-light bg-light\">\n  <ul class=\"navbar-nav ml-auto\">\n    <a [routerLink]=\"['/user', userId]\" class=\"navbar-link navbar-text pull-right cl-icon-padding\">\n      <i class=\"fa fa-user\"></i>\n    </a>\n  </ul>\n</nav>\n"
+module.exports = "<nav class=\"navbar navbar-expand-md navbar-light bg-light\">\n  <div class=\"navbar-collapse collapse\" id=\"collapsingNavbar\">\n    <ul class=\"navbar-nav\">\n      <a class=\"nav-link cl-icon-padding\" [routerLink]=\"['/user', userId, 'website', websiteId, 'page', pageId, 'widget']\">\n        <i class=\"fa fa-chevron-left\"></i>\n      </a>\n      <a class=\"navbar-brand cl-icon-padding\" routerLink=\".\">Widgets Edit</a>\n    </ul>\n  </div>\n\n  <div>\n    <ul class=\"navbar-nav ml-auto\">\n      <li class=\"nav-item\">\n        <button class=\"nav-link cl-icon-padding\" (click)=\"updateImage()\">\n          <i class=\"fa fa-check\"></i>\n          </button>\n      </li>\n    </ul>\n  </div>\n</nav>\n\n<div class=\"container cl-container-padding\">\n  <!--<div *ngIf=\"errorFlag\" class=\"alert alert-danger\">-->\n    <!--{{errorMsg}}-->\n  <!--</div>-->\n\n  <form>\n\n    <div class=\"form-group\" *ngIf=\"widget\">\n      <label for=\"image-name\">Name</label>\n      <input [(ngModel)]=\"widget.name\"\n             name=\"name\"\n             type=\"text\"\n             class=\"form-control\"\n             id=\"image-name\"\n             placeholder=\"name\"/>\n    </div>\n\n    <div class=\"form-group\" *ngIf=\"widget\">\n      <label for=\"image-text\">Text</label>\n      <input [(ngModel)]=\"widget.text\"\n             name=\"text\"\n             type=\"text\"\n             class=\"form-control\"\n             id=\"image-text\"\n             placeholder=\"Text\"/>\n    </div>\n\n    <div class=\"form-group\" *ngIf=\"widget\">\n      <label for=\"image-URL\">URL</label>\n      <input type=\"text\"\n             name=\"url\"\n             class=\"form-control\"\n             id=\"image-URL\"\n             placeholder=\"url\"/>\n    </div>\n\n    <!--<span class=\"help-block\" *ngIf=\"!url.valid && url.touched\">-->\n          <!--Please enter URL!-->\n    <!--</span>-->\n\n    <div class=\"form-group\" *ngIf=\"widget\">\n      <label for=\"image-width\">Width</label>\n      <input [(ngModel)]=\"widget.width\"\n             name=\"width\"\n             type=\"text\"\n             class=\"form-control\"\n             id=\"image-width\"\n             placeholder=\"100%\"/>\n    </div>\n\n    <!--<div class=\"form-group\">-->\n      <!--<label for=\"exampleInputFile\">Upload</label>-->\n      <!--<input type=\"file\" class=\"form-control\" id=\"exampleInputFile\">-->\n    <!--</div>-->\n\n    <form ngNoForm action=\"{{baseUrl}}/api/upload\" method=\"post\" enctype=\"multipart/form-data\">\n      <input  name=\"myFile\"   type=\"file\" class=\"form-control\"/>\n      <input  name=\"widgetId\" value=\"{{widgetId}}\"   style=\"display: none\"/>\n      <input  name=\"websiteId\" value=\"{{websiteId}}\"   style=\"display: none\"/>\n      <input  name=\"pageId\" value=\"{{pageId}}\"   style=\"display: none\"/>\n      <input  name=\"userId\" value=\"{{userId}}\"   style=\"display: none\"/>\n      <input  name=\"width\" value=\"{{widget?.width}}\"   style=\"display: none\"/>\n      <input  name=\"name\" value=\"{{widget?.name}}\"   style=\"display: none\"/>\n      <input  name=\"text\" value=\"{{widget?.text}}\"   style=\"display: none\"/>\n      <button type=\"submit\" class=\"btn btn-block btn-primary\">Upload Image</button>\n      <br/>\n    </form>\n  </form>\n\n  <button class=\"btn btn-primary btn-block\"\n          (click)=\"chooseFromFlickr()\">Choose From Flickr</button>\n\n  <button class=\"btn btn-danger  btn-block\" (click)=\"deleteImage()\"\n     routerLink=\"..\">Delete</button>\n</div>\n\n<nav class=\"navbar fixed-bottom navbar-light bg-light\">\n  <ul class=\"navbar-nav ml-auto\">\n    <a [routerLink]=\"['/user', userId]\" class=\"navbar-link navbar-text pull-right cl-icon-padding\">\n      <i class=\"fa fa-user\"></i>\n    </a>\n  </ul>\n</nav>\n"
 
 /***/ }),
 
@@ -1500,10 +1650,10 @@ var WidgetImageComponent = /** @class */ (function () {
         this.route.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
     };
     WidgetImageComponent.prototype.updateImage = function () {
-        if (this.widget.url === undefined) {
-            this.errorFlag = true;
-            return;
-        }
+        // if (this.widget.url === undefined) {
+        //   this.errorFlag = true;
+        //   return;
+        // }
         if (this.widgetId === undefined) {
             this.widget.type = 'IMAGE';
             this.widget.pageId = this.pageId;
@@ -1519,6 +1669,9 @@ var WidgetImageComponent = /** @class */ (function () {
             }, function (error) { return console.log(error); });
         }
         this.route.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+    };
+    WidgetImageComponent.prototype.chooseFromFlickr = function () {
+        this.route.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', this.widgetId, 'flickr']);
     };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('f'),
@@ -1771,6 +1924,105 @@ var WidgetYoutubeComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/components/widget/widget-list/oder-by-pipe.pipe.ts":
+/*!********************************************************************!*\
+  !*** ./src/app/components/widget/widget-list/oder-by-pipe.pipe.ts ***!
+  \********************************************************************/
+/*! exports provided: OrderByPipe */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrderByPipe", function() { return OrderByPipe; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var OrderByPipe = /** @class */ (function () {
+    function OrderByPipe() {
+    }
+    OrderByPipe.prototype.transform = function (array, args) {
+        array.sort(function (a, b) {
+            if (a.position < b.position) {
+                return -1;
+            }
+            else if (a.position > b.position) {
+                return 1;
+            }
+            else {
+                return 0;
+            }
+        });
+        return array;
+    };
+    OrderByPipe = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Pipe"])({
+            name: 'orderBy'
+        })
+    ], OrderByPipe);
+    return OrderByPipe;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/widget/widget-list/sortable.directive.ts":
+/*!*********************************************************************!*\
+  !*** ./src/app/components/widget/widget-list/sortable.directive.ts ***!
+  \*********************************************************************/
+/*! exports provided: SortableDirective */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SortableDirective", function() { return SortableDirective; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var SortableDirective = /** @class */ (function () {
+    function SortableDirective(el) {
+        this.el = el;
+        this.newIndexes = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+    }
+    // Lifecycle hook that is called after a component's view has been fully initialized
+    SortableDirective.prototype.ngAfterViewInit = function () {
+        this.appSortable(this);
+    };
+    SortableDirective.prototype.appSortable = function (refe) {
+        jQuery(this.el.nativeElement).sortable({
+            axis: 'y',
+            start: function (event, ui) {
+                refe.initialIndex = ui.item.index();
+                // console.log("start at: " + refe.initialIndex);
+            },
+            stop: function (event, ui) {
+                // console.log("stop at: " + ui.item.index());
+                refe.newIndexes.emit({
+                    startIndex: refe.initialIndex,
+                    endIndex: ui.item.index()
+                });
+            }
+        });
+    };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
+    ], SortableDirective.prototype, "newIndexes", void 0);
+    SortableDirective = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Directive"])({
+            selector: '[appSortable]'
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"]])
+    ], SortableDirective);
+    return SortableDirective;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/components/widget/widget-list/widget-list.component.css":
 /*!*************************************************************************!*\
   !*** ./src/app/components/widget/widget-list/widget-list.component.css ***!
@@ -1778,7 +2030,7 @@ var WidgetYoutubeComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvd2lkZ2V0L3dpZGdldC1saXN0L3dpZGdldC1saXN0LmNvbXBvbmVudC5jc3MifQ== */"
+module.exports = ".youtube-widget {\n  position: relative;\n  padding-bottom: 56.25%; /* 16:9 */\n  height: 0;\n}\n.youtube-widget iframe {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy93aWRnZXQvd2lkZ2V0LWxpc3Qvd2lkZ2V0LWxpc3QuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGtCQUFrQjtFQUNsQixzQkFBc0IsRUFBRSxTQUFTO0VBQ2pDLFNBQVM7QUFDWDtBQUNBO0VBQ0Usa0JBQWtCO0VBQ2xCLE1BQU07RUFDTixPQUFPO0VBQ1AsV0FBVztFQUNYLFlBQVk7QUFDZCIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvd2lkZ2V0L3dpZGdldC1saXN0L3dpZGdldC1saXN0LmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIueW91dHViZS13aWRnZXQge1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIHBhZGRpbmctYm90dG9tOiA1Ni4yNSU7IC8qIDE2OjkgKi9cbiAgaGVpZ2h0OiAwO1xufVxuLnlvdXR1YmUtd2lkZ2V0IGlmcmFtZSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAwO1xuICBsZWZ0OiAwO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xufVxuIl19 */"
 
 /***/ }),
 
@@ -1789,7 +2041,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<nav class=\"navbar navbar-expand-md navbar-light bg-light\">\n  <div class=\"navbar-collapse collapse\" id=\"collapsingNavbar\">\n    <ul class=\"navbar-nav\">\n      <a class=\"nav-link cl-icon-padding\" routerLink=\"../..\">\n        <i class=\"fa fa-chevron-left\"></i>\n      </a>\n      <a class=\"navbar-brand cl-icon-padding\" routerLink=\".\">Widgets Edit</a>\n    </ul>\n  </div>\n\n  <div>\n    <ul class=\"navbar-nav ml-auto\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link cl-icon-padding\" routerLink=\"./new\"><i class=\"fa fa-plus\"></i></a>\n      </li>\n    </ul>\n  </div>\n</nav>\n\n<!--<div  id=\"sortable\" class=\"container container-fluid cl-container-padding-more\" appSortable (newIndexes)=\"reorderItems($event)\">-->\n  <!--<div class=\"container-fluid\" *ngFor=\"let widget of widgets\">-->\n    <!--<div [ngSwitch]=\"widget.type\">-->\n\n      <!--<div class=\"jga-widget-tool\">-->\n        <!--<a class=\"pull-right\">-->\n          <!--<span class=\"fa fa-bars\"></span>-->\n        <!--</a>-->\n        <!--<a routerLink=\"./{{widget._id}}\" class=\"pull-right\">-->\n          <!--<span class=\"fa fa-cog\"></span>-->\n        <!--</a>-->\n      <!--</div>-->\n\n      <!--<div *ngSwitchCase=\"'HEADER'\">-->\n        <!--&lt;!&ndash;<a routerLink=\"./{{widget._id}}\" class=\"pull-right\">&ndash;&gt;-->\n          <!--&lt;!&ndash;<span class=\"fa fa-cog whiteBackground\"></span>&ndash;&gt;-->\n        <!--&lt;!&ndash;</a>&ndash;&gt;-->\n        <!--&lt;!&ndash;<h2>{{widget.text}}</h2>&ndash;&gt;-->\n        <!--<div [ngSwitch]=\"widget.size\">-->\n          <!--<h1 *ngSwitchCase=\"'1'\">{{widget.text}}</h1>-->\n          <!--<h2 *ngSwitchCase=\"'2'\">{{widget.text}}</h2>-->\n          <!--<h3 *ngSwitchCase=\"'3'\">{{widget.text}}</h3>-->\n          <!--<h4 *ngSwitchCase=\"'4'\">{{widget.text}}</h4>-->\n          <!--<h5 *ngSwitchCase=\"'5'\">{{widget.text}}</h5>-->\n          <!--<h6 *ngSwitchCase=\"'6'\">{{widget.text}}</h6>-->\n          <!--<h1 *ngSwitchDefault>{{widget.text}}</h1>-->\n        <!--</div>-->\n      <!--</div>-->\n\n      <!--<div *ngSwitchCase=\"'YOUTUBE'\">-->\n        <!--&lt;!&ndash;<div class=\"embed-responsive embed-responsive-16by9\">&ndash;&gt;-->\n          <!--&lt;!&ndash;<iframe [src]=getUrl(widget.url)&ndash;&gt;-->\n                  <!--&lt;!&ndash;frameborder=\"0\"&ndash;&gt;-->\n                  <!--&lt;!&ndash;allowfullscreen></iframe>&ndash;&gt;-->\n          <!--&lt;!&ndash;<a routerLink=\"./{{widget._id}}\" class=\"pull-right\">&ndash;&gt;-->\n            <!--&lt;!&ndash;<span class=\"fa fa-cog whiteBackground\"></span>&ndash;&gt;-->\n          <!--&lt;!&ndash;</a>&ndash;&gt;-->\n        <!--&lt;!&ndash;</div>&ndash;&gt;-->\n        <!--<div class=\"embed-responsive embed-responsive-16by9\">-->\n          <!--<iframe [src]=getUrl(widget.url)-->\n                  <!--width=\"560\" height=\"315\"-->\n                  <!--frameborder=\"0\"-->\n                  <!--allowfullscreen></iframe>-->\n        <!--</div>-->\n      <!--</div>-->\n\n      <!--<div *ngSwitchCase=\"'IMAGE'\">-->\n        <!--&lt;!&ndash;<a routerLink=\"./{{widget._id}}\" class=\"pull-right\">&ndash;&gt;-->\n          <!--&lt;!&ndash;<span class=\"fa fa-cog whiteBackground\"></span>&ndash;&gt;-->\n        <!--&lt;!&ndash;</a>&ndash;&gt;-->\n        <!--&lt;!&ndash;<img class=\"img-responsive img-rounded cl-widget-images\"&ndash;&gt;-->\n             <!--&lt;!&ndash;src=\"{{widget.url}}\">&ndash;&gt;-->\n        <!--<img class=\"img-responsive img-rounded cl-widget-images\"-->\n             <!--[src]=\"widget.url\"-->\n             <!--width=\"{{widget.width}}\">-->\n      <!--</div>-->\n <!--</div>-->\n<!--</div>-->\n<div id=\"sortable\" class=\"container-fluid cl-container-padding\" appSortable (newIndexes)=\"reorderItems($event)\">\n\n  <div *ngFor=\"let widget of widgets\">\n    <div [ngSwitch]=\"widget.type\">\n\n      <div class=\"jga-widget-tool\">\n        <a class=\"pull-right\">\n          <span class=\"fa fa-bars\"></span>\n        </a>\n        <a routerLink=\"./{{widget._id}}\" class=\"pull-right\">\n          <span class=\"fa fa-cog\"></span>\n        </a>\n      </div>\n\n      <div *ngSwitchCase=\"'HEADER'\">\n        <div [ngSwitch]=\"widget.size\">\n          <h1 *ngSwitchCase=\"'1'\">{{widget.text}}</h1>\n          <h2 *ngSwitchCase=\"'2'\">{{widget.text}}</h2>\n          <h3 *ngSwitchCase=\"'3'\">{{widget.text}}</h3>\n          <h4 *ngSwitchCase=\"'4'\">{{widget.text}}</h4>\n          <h5 *ngSwitchCase=\"'5'\">{{widget.text}}</h5>\n          <h6 *ngSwitchCase=\"'6'\">{{widget.text}}</h6>\n          <h1 *ngSwitchDefault>{{widget.text}}</h1>\n        </div>\n      </div>\n\n      <div *ngSwitchCase=\"'TEXT'\">\n        <div *ngIf=\"widget.formatted\">\n          <!--<quill-editor [(ngModel)]=\"widget.text\"></quill-editor>-->\n        </div>\n\n        <input *ngIf=\"!widget.formatted && (!widget.rows || widget.rows <= 1)\"\n               placeholder=\"{{widget.placeholder}}\"\n               class=\"form-control\"/>\n\n        <textarea *ngIf=\"!widget.formatted && (widget.rows > 1)\"\n                  rows=\"{{widget.rows}}\"\n                  placeholder=\"{{widget.placeholder}}\"\n                  class=\"form-control\">{{widget.text}}</textarea>\n      </div>\n\n      <div *ngSwitchCase=\"'HTML'\" [innerHTML]=\"widget.text\"></div>\n\n      <div *ngSwitchCase=\"'YOUTUBE'\">\n        <div class=\"embed-responsive embed-responsive-16by9\">\n          <iframe [src]=getUrl(widget.url)\n                  width=\"560\" height=\"315\"\n                  frameborder=\"0\"\n                  allowfullscreen></iframe>\n        </div>\n      </div>\n\n      <div *ngSwitchCase=\"'IMAGE'\">\n        <img class=\"img-responsive img-rounded cl-widget-images\"\n             [src]=\"widget.url\"\n             width=\"{{widget.width}}\">\n      </div>\n\n    </div>\n  </div>\n\n</div>\n\n<nav class=\"navbar fixed-bottom navbar-light bg-light\">\n  <ul>\n    <a routerLink=\".\" class=\"navbar-link navbar-text cl-icon-padding\">\n      <i class=\"fa fa-play\"></i>\n    </a>\n    <a routerLink=\".\" class=\"navbar-link navbar-text cl-icon-padding\">\n      <i class=\"fa fa-eye\"></i>\n    </a>\n  </ul>\n  <ul>\n    <a routerLink=\"../../../../..\" class=\"navbar-brand navbar-text pull-right cl-icon-padding\">\n      <i class=\"fa fa-user\"></i>\n    </a>\n  </ul>\n\n</nav>\n\n"
+module.exports = "<nav class=\"navbar navbar-expand-md navbar-light bg-light\">\n  <div class=\"navbar-collapse collapse\" id=\"collapsingNavbar\">\n    <ul class=\"navbar-nav\">\n      <a class=\"nav-link cl-icon-padding\" routerLink=\"../..\">\n        <i class=\"fa fa-chevron-left\"></i>\n      </a>\n      <a class=\"navbar-brand cl-icon-padding\" routerLink=\".\">Widgets Edit</a>\n    </ul>\n  </div>\n\n  <div>\n    <ul class=\"navbar-nav ml-auto\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link cl-icon-padding\" routerLink=\"./new\"><i class=\"fa fa-plus\"></i></a>\n      </li>\n    </ul>\n  </div>\n</nav>\n\n\n<div id=\"sortable\" class=\"container-fluid cl-container-padding\" appSortable (newIndexes)=\"reorderItems($event)\" *ngIf=\"widgets\">\n\n  <div *ngFor=\"let widget of widgets | orderBy\">\n    <div [ngSwitch]=\"widget.type\">\n\n      <div class=\"jga-widget-tool\">\n        <a class=\"pull-right\">\n          <span class=\"fa fa-bars\"></span>\n        </a>\n        <a routerLink=\"./{{widget._id}}\" class=\"pull-right\">\n          <span class=\"fa fa-cog\"></span>\n        </a>\n      </div>\n\n      <div *ngSwitchCase=\"'HEADER'\">\n        <div [ngSwitch]=\"widget.size\">\n          <h1 *ngSwitchCase=\"'1'\">{{widget.text}}</h1>\n          <h2 *ngSwitchCase=\"'2'\">{{widget.text}}</h2>\n          <h3 *ngSwitchCase=\"'3'\">{{widget.text}}</h3>\n          <h4 *ngSwitchCase=\"'4'\">{{widget.text}}</h4>\n          <h5 *ngSwitchCase=\"'5'\">{{widget.text}}</h5>\n          <h6 *ngSwitchCase=\"'6'\">{{widget.text}}</h6>\n          <h1 *ngSwitchDefault>{{widget.text}}</h1>\n        </div>\n      </div>\n\n      <div *ngSwitchCase=\"'TEXT'\">\n        <div *ngIf=\"widget.formatted\">\n          <quill-editor [(ngModel)]=\"widget.text\"></quill-editor>\n        </div>\n\n        <input *ngIf=\"!widget.formatted && (!widget.rows || widget.rows <= 1)\"\n               placeholder=\"{{widget.placeholder}}\"\n               class=\"form-control\"/>\n\n        <textarea *ngIf=\"!widget.formatted && (widget.rows > 1)\"\n                  rows=\"{{widget.rows}}\"\n                  placeholder=\"{{widget.placeholder}}\"\n                  class=\"form-control\">{{widget.text}}</textarea>\n      </div>\n\n      <div *ngSwitchCase=\"'HTML'\" [innerHTML]=\"widget.text\"></div>\n\n      <div *ngSwitchCase=\"'YOUTUBE'\" class=\"youtube-widget\">\n        <div class=\"embed-responsive embed-responsive-16by9\">\n          <iframe [src]=getUrl(widget.url)\n                  width=\"560\" height=\"315\"\n                  frameborder=\"0\"\n                  allowfullscreen></iframe>\n        </div>\n      </div>\n\n      <div *ngSwitchCase=\"'IMAGE'\">\n        <img class=\"img-responsive img-rounded cl-widget-images\"\n             [src]=\"widget.url\"\n             width=\"{{widget.width}}\">\n      </div>\n\n    </div>\n  </div>\n\n</div>\n\n<nav class=\"navbar fixed-bottom navbar-light bg-light\">\n  <ul>\n    <a routerLink=\".\" class=\"navbar-link navbar-text cl-icon-padding\">\n      <i class=\"fa fa-play\"></i>\n    </a>\n    <a routerLink=\".\" class=\"navbar-link navbar-text cl-icon-padding\">\n      <i class=\"fa fa-eye\"></i>\n    </a>\n  </ul>\n  <ul>\n    <a routerLink=\"../../../../..\" class=\"navbar-brand navbar-text pull-right cl-icon-padding\">\n      <i class=\"fa fa-user\"></i>\n    </a>\n  </ul>\n\n</nav>\n"
 
 /***/ }),
 
@@ -1818,7 +2070,6 @@ var WidgetListComponent = /** @class */ (function () {
         this.widgetService = widgetService;
         this.activatedRoute = activatedRoute;
         this.domSanitizer = domSanitizer;
-        this.widgets = [];
     }
     WidgetListComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1968,6 +2219,50 @@ var Widget = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/services/flickr.service.client.ts":
+/*!***************************************************!*\
+  !*** ./src/app/services/flickr.service.client.ts ***!
+  \***************************************************/
+/*! exports provided: FlickrService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FlickrService", function() { return FlickrService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+/**
+ * Created by mayankrd on 8/16/17.
+ */
+
+
+var FlickrService = /** @class */ (function () {
+    function FlickrService(_http) {
+        this._http = _http;
+        this.key = '78bb6902bcde78319e867c796eb9f5d6';
+        this.secret = '2435fa6c2be5be28';
+        this.urlBase = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&api_key=API_KEY&text=TEXT';
+    }
+    FlickrService.prototype.searchPhotos = function (searchTerm) {
+        var url = this.urlBase
+            .replace('API_KEY', this.key)
+            .replace('TEXT', searchTerm);
+        return this._http.get(url);
+    };
+    FlickrService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])() // needed as we're injecting Http service into this service
+        ,
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_http__WEBPACK_IMPORTED_MODULE_1__["Http"]])
+    ], FlickrService);
+    return FlickrService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/page.service.client.ts":
 /*!*************************************************!*\
   !*** ./src/app/services/page.service.client.ts ***!
@@ -2031,6 +2326,37 @@ var PageService = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"]])
     ], PageService);
     return PageService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/shared.service.ts":
+/*!********************************************!*\
+  !*** ./src/app/services/shared.service.ts ***!
+  \********************************************/
+/*! exports provided: SharedService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SharedService", function() { return SharedService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/**
+ * Created by mayankrd on 8/10/17.
+ */
+
+
+var SharedService = /** @class */ (function () {
+    function SharedService() {
+        this.user = '';
+    }
+    SharedService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()
+    ], SharedService);
+    return SharedService;
 }());
 
 
@@ -2222,62 +2548,6 @@ var WidgetService = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]])
     ], WidgetService);
     return WidgetService;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/sortable.directive.ts":
-/*!***************************************!*\
-  !*** ./src/app/sortable.directive.ts ***!
-  \***************************************/
-/*! exports provided: SortableDirective */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SortableDirective", function() { return SortableDirective; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-
-
-var SortableDirective = /** @class */ (function () {
-    function SortableDirective(el) {
-        this.el = el;
-        this.newIndexes = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
-    }
-    // Lifecycle hook that is called after a component's view has been fully initialized
-    SortableDirective.prototype.ngAfterViewInit = function () {
-        this.appSortable(this);
-    };
-    SortableDirective.prototype.appSortable = function (refe) {
-        jQuery(this.el.nativeElement).sortable({
-            axis: 'y',
-            start: function (event, ui) {
-                refe.initialIndex = ui.item.index();
-                // console.log("start at: " + refe.initialIndex);
-            },
-            stop: function (event, ui) {
-                // console.log("stop at: " + ui.item.index());
-                refe.newIndexes.emit({
-                    startIndex: refe.initialIndex,
-                    endIndex: ui.item.index()
-                });
-            }
-        });
-    };
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
-    ], SortableDirective.prototype, "newIndexes", void 0);
-    SortableDirective = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Directive"])({
-            selector: '[appSortable]'
-        }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"]])
-    ], SortableDirective);
-    return SortableDirective;
 }());
 
 

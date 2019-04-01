@@ -60,10 +60,10 @@ export class WidgetImageComponent implements OnInit {
   }
 
   updateImage() {
-    if (this.widget.url === undefined) {
-      this.errorFlag = true;
-      return;
-    }
+    // if (this.widget.url === undefined) {
+    //   this.errorFlag = true;
+    //   return;
+    // }
     if (this.widgetId === undefined) {
       this.widget.type = 'IMAGE';
       this.widget.pageId = this.pageId;
@@ -82,5 +82,10 @@ export class WidgetImageComponent implements OnInit {
       );
     }
     this.route.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+  }
+
+  chooseFromFlickr() {
+    this.route.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', this.widgetId, 'flickr']);
+
   }
 }

@@ -30,14 +30,14 @@ export class RegisterComponent implements OnInit {
     this.pwErrorFlag = false;
 
     this.userService.findUserByUsername(this.user.username).subscribe(
-      (user: User) => {
-        if (typeof user._id !== 'undefined') {
+      (user: any) => {
+        if (user != null) {
           this.userErrorFlag = true;
         } else if (this.v_password !== this.user.password) {
           this.pwErrorFlag = true;
         } else {
           return this.userService.createUser(this.user).subscribe(
-            (newUser: User) => {
+            (newUser: any) => {
               this.router.navigate(['/user', newUser._id]);
             }
           );

@@ -9,7 +9,7 @@ import { WidgetService } from './services/widget.service.client';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-// import { QuillModule } from 'ng-quill';
+import { QuillEditorModule } from 'ngx-quill-editor';
 
 import { LoginComponent } from './components/user/login/login.component';
 import { RegisterComponent } from './components/user/register/register.component';
@@ -31,9 +31,11 @@ import { WidgetImageComponent } from './components/widget/widget-edit/widget-ima
 import { WidgetYoutubeComponent } from './components/widget/widget-edit/widget-youtube/widget-youtube.component';
 import { WidgetHtmlComponent } from './components/widget/widget-edit/widget-html/widget-html.component';
 import { WidgetTextComponent } from './components/widget/widget-edit/widget-text/widget-text.component';
-
-
-import { SortableDirective } from './sortable.directive';
+import { FlickrImageSearchComponent } from './components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
+import {FlickrService} from './services/flickr.service.client';
+import {SharedService} from './services/shared.service';
+import {OrderByPipe} from './components/widget/widget-list/oder-by-pipe.pipe';
+import { SortableDirective } from './components/widget/widget-list/sortable.directive';
 
 @NgModule({
   declarations: [
@@ -55,15 +57,18 @@ import { SortableDirective } from './sortable.directive';
     WidgetYoutubeComponent,
     WidgetHtmlComponent,
     WidgetTextComponent,
-    SortableDirective
+    SortableDirective,
+    FlickrImageSearchComponent,
+    OrderByPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    QuillEditorModule
   ],
-  providers: [UserService, WebsiteService, PageService, WidgetService],
+  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService, SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,106 +1,128 @@
 module.exports = function(app) {
 
+  const userModel = require("../models/user/user.model.server");
+  const websiteModel = require("../models/website/website.model.server");
+  const pageModel = require("../models/page/page.model.server");
+  const widgetModel = require("../models/widget/widget.model.server");
+
   app.post("/api/user", createUser);
   app.get("/api/user?", findUser);
   app.get("/api/user/:userId", findUserById);
   app.put("/api/user/:userId", updateUser);
   app.delete("/api/user/:userId", deleteUser);
 
-  const users = [
-    {_id: '123', username: 'xuan', password: '666', email: 'xuan@test.com', firstName: 'Xuan', lastName: 'Song'},
-    {_id: '234', username: 'bob', password: 'bob', email: 'bob@test.com', firstName: 'Bod', lastName: 'Marley'},
-    {
-      _id: '345',
-      username: 'charlie',
-      password: 'charly',
-      email: 'charlie@test.com',
-      firstName: 'Charly',
-      lastName: 'Garcia'
-    },
-    {
-      _id: '456',
-      username: 'jannunzi',
-      password: 'jannunzi',
-      email: 'jannunzi@test.com',
-      firstName: 'Jose',
-      lastName: 'Annunzi'
-    }
-  ];
+  // const users = [
+  //   {_id: '123', username: 'alice', password: 'alice', email: 'alice@test.com', firstName: 'Alice', lastName: 'Wonder'},
+  //   {_id: '234', username: 'bob', password: 'bob', email: 'bob@test.com', firstName: 'Bod', lastName: 'Marley'},
+  //   {
+  //     _id: '345',
+  //     username: 'charlie',
+  //     password: 'charly',
+  //     email: 'charlie@test.com',
+  //     firstName: 'Charly',
+  //     lastName: 'Garcia'
+  //   },
+  //   {
+  //     _id: '456',
+  //     username: 'jannunzi',
+  //     password: 'jannunzi',
+  //     email: 'jannunzi@test.com',
+  //     firstName: 'Jose',
+  //     lastName: 'Annunzi'
+  //   }
+  // ];
 
   function createUser(req, res) {
-    const user = req.body;
-    user._id = (new Date()).getTime().toString();
-    console.log('create user: ' + user._id + " " + user.username);
-    users.push(user);
-    res.json(user);
+    const newUser = req.body;
+    userModel.createUser(newUser)
+      .then(function(user) {
+        res.status(200).json(user);
+        console.log('created user: ' + user);
+      }, function(err) {
+        console.log(err);
+        res.status(500);
+      });
   }
 
   function findUser(req, res) {
-    const username = req.query['username'];
-    const password = req.query['password'];
-    let user = null;
-    if (username && password) {
-      user = users.find(function (user) {
-        return user.username === username && user.password === password;
+    const username = req.query["username"];
+    const password = req.query["password"];
+    if (username && password){
+      const promise = userModel.findUserByCredentials(username, password);
+      promise.then(function(user) {
+        res.status(200).json(user);
+        console.log('found user by credentials: ' + user);
+      }, function(err) {
+        console.log(err);
+        res.status(500);
       });
-    } else if (username) {
-      user = users.find(function (user) {
-        return user.username === username;
-      });
+      return;
+    } else if (username){
+      userModel.findUserByUserName(username)
+        .then(function(user) {
+          res.status(200).json(user);
+          console.log('found user by username: ' + user);
+        }, function(err) {
+          console.log(err);
+          res.status(500);
+        });
+      return;
     }
-    if (user) {
-      console.log("find user: " + user._id + " " + user.username);
-      res.json(user);
-    } else {
-      console.log("find user: not found");
-      res.json({});
-    }
+    console.log('found user: username is not provided');
+    res.json({});
   }
 
   function findUserById(req, res) {
     const userId = req.params['userId'];
-    const user = users.find(function (user) {
-      return user._id === userId;
-    });
-    if (user) {
-      console.log("find user by id: " + user._id + " " + user.username);
+    userModel.findUserById(userId).then(function(user) {
       res.json(user);
-    } else {
-      console.log("find user by id: not found");
-      res.json({});
-    }
+      console.log('found user by id: ' + user);
+    }, function(err) {
+      console.log(err);
+      res.status(500);
+    });
   }
 
   function updateUser(req, res) {
-    const userId = req.params['userId'];
+    const userId = req.params.userId;
     const user = req.body;
-
-    for(let i = 0; i < users.length; i++) {
-      if (users[i]._id === userId) {
-        console.log(req.body);
-        console.log("update user: " + userId + " " + user.username);
-
-        users[i].username = user.username;
-        users[i].firstName = user.firstName;
-        users[i].lastName = user.lastName;
-        users[i].email = user.email;
-        res.status(200).send(user);
-        return;
-      }
-    }
-    res.status(404).send("not found!");
+    userModel.updateUser(userId, user)
+      .then(function(response) {
+        res.status(200).json({});
+        console.log('updated user');
+      }, function(err) {
+        console.log(err);
+        res.status(500);
+      });
   }
 
   function deleteUser(req, res) {
     const userId = req.params['userId'];
-    for (const i in users) {
-      if (users[i]._id === userId) {
-        const j = +i;
-        res.json(users[i]);
-        console.log('delete user: ' + userId);
-        users.splice(j, 1);
-        return;
-      }
-    }
+    userModel.deleteUser(userId)
+      .then(function(response) {
+        websiteModel.findAllWebsitesForUser(userId)
+          .then(function (websites) {
+            websites.forEach(function (website) {
+              websiteModel.deleteWebsite(website._id);
+              pageModel.findAllPagesForWebsite(website._id)
+                .then(function(pages) {
+                  pages.forEach(function(page) {
+                    pageModel.deletePage(page._id);
+                    widgetModel.findAllWidgetsForPage(page._id)
+                      .then(function(widgets) {
+                        widgets.forEach(function(widget) {
+                          widgetModel.deleteWidget(widget._id);
+                        })
+                      })
+                  })
+                })
+            })
+          });
+        res.status(200).json({});
+        console.log('deleted user: userId = ' + userId);
+      }, function(err) {
+        console.log(err);
+        res.status(500);
+    });
   }
 };

@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-expand-md navbar-light bg-light">
   <div class="navbar-collapse collapse" id="collapsingNavbar">
     <ul class="navbar-nav">
@@ -18,67 +17,10 @@
   </div>
 </nav>
 
-<!--<div  id="sortable" class="container container-fluid cl-container-padding-more" appSortable (newIndexes)="reorderItems($event)">-->
-  <!--<div class="container-fluid" *ngFor="let widget of widgets">-->
-    <!--<div [ngSwitch]="widget.type">-->
 
-      <!--<div class="jga-widget-tool">-->
-        <!--<a class="pull-right">-->
-          <!--<span class="fa fa-bars"></span>-->
-        <!--</a>-->
-        <!--<a routerLink="./{{widget._id}}" class="pull-right">-->
-          <!--<span class="fa fa-cog"></span>-->
-        <!--</a>-->
-      <!--</div>-->
+<div id="sortable" class="container-fluid cl-container-padding" appSortable (newIndexes)="reorderItems($event)" *ngIf="widgets">
 
-      <!--<div *ngSwitchCase="'HEADER'">-->
-        <!--&lt;!&ndash;<a routerLink="./{{widget._id}}" class="pull-right">&ndash;&gt;-->
-          <!--&lt;!&ndash;<span class="fa fa-cog whiteBackground"></span>&ndash;&gt;-->
-        <!--&lt;!&ndash;</a>&ndash;&gt;-->
-        <!--&lt;!&ndash;<h2>{{widget.text}}</h2>&ndash;&gt;-->
-        <!--<div [ngSwitch]="widget.size">-->
-          <!--<h1 *ngSwitchCase="'1'">{{widget.text}}</h1>-->
-          <!--<h2 *ngSwitchCase="'2'">{{widget.text}}</h2>-->
-          <!--<h3 *ngSwitchCase="'3'">{{widget.text}}</h3>-->
-          <!--<h4 *ngSwitchCase="'4'">{{widget.text}}</h4>-->
-          <!--<h5 *ngSwitchCase="'5'">{{widget.text}}</h5>-->
-          <!--<h6 *ngSwitchCase="'6'">{{widget.text}}</h6>-->
-          <!--<h1 *ngSwitchDefault>{{widget.text}}</h1>-->
-        <!--</div>-->
-      <!--</div>-->
-
-      <!--<div *ngSwitchCase="'YOUTUBE'">-->
-        <!--&lt;!&ndash;<div class="embed-responsive embed-responsive-16by9">&ndash;&gt;-->
-          <!--&lt;!&ndash;<iframe [src]=getUrl(widget.url)&ndash;&gt;-->
-                  <!--&lt;!&ndash;frameborder="0"&ndash;&gt;-->
-                  <!--&lt;!&ndash;allowfullscreen></iframe>&ndash;&gt;-->
-          <!--&lt;!&ndash;<a routerLink="./{{widget._id}}" class="pull-right">&ndash;&gt;-->
-            <!--&lt;!&ndash;<span class="fa fa-cog whiteBackground"></span>&ndash;&gt;-->
-          <!--&lt;!&ndash;</a>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--<div class="embed-responsive embed-responsive-16by9">-->
-          <!--<iframe [src]=getUrl(widget.url)-->
-                  <!--width="560" height="315"-->
-                  <!--frameborder="0"-->
-                  <!--allowfullscreen></iframe>-->
-        <!--</div>-->
-      <!--</div>-->
-
-      <!--<div *ngSwitchCase="'IMAGE'">-->
-        <!--&lt;!&ndash;<a routerLink="./{{widget._id}}" class="pull-right">&ndash;&gt;-->
-          <!--&lt;!&ndash;<span class="fa fa-cog whiteBackground"></span>&ndash;&gt;-->
-        <!--&lt;!&ndash;</a>&ndash;&gt;-->
-        <!--&lt;!&ndash;<img class="img-responsive img-rounded cl-widget-images"&ndash;&gt;-->
-             <!--&lt;!&ndash;src="{{widget.url}}">&ndash;&gt;-->
-        <!--<img class="img-responsive img-rounded cl-widget-images"-->
-             <!--[src]="widget.url"-->
-             <!--width="{{widget.width}}">-->
-      <!--</div>-->
- <!--</div>-->
-<!--</div>-->
-<div id="sortable" class="container-fluid cl-container-padding" appSortable (newIndexes)="reorderItems($event)">
-
-  <div *ngFor="let widget of widgets">
+  <div *ngFor="let widget of widgets | orderBy">
     <div [ngSwitch]="widget.type">
 
       <div class="jga-widget-tool">
@@ -104,7 +46,7 @@
 
       <div *ngSwitchCase="'TEXT'">
         <div *ngIf="widget.formatted">
-          <!--<quill-editor [(ngModel)]="widget.text"></quill-editor>-->
+          <quill-editor [(ngModel)]="widget.text"></quill-editor>
         </div>
 
         <input *ngIf="!widget.formatted && (!widget.rows || widget.rows <= 1)"
@@ -119,7 +61,7 @@
 
       <div *ngSwitchCase="'HTML'" [innerHTML]="widget.text"></div>
 
-      <div *ngSwitchCase="'YOUTUBE'">
+      <div *ngSwitchCase="'YOUTUBE'" class="youtube-widget">
         <div class="embed-responsive embed-responsive-16by9">
           <iframe [src]=getUrl(widget.url)
                   width="560" height="315"
@@ -155,4 +97,3 @@
   </ul>
 
 </nav>
-

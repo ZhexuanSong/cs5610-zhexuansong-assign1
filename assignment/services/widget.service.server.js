@@ -1,5 +1,7 @@
 module.exports = function (app) {
 
+  const widgetModel = require("../models/widget/widget.model.server");
+
   const multer = require('multer'); // npm install multer --save
   const upload = multer({dest: __dirname + '/../../src/assets/uploads'});
   const baseUrl = "";
@@ -10,173 +12,23 @@ module.exports = function (app) {
   app.put("/api/widget/:widgetId", updateWidget);
   app.delete("/api/widget/:widgetId", deleteWidget);
 
-  app.put("/api/page/:pageId/widget?", reorderWidgets);
+  // REORDER
+  app.put("/api/page/:pageId/widget?", reorderWidget);
 
-  //UPLOAD
+  // UPLOAD
   app.post ("/api/upload", upload.single('myFile'), uploadImage);
 
-  const widgets = [
-    {_id: '1', type: 'HEADER', pageId: '321', size: '2', text: 'MONSTER HUNTER WORLD'},
-    {_id: '2', type: 'HEADER', pageId: '321', size: '4', text: 'Iceborne Expansion Announced'},
-    {_id: '3', type: 'IMAGE', pageId: '321', size: '2', text: 'text', width: '100%',
-      url: 'http://www.monsterhunter.com/15th/images/top/mainart.jpg'},
-    {_id: '4', type: 'IMAGE', pageId: '321', size: '2', text: 'my image', width: '100%',
-      url: 'https://static.gamespot.com/uploads/original/1578/15787979/3473960-3733902450-main..jpg'},
-    {_id: '5', type: 'YOUTUBE', pageId: '321', size: '2', text: 'text', width: '100%',
-      url: 'https://www.youtube.com/embed/KyUxNSHAqIQ'}
-  ];
-
-  function createWidget(req, res) {
-    const widget = req.body;
-    widget._id = (new Date()).getTime().toString();
-    console.log(req.body);
-    console.log('create new widget: ' + widget._id);
-    widgets.push(widget);
-    res.json(widget);
-  }
-
-  function findAllWidgetsForPage(req, res) {
-    const pageId = req.params['pageId'];
-    const resultSet = widgets.filter(function (widget) {
-      return widget.pageId === pageId;
-    });
-    if (resultSet) {
-      console.log("find widgets for page: success");
-      res.json(resultSet);
-    } else {
-      console.log("find widgets for page: not found");
-      res.json({});
-    }
-  }
-
-  function findWidgetById(req, res) {
-    const widgetId = req.params['widgetId'];
-    const widget = widgets.find(function (widget) {
-      return widget._id === widgetId;
-    });
-    if (widget) {
-      console.log("find widget by id: " + widget._id);
-      res.json(widget);
-    } else {
-      console.log("find widget by id: not found");
-      res.json({});
-    }
-  }
-
-  function updateWidget(req, res) {
-    const widgetId = req.params['widgetId'];
-    const widget = req.body;
-    for (const i in widgets) {
-      if (widgets[i]._id === widgetId) {
-        console.log(req.body);
-        console.log("update widget: " + widgetId);
-        switch (widgets[i].type) {
-          case 'HEADER':
-            widgets[i].name = widget.name;
-            widgets[i].text = widget.text;
-            widgets[i].size = widget.size;
-            widgets[i].url = "";
-            widgets[i].width = "";
-            widgets[i].rows = "";
-            widgets[i].placeholder = "";
-            widgets[i].formatted = "";
-            res.status(200).send(widgets[i]);
-            return;
-          case 'IMAGE':
-            widgets[i].name = widget.name;
-            widgets[i].text = widget.text;
-            widgets[i].size = "";
-            widgets[i].url = widget.url;
-            widgets[i].width = widget.width;
-            widgets[i].rows = "";
-            widgets[i].placeholder = "";
-            widgets[i].formatted = "";
-            res.status(200).send(widgets[i]);
-            return;
-          case 'YOUTUBE':
-            widgets[i].name = widget.name;
-            widgets[i].text = widget.text;
-            widgets[i].size = "";
-            widgets[i].url = widget.url;
-            widgets[i].width = widget.width;
-            widgets[i].rows = "";
-            widgets[i].placeholder = "";
-            widgets[i].formatted = "";
-            res.status(200).send(widgets[i]);
-            return;
-          case 'HTML':
-            widgets[i].name = widget.name;
-            widgets[i].text = widget.text;
-            widgets[i].size = "";
-            widgets[i].url = "";
-            widgets[i].width = "";
-            widgets[i].rows = "";
-            widgets[i].placeholder = "";
-            widgets[i].formatted = "";
-            res.status(200).send(widgets[i]);
-            return;
-          case 'TEXT':
-            widgets[i].name = widget.name;
-            widgets[i].text = widget.text;
-            widgets[i].rows = widget.rows;
-            widgets[i].placeholder = widget.placeholder;
-            widgets[i].formatted = widget.formatted;
-            widgets[i].size = "";
-            widgets[i].url = "";
-            widgets[i].width = "";
-            res.status(200).send(widgets[i]);
-            return;
-          default:
-            res.status(404).send("widget type not supported");
-        }
-      }
-    }
-    res.status(404).send("not found!");  }
-
-  function deleteWidget(req, res) {
-    const widgetId = req.params['widgetId'];
-    for (const i in widgets) {
-      if (widgets[i]._id === widgetId) {
-        const j = +i;
-        res.json(widgets[i]);
-        console.log('delete widget: ' + widgetId);
-        widgets.splice(j, 1);
-        return;
-      }
-    }
-  }
-
-  function reorderWidgets(req, res) {
-    const startIndex = parseInt(req.query.initial);
-    const endIndex = parseInt(req.query.final);
-    const widgets_in_page = req.body;
-
-    if (startIndex === endIndex) {
-      res.json(widgets_in_page);
-      return;
-    }
-
-    const widget_to_reorder = widgets_in_page[startIndex];
-    const widget_endIndex = widgets_in_page[endIndex];
-
-    const index_start_main = findIndex(widget_to_reorder);
-    widgets.splice(index_start_main, 1);
-    console.log('start index in main widgets: ' + index_start_main);
-
-    const index_end_main = parseInt(findIndex(widget_endIndex)) + (startIndex < endIndex ? 1 : 0);
-    widgets.splice(index_end_main, 0, widget_to_reorder);
-    console.log('end index in main widgets: ' + index_end_main);
-
-    res.json({});
-  }
-
-  function findIndex(widget) {
-    for (const i in widgets) {
-      if (widgets[i]._id === widget._id) {
-        return i;
-      }
-    }
-  }
+  // const widgets = [
+  //   {_id: '1', type: 'HEADER', pageId: '321', size: '2', text: 'GIZMODO'},
+  //   {_id: '2', type: 'HEADER', pageId: '321', size: '4', text: 'Lorem ipsum'},
+  //   {_id: '3', type: 'IMAGE', pageId: '321', size: '2', text: 'text', width: '100%',
+  //     url: 'http://lorempixel.com/400/200/'},
+  //   {_id: '4', type: 'IMAGE', pageId: '321', size: '2', text: 'my image', width: '100%',
+  //     url: 'http://food.fnr.sndimg.com/content/dam/images/food/fullset/2009/11/4/2/FNM_120109-Sugar-Fix-006_s4x3.jpg'
+  //     + '.rend.hgtvcom.616.462.suffix/1382539033745.jpeg'},
+  //   {_id: '5', type: 'YOUTUBE', pageId: '321', size: '2', text: 'text', width: '100%',
+  //     url: 'https://www.youtube.com/embed/d5nCbSNS9mA'}
+  // ];
 
   function uploadImage(req, res) {
     const userId = req.body.userId;
@@ -186,13 +38,13 @@ module.exports = function (app) {
     const width = req.body.width;
     const name = req.body.name;
     const text = req.body.text;
-
     const myFile = req.file;
 
     console.log(req.file);
 
     const callbackUrl = baseUrl + '/user/' + userId + "/website/" + websiteId
       + "/page/" + pageId + "/widget";
+
     if(myFile == null) {
       res.redirect(callbackUrl + '/' + widgetId);
       return;
@@ -206,29 +58,103 @@ module.exports = function (app) {
     const mimetype = myFile.mimetype;
 
     if (widgetId === '') {
-      const widget =
-        {_id: '', type: 'IMAGE', pageId: pageId, size: '', text: '', width: '', url: '', name: ''};
-      widget._id = (new Date()).getTime().toString();
-      widget.url = 'uploads/' + filename;
-      /*      widget.name = name;
-            widget.text = text;
-            widget.width = width;*/
-      console.log('create widget image: ' + widget._id);
-      widgets.push(widget);
-      res.redirect(callbackUrl + '/' + widget._id);
+      let widget = {type: 'IMAGE', _pageId: pageId, url: 'uploads/' + filename};
+      widgetModel.createWidget(pageId, widget).then(function(newWidget) {
+        console.log('created widget image (from upload image)');
+        res.redirect(callbackUrl + '/' + newWidget._id);
+      });
       return;
     }
 
-    for (let i = 0; i < widgets.length; i++) {
-      if (widgets[i]._id === widgetId) {
-        widgets[i].url = 'uploads/' + filename;
-        /*        widgets[i].name = name;
-                widgets[i].text = text;
-                widgets[i].width = width;*/
-        break;
-      }
-    }
-
+    const widget =  {url: 'uploads/' + filename};
+    widgetModel.updateWidget(widgetId, widget)
+      .then(function (response) {
+        console.log('updated widget image (from upload image): widgetId=' + widgetId);
+        res.status(200);
+      }, function (err) {
+        console.log(err);
+        res.status(500);
+      });
     res.redirect(callbackUrl + '/' + widgetId);
   }
+
+  function reorderWidget(req, res) {
+    const pageId = req.params['pageId'];
+    const startIndex = parseInt(req.query.initial);
+    const endIndex = parseInt(req.query.final);
+    widgetModel
+      .reorderWidget(pageId, startIndex, endIndex)
+      .then(function(response) {
+        console.log('reordered widget: pageId=' + pageId + ' initial=' + startIndex + ' final=' + endIndex);
+        res.status(200).json({});
+      }, function(err) {
+        res.status(500);
+      });
+  }
+
+  function createWidget(req, res) {
+    const widget = req.body;
+    const pageId = req.params['pageId'];
+    widget._pageId = pageId;
+    widgetModel.createWidget(pageId, widget).then(function(response) {
+        console.log('created widget: ' + response);
+        widgetModel.findAllWidgetsForPage(pageId)
+          .then(function(widgets) {
+          res.status(200).json(widgets);
+        })
+      }, function(err) {
+        console.log(err);
+        res.status(500);
+      });
+  }
+
+  function findAllWidgetsForPage(req, res) {
+    const pageId = req.params['pageId'];
+    widgetModel.findAllWidgetsForPage(pageId)
+      .then(function(widgets) {
+        res.status(200).json(widgets);
+        console.log('found all widgets for page: ' + widgets);
+      }, function(err) {
+        console.log(err);
+        res.status(500);
+      });
+  }
+
+  function findWidgetById(req, res) {
+    const widgetId = req.params['widgetId'];
+    widgetModel.findWidgetById(widgetId)
+      .then(function(widget){
+        console.log('found widget by id: ' + widget);
+        res.status(200).json(widget);
+      }, function(err) {
+        console.log(err);
+        res.status(500);
+      });
+  }
+
+  function updateWidget(req, res) {
+    const widgetId = req.params['widgetId'];
+    const widget = req.body;
+    widgetModel.updateWidget(widgetId, widget)
+      .then(function(response) {
+        res.status(200).json({});
+        console.log('updated widget: widgetId = ' + widgetId);
+      }, function(err) {
+        console.log(err);
+        res.status(500);
+      });
+  }
+
+  function deleteWidget(req, res) {
+    const widgetId = req.params['widgetId'];
+    widgetModel.deleteWidget(widgetId)
+      .then(function(response){
+        res.status(200).json({});
+        console.log('deleted widget: widgetId = ' + widgetId);
+      }, function(err) {
+        console.log(err);
+        res.status(500);
+      });
+  }
+
 };
