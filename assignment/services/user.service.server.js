@@ -28,7 +28,7 @@ module.exports = function (app) {
     const facebookConfig = {
         clientID: process.env.FACEBOOK_CLIENT_ID,
         clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL: process.env.FACEBOOK_CALLBACK_URL
+        callbackURL: process.env.FACEBOOK_CALLBACK_URL? process.env.FACEBOOK_CALLBACK_URL: '/auth/facebook/callback'
     };
     // const facebookConfig = {
     //     clientID: 610435949421259,
