@@ -1,0 +1,36 @@
+<nav class="navbar sticky-top navbar-dark bg-primary">
+  <span class="navbar-brand">Profile</span>
+  <a class="nav-item nav-link ml-auto" [routerLink]="" (click)="updateUser()">
+      <i class="fas fa-check white-icons"></i></a>
+</nav>
+
+<div class="container">
+    <div class="form-group move-down" *ngIf="user">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" id="username" placeholder="Username" [(ngModel)]="user.username">
+    </div>
+    <div class="form-group" *ngIf="user">
+      <label for="email">Email address</label>
+      <input type="email" class="form-control" id="email" placeholder="alice@wonderland.com" [(ngModel)]="user.email">
+    </div>
+    <div class="form-group" *ngIf="user">
+      <label for="first-name">First Name</label>
+      <input type="text" class="form-control" id="first-name" placeholder="Alice" [(ngModel)]="user.firstName">
+    </div>
+    <div class="form-group" *ngIf="user">
+      <label for="last-name">Last Name</label>
+      <input type="text" class="form-control" id="last-name" placeholder="Wonderland" [(ngModel)]="user.lastName">
+    </div>
+
+  <a class="btn btn-primary btn-block"
+     routerLink="/website">Websites</a>
+    <a class="btn btn-danger btn-block"
+       (click)="deleteUser()" routerLink="/login">Delete User</a>
+  <a class="btn btn-danger  btn-block"
+     (click)="logout()" routerLink="/login">Logout</a>
+</div>
+
+<nav class="navbar fixed-bottom navbar-dark bg-primary">
+  <a class = "navbar-brand" id="hidden">hidden bottom</a>
+</nav>
+

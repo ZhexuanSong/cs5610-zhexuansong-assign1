@@ -1,0 +1,62 @@
+<form (ngSubmit)="createWebsite()" #f="ngForm">
+<div class="container-fluid m-0 p-0">
+  <div class="row">
+    <div class="col-4 p-0 d-none d-sm-block">
+      <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary justify-content-start">
+        <a class="nav-item nav-link navblack" routerLink="/website">
+          <i class="fas fa-chevron-left white-icons move-left"></i></a>
+        <a class="navbar-brand  " [routerLink]="">Websites</a>
+        <a class="nav-item nav-link ml-auto" routerLink="/website/new">
+          <i class=" navblack fas fa-plus white-icons"></i></a>
+      </nav>
+    </div>
+    <div class="col-12 col-sm-8 p-0">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-start">
+        <a class="nav-item nav-link navblack d-sm-none" routerLink="/website">
+          <i class="fas fa-chevron-left white-icons move-left"></i></a>
+        <a class="navbar-brand pl-4 " [routerLink]="">New Website</a>
+        <a class="nav-item nav-link ml-auto" routerLink="/website" (click)="createWebsite()">
+          <i class=" navblack fas fa-check white-icons move-right" ></i></a>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid">
+  <div class="row"><div class="container col-4 d-none d-sm-block move-up">
+    <ul class="list-group border-0" *ngIf="websites">
+        <div *ngFor="let web of websites">
+          <li class="list-group-item border-0 " *ngIf="web">
+            <a routerLink="/website/{{web._id}}">
+              <span><i class="fas fa-cog float-right setting"></i></span></a>
+            <a routerLink="/website/{{web._id}}/page">{{web.name}}</a>
+          </li>
+        </div>
+    </ul>
+  </div>
+
+    <div class="col-12 col-sm-8 move-up">
+      <div class="form-group">
+        <label for="website-name">Name</label>
+        <input type="text" id="website-name" name="websitename" placeholder="Name" class="form-control" ngModel required #websitename="ngModel">
+      </div>
+      <span class="help-block" *ngIf="!websitename.valid">
+      Please enter website name!
+    </span>
+      <div class="form-group">
+        <label for="website-description">Description</label>
+        <textarea id="website-description" class="form-control" rows="5" placeholder="Description" name="description"
+                  ngModel required #description="ngModel"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<nav class="navbar fixed-bottom bg-primary navbar-dark justify-content-end">
+  <div class="container-fuild">
+    <a routerLink="/profile" class="navbar-link navbar-text float-right ">
+      <i class="fas fa-user white-icons"></i>
+    </a>
+  </div>
+</nav>
+</form>
