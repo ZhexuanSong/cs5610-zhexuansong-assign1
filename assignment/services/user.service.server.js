@@ -25,16 +25,16 @@ module.exports = function (app) {
     app.get('/auth/facebook/callback', 
         passport.authenticate('facebook', {  successRedirect: '/#/profile/',  failureRedirect: '/#/login' }));
 
+    //const facebookConfig = {
+    //    clientID: process.env.FACEBOOK_CLIENT_ID,
+    //    clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    //    callbackURL: process.env.FACEBOOK_CALLBACK_URL? process.env.FACEBOOK_CALLBACK_URL: '/auth/facebook/callback'
+    //};
     const facebookConfig = {
-        clientID: process.env.FACEBOOK_CLIENT_ID,
-        clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL: process.env.FACEBOOK_CALLBACK_URL? process.env.FACEBOOK_CALLBACK_URL: '/auth/facebook/callback'
+       clientID: 610435949421259,
+       clientSecret: '4df0f4b575232a68cb9f04a23698c528',
+       callbackURL: '/auth/facebook/callback'
     };
-    // const facebookConfig = {
-    //     clientID: 610435949421259,
-    //     clientSecret: '4df0f4b575232a68cb9f04a23698c528',
-    //     callbackURL: '/auth/facebook/callback'
-    // };
 
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
