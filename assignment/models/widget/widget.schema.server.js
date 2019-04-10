@@ -1,9 +1,9 @@
-var mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-var widgetSchema = new mongoose.Schema({
-  pageId:{type: mongoose.Schema.Types.ObjectId, ref:"Page"},
-  type:{type: String, enum: ['HEADER', 'IMAGE', 'YOUTUBE', 'HTML', 'INPUT','TEXT']},
-  name: String,
+const WidgetSchema = mongoose.Schema({
+  _pageId: {type: mongoose.Schema.ObjectId, ref: 'PageModel'},
+  type: {type: String, enum: ['HEADER', 'IMAGE', 'YOUTUBE', 'HTML', 'TEXT']},
+  name: {type: String},
   text: String,
   placeholder: String,
   description: String,
@@ -14,10 +14,11 @@ var widgetSchema = new mongoose.Schema({
   size: Number,
   class: String,
   icon: String,
-  deletable:Boolean,
+  deletable: Boolean,
   formatted: Boolean,
-  position: Number,
-  dateCreated: {type:Date, default: Date.now()}
-}, {collection: 'Widgets'});
+  position: Number, //for sortable
+  dateCreated: {type: Date, default: Date.now} //Date.now is the current time
+}, {collection: "widget"});
 
-module.exports = widgetSchema;
+module.exports = WidgetSchema;
+

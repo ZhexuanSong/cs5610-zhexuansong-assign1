@@ -1,40 +1,46 @@
-import {Website} from '../models/website.model.client';
+import { Website } from '../models/website.model.client';
 import {Injectable} from '@angular/core';
-import {User} from '../models/user.model.client';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {Observable} from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class WebsiteService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private _http: HttpClient) {}
   baseUrl = environment.baseUrl;
 
-  createWebsite(userId, website): Observable<any> {
-    const url = this.baseUrl + '/api/user/' + userId + '/website';
-    return this.http.post<any>(url, website);
+  static getNewWebsite() {
+    return new Website(undefined, undefined, undefined, undefined);
   }
 
-  findWebsitesByUser(userId: string): Observable<any[]> {
-    const url = this.baseUrl + '/api/user/' + userId + '/website';
-    return this.http.get<any[]>(url);
+  createWebsite(userId: String, website: Website) {
+    return this._http.post(this.baseUrl + '/api/user/' + userId + '/website', website);
+      // .pipe(map(
+      //   (res: any) => res.json()));
   }
 
-  findWebsiteById(websiteId): Observable<any> {
-    const url = this.baseUrl + '/api/website/' + websiteId;
-    return this.http.get<any>(url);
+  findWebsitesByUser(userId: String) {
+    return this._http.get(this.baseUrl + '/api/user/' + userId + '/website');
+      // .pipe(map(
+      //   (res: any) => res.json()));
   }
 
-  updateWebsite(websiteId, website): Observable<any> {
-    const url = this.baseUrl + '/api/website/' + websiteId;
-    return this.http.put<any>(url, website);
+  findWebsitesById(websiteId: String) {
+    return this._http.get(this.baseUrl + '/api/website/' + websiteId);
+      // .pipe(map(
+      //   (res: any) => res.json()));
   }
 
-  deleteWebsite(websiteId): Observable<any> {
-    const url = this.baseUrl + '/api/website/' + websiteId;
-    return this.http.delete<any>(url);
+  updateWebsite(websiteId: String, website: Website) {
+    return this._http.put(this.baseUrl + '/api/website/' + websiteId, website);
+      // .pipe(map(
+      //   (res: any) => res.json()));
   }
 
-
+  deleteWebsite(websiteId: String) {
+    return this._http.delete(this.baseUrl + '/api/website/' + websiteId);
+      // .pipe(map(
+      //   (res: any) => res.json()));
+  }
 }

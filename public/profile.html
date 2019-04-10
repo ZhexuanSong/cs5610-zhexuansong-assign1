@@ -1,41 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="UTF-8">
-  <title>Profile</title>
+  <title>Title</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="css/style.css" rel="stylesheet"/>
 </head>
+
 <body>
-<nav class="navbar fixed-top navbar-light bg-light">
-  <a class="navbar-text color-black navbar-brand text-bold" href="#">
-    Profile
-  </a>
-</nav>
-<div class="container container-padding">
-   <form>
-   <div class="form-group">
-       <label for="username"><strong>Username</strong></label>
-       <input id="username" class="form-control" type="text" placeholder="jannunzi"/>
-   </div>
-   <div class="form-group">
-     <label for="email"><strong>Email</strong></label>
-     <input id="email" class="form-control" type="email" placeholder="jannunzi@gmail.com"/>
-   </div>
-   <div class="form-group">
-     <label for="first-name"><strong>First Name</strong></label>
-     <input id="first-name" class="form-control" type="text" placeholder="Jose"/>
-   </div>
-   <div class="form-group">
-     <label for="last-name"><strong>Last Name</strong></label>
-     <input id="last-name" class="form-control" type="text" placeholder="Annunziato"/>
-   </div>
-   </form>
-     <a class="btn btn-primary btn-block" href="website-list.html">Websites</a>
-     <a class="btn btn-danger btn-block" href="login.html">Logout</a>
- </div>
-<nav class="navbar navbar-fixed-bottom blue-navbar">
-</nav>
+  <nav class="navbar navbar-expand-md navbar-custom">
+    <div class="navbar-collapse collapse mr-auto" id="collapsingNavbar">
+      <ul class="navbar-nav">
+        <a class="navbar-brand" href="#">
+          Profile
+        </a>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container cl-container-padding">
+
+    <form>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" placeholder="Username">
+      </div>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" id="email" placeholder="Email Address">
+      </div>
+      <div class="form-group">
+        <label for="first-name">First Name</label>
+        <input type="text" class="form-control" id="first-name" placeholder="First Name">
+      </div>
+      <div class="form-group">
+        <label for="last-name">Last Name</label>
+        <input type="text" class="form-control" id="last-name" placeholder="Last Name">
+      </div>
+    </form>
+
+    <a class="btn btn-primary btn-block"
+       href="website-list.html">Websites</a>
+    <a class="btn btn-danger  btn-block"
+       href="login.html">Logout</a>
+  </div>
+
+  <nav class="navbar fixed-bottom navbar-light navbar-custom">
+    <ul class="navbar-nav ml-auto">
+      <a href="profile.html" class="navbar-link navbar-text pull-right cl-icon-padding">
+        <i class="fa fa-user"></i>
+      </a>
+    </ul>
+  </nav>
 </body>
 </html>

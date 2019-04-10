@@ -1,0 +1,61 @@
+
+input.form-control {
+  margin-bottom: 5px;
+}
+
+.cl-list-item-borderless {
+  border-top: 0 none;
+  border-bottom: 0 none;
+  border-left: 0 none;
+  border-right: 0 none;
+}
+
+a:hover{
+  text-decoration: none;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+  color: #fff;
+}
+
+.navbar-custom .navbar-nav .nav-link {
+  color: #fff;
+}
+
+.navbar-custom {
+  background-color: #337ab7;
+}
+
+.cl-container-padding {
+  padding-top: 1%;
+  padding-bottom: 10%;
+}
+
+.cl-icon-padding {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.custom-padding {
+  padding-top: 5%;
+  padding-bottom: 10%;
+}
+
+.cl-text-blue{
+  color: #337ab7;
+}
+
+.cl-icon-blue {
+  color: #337ab7;
+}
+
+.cl-container-padding-more {
+  padding-top: 7%;
+  padding-bottom: 10%;
+}
+
+.special-btn {
+  position: relative;
+}
+

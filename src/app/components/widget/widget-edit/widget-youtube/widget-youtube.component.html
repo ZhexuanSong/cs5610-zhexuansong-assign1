@@ -1,0 +1,91 @@
+
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+    <ul class="navbar-nav">
+      <li>
+        <a class="nav-link cl-icon-padding" [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget']">
+          <i class="fa fa-chevron-left"></i>
+        </a>
+      </li>
+      <li>
+        <a class="navbar-brand cl-icon-padding" routerLink=".">Widgets Edit</a>
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <button class="nav-link cl-icon-padding" (click)="updateYoutube()">
+          <i class="fa fa-check"></i>
+        </button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container cl-container-padding">
+  <div *ngIf="errorFlag"
+       class="alert alert-danger">
+    {{errorMsg}}
+  </div>
+
+  <form>
+    <div class="form-group" *ngIf="widget">
+      <label for="youtube-name">Name</label>
+      <input [(ngModel)]="widget.name"
+             type="text"
+             class="form-control"
+             id="youtube-name"
+             placeholder="Name"
+             [ngModelOptions]="{standalone: true}"/>
+    </div>
+
+    <div class="form-group" *ngIf="widget">
+      <label for="youtube-text">Text</label>
+      <input [(ngModel)]="widget.text"
+             type="text"
+             class="form-control"
+             id="youtube-text"
+             placeholder="Text"
+             [ngModelOptions]="{standalone: true}"/>
+    </div>
+
+    <div class="form-group" *ngIf="widget">
+      <label for="youtube-URL">URL</label>
+      <input [(ngModel)]="widget.url"
+             type="text"
+             class="form-control"
+             id="youtube-URL"
+             placeholder="URL"
+             [ngModelOptions]="{standalone: true}"/>
+    </div>
+
+    <!--<span class="help-block" *ngIf="!url.valid && url.touched">-->
+          <!--Please enter URL!-->
+    <!--</span>-->
+
+    <div class="form-group" *ngIf="widget">
+      <label for="youtube-width">Width</label>
+      <input [(ngModel)]="widget.width"
+             type="text"
+             class="form-control"
+             id="youtube-width"
+             placeholder="100%"
+             [ngModelOptions]="{standalone: true}"/>
+    </div>
+
+  </form>
+  <button class="btn btn-danger btn-block" (click)="deleteYoutube()"
+     routerLink="..">Delete</button>
+</div>
+
+<nav class="navbar fixed-bottom navbar-light bg-light">
+  <ul class="navbar-nav ml-auto">
+    <a [routerLink]="['/user', userId]" class="navbar-link navbar-text pull-right cl-icon-padding">
+      <i class="fa fa-user"></i>
+    </a>
+  </ul>
+</nav>
+
+

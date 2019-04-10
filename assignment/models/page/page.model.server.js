@@ -1,106 +1,57 @@
-var mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const PageSchema = require("./page.schema.server");
+const PageModel = mongoose.model('PageModel', PageSchema);
 
-var pageSchema = require('./page.schema.server');
-var websiteModel = require('../website/website.model.server');
-var userModel = require('../user/user.model.server');
-var pageModel = mongoose.model('Page', pageSchema);
+const websiteModel = require("../website/website.model.server");
 
-pageModel.createPage = createPage;
-pageModel.findAllPagesByWebsite = findAllPagesByWebsite;
-pageModel.findPageById = findPageById;
-pageModel.updatePage = updatePage;
-pageModel.deletePage = deletePage;
+PageModel.createPage = createPage;
+PageModel.findAllPagesForWebsite = findAllPagesForWebsite;
+PageModel.findPageById = findPageById;
+PageModel.updatePage = updatePage;
+PageModel.deletePage = deletePage;
 
-pageModel.createPageWidgets = createPageWidgets;
-pageModel.updatePageWidgets = updatePageWidgets;
-pageModel.deletePageWidgets = deletePageWidgets;
+module.exports = PageModel;
 
-
-module.exports = pageModel;
 function createPage(websiteId, page) {
-  return pageModel.create(page)
-    .then((newPage) => {
-      createPageInWeb(websiteId,newPage);
-      return newPage;
+  const promise = PageModel.create(page);
+  promise
+    .then(function(responsePage) {
+      websiteModel.findWebsiteById(websiteId)
+        .then(function(website) {
+          website.pages.push(responsePage);
+          website.save();
+        })
     });
+  return promise;
 }
 
-function findAllPagesByWebsite(websiteId) {
-  return pageModel.find({websiteId:websiteId});
+function findAllPagesForWebsite(websiteId) {
+  return PageModel.find({_websiteId: websiteId})
+    .populate('_websiteId', 'name')
+    .exec();
 }
-function findPageById(pageId){
-  return pageModel.findById(pageId);
+
+function findPageById(pageId) {
+  return PageModel.findById({_id: pageId});
 }
+
 function updatePage(pageId, page) {
-  updatePageInWeb(page);
-  return pageModel.findByIdAndUpdate(pageId, page, {new: true, safe:true})
-    .then((newPage) => {
-      console.log(newPage.widgets);
-    });
+  return PageModel.update({_id: pageId}, page);
 }
 
 function deletePage(pageId) {
-  deletePageInWeb(pageId);
-  return pageModel.findByIdAndRemove(pageId);
-}
-
-function createPageInWeb(websiteId, page) {
-  websiteModel.createWebsitePages(websiteId, page);
-}
-
-function updatePageInWeb(page) {
-  websiteModel.updateWebsitePages(page.websiteId, page);
-}
-
-function deletePageInWeb(pageId) {
-  pageModel.findPageById(pageId)
-    .then((page) => {
-       websiteModel.deleteWebsitePages(page.websiteId, pageId);
-    });
-}
-
-function createPageWidgets(pageId, widget) {
-   pageModel.findByIdAndUpdate(pageId,
-    {$push: {"widgets": widget}},
-    {safe: true, new: true},
-    () => {
-      pageModel.findPageById(pageId)
-        .then((page) => {
-          pageModel.updatePage(pageId, page);
-        });
-    }
-    );
-}
-
-function updatePageWidgets(pageId, widget) {
-  return pageModel.findPageById(pageId)
-    .then((page) => {
-      const index = findIndex(page.widgets, widget);
-      page.widgets.splice(index, 1);
-      page.widgets.splice(index, 0, widget);
-      return page.save().then((page) => {
-        pageModel.updatePage(pageId, page);
-      });
-    });
-}
-function findIndex(array, target) {
-  for (let i = 0;i<array.length;i++) {
-    if (array[i]._id.toString() === target._id.toString()) {
-      return i;
-    }
-  }
-  return -1;
-}
-
- function deletePageWidgets(pageId, widgetId) {
-  pageModel.findByIdAndUpdate(pageId,
-    {$pull: {'widgets': {_id: widgetId}}},
-    {safe: true, new: true},
-    () => {
-      pageModel.findPageById(pageId)
-        .then((page) => {
-          pageModel.updatePage(pageId, page);
-        });
-    }
-    );
+  return findPageById(pageId).then(function(page) {
+    PageModel.remove({_id: pageId}).then(function() {
+      websiteModel.findWebsiteById(page._websiteId).then(function(website) {
+        if (website != null) {
+          for (let i = 0; i < website.pages.length; i++) {
+            if (website.pages[i].equals(pageId)) {
+              website.pages.splice(i, 1);
+              return website.save();
+            }
+          }
+        }
+      })
+    })
+  });
 }

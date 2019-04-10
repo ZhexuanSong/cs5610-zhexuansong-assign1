@@ -1,88 +1,97 @@
-var mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const WidgetSchema = require("./widget.schema.server");
+const WidgetModel = mongoose.model('WidgetModel', WidgetSchema);
 
-var widgetSchema = require('./widget.schema.server');
+const pageModel = require("../page/page.model.server");
 
-var pageModel = require('../page/page.model.server');
-var widgetModel = mongoose.model('Widget', widgetSchema);
+WidgetModel.createWidget = createWidget;
+WidgetModel.findAllWidgetsForPage = findAllWidgetsForPage;
+WidgetModel.findWidgetById = findWidgetById;
+WidgetModel.updateWidget = updateWidget;
+WidgetModel.deleteWidget = deleteWidget;
+WidgetModel.reorderWidget = reorderWidget;
+WidgetModel.updatePosition = updatePosition;
 
-widgetModel.createWidget = createWidget;
-widgetModel.findAllWidgetsForPage = findAllWidgetsForPage;
-widgetModel.findWidgetById = findWidgetById;
-widgetModel.updateWidget = updateWidget;
-widgetModel.deleteWIdget = deleteWidget;
-widgetModel.reorderWidget = reorderWidget;
+module.exports = WidgetModel;
 
-module.exports = widgetModel;
+function updatePosition (pageId, position) {
+  return WidgetModel.find({_pageId: pageId}).then(function(widgets) {
+    widgets.forEach(function(widget) {
+      if (widget.position > position){
+        widget.position--;
+        widget.save();
+      }
+    })
+  })
+}
 
 function createWidget(pageId, widget) {
-  return widgetModel.create(widget)
-    .then((newWidget) => {
-      createWidgetInPage(pageId, newWidget);
-      return newWidget;
-    });
+  const promise = WidgetModel.create(widget);
+  promise
+    .then(function(responseWidget) {
+      pageModel.findPageById(pageId).then(function(page) {
+        responseWidget.position = page.widgets.length;
+        responseWidget.save();
+        page.widgets.push(responseWidget);
+        page.save();
+      })
+  });
+  return promise;
 }
 
 function findAllWidgetsForPage(pageId) {
-  return widgetModel.find({"pageId": pageId});
+  return WidgetModel.find({_pageId: pageId})
+    .populate('_pageId', 'name')
+    .exec();
 }
 
 function findWidgetById(widgetId) {
-  return widgetModel.findById(widgetId);
+  return WidgetModel.findById({_id: widgetId});
 }
 
 function updateWidget(widgetId, widget) {
- updateWidgetInPage(widget);
- return widgetModel.findByIdAndUpdate(widgetId, widget);
+  return WidgetModel.update({_id: widgetId}, {$set:widget});
 }
 
 function deleteWidget(widgetId) {
-  deleteWidgetInPage(widgetId);
-  return widgetModel.findByIdAndRemove(widgetId);
-}
-
-function reorderWidget(pageId, start, end){
-  return pageModel.findPageById(pageId)
-    .then(function (page) {
-      if (page) {
-        swapArray(page.widgets,start,end);
-        return page.save();
-      }
-      else {
-        return null;
-      }
-
-    }, function (err) {
-      return null;
+  return findWidgetById(widgetId).then(function(widget) {
+    WidgetModel.remove({_id: widgetId}).then(function() {
+      updatePosition(widget._pageId, widget.position).then(function() {
+        pageModel.findPageById(widget._pageId).then(function(page) {
+          if (page != null) {
+            for (let i = 0; i < page.widgets.length; i++) {
+              if (page.widgets[i].equals(widgetId)) {
+                page.widgets.splice(i, 1);
+                return page.save();
+              }
+            }
+          }
+        })
+      })
     })
+  })
 }
 
-function swapArray(arr, old_index, new_index) {
-    while (old_index < 0) {
-      old_index += arr.length;
-    }
-    while (new_index < 0) {
-      new_index += arr.length;
-    }
-    if (new_index >= arr.length) {
-      var k = new_index - arr.length + 1;
-      while (k--) {
-        arr.push(undefined);
+function reorderWidget(pageId, start, end) {
+  return WidgetModel.find({_pageId: pageId}).then(function(widgets) {
+    widgets.forEach(function(widget) {
+      if (start < end) {
+        if (widget.position === start) {
+          widget.position = end;
+          widget.save();
+        } else if (widget.position > start && widget.position <= end) {
+          widget.position--;
+          widget.save();
+        }
+      } else {
+        if (widget.position === start){
+          widget.position = end;
+          widget.save();
+        } else if (widget.position < start && widget.position >= end){
+          widget.position++;
+          widget.save();
+        }
       }
-    }
-    arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
-}
-
-function createWidgetInPage(pageId, widget) {
-  pageModel.createPageWidgets(pageId, widget);
-}
-
-function updateWidgetInPage(widget) {
-  pageModel.updatePageWidgets(widget.pageId, widget);
-}
-
-function deleteWidgetInPage(widgetId) {
-  widgetModel.findWidgetById(widgetId)
-    .then((widget) => {
-      pageModel.deletePageWidgets(widget.pageId, widgetId);
     })
+  })
 }
