@@ -1,52 +1,48 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {WebsiteService} from '../../../services/website.service.client';
-import {Website} from '../../../models/website.model.client';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Website} from '../../../models/website.model.client';
+import {WebsiteService} from '../../../services/website.service.client';
+import {UserService} from '../../../services/user.service.client';
 import {SharedService} from '../../../services/shared.service';
 
 @Component({
   selector: 'app-website-new',
   templateUrl: './website-new.component.html',
-  styleUrls: ['../../../app.component.css']
+  styleUrls: ['./website-new.component.css']
 })
 export class WebsiteNewComponent implements OnInit {
-  @ViewChild('f') websiteForm: NgForm;
+
+  userId: string;
   errorFlag: boolean;
-  errorMsg: String;
-  websiteId: String;
-  name: String;
-  description: String;
-  userId: String;
-  websites = [];
-  user: {};
+  errorMsg = 'Please enter the name.';
+  website: Website;
+  websites: Website[] = [];
 
-  constructor(private websiteService: WebsiteService,
-              private sharedService: SharedService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private userService: UserService, private router: Router, private websiteService: WebsiteService,
+              private activatedRouter: ActivatedRoute, private sharedService: SharedService) {
+    this.website = new Website( '', '', undefined);
   }
 
-  ngOnInit() {
-    this.errorMsg = 'Please enter a website name';
-    this.errorFlag = false;
-    this.getUser();
-  }
-
-  create() {
-    const website = new Website('', '', '', '');
-    website.name = this.websiteForm.value.name;
-    if (website.name === undefined || website.name.trim() === '') {
+  createNewWeb() {
+    if (this.website.name === '') {
       this.errorFlag = true;
     } else {
-      website.description = this.websiteForm.value.description;
-      website.developerId = this.userId;
-      return this.websiteService.createWebsite(this.userId, website).subscribe((returnWebsite: Website) => {
-        this.router.navigate(['../'], {relativeTo: this.activatedRoute} );
-      });
+      this.errorFlag = false;
+      this.websiteService.createWebsite(this.userId, new Website(this.website.name, undefined, this.website.description))
+        .subscribe((data) => {
+          this.website = data;
+          this.router.navigate(['/profile/website']);
+        });
     }
   }
 
-  getUser() {
-    this.user = this.sharedService.user;
-    this.userId = this.user['_id'];
+  ngOnInit() {
+    this.activatedRouter.params.subscribe(params => {
+      this.userId = this.sharedService.user._id;
+      this.userService.findUserById(this.userId).subscribe((user) => {
+        this.websites = user.websites;
+      });
+    });
   }
+
 }

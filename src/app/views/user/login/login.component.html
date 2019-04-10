@@ -1,49 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<div class="container-fluid no-frame-padding">
-  <div *ngIf="errorFlag"
-       class="alert alert-danger">
+<div class="container">
+  <div *ngIf="errorFlag" class="alert alert-danger">
     {{errorMsg}}
   </div>
-
-  <strong><h3>Login</h3></strong>
-  <form (ngSubmit)="login()" #f="ngForm">
-    <input
-           placeholder="Username"
-           name="username"
-           type="text"
-           class="form-control"
-           ngModel
-           required
-           #username="ngModel"/>
-    <span class="help-block"
-          *ngIf="!username.valid && username.touched">
-      Please enter username!
-      </span>
-    <input placeholder="Password"
-           name="password"
-           type="password"
-           class="form-control"
-           ngModel
-           required
-           #password="ngModel"/>
-    <span class="help-block"
-          *ngIf="!password.valid && password.touched">
-      Please enter password
-      </span>
-    <button class="btn btn-primary btn-block text-white"
-            type="submit"
-            [disabled]="!f.valid">Login
-    </button>
-    <button routerLink="/register" class="btn btn-success btn-block text-white">Register</button>
-    <a   href = "/facebook/login" class="btn btn-primary btn-block">
-      <span class="fa fa-facebook"></span>
-      Facebook
-    </a>
-
-  </form>
-
+  <h1>
+    {{title}}
+  </h1>
+  <div>
+    <form method="get" (ngSubmit)="login()" #f="ngForm">
+      <input type="text" class="form-control" placeholder="username" name="username"
+             ngModel required #username="ngModel"/>
+      <input type="password" class="form-control" placeholder="password" name="password"
+             ngModel required #password="ngModel"/>
+      <button class="button-div btn btn-primary btn-block" type="submit" [disabled]="!f.valid">Login</button>
+      <a href="/facebook/login" class="btn btn-primary btn-block"><span class="fab fa-facebook-square">Log in With Facebook</span></a>
+      <a routerLink="/register" class="button-div btn btn-success btn-block">Register</a>
+    </form>
+  </div>
 </div>
-</body>
-</html>
+

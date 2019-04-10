@@ -1,20 +1,17 @@
-import {Http} from '@angular/http';
 import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class FlickrService {
+  key = 'b8980fb0b4751b1a0845093050bb993e';
+  secret = 'c0d0c4a23a6d6f75';
+  flickrUrl = `https://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&api_key=${this.key}&text=`;
 
-  key = '90ea0df0685933f65ea96fab852a3023';
-  secret = '59b7fb7ceb0a467b';
-  urlBase = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&api_key=API_KEY&text=TEXT';
+  constructor(private http: HttpClient) {}
 
-  constructor(private _http: Http) {
-  }
-
-  searchPhotos(searchTerm: any) {
-    const url = this.urlBase
-      .replace('API_KEY', this.key)
-      .replace('TEXT', searchTerm);
-    return this._http.get(url);
+  searchPhotos(searchItem: any) {
+    const url = this.flickrUrl + searchItem;
+    console.log(url);
+    return this.http.get(url, {responseType: 'text'});
   }
 }

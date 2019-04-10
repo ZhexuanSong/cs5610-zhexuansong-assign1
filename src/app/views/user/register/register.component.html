@@ -1,54 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<div *ngIf="errorFlag"
-     class="alert alert-danger">
-  {{errorMsg}}
-</div>
-<div class="container-fluid no-frame-padding">
-  <strong><h3>Register</h3></strong>
-  <form (ngSubmit)="register()" #f="ngForm">
-    <input placeholder="Username"
-           name="username"
-           type="text"
-           class="form-control"
-           ngModel
-           required
-           #username="ngModel"/>
-    <span class="help-block"
-          *ngIf="!username.valid && username.touched">
-      Please enter username!
-      </span>
-    <input placeholder="Password"
-           name="password"
-           type="password"
-           class="form-control"
-           ngModel
-           required
-           #password="ngModel"/>
-    <span class="help-block"
-          *ngIf="!password.valid && password.touched">
-      Please enter password
-      </span>
+<div class="container">
 
-    <input placeholder="Verify your password"
-           name="verifiedPassword"
-           type="password"
-           class="form-control"
-           ngModel
-           required
-           #password="ngModel"/>
-    <span class="help-block"
-          *ngIf="!password.valid && password.touched">
-      Please verify password
-      </span>
-    <button class="btn btn-primary btn-block text-white"
-            type="submit"
-            [disabled]="!f.valid">Register
-    </button>
-    <button routerLink="/login" class="btn btn-danger btn-block text-white">Cancel</button>
-  </form>
-</div>
+  <div *ngIf="errorFlag" class="alert alert-danger">
+    {{errorMsg}}
+  </div>
+  <h1>
+    {{title}}
+  </h1>
+  <div>
+      <input [(ngModel)]="user.username" type="text" class="form-control" placeholder="username"/>
+      <input [(ngModel)]="user.password" type="password" class="form-control" placeholder="password"/>
+      <input [(ngModel)]="vpassword" type="password" class="form-control" placeholder="verify password"/>
+      <input [(ngModel)]="user.firstName" type="text" class="form-control" placeholder="last name"/>
+      <input [(ngModel)]="user.lastName" type="text" class="form-control" placeholder="first name"/>
 
-</body>
-</html>
+    <a (click)="register()" class="btn btn-primary btn-block color-white">Register</a>
+    <a routerLink="/login" class="btn btn-success btn-block color-white">Cancel</a>
+  </div>
+
+</div>

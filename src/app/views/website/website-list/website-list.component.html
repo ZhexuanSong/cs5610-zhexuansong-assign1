@@ -1,36 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<div class="container-fluid ct-no-padding">
-  <div class="card fixed-top no-border">
-    <div class="card-header bg-primary text-white">
-      <a routerLink="/user/{{userId}}"><i class="fa fa-chevron-left white-icon" aria-hidden="true"></i></a>
-      <strong class="heading-padding">Websites</strong>
-      <a class="float-right" routerLink="/user/{{userId}}/website/new"><i class="fa fa-plus white-icon"
-                                                                          aria-hidden="true"></i>
+<header>
+<nav class="navbar fixed-top background-blue">
+  <div class="container-fluid">
+    <p class="navbar-text float-left">
+      <a routerLink="/profile" class="navbar-link">
+        <span class="nav-icon fas fa-chevron-left fontawsome_icon top-left"></span>
       </a>
-
-    </div>
-    <div class="card-body list-no-right-p">
-      <ul class="list-group">
-        <div *ngFor="let website of websites">
-          <li class="list-group-item no-border"><a
-            routerLink="/user/{{userId}}/website/{{website._id}}/page">{{website.name}}</a><a
-            class="float-right"
-            routerLink="/user/{{userId}}/website/{{website._id}}">
-            <i class="fa fa-cog" aria-hidden="true"></i>
-          </a></li>
-        </div>
-
-      </ul>
-    </div>
-    <div class="card-footer bg-primary text-white fixed-bottom">
-      <a class="float-right white-icon" routerLink="/user/{{userId}}"><i class="fa fa-user" aria-hidden="true"></i>
+      <a class="navbar-brand text-bold" routerLink="/profile/website">
+        Websites
       </a>
-    </div>
+    </p>
+    <a routerLink="new" class="navbar-link navbar-text float-right">
+      <span class="nav-icon fas fa-plus fontawsome-icon top-right"></span>
+    </a>
   </div>
+</nav>
+</header>
 
-
+<main>
+<div class="container">
+  <ul class="list-group list-borderless">
+    <li class="list-group-item list-borderless" *ngFor="let website of websites">
+      <a routerLink="{{website._id}}/page">{{website.name}}</a>
+      <a routerLink="{{website._id}}"><i class="fas fa-cog fontawsome_icon float-right"></i></a>
+    </li>
+  </ul>
 </div>
-</body>
-</html>
+</main>
+
+<footer>
+<nav class="navbar fixed-bottom background-blue">
+  <div class="container-fluid">
+    <p class="navbar-text float-left"></p>
+    <a class="nav-icon" routerLink="/profile">
+      <span class="fas fa-user fontawsome-icon bottom-right"></span>
+    </a>
+  </div>
+</nav>
+</footer>

@@ -1,42 +1,44 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {WidgetService} from '../../../services/widget.service.client';
-import {DomSanitizer} from '@angular/platform-browser';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Widget} from '../../../models/widget.model.client';
+import {WidgetService} from '../../../services/widget.service.client';
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {Page} from '../../../models/page.model.client';
+import {PageService} from '../../../services/page.service.client';
 
 @Component({
   selector: 'app-widget-list',
   templateUrl: './widget-list.component.html',
-  styleUrls: ['../../../app.component.css']
+  styleUrls: ['./widget-list.component.css']
 })
 export class WidgetListComponent implements OnInit {
-  widgets = [{}];
-  widget = {};
-  pageId: String;
+  websiteId: string;
+  pageId: string;
+  widgets: Widget[] = [];
 
-  constructor(private domSanitizer: DomSanitizer, private widgetService: WidgetService, private activatedRoute: ActivatedRoute) {
-  }
-
-  getUrl(url: String) {
-    return this.domSanitizer.bypassSecurityTrustResourceUrl(url.toString());
+  constructor(private activatedRoute: ActivatedRoute, private widgetService: WidgetService, private router: Router,
+              private domSanitizer: DomSanitizer, private pageService: PageService) {
   }
 
   ngOnInit() {
-    this.activatedRoute.params
-      .subscribe(
-        params => {
-          return this.widgetService.findWidgetsByPageId(params['pid']).subscribe((data: any) => {
-            this.pageId = params['pid'];
-            this.widgets = data;
-          });
-        }
-      );
+    this.activatedRoute.params.subscribe(params => {
+      this.websiteId = params.websiteId;
+      this.pageId = params.pageId;
+      this.pageService.findPageById(this.pageId).subscribe((page) => {
+        this.widgets = page.widgets;
+      });
+    });
   }
 
-  reorderWidgets(indexes) {
-    this.widgetService.reorderWidgets(indexes.startIndex, indexes.endIndex, this.pageId)
-      .subscribe(
-        (data) => console.log(data)
-      );
+
+
+  checkUrl(url: string) {
+    return this.domSanitizer.bypassSecurityTrustResourceUrl(url);
   }
+
+   reorderWidgets(indexes) {
+    this.widgetService.reorderWidgets(indexes.startIndex, indexes.endIndex, this.pageId).subscribe((data) => {
+    });
+   }
+
 }

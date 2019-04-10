@@ -1,30 +1,24 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {WidgetService} from '../../../services/widget.service.client';
-import {Widget} from '../../../models/widget.model.client';
 
 @Component({
   selector: 'app-widget-chooser',
   templateUrl: './widget-chooser.component.html',
-  styleUrls: ['../../../app.component.css']
+  styleUrls: ['./widget-chooser.component.css']
 })
 export class WidgetChooserComponent implements OnInit {
-  widgets = [];
-  widgetId: String;
-  pageId: String;
+  websiteId: string;
+  pageId: string;
 
-  constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute, private router: Router) {
-  }
+
+  constructor(private activatedRoute: ActivatedRoute, private widgetService: WidgetService, private router: Router) { }
 
   ngOnInit() {
-    this.activatedRoute.params
-      .subscribe(
-        params => {
-          return this.widgetService.findWidgetsByPageId(params['pid']).subscribe((returnWidgets: Widget[]) => {
-            this.pageId = params['pid'];
-            this.widgets = returnWidgets;
-          });
-        }
-      );
+    this.activatedRoute.params.subscribe(params => {
+      this.websiteId = params.websiteId;
+      this.pageId = params.pageId;
+    });
   }
+
 }

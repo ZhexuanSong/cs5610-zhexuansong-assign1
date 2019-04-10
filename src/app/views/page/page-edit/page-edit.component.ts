@@ -1,63 +1,62 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import {PageService} from '../../../services/page.service.client';
-import {NgForm} from '@angular/forms';
 import {Page} from '../../../models/page.model.client';
+import {ActivatedRoute, Router} from '@angular/router';
+import {WebsiteService} from '../../../services/website.service.client';
 
 @Component({
   selector: 'app-page-edit',
   templateUrl: './page-edit.component.html',
-  styleUrls: ['../../../app.component.css']
+  styleUrls: ['./page-edit.component.css']
 })
 export class PageEditComponent implements OnInit {
-  @ViewChild('f') pageForm: NgForm;
-  userId: String;
-  websiteId: String;
-  pageId: String;
-  name: String;
-  page: Page;
-  title: String;
+  websiteId: string;
+  pageId: string;
   errorFlag: boolean;
-  errorMsg: String;
+  errorMsg = 'Please enter the name.';
 
-  constructor(private pageService: PageService, private activatedRoute: ActivatedRoute, private router: Router) {
+  curPage: Page;
+  pages: Page[] = [];
+
+  constructor(private webService: WebsiteService, private pageService: PageService,
+              private router: Router, private activatedRoute: ActivatedRoute) {
+    this.curPage = new Page('', '', undefined);
   }
 
   ngOnInit() {
-    this.errorFlag = false;
-    this.errorMsg = 'Please enter a page name';
-    this.activatedRoute.params
-      .subscribe(
-        params => {
-          return this.pageService.findPageById(params['pid']).subscribe((returnPage: Page) => {
-            this.userId = params['uid'];
-            this.websiteId = params['wid'];
-            this.pageId = params['pid'];
-            this.page = returnPage;
-            this.name = this.page.name;
-            this.title = this.page.title;
-
-          });
-
-        }
-      );
+    this.activatedRoute.params.subscribe(params => {
+      this.websiteId = params.websiteId;
+      this.pageId = params.pageId;
+      this.webService.findWebsiteById(this.websiteId).subscribe((website) => {
+        this.pages = website.pages;
+      });
+      this.pageService.findPageById(this.pageId).subscribe((data: Page) => {
+        this.curPage = data;
+      });
+    });
   }
 
-  update() {
-    this.page.name = this.pageForm.value.name;
-    if (this.page.name === undefined || this.page.name.trim() === '') {
+  updateCurPage() {
+    if (this.curPage.name === '') {
       this.errorFlag = true;
     } else {
-      this.page.title = this.pageForm.value.title;
-      return this.pageService.updatePage(this.pageId, this.page).subscribe((returnPage: Page) => {
-        this.router.navigate(['../'], {relativeTo: this.activatedRoute});
-
+      this.errorFlag = false;
+      this.pageService.updatePage(this.pageId, this.curPage).subscribe((data: Page) => {
+        this.curPage = data;
+        this.backToPages();
       });
     }
   }
 
-  delete() {
-    return this.pageService.deletePage(this.pageId).subscribe((returnPage: Page) => {
+  backToPages() {
+    this.router.navigate(['/profile/website/' + this.websiteId + '/page']);
+  }
+
+
+  deletePage() {
+    this.pageService.deletePage(this.pageId).subscribe(() => {
+      this.backToPages();
     });
   }
+
 }

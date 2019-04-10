@@ -1,7 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {WidgetService} from '../../../../services/widget.service.client';
-import {NgForm} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import {Widget} from '../../../../models/widget.model.client';
+import {WidgetService} from '../../../../services/widget.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -10,77 +9,75 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./widget-html.component.css']
 })
 export class WidgetHtmlComponent implements OnInit {
-
-  @ViewChild('f') widgetForm: NgForm;
-  pageId: String;
-  wgid: String;
+  websiteId: string;
+  pageId: string;
+  widgetId: string;
   widget: Widget;
-  text: String;
-  name: String;
+  isNewWidget: boolean;
   errorFlag: boolean;
-  errorMsg: String;
-
+  errorMsg = 'Please enter the name and html text.';
 
   constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute, private router: Router) {
+    this.widget = new Widget( 'HTML', '', undefined, undefined, undefined, undefined,
+      undefined, undefined, undefined, undefined);
   }
 
   ngOnInit() {
-    this.errorFlag = false;
-    this.errorMsg = 'Please enter a widget name.';
-    this.activatedRoute.params
-      .subscribe(
-        params => {
-          this.wgid = params['wgid'];
-          this.pageId = params['pid'];
-          if (this.wgid !== undefined) {
-            return this.widgetService.findWidgetById(this.wgid).subscribe((returnWidget: Widget) => {
-              this.widget = returnWidget;
-              this.text = this.widget.text;
-              this.name = this.widget.name;
-            });
-          } else {
-            this.widget = new Widget('', '', 'Html', '', '', '', '', '', 0, '', false);
-            this.text = this.widget.text;
-            this.name = this.widget.name;
-          }
-        }
-      );
-
+    this.activatedRoute.params.subscribe(params => {
+      this.websiteId = params.websiteId;
+      this.pageId = params.pageId;
+      this.widgetId = params.widgetId;
+      if (this.widgetId) {
+        this.widgetService.findWidgetById(this.widgetId).subscribe((data: Widget) => {
+          this.widget = data;
+          this.isNewWidget = false;
+        });
+      } else {
+        this.isNewWidget = true;
+      }
+    });
   }
 
-
-  updateOrCreate() {
-    this.widget.text = this.widgetForm.value.text;
-    this.widget.name = this.widgetForm.value.name;
-    this.widget.widgetType = 'Html';
-    if (this.wgid !== undefined) {
-      if (this.widget.name === undefined || this.widget.name.trim() === '') {
-        this.errorFlag = true;
-      } else {
-        return this.widgetService.updateWidget(this.wgid, this.widget).subscribe((returnWidget: Widget) => {
-          this.router.navigate(['../'], {relativeTo: this.activatedRoute});
-        });
-      }
+  widgetOperation() {
+    if (this.isNewWidget) {
+      this.createNewWidget();
     } else {
-      if (this.widget.name === undefined || this.widget.name.trim() === '') {
-        this.errorFlag = true;
-      } else {
-        return this.widgetService.createWidget(this.pageId, this.widget).subscribe((returnWidget: Widget) => {
-          this.widget = returnWidget;
-          this.router.navigate(['../../'], {relativeTo: this.activatedRoute});
-        });
-      }
+      this.updateCurWidget();
     }
   }
 
-  delete() {
-    if (this.wgid !== undefined) {
-      return this.widgetService.deleteWidget(this.wgid).subscribe((returnWidget: Widget) => {
+  private createNewWidget() {
+    if (!this.widget.name || !this.widget.text || this.widget.name === '' || this.widget.text === '') {
+      this.errorFlag = true;
+    } else {
+      this.errorFlag = false;
+      this.widgetService.createWidget(this.pageId, this.widget).subscribe((data: Widget) => {
+        this.widget = data;
+        this.backToWidgets();
       });
-    } else {
-      this.router.navigate(['../../'], {relativeTo: this.activatedRoute});
     }
   }
 
+  private updateCurWidget() {
+    if (!this.widget.name || !this.widget.text || this.widget.name === '' || this.widget.text === '') {
+      this.errorFlag = true;
+    } else {
+      this.errorFlag = false;
+      this.widgetService.updateWidget(this.widgetId, this.widget).subscribe((data: Widget) => {
+        this.widget = data;
+        this.backToWidgets();
+      });
+    }
+  }
+
+  deleteWidget() {
+    this.widgetService.deleteWidget(this.widgetId).subscribe(() => {
+      this.backToWidgets();
+    });
+  }
+
+  backToWidgets() {
+    this.router.navigate(['/profile/website/' + this.websiteId + '/page/' + this.pageId + '/widget']);
+  }
 
 }

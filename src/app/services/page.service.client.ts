@@ -1,47 +1,39 @@
-import {Injectable} from '@angular/core';
+import 'rxjs/Rx';
 import {Page} from '../models/page.model.client';
-import {Http, Response} from '@angular/http';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class PageService {
-  constructor(private http: Http) {
-  }
+
+  constructor(private http: HttpClient) {}
 
   baseUrl = environment.baseUrl;
 
-  createPage(websiteId: String, page: Page) {
+  createPage( websiteId: string, page: Page): Observable<any> {
     const url = this.baseUrl + '/api/website/' + websiteId + '/page';
-    return this.http.post(url, page).map((response: Response) => {
-      return response.json();
-    });
+    return this.http.post<any>(url, page);
   }
 
-  findPageByWebsiteId(websiteId: String) {
+  findPagesByWebsiteId(websiteId): Observable<any[]> {
     const url = this.baseUrl + '/api/website/' + websiteId + '/page';
-    return this.http.get(url).map((response: Response) => {
-      return response.json();
-    });
+    return this.http.get<any[]>(url);
   }
 
-  findPageById(pageId: String) {
+  findPageById(pageId): Observable<any> {
     const url = this.baseUrl + '/api/page/' + pageId;
-    return this.http.get(url).map((response: Response) => {
-      return response.json();
-    });
+    return this.http.get<any>(url);
   }
 
-  updatePage(pageId: String, page: Page) {
+  updatePage(pageId, page): Observable<any> {
     const url = this.baseUrl + '/api/page/' + pageId;
-    return this.http.put(url, page).map((response: Response) => {
-      return response.json();
-    });
+    return this.http.put<any>(url, page);
   }
 
-  deletePage(pageId: String) {
+  deletePage(pageId): Observable<any> {
     const url = this.baseUrl + '/api/page/' + pageId;
-    return this.http.delete(url).map((response: Response) => {
-      return response.json();
-    });
+    return this.http.delete<any>(url);
   }
 }

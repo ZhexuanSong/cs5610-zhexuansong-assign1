@@ -1,69 +1,58 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {Website} from '../../../models/website.model.client';
+import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from '../../../services/user.services.client';
+import {Website} from '../../../models/website.model.client';
 import {WebsiteService} from '../../../services/website.service.client';
+import {User} from '../../../models/user.model.client';
+import {UserService} from '../../../services/user.service.client';
+import {SharedService} from '../../../services/shared.service';
 
 @Component({
   selector: 'app-website-edit',
   templateUrl: './website-edit.component.html',
-  styleUrls: ['../../../app.component.css']
+  styleUrls: ['./website-edit.component.css']
 })
 export class WebsiteEditComponent implements OnInit {
-  @ViewChild('f') websiteForm: NgForm;
+  userId: string;
+  websiteId: string;
   errorFlag: boolean;
-  errorMsg: String;
-  websiteId: String;
-  website: Website;
-  name: String;
-  description: String;
-  userId: String;
-  websites = [];
+  errorMsg = 'Please enter the name.';
+  curWebsite: Website;
+  websites: Website[] = [];
 
-  constructor(private websiteService: WebsiteService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private userService: UserService, private activatedRouter: ActivatedRoute,
+              private websiteService: WebsiteService, private router: Router, private sharedService: SharedService) {
+    this.curWebsite = new Website('', '', undefined);
   }
 
   ngOnInit() {
-    this.errorFlag = false;
-    this.errorMsg = 'Please enter a website name';
-    this.activatedRoute.params
-      .subscribe(
-        params => {
-          return this.websiteService.findWebsiteByUser(params['uid']).subscribe((returnWebsites: Website[]) => {
-            this.userId = params['uid'];
-            this.websites = returnWebsites;
-          });
-        }
-      );
-    this.activatedRoute.params
-      .subscribe(
-        params => {
-          return this.websiteService.findWebsiteById(params['wid']).subscribe((returnWebsite: Website) => {
-            this.website = returnWebsite;
-            this.websiteId = this.website._id;
-            this.userId = this.website.developerId;
-            this.name = this.website.name;
-            this.description = this.website.description;
-          });
-        }
-      );
+    this.activatedRouter.params.subscribe(params => {
+      this.userId = this.sharedService.user._id;
+      this.websiteId = params.websiteId;
+      this.userService.findUserById(this.userId).subscribe((user) => {
+        this.websites = user.websites;
+      });
+      this.websiteService.findWebsiteById(this.websiteId).subscribe((data: Website) => {
+        this.curWebsite = data;
+      });
+    });
   }
 
-  update() {
-    this.website.name = this.websiteForm.value.name;
-    if (this.website.name.trim() === '' || this.website.name === undefined) {
+  updateCurWebsite() {
+    if (this.curWebsite.name === '') {
       this.errorFlag = true;
     } else {
-      this.website.description = this.websiteForm.value.description;
-      return this.websiteService.updateWebsite(this.websiteId, this.website).subscribe((website: Website) => {
-        this.router.navigate(['../'], {relativeTo: this.activatedRoute} );
-      });
+      this.errorFlag = false;
+      this.websiteService.updateWebsite(this.websiteId, this.curWebsite)
+                          .subscribe((data: Website) => {
+                            this.router.navigate(['/profile/website']);
+                          });
     }
   }
 
-  delete() {
-    return this.websiteService.deleteWebsite(this.websiteId).subscribe((website: Website) => {
+  deleteWeb() {
+    this.websiteService.deleteWebsite(this.websiteId).subscribe(() => {
+      alert('delete successfully');
+      this.router.navigate(['/profile/website']);
     });
   }
 }
