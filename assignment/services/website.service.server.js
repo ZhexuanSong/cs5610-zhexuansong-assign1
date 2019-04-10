@@ -1,85 +1,90 @@
 module.exports = function (app) {
-    var websites = [
-        {websiteId: '321', name: 'Facebook', developerId: '123', description: 'blabla'},
-        {websiteId: '432', name: 'Twitter', developerId: '234',description: 'hahaha'},
-        {websiteId: '234', name: 'Amazon', developerId: '345', description: 'hello world'},
-        {websiteId: '333', name: 'MyWebSite', developerId: '123', description: 'have a good one'}
+    app.post("/api/user/:userId/website", createWebsite);
+    app.get("/api/user/:userId/website", findAllWebsitesForUser);
+    app.get("/api/website/:websiteId", findWebsiteById);
+    app.put("/api/website/:websiteId", updateWebsite);
+    app.delete("/api/website/:websiteId", deleteWebsite);
+
+    let websites = [
+        { _id: "123", name: "Facebook", userId: "456", description: "Lorem" },
+        { _id: "234", name: "Tweeter", userId: "456", description: "Lorem" },
+        { _id: "456", name: "Gizmodo", userId: "456", description: "Lorem" },
+        { _id: "890", name: "Go", userId: "123", description: "Lorem" },
+        { _id: "567", name: "Tic Tac Toe", userId: "123", description: "Lorem" },
+        { _id: "678", name: "Checkers", userId: "123", description: "Lorem" },
+        { _id: "789", name: "Chess", userId: "234", description: "Lorem" }
     ];
-    var websiteModel = require('../model/website/website.model.server');
-    var userModel = require('../model/user/user.model.server');
-    app.post('/api/user/:uid/website', createWebsite);
-    app.get('/api/user/:uid/website', findAllWebsitesForUser);
-    app.get('/api/website/:websiteId', findWebsiteById);
-    app.put('/api/website/:websiteId', updateWebsite);
-    app.delete('/api/website/:websiteId', deleteWebsite);
+
+    let websiteModel = require('../model/website/website.model.server');
 
     function createWebsite(req, res) {
-        var developerId = req.params['uid'];
-        var website = new Object();
-        website.name = req.body.name;
-        website.description = req.body.description;
-        website.developerId = developerId;
-        websiteModel
-            .createWebsite(website)
+        let website = req.body;
+        console.log(website);
+
+        websiteModel.createWebsite(website._user,website)
             .then(
-                function(website) {
-                    res.status(200).send(website);
-                }, function(error){
-                    console.log('create website error: ' + error);
-                    res.status(200).send({message: 'Create Website Failed!'});
-                });
+                function (website) {
+                    console.log(website);
+                    res.json(website);
+                },
+                function (error) {
+                    res.status(400).send(error);
+                }
+            )
     }
 
     function findAllWebsitesForUser(req, res) {
-        let userId = req.params['uid'];
-        userModel
-            .findUserById(userId)
-            .then(
-                function(user) {
-                    res.status(200).send(user.websites);
-                }, function(error){
-                    console.log('find websites by user error: ' + error);
-                    res.status(200).send({message: 'Website not found!'});
-                });
+        let userId = req.params.userId;
+        websiteModel.findAllWebsiteForUser(userId).then(
+            function (websites) {
+                console.log(websites);
+                res.json(websites);
+            },
+            function (error) {
+                res.status(400).send(error);
+            }
+        );
     }
 
     function findWebsiteById(req, res) {
-        var websiteId = req.params['websiteId'];
-        websiteModel
-            .findWebsiteById(websiteId)
+        let websiteId = req.params.websiteId;
+        websiteModel.findWebsiteById(websiteId)
             .then(
-                function(website) {
-                    res.status(200).send(website);
-                }, function(error){
-                    console.log('find website by id error: ' + error);
-                    res.status(200).send({message: 'Website not found!'});
-                });
+                function(website){
+                    res.json(website);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            )
     }
 
     function updateWebsite(req, res) {
-        var websiteId = req.params['websiteId'];
-        var website = req.body;
-        websiteModel
-            .updateWebsite(websiteId, website)
+        let websiteId = req.params.websiteId;
+        let website = req.body;
+
+        websiteModel.updateWebsite(websiteId,website)
             .then(
-                function(website) {
-                    res.status(200).send(website);
-                }, function(error){
-                    console.log('update website error: ' + error);
-                    res.status(200).send({message: 'Website not found!'});
-                });
+                function (website) {
+                    res.json(website);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function deleteWebsite(req, res) {
-        var websiteId = req.params['websiteId'];
-        websiteModel
-            .deleteWebsite(websiteId)
+        let websiteId = req.params.websiteId;
+        websiteModel.deleteWebsite(websiteId)
             .then(
-                function(website) {
-                    res.status(200).send(website);
-                }, function(error){
-                    console.log('delete website error: ' + error);
-                    res.status(200).send({message: 'Website not found!'});
-                });
+                function (data) {
+                    res.json(data);
+                },
+                function (err) {
+                    res.status(400).send(err);
+
+                }
+            );
     }
 }

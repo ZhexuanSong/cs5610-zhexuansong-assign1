@@ -1,67 +1,74 @@
-<header>
-  <nav class="navbar fixed-top">
-    <div class="container-fluid">
-      <p class="navbar-text float-left">
-        <a routerLink="/profile/website/{{website.websiteId}}/page/{{page.pageId}}/widget" class="navbar-link text-white">
-          <span class="fas fa-chevron-left fontawsome_icon top-left"></span>
-        </a>
-        <a class="text-white text-bold" routerLink="/profile/website/{{website.websiteId}}/page/{{page.pageId}}/widget">
-          Widget Edit
-        </a>
-      </p>
-      <a (click)="updateWidget()" class="navbar-link navbar-text float-right text-white check-icon">
-        <span class="fas fa-check fontawsome_icon top-right">
+<form (ngSubmit)="updateWidget()" #f="ngForm">
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light justify-content-start">
+  <a class="nav-item nav-link" routerLink="/website/{{websiteId}}/page/{{pageId}}/widget">
+      <i class="fas fa-chevron-left black-icons"></i></a>
+  <a class="navbar-brand  white-icons">Widget Edit</a>
+  <a class="nav-item nav-link ml-auto" (click)="updateWidget()"
+     routerLink="/website/{{websiteId}}/page/{{pageId}}/widget">
+    <i class="fas fa-check black-icons"></i></a>
+</nav>
+
+<div class="container cl-container-padding move-up" *ngIf="widget">
+
+        <div class="form-group" >
+            <label for="image-name">Name</label>
+            <input type="text" class="form-control" id="image-name" placeholder="Name" name="widgetname"
+                   ngModel required #widgetname="ngModel" [(ngModel)]="widget.name">
+        </div>
+        <span class="help-block" *ngIf="!widgetname.valid">
+          Please enter widget name!
         </span>
-      </a>
-    </div>
-  </nav>
-</header>
-<main>
-    <div *ngIf="errorFlag" class="alert alert-danger">
-        {{errorMsg}}
-    </div>
-  <div class="container">
-      <div class="form-group">
-        <label for="image-text">Text</label>
-        <input type="text" class="form-control" id="image-text" [(ngModel)]="newWidget.text" placeholder="{{newWidget.text}}">
-      </div>
-      <div class="form-group">
-        <label for="image-URL">URL</label>
-        <input type="text" class="form-control" id="image-URL" [(ngModel)]="newWidget.url" placeholder="{{newWidget.url}}">
-      </div>
-      <div class="form-group">
-        <label for="image-width">Width</label>
-        <input type="text" class="form-control" id="image-width" [(ngModel)]="newWidget.width" placeholder="{{newWidget.width}}">
-      </div>
-    <!--<form ngNoForm action="{{baseUrl}}/api/uploads" method="post" enctype="multipart/form-data">-->
-    <!--&lt;!&ndash;<form ngNoForm (ngSubmit)="uploads()" enctype="multipart/form-data">&ndash;&gt;-->
-      <!--<input  name="myFile"   type="file" class="form-control"/>-->
-      <!--<input  name="widgetId" value="{{currWidget.widgetId}}"   style="display: none"/>-->
-      <!--<input  name="websiteId" value="{{website.websiteId}}"   style="display: none"/>-->
-      <!--<input  name="pageId" value="{{page.pageId}}"   style="display: none"/>-->
-      <!--<input  name="userId" value="{{user.uid}}"   style="display: none"/>-->
-      <!--<button type="submit" class="btn btn-block btn-primary">-->
-        <!--Upload Image-->
-      <!--</button>-->
-      <!--<br/>-->
-    <!--</form>-->
-    <!--<form (ngSubmit)="uploads()" #f="ngForm" *ngIf="judge()" enctype="multipart/form-data">-->
-      <div class="form-group">
-        <input style="display: none" type="file" class="form-control" (change)="onFileChanged($event)" #fileInput/>
-      </div>
-      <div class="form-group">
-        <button (click)="fileInput.click()" class="btn btn-block btn-primary">Select Image</button>
-      </div>
-      <div class="form-group">
-        <button (click)="onUpload()" class="btn btn-block btn-primary">Upload Image</button>
-      </div>
-    <!--</form>-->
-      <a *ngIf="currWidget.widgetId" class="btn btn-primary btn-block" routerLink="/profile/website/{{website.websiteId}}/page/{{page.pageId}}/widget/{{currWidget.widgetId}}/flickr">Choose From Flickr</a>
-    <a class="btn btn-danger  btn-block" *ngIf="currWidget.url!==''" (click)="deleteWidget()">Delete</a>
-    <a class="btn btn-danger  btn-block"
-       routerLink="/profile/website/{{website.websiteId}}/page/{{page.pageId}}/widget">Cancel</a>
-  </div>
-</main>
-<app-page-footer [uid]="user.uid"></app-page-footer>
 
+        <div class="form-group" *ngIf="widget">
+            <label for="image-text">Text</label>
+            <input [(ngModel)]="widget.text"
+                   name="text"
+                   type="text"
+                   class="form-control"
+                   id="image-text"
+                   placeholder="Text"/>
+        </div>
 
+        <div class="form-group" *ngIf="widget">
+            <label for="image-URL">URL</label>
+            <input [(ngModel)]="widget.url"
+                    type="text"
+                   name="url"
+                   class="form-control"
+                   id="image-URL"
+                   placeholder="url"/>
+        </div>
+
+        <div class="form-group" *ngIf="widget">
+            <label for="image-width">Width</label>
+            <input [(ngModel)]="widget.width"
+                   name="width"
+                   type="text"
+                   class="form-control"
+                   id="image-width"
+                   placeholder="100%"/>
+        </div>
+
+        <form ngNoForm action="{{baseUrl}}/api/upload" method="post" enctype="multipart/form-data">
+            <input  name="myFile"   type="file" class="form-control"/>
+            <input  name="widgetId" value="{{widgetId}}"   style="display: none"/>
+            <input  name="websiteId" value="{{websiteId}}"   style="display: none"/>
+            <input  name="pageId" value="{{pageId}}"   style="display: none"/>
+            <input  name="userId" value="{{userId}}"   style="display: none"/>
+            <input  name="width" value="{{widget?.width}}"   style="display: none"/>
+            <input  name="name" value="{{widget?.name}}"   style="display: none"/>
+            <input  name="text" value="{{widget?.text}}"   style="display: none"/>
+            <button type="submit" class="btn btn-block btn-primary">Upload Image</button>
+            <br/>
+        </form>
+    <a class="btn btn-primary btn-block "
+       [routerLink]="['/website/'+websiteId+'/page/'+pageId+'/widget/'+widgetId+'/flickr']" >Choose From Flickr</a>
+    <a class="btn btn-danger  btn-block" routerLink="/website/{{websiteId}}/page/{{pageId}}/widget"
+        (click)="deleteWidget()">Delete</a>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-primary bg-light justify-content-start fixed-bottom">
+  <a class="nav-item nav-link ml-auto navblack" routerLink="/profile"><i class="  fas fa-user"></i></a>
+</nav>
+
+</form>

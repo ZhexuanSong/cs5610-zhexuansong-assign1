@@ -1,15 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {User} from '../../../../models/user.model.client';
-import {Website} from '../../../../models/website.model.client';
-import {Page} from '../../../../models/page.model.client';
-import {Widget} from '../../../../models/widget.model.client';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import {WebsiteService} from '../../../../services/website.service.client';
-import {UserService} from '../../../../services/user.service.client';
-import {PageService} from '../../../../services/page.service.client';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {WidgetService} from '../../../../services/widget.service.client';
-import {ActivatedRoute, Router} from '@angular/router';
-import {SharedService} from '../../../../services/shared.service.client';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-widget-header',
@@ -17,103 +9,59 @@ import {SharedService} from '../../../../services/shared.service.client';
   styleUrls: ['./widget-header.component.css']
 })
 export class WidgetHeaderComponent implements OnInit {
+    @ViewChild('f') myWidgetForm: NgForm;
+    flag = false; // setting error flag as false by default
+    error: string;
+    alert: string;
+    websiteId: string;
+    pageId: string;
+    widgetId: string;
+    widget: any;
+    widgets: any;
 
-  user: User = new User('', '', '', '', '', '');;
-  website: Website = new Website('', '', '', '');
-  page: Page = new Page('', '', '', '');
-  widgets: Widget[] = [];
-  currWidget: Widget = new Widget('', '', '',
-      '', '', '', '', '', true, 1, '');
-  newWidget: Widget = new Widget('', '',
-      '', '', '', '', '', '',  true, 1, '');
-  errorFlag: boolean;
-  errorMsg = '';
+    constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute) { }
 
-  constructor(private webService: WebsiteService, private userService: UserService, private sanitizer: DomSanitizer,
-              private pageService: PageService, private widgetService: WidgetService, private route: ActivatedRoute,
-              private router: Router, private  sharedService: SharedService) {}
+    ngOnInit() {
 
-  ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.userService.findUserById(this.sharedService.user._id).subscribe(
-          (user: any) => {
-            this.user = new User(user._id, user.username, user.password, user.firstName, user.lastName, user.email);
-          }
-      );
-      this.webService.findWebsiteById(params['websiteId']).subscribe(
-          (website: any) => {
-            this.website = new Website(website._id, website.name, website.developerId, website.description);
-          }
-      );
-      this.pageService.findPageById(params['pageId']).subscribe(
-          (page: any) => {
-            this.page = new Page(page._id, page.name, page.websiteId, page.description);
-            this.newWidget = new Widget('', 'HEADING', this.page.pageId, '', '', '', '', '',
-                true, 1, '');
-          }
-      );
-      this.widgetService.findWidgetsByPageId(params['pageId']).subscribe(
-          (widgets: any[]) => {
-              for(var i = 0; i < widgets.length; i++) {
-                  const widget = widgets[i];
-                  const newWid = new Widget(widget._id, widget.type,
-                      widget.pageId, widget.size, widget.text, widget.width,
-                      widget.url, widget.name, widget.formatted, widget.rows, widget.placeholder);
-                  this.widgets.push(newWid);
-              }
-          }
-      );
-      this.widgetService.findWidgetById(params['widgetId']).subscribe(
-          (widget: any) => {
-              if (widget.message !== 'Widget not found!') {
-                  this.currWidget = new Widget(widget._id, widget.type, widget.pageId,
-                      widget.size, widget.text,
-                      widget.width, widget.url, widget.name,  widget.formatted, widget.rows, widget.placeholder);
-                  this.newWidget.text = this.currWidget.text;
-                  this.newWidget.size = this.currWidget.size;
-              }
-          }
-      );
-    });
-  }
+        // initialize error and alert text
+        this.error = 'Enter the name of the widget';
+        this.alert = '* Enter the widget name';
 
-  updateWidget() {
-    if (this.currWidget.text !== '') {
-      this.currWidget.text = this.newWidget.text;
-      this.currWidget.size = this.newWidget.size;
-      if (this.currWidget.text !== '') {
-        this.widgetService.updateWidget(this.currWidget.widgetId, this.currWidget).subscribe(
-            (data: any) => {
-              this.router.navigate(['/profile/website/' + this.website.websiteId
-              + '/page/' + this.page.pageId + '/widget']);
-            }
-        );
-      } else {
-          this.errorFlag = true;
-          this.errorMsg = 'Text cannot be empty!';
-      }
-    } else {
-      if (this.newWidget.text !== '') {
-        this.widgetService.createWidget(this.page.pageId, this.newWidget).subscribe(
-            (data: any) => {
-              this.router.navigate(['/profile/website/'
-              + this.website.websiteId + '/page/' + this.page.pageId + '/widget']);
-            }
-        );
-      } else {
-          this.errorFlag = true;
-          this.errorMsg = 'Text cannot be empty!';
-      }
+        this.activatedRoute.params
+            .subscribe(
+                (params: any) => {
+                    this.websiteId = params['wid'];
+                    this.pageId = params['pid'];
+                    this.widgetId = params['wgid'];
+                    this.widgetService.findWidgetById(this.widgetId).subscribe(
+                        (widget: any) => {
+                            this.widget = widget;
+                            console.log(this.widget);
+                        }
+                    );
+                }
+
+            );
     }
-  }
 
-  deleteWidget() {
-    this.widgetService.deleteWidget(this.currWidget.widgetId).subscribe(
-        (data: any) => {
-            this.router.navigate(['/profile/website/' + this.website.websiteId
-            + '/page/' + this.page.pageId + '/widget']);
+    updateWidget() {
+
+        this.widget.name = this.myWidgetForm.value.widgetname;
+        // if name field is undefined then set error 'flag' to true making 'error' and 'alert' message visible
+        if (this.widget['name'] === undefined) {
+            this.flag = true;
+        } else {
+            this.widgetService.updateWidget(this.widget._id, this.widget).subscribe(
+                (widget: any) => {
+                    console.log('update widget header: ');
+                });
         }
-    );
-  }
+    }
+
+    deleteWidget() {
+        this.widgetService.deleteWidget(this.widgetId).subscribe((data: any) => {
+            console.log('widget deleted' + data._id);
+        });
+    }
 
 }

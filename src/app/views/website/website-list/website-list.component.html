@@ -1,32 +1,22 @@
-<header>
-  <nav class="navbar fixed-top">
-    <div class="container-fluid">
-      <p class="navbar-text float-left">
-        <a routerLink="/profile" class="navbar-link text-white">
-          <span class="fas fa-chevron-left fontawsome_icon top-left"></span>
-        </a>
-        <a class="text-white text-bold" routerLink="/profile/website">
-          Websites
-        </a>
-      </p>
-      <a routerLink="/profile/website/new" class="navbar-link navbar-text float-right text-white">
-        <span class="fas fa-plus fontawsome_icon top-right">
-        </span>
-      </a>
-    </div>
-  </nav>
-</header>
-<main>
-  <div class="container">
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let website of websites">
-        <a routerLink="/profile/website/{{website.websiteId}}/page">{{website.name}}</a>
-        <a routerLink="/profile/website/{{website.websiteId}}/edit">
-          <span class="fas fa-cog fontawsome_icon main-icon float-right">
-          </span>
-        </a>
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary justify-content-start">
+  <a class="nav-item nav-link" routerLink="/profile"><i class="fas fa-chevron-left white-icons"></i></a>
+  <a class="navbar-brand  white-icons" [routerLink]="">Websites</a>
+  <a class="nav-item nav-link ml-auto" routerLink="./new"><i class="fas fa-plus white-icons"></i></a>
+</nav>
+
+<div class="container move-up" *ngIf="websites">
+    <ul class="list-group border-0">
+      <li class="list-group-item border-0 " *ngFor="let website of websites">
+        <a routerLink="./{{website._id}}"><span><i class="fas fa-cog float-right setting"></i></span></a>
+        <a routerLink="./{{website._id}}/page">{{website.name}}</a>
       </li>
     </ul>
+</div>
+
+<nav class="navbar fixed-bottom bg-primary navbar-dark justify-content-end">
+  <div class="container-fuild">
+    <a routerLink="/profile" class="navbar-link navbar-text float-right">
+      <i class="fas fa-user white-icons"></i>
+    </a>
   </div>
-</main>
-<app-website-footer [uid]="user.uid"></app-website-footer>
+</nav>

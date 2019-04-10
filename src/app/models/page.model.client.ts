@@ -1,13 +1,11 @@
 export class Page {
-    pageId: string;
-    name: string;
-    websiteId: string;
-    description: string;
+    name: String;
+    websiteId: String;
+    title: String;
 
-    constructor(pageId, name, websiteId, description) {
-        this.pageId = pageId;
+    constructor(name, websiteId, title) {
         this.name = name;
         this.websiteId = websiteId;
-        this.description = description;
+        this.title = title;
     }
 }

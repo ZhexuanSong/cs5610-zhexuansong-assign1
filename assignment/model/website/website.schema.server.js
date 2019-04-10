@@ -1,14 +1,13 @@
-var mongoose = require('mongoose');
-var pageSchema = require('../page/page.schema.server');
+let mongoose = require('mongoose');
+let pageSchema = require('../page/page.schema.server');
 
-var websiteSchema = new mongoose.Schema({
-        developerId: {type: mongoose.Schema.ObjectId, ref: "User"},
+let websiteSchema = mongoose.Schema({
+        _user: {type: mongoose.Schema.ObjectId, ref: "User"},
         name: String,
         description: String,
         pages: [pageSchema],
-        dateCreated: {type:Date, default: Date.now()}
-    },
-    {collection:'Websites'}
+        dateCreate:{type: Date, default: Date.now()}
+    },{collection: "Websites"}
 );
 
 module.exports = websiteSchema;
