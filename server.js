@@ -39,7 +39,7 @@ app.use(function(req, res, next) {
 
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-const db = mongoose.connect('mongodb://heroku_9vhc3k03:a50c03ees3p21dbka92qjpc7ug@ds031541.mlab.com:31541/heroku_9vhc3k03', {useNewUrlParser: true});
+const db = mongoose.connect('mongodb://heroku_1zscvlfl:d2m0js8afkqkrd3r5iqchhcqdi@ds263837.mlab.com:63837/heroku_1zscvlfl', {useNewUrlParser: true});
 //const db = mongoose.connect('mongodb://localhost:27017/webdev', {useNewUrlParser: true});
 
 
