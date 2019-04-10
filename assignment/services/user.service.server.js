@@ -31,8 +31,8 @@ module.exports = function (app) {
     //    callbackURL: process.env.FACEBOOK_CALLBACK_URL? process.env.FACEBOOK_CALLBACK_URL: '/auth/facebook/callback'
     //};
     const facebookConfig = {
-       clientID: 610435949421259,
-       clientSecret: '4df0f4b575232a68cb9f04a23698c528',
+       clientID: 588237745011344,
+       clientSecret: '91720f11e8dc8705c0fa3b150529a6f0',
        callbackURL: '/auth/facebook/callback'
     };
 
