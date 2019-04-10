@@ -1,70 +1,69 @@
-<form (ngSubmit)="updateWebsite()" #f="ngForm">
-<div class="container-fluid m-0 p-0">
-  <div class="row">
-    <div class="col-4 p-0 d-none d-sm-block">
-      <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary justify-content-start">
-        <a class="nav-item nav-link navblack" routerLink="/website">
-          <i class="fas fa-chevron-left white-icons move-left"></i></a>
-        <a class="navbar-brand" [routerLink]="">Websites</a>
-        <a class="nav-item nav-link ml-auto" routerLink="/website/new">
-          <i class=" navblack fas fa-plus white-icons"></i></a>
-      </nav>
+<header>
+  <nav class="navbar fixed-top">
+    <div class="row colrow">
+      <div class="col-sm-4 container-fluid d-none d-sm-block">
+        <p class="navbar-text float-left">
+          <a routerLink="/profile/website" class="navbar-link text-white">
+            <span class="fas fa-chevron-left fontawsome_icon top-left">
+            </span>
+          </a>
+          <a class="text-white text-bold" routerLink="/profile/website">
+            Websites
+          </a>
+        </p>
+        <a routerLink="/profile/website/new" class="navbar-link navbar-text float-right text-white">
+          <span class="fas fa-plus fontawsome_icon top-right">
+          </span>
+        </a>
+      </div>
+      <div class="col-sm-8 container-fluid">
+        <p class="navbar-text float-left">
+          <a routerLink="/profile/website" class="navbar-link text-white d-inline d-sm-none d-md-none d-lg-none">
+            <span class="fas fa-chevron-left fontawsome_icon top-left">
+            </span>
+          </a>
+          <a class="text-white text-bold" routerLink="/profile/website/{{currWebsite.websiteId}}/edit">
+            Edit Website
+          </a>
+        </p>
+        <a (click)="updateWebsite()" class="navbar-link navbar-text float-right text-white check-icon">
+          <span class="fas fa-check fontawsome_icon top-right">
+          </span>
+        </a>
+      </div>
     </div>
-    <div class="col-12 col-sm-8 p-0">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-start">
-        <a class="nav-item nav-link navblack d-sm-none" routerLink="/website">
-          <i class="fas fa-chevron-left white-icons move-left"></i></a>
-        <a class="navbar-brand pl-4 " [routerLink]="">Edit Website</a>
-        <a class="nav-item nav-link ml-auto" (click)="updateWebsite()"  routerLink="/website">
-          <i class=" navblack fas fa-check white-icons move-right"></i></a>
-      </nav>
-    </div>
+  </nav>
+</header>
+<main>
+  <div *ngIf="errorFlag" class="alert alert-danger">
+    {{errorMsg}}
   </div>
-</div>
-
-
-<div class="container-fluid">
-  <div class="row"><div class="container col-4 d-none d-sm-block move-up">
-    <ul class="list-group border-0" *ngIf="websites">
-      <!--<div -->
-        <div *ngFor="let website of websites">
-          <li class="list-group-item border-0 ">
-            <a routerLink="/website/{{website._id}}"><span><i class="fas fa-cog float-right setting"></i></span></a>
-            <a routerLink="./page">{{website.name}}</a>
+  <div class="container-fluid">
+    <div class="row colrow">
+      <div class="col-sm-4 d-none d-sm-block">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let website of websites">
+            <a routerLink="/profile/website/{{website.websiteId}}/page">{{website.name}}</a>
+            <a routerLink="/profile/website/{{website.websiteId}}/edit">
+              <span class="fas fa-cog fontawsome_icon main-icon float-right">
+              </span>
+            </a>
           </li>
-        </div>
-      <!--</div>-->
-    </ul>
-  </div>
-
-<div class="col-12 col-sm-8 move-up">
-  <div class="form-group" *ngIf="website">
-    <div class="form-group">
-      <label for="website-name">Website Name</label>
-      <input type="text" id="website-name" placeholder="Name" class="form-control" name="websitename"
-             ngModel required #websitename="ngModel" [(ngModel)]="website.name">
+        </ul>
+      </div>
+      <div class="col-sm-8 right-form">
+          <div class="form-group">
+            <label for="website-name">Name</label>
+            <input type="text" class="form-control" id="website-name" [(ngModel)]="currWebsite.name" placeholder="{{currWebsite.name}}">
+          </div>
+          <div class="form-group">
+            <label for="website-description">Website Description</label>
+            <textarea id="website-description" class="form-control" rows="5" [(ngModel)]="currWebsite.description" placeholder="{{currWebsite.description}}"></textarea>
+          </div>
+          <a class="btn btn-danger  btn-block" (click)="deleteWebsite()">Delete</a>
+      </div>
     </div>
-    <span class="help-block" *ngIf="!websitename.valid && websitename.touched">
-      Please enter website name!
-    </span>
 
-    <div class="form-group">
-      <label for="website-description">Website Description</label>
-      <textarea id="website-description" class="form-control" rows="5" placeholder="Description" name="description"
-                ngModel required #description="ngModel" [(ngModel)]="website.description"></textarea>
-    </div>
   </div>
-    <a class="btn btn-danger  btn-block move-up" routerLink="/website"
-       (click)="deleteWebsite()">Delete</a>
-  </div>
-</div>
-  </div>
-
-<nav class="navbar fixed-bottom bg-primary navbar-dark justify-content-end">
-  <div class="container-fuild">
-    <a routerLink="/profile" class="navbar-link navbar-text float-right ">
-      <i class="fas fa-user white-icons"></i>
-    </a>
-  </div>
-</nav>
-</form>
+</main>
+<app-website-footer [uid]="user.uid"></app-website-footer>

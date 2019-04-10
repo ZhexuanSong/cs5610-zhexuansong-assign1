@@ -1,54 +1,124 @@
-/* You can add global styles to this file, and also import other style files */
-#title {
-    text-align: center;
-    margin-top: 20px;
+/*normal*/
+body {
+    width:100%;
+    height:100%;
+    min-height: 100%;
+    padding-top: 80px;
+    padding-bottom: 80px;
 }
-.padding {
-    padding: 30px;
+input.form-control {
+    margin-bottom: 10px;
 }
-.site {
-    color: #1d2786;
-    font-size: 16pt;
-    margin: auto;
+
+nav {
+    background: lightgray;
 }
-label {
+
+.navbar-brand {
+    font-size: 20px;
     font-weight: bold;
-}
-.input {
-    margin-bottom: 10px
-}
-#hidden {
-    color: #007bff;
-}
-.setting {
-    margin-top: 5px;
-}
-.white-icons {
     color: white;
 }
-.black-icons {
-    color: black;
-}
-.move-left {
-    margin-left: 20px;
-}
-.move-right {
-    margin-right: 20px
-}
-.move-up {
-    margin-top: 20px;
-}
-.move-down {
-    margin-top: 15px
-}
-.blue {
-    color: #007bff;
-}
-.content {
-    margin-bottom: 80px;
+
+.navbar-brand:hover {
+    font-size: 20px;
+    color: white;
 }
 
-.fa-bars {
-    margin-left: 5px;
+main {
+    height: 100%;
 }
 
+/*profile*/
+#hideone {
+    color: #337ab7;
+}
+
+#hideone:hover {
+    text-decoration: none;
+}
+
+
+/*websites*/
+.navbar-text {
+    padding-top: 0;
+}
+
+.text-bold{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+p.float-left {
+    height: 20px;
+    margin-top: 6px;
+}
+
+.top-left{
+    font-size: 20px;
+    margin-top: 5px;
+    margin-right: 20px;
+}
+
+.top-right{
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.main-icon{
+    font-size: 20px;
+}
+
+.bottom-right{
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+li.list-group-item {
+    border:none;
+    line-height: 20px;
+}
+
+/*website-new*/
+
+main > div.container-fluid {
+    height:100%;
+}
+
+.colrow {
+    width: 100%;
+    height: 100%;
+}
+
+.right-form {
+    border-left: #808080 2px solid;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a.top-left {
+    margin-top:10px;
+}
+
+/*widget-list*/
+.widget-div {
+    margin-top: 15px;
+    min-height: 20px;
+    line-height: 20px;
+}
+
+.widget-icon-special {
+    background-color: white;
+}
+
+.widget-div > div > img {
+    width: 80%;
+    height: 60%;
+}
+
+.bottom-left{
+    margin-top: 10px;
+    font-size: 20px;
+}

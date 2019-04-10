@@ -1,0 +1,45 @@
+.widget-div {
+    margin-top: 15px;
+    min-height: 20px;
+    line-height: 20px;
+}
+
+.widget-icon-special {
+    background-color: white;
+}
+
+.bottom-left{
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+nav {
+    background: lightgray;
+}
+
+.text-white{
+    color: black !important;
+}
+
+.navbar-brand {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+
+.navbar-brand:hover {
+    font-size: 20px;
+}
+
+#hideone {
+    color: lightgray;
+}
+
+#hideone:hover {
+    text-decoration: none;
+}
+
+.widget-div > img {
+    width: 80%;
+    height: 60%;
+}

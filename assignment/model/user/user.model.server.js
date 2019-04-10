@@ -1,49 +1,43 @@
-let mongoose = require('mongoose');
-let userSchema = require('./user.schema.server');
+var mongoose =  require('mongoose');
+var userSchema = require('./user.schema.server');
 
-let userModel = mongoose.model("User",userSchema);
-
+var userModel = mongoose.model('User', userSchema);
+// var websiteModel = require('../website/website.model.server');
 
 userModel.createUser = createUser;
 userModel.findUserById = findUserById;
-userModel.findUserByUserName = findUserByUserName;
-userModel.findByCredential = findByCredential;
+userModel.findUserByUsername = findUserByUsername;
+userModel.findUserByCredentials = findUserByCredentials;
 userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
 userModel.findUserByFacebookId = findUserByFacebookId;
 
-module.exports = userModel;
-
-  function findUserByFacebookId(facebookId) {
-    return userModel.findOne({'facebook.id': facebookId});
-}
-
 function createUser(user) {
-    console.log("model"+user);
     return userModel.create(user);
 }
 
-function findUserById(id) {
-    return userModel.findById(id);
+function findUserById(userId) {
+    return userModel.findById(userId);
 }
 
-function findUserByUserName(username) {
+function findUserByFacebookId(facebookId) {
+    return userModel.findOne({'facebook.id': facebookId});
+}
+
+function findUserByUsername(username) {
     return userModel.findOne({username:username});
 }
 
-function findByCredential(username,password){
-    return userModel.findOne({username:username,password:password});
+function findUserByCredentials(username, password) {
+    return userModel.findOne({username: username, password: password});
 }
 
 function updateUser(userId,user) {
-    console.log('user model update: ' + user);
-    delete user._id;
-    return userModel.findOneAndUpdate(userId,user);
+    return userModel.findByIdAndUpdate(userId,user,{new: true, safe: true});
 }
 
 function deleteUser(userId){
-    return userModel.findByIdAndRemove(userId).then(function (user) {
-        console.log('user model delete: ' + user);
-        return user;
-    });
+    return userModel.findByIdAndRemove(userId);
 }
+
+module.exports = userModel;

@@ -1,31 +1,70 @@
-<form (ngSubmit)="createPage()" #f="ngForm">
-    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light justify-content-start">
-      <a class="nav-item nav-link" routerLink="/website/{{websiteId}}/page">
-        <i class="fas fa-chevron-left black-icons"></i></a>
-      <a class="navbar-brand  white-icons" [routerLink]="">New Page</a>
-      <a class="nav-item nav-link ml-auto" routerLink=".." (click)="createPage()" >
-        <i class="fas fa-check black-icons"></i></a>
-    </nav>
-
-    <div class="container move-up">
-
-        <div class="form-group">
-            <label for="page-name">Name</label>
-            <input type="text" id="page-name" placeholder="Page Name" class="form-control" name="pagename" ngModel required #pagename="ngModel">
-        </div>
-        <span class="help-block" *ngIf="!pagename.valid">
-            Please enter pagename!
-        </span>
-
-        <div class="form-group">
-            <label for="page-title">Title</label>
-            <input type="text" id="page-title" placeholder="Page Title" class="form-control" name="pagetitle" ngModel required #pagetitle="ngModel">
-        </div>
-    </div>
-    <nav class="navbar fixed-bottom bg-light navbar-light justify-content-end">
-      <div class="container-fuild">
-        <a routerLink="/profile" class="navbar-link navbar-text float-right">
-          <i class="fas fa-user blue"></i>
+<header>
+  <nav class="navbar fixed-top">
+    <div class="row colrow">
+      <div class="col-sm-4 container-fluid d-none d-sm-block">
+        <p class="navbar-text float-left">
+          <a routerLink="/profile/website/{{website.websiteId}}/page" class="navbar-link text-white">
+            <span class="fas fa-chevron-left fontawsome_icon top-left">
+            </span>
+          </a>
+          <a class="text-white text-bold" routerLink="/profile/{{user.uid}}/website/{{website.websiteId}}/page">
+            Pages
+          </a>
+        </p>
+        <a routerLink="/profile/website/{{website.websiteId}}/page/new" class="navbar-link navbar-text float-right text-white">
+          <span class="fas fa-plus fontawsome_icon top-right">
+          </span>
         </a>
       </div>
-    </nav>
+      <div class="col-sm-8 container-fluid">
+        <p class="navbar-text float-left">
+          <a routerLink="/profile/website/{{website.websiteId}}/page" class="navbar-link text-white d-inline d-sm-none d-md-none d-lg-none">
+            <span class="fas fa-chevron-left fontawsome_icon top-left">
+            </span>
+          </a>
+          <a class="text-white text-bold" routerLink="/profile/website/{{website.websiteId}}/page/new">
+            New Page
+          </a>
+        </p>
+        <a (click)="addPage()" class="navbar-link navbar-text float-right text-white check-icon">
+          <span class="fas fa-check fontawsome_icon top-right">
+          </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+<main>
+  <div *ngIf="errorFlag" class="alert alert-danger">
+    {{errorMsg}}
+  </div>
+  <div class="container-fluid">
+    <div class="row colrow">
+      <div class="col-sm-4 d-none d-sm-block">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let page of pages">
+            <a routerLink="/profile/website/{{website.websiteId}}/page/{{page.pageId}}/widget">{{page.name}}
+            </a>
+            <a routerLink="/profile/website/{{website.websiteId}}/page/{{page.pageId}}/edit">
+          <span class="fas fa-cog fontawsome_icon main-icon float-right">
+          </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-8 right-form">
+        <div class="form-group">
+          <label for="page-name">Name</label>
+          <input type="text" class="form-control" id="page-name" placeholder="Page Name" [(ngModel)]="newPage.name">
+        </div>
+        <div class="form-group">
+          <label for="page-title">Title</label>
+          <textarea id="page-title" class="form-control" rows="5" placeholder="Page Title"[(ngModel)]="newPage.description"></textarea>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+<app-page-footer [uid]="user.uid"></app-page-footer>
+

@@ -1,0 +1,25 @@
+.text-white{
+    color: black !important;
+}
+
+.navbar-brand {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+
+.navbar-brand:hover {
+    font-size: 20px;
+}
+
+#hideone {
+    color: lightgray;
+}
+
+#hideone:hover {
+    text-decoration: none;
+}
+
+.widget-icon {
+    margin-top: 20px;
+}

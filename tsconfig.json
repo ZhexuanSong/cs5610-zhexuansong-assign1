@@ -1,5 +1,9 @@
 {
   "compileOnSave": false,
+  "include": [
+    "src/**/*",
+    "node_modules/ngx-quill-editor/*"
+  ],
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",

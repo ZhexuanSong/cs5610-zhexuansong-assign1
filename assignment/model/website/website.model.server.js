@@ -1,51 +1,79 @@
-let mongoose = require('mongoose');
-let websiteSchema = require('./website.schema.server');
+var mongoose = require('mongoose');
 
-let websiteModel = mongoose.model("Website",websiteSchema);
-let userModel = require('../user/user.model.server');
+var websiteSchema = require('./website.schema.server');
+var websiteModel = mongoose.model("Website",websiteSchema);
 
+var userModel = require('../user/user.model.server');
 
 websiteModel.createWebsite = createWebsite;
-websiteModel.findAllWebsiteForUser = findAllWebsiteForUser;
 websiteModel.findWebsiteById = findWebsiteById;
+websiteModel.findWebsitesByUser = findWebsitesByUser;
 websiteModel.updateWebsite = updateWebsite;
 websiteModel.deleteWebsite = deleteWebsite;
 
-module.exports = websiteModel;
 
-function createWebsite(userId, website) {
-    website._user = userId;
+function createWebsite(website) {
     return websiteModel.create(website)
         .then(
-            function (website) {
-                userModel.findUserById(userId)
+            function(responseWeb) {
+                return userModel.findUserById(website.developerId)
                     .then(
                         function (user) {
-                            console.log('website model create: user' + JSON.stringify(user));
-                            if (user.websites) user.websites = [];
-                            user.websites.push(website);
-                            userModel.updateUser(userId,user);
-                            user.save();
-                            website.save();
+                            user.websites.push(responseWeb);
+                            return user.save();
                         }
                     );
-                return website;
-            }
-        )
-}
-
-function findAllWebsiteForUser(userId) {
-    return websiteModel.find({_user:userId.toString()});
+            });
 }
 
 function findWebsiteById(id) {
     return websiteModel.findById(id);
 }
 
-function updateWebsite(id,website) {
-    return websiteModel.findByIdAndUpdate(id,website);
+
+function findWebsitesByUser(userId) {
+    return websiteModel.find({developerId:userId});
 }
 
-function deleteWebsite(id){
-    return websiteModel.findByIdAndRemove(id);
+function updateWebsite(websiteId, website) {
+    return websiteModel.findByIdAndUpdate(websiteId, website,{new: true, safe: true})
+        .then(
+            function (responseWeb) {
+                userModel.findById(website.developerId).then(
+                    function (user) {
+                        const index = findIndex(user.websites, websiteId);
+                        user.websites.splice(index, 1);
+                        user.websites.splice(index, 0, responseWeb);
+                        return user.save();
+                    }
+                )
+            }
+        );
 }
+
+function findIndex(arr, target) {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i]._id.toString() === target.toString()) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+function deleteWebsite(websiteId){
+    return websiteModel.findByIdAndRemove(websiteId).then(
+        function (response) {
+            userModel.findByIdAndUpdate(
+                response.developerId,
+                {$pull: {websites: {_id: websiteId}}},
+                {safe: true, new: true},
+                function (err) {
+                    console.log(err);
+                }
+            );
+        }
+    );
+}
+
+module.exports = websiteModel;
+

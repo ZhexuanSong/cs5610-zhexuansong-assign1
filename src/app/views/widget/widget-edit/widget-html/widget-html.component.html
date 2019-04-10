@@ -1,41 +1,40 @@
-<form (ngSubmit)="updateWidget()" #f="ngForm">
-<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light justify-content-start">
-  <a class="nav-item nav-link" routerLink="/website/{{websiteId}}/page/{{pageId}}/widget">
-    <i class="fas fa-chevron-left black-icons"></i></a>
-  <a class="navbar-brand  white-icons">Widget Edit</a>
-  <a class="nav-item nav-link ml-auto" (click)="updateWidget()"
-     routerLink="/website/{{websiteId}}/page/{{pageId}}/widget">
-    <i class="fas fa-check black-icons"></i></a>
-</nav>
-
-<div class="container move-up">
-  <div *ngIf="flag"
-       class="alert alert-danger">
-    {{error}}
+<header>
+  <nav class="navbar fixed-top">
+    <div class="container-fluid">
+      <p class="navbar-text float-left">
+        <a routerLink="/profile/website/{{website.websiteId}}/page/{{page.pageId}}/widget" class="navbar-link text-white">
+          <span class="fas fa-chevron-left fontawsome_icon top-left"></span>
+        </a>
+        <a class="text-white text-bold" routerLink="/profile/website/{{website.websiteId}}/page/{{page.pageId}}/widget">
+          Widget Edit
+        </a>
+      </p>
+      <a (click)="updateWidget()" class="navbar-link navbar-text float-right text-white check-icon">
+        <span class="fas fa-check fontawsome_icon top-right">
+        </span>
+      </a>
+    </div>
+  </nav>
+</header>
+<main>
+  <div *ngIf="errorFlag" class="alert alert-danger">
+    {{errorMsg}}
   </div>
-    <div class="form-group" *ngIf="widget">
+  <div class="container">
+    <div class="form-group">
       <label for="Name">Name</label>
-      <input ngModel required #widgetname="ngModel"
+      <input [(ngModel)]="newWidget.name"
              type="text"
              class="form-control"
              id="Name"
-             name="widgetname"
-             placeholder="Name"
-             [(ngModel)]="widget.name"
+             name="widname"
+             placeholder="{{newWidget.name}}"
              required>
-      <span class="help-block" *ngIf="!widgetname.valid">
-      Please enter widget name!
-    </span>
-    </div>
-    <div *ngIf="widget">
-      <quill-editor [(ngModel)]="widget.text" name="text"></quill-editor>
-    </div>
-  <p></p>
-  <a class="btn btn-danger  btn-block" (click)="deleteWidget()"
-     routerLink="/website/{{websiteId}}/page/{{pageId}}/widget">Delete</a>
-</div>
-
-<nav class="navbar navbar-expand-lg navbar-primary bg-light justify-content-start fixed-bottom">
-  <a class="nav-item nav-link ml-auto navblack" routerLink="/profile"><i class="  fas fa-user"></i></a>
-</nav>
-</form>
+      </div>
+      <quill-editor [(ngModel)]="newWidget.text" name="text"></quill-editor>
+    <p></p>
+    <a class="btn btn-danger btn-block "
+       (click)="deleteWidget()">Delete</a>
+  </div>
+</main>
+<app-page-footer [uid]="user.uid"></app-page-footer>

@@ -1,8 +1,54 @@
+.widget-div {
+    margin-top: 15px;
+    min-height: 20px;
+    line-height: 20px;
+}
+
+.widget-icon-special {
+    background-color: white;
+}
+
+.bottom-left{
+    margin-top: 10px;
+    font-size: 20px;
+}
+nav {
+    background: lightgray;
+}
+
+.text-white{
+    color: black !important;
+}
+
+.navbar-brand {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+
+.navbar-brand:hover {
+    font-size: 20px;
+}
+
+#hideone {
+    color: lightgray;
+}
+
+#hideone:hover {
+    text-decoration: none;
+}
+
+.widget-div > img {
+    width: 80%;
+    height: 60%;
+}
+
 .youtube-widget {
     position: relative;
     padding-bottom: 56.25%; /* 16:9 */
     height: 0;
 }
+
 .youtube-widget iframe {
     position: absolute;
     top: 0;
@@ -10,3 +56,6 @@
     width: 100%;
     height: 100%;
 }
+/*.widget-icon {*/
+    /*margin-top: 20px;*/
+/*}*/

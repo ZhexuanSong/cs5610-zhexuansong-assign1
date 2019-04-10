@@ -1,7 +1,12 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import {User} from '../../../models/user.model.client';
+import {Website} from '../../../models/website.model.client';
+import {Page} from '../../../models/page.model.client';
+import {WebsiteService} from '../../../services/website.service.client';
+import {UserService} from '../../../services/user.service.client';
 import {PageService} from '../../../services/page.service.client';
-import {NgForm} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {SharedService} from '../../../services/shared.service.client';
 
 @Component({
   selector: 'app-page-edit',
@@ -9,38 +14,66 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./page-edit.component.css']
 })
 export class PageEditComponent implements OnInit {
-    @ViewChild('f') myPageForm: NgForm;
-    websiteId: String;
-    pageId: String;
-    page: any;
 
-    constructor(private pageService: PageService, private activatedRoute: ActivatedRoute) {}
+  user: User = new User('', '', '', '', '', '');
+  website: Website = new Website('', '', '', '');
+  pages: Page[] = [];
+  currPage: Page = new Page('', '', '', '');
+  errorFlag: boolean;
+  errorMsg = '';
 
-    updatePage() {
-        this.page.name = this.myPageForm.value.pagename;
-        this.page.title = this.myPageForm.value.pagetitle;
-        this.pageService.updatePage(this.pageId, this.page).subscribe((page: any) => {
-            console.log('update page: ' + page._id + ' ' + page.name);
-        });
-    }
-    deletePage() {
-        this.pageService.deletePage(this.pageId).subscribe((data: any) => {
-            console.log('delete page: ' + this.page._id);
-        });
-    }
+  constructor(private webService: WebsiteService, private userService: UserService,
+              private pageService: PageService, private route: ActivatedRoute,
+              private router: Router, private sharedService: SharedService) {}
 
-    ngOnInit() {
-        this.activatedRoute.params
-            .subscribe(
-                (params: any) => {
-                    this.websiteId = params['wid'];
-                    this.pageId = params['pid'];
-                }
-            );
-        this.pageService.findPageById(this.pageId).subscribe((page: any) => {
-            this.page = page;
-            console.log(this.page);
-        });
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.userService.findUserById(this.sharedService.user._id).subscribe(
+          (user: any) => {
+              this.user = new User(user._id, user.username, user.password, user.firstName, user.lastName, user.email);
+          }
+      );
+      this.webService.findWebsiteById(params['websiteId']).subscribe(
+          (website: any) => {
+            this.website = new Website(website._id, website.name, website.developerId, website.description);
+          }
+      );
+      this.pageService.findPageByWebsiteId(params['websiteId']).subscribe(
+          (pages: any[]) => {
+              for(var i = 0; i < pages.length; i++) {
+                  const page = pages[i];
+                  const newPage = new Page(page._id, page.name, page.websiteId, page.description);
+                  this.pages.push(newPage);
+              }
+          }
+      );
+      this.pageService.findPageById(params['pageId']).subscribe(
+          (page: any) => {
+            this.currPage = new Page(page._id, page.name, page.websiteId, page.description);
+          }
+      );
+    });
+  }
+
+  updatePage() {
+    if (this.currPage.name) {
+      this.pageService.updatePage(this.currPage.pageId, this.currPage).subscribe(
+          (page: any) => {
+            this.router.navigate(['/profile/website/' + this.website.websiteId + '/page']);
+          }
+      );
+    } else {
+        this.errorFlag = true;
+        this.errorMsg = 'Please enter page name!';
     }
+  }
+
+  deletePage() {
+    this.pageService.deletePage(this.currPage.pageId).subscribe(
+        (data: any) => {
+            this.router.navigate(['/profile/website/' + this.website.websiteId + '/page']);
+        }
+    );
+  }
 
 }

@@ -1,0 +1,18 @@
+nav {
+    background: #337ab7 !important;
+}
+
+.text-white{
+    color: #fff !important;
+}
+
+.check-icon {
+    cursor: pointer !important;
+}
+
+a:not([href]):not([tabindex]) {
+    text-decoration: none;
+    color: #fff !important;
+}
+
+
