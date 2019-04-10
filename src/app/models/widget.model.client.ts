@@ -1,27 +1,19 @@
 export class Widget {
-  _id: String;
-  type: String;
-  pageId: String;
-  size: String;
-  text: String;
-  url: String;
-  width: String;
-  name: String;
-  formatted: Boolean;
-  rows: number;
-  placeholder: String;
+    widgetType: String;
+    name: String;
+    pageId: String;
+    size: String;
+    text: String;
+    url: String;
+    width: String;
 
-  constructor(_id, type, pageId, size, text, width, url, name, formatted = false, rows = 1, placeholder = 'placeholder') {
-    this._id = _id;
-    this.type = type;
-    this.pageId = pageId;
-    this.size = size;
-    this.url = url;
-    this.width = width;
-    this.name = name;
-    this.text = text;
-    this.formatted = formatted;
-    this.rows = rows;
-    this.placeholder = placeholder;
-  }
+    constructor(type, pageId, size= '1', text = 'text', width = '100%', url = 'url') {
+        this.widgetType = type;
+        this.pageId = pageId;
+        this.size = size;
+        this.url = url;
+        this.width = width;
+        this.text = text;
+        this.name = '';
+    }
 }
