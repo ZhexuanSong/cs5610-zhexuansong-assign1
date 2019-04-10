@@ -1,39 +1,36 @@
-import 'rxjs/Rx';
-import {Page} from '../models/page.model.client';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {Observable} from 'rxjs';
 
 @Injectable()
 export class PageService {
 
-  constructor(private http: HttpClient) {}
+    baseUrl = environment.baseUrl;
 
-  baseUrl = environment.baseUrl;
+    constructor(private _http: HttpClient) {
+    }
 
-  createPage( websiteId: string, page: Page): Observable<any> {
-    const url = this.baseUrl + '/api/website/' + websiteId + '/page';
-    return this.http.post<any>(url, page);
-  }
+    createPage(websiteId: String, page: any) {
+        return this._http.post(this.baseUrl + '/api/website/' + websiteId + '/page', page);
+    }
 
-  findPagesByWebsiteId(websiteId): Observable<any[]> {
-    const url = this.baseUrl + '/api/website/' + websiteId + '/page';
-    return this.http.get<any[]>(url);
-  }
+    findPagesByWebsiteId(websiteId) {
+        const url = this.baseUrl + '/api/website/' + websiteId + '/page';
+        return this._http.get(url);
+    }
 
-  findPageById(pageId): Observable<any> {
-    const url = this.baseUrl + '/api/page/' + pageId;
-    return this.http.get<any>(url);
-  }
+    findPageById(pageId) {
+        const url = this.baseUrl + '/api/page/' + pageId;
+        return this._http.get(url);
+    }
 
-  updatePage(pageId, page): Observable<any> {
-    const url = this.baseUrl + '/api/page/' + pageId;
-    return this.http.put<any>(url, page);
-  }
+    updatePage(pageId, page) {
+        const url = this.baseUrl + '/api/page/' + pageId;
+        return this._http.put(url, page);
+    }
 
-  deletePage(pageId): Observable<any> {
-    const url = this.baseUrl + '/api/page/' + pageId;
-    return this.http.delete<any>(url);
-  }
+    deletePage(pageId) {
+        const url = this.baseUrl + '/api/page/' + pageId;
+        return this._http.delete(url);
+    }
 }

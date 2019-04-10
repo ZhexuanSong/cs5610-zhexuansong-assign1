@@ -1,40 +1,37 @@
-import {Website} from '../models/website.model.client';
 import {Injectable} from '@angular/core';
-import {User} from '../models/user.model.client';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {Observable} from 'rxjs';
 
 @Injectable()
 export class WebsiteService {
 
-  constructor(private http: HttpClient) {}
-  baseUrl = environment.baseUrl;
+    baseUrl = environment.baseUrl;
+    constructor(private _http: HttpClient) {
 
-  createWebsite(userId, website): Observable<any> {
-    const url = this.baseUrl + '/api/user/' + userId + '/website';
-    return this.http.post<any>(url, website);
-  }
+    }
 
-  findWebsitesByUser(userId: string): Observable<any[]> {
-    const url = this.baseUrl + '/api/user/' + userId + '/website';
-    return this.http.get<any[]>(url);
-  }
+    findWebsiteById(websiteId: String) {
+        return this._http.get(this.baseUrl + '/api/website/' + websiteId);
+    }
 
-  findWebsiteById(websiteId): Observable<any> {
-    const url = this.baseUrl + '/api/website/' + websiteId;
-    return this.http.get<any>(url);
-  }
+    findWebsitesByUser(userId: String) {
+        return this._http.get(this.baseUrl + '/api/user/' + userId + '/website');
+    }
 
-  updateWebsite(websiteId, website): Observable<any> {
-    const url = this.baseUrl + '/api/website/' + websiteId;
-    return this.http.put<any>(url, website);
-  }
+    createWebsite(userId, website: any) {
+        const url = this.baseUrl + '/api/user/' + userId + '/website';
+        return this._http.post(url, website);
 
-  deleteWebsite(websiteId): Observable<any> {
-    const url = this.baseUrl + '/api/website/' + websiteId;
-    return this.http.delete<any>(url);
-  }
+    }
 
+    updateWebsite(websiteId, website: any) {
+        const url = this.baseUrl + '/api/website/' + websiteId;
+        const body = website;
+        return this._http.put(url, body);
+    }
 
+    deleteWebsite(websiteId) {
+        const url = this.baseUrl + '/api/website/' + websiteId;
+        return this._http.delete(url);
+    }
 }

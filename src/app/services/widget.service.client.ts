@@ -1,48 +1,41 @@
-import {Widget} from '../models/widget.model.client';
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
-export class WidgetService {
-  constructor(private http: HttpClient) {}
-  baseurl = environment.baseUrl;
+export  class WidgetService {
+    baseUrl = environment.baseUrl;
 
-  createWidget(pageId, widget): Observable<any> {
-    const url = this.baseurl + '/api/page/' + pageId + '/widget';
-    return this.http.post<Widget>(url, widget);
-  }
+    constructor(private _http: HttpClient) {}
 
-  findWidgetsByPageId(pageId): Observable<any[]> {
-    const url = this.baseurl + '/api/page/' + pageId + '/widget';
-    return this.http.get<any[]>(url);
-  }
 
-  findWidgetById(widgetId): Observable<any> {
-    const url = this.baseurl + '/api/widget/' + widgetId;
-    return this.http.get<any>(url);
+    createWidget(pageId, widget: any) {
+        const url = this.baseUrl + '/api/page/' + pageId + '/widget';
+        return this._http.post(url, widget);
+    }
 
-  }
+    findWidgetsByPageId(pageId) {
+        const url = this.baseUrl + '/api/page/' + pageId + '/widget';
+        return this._http.get(url);
+    }
 
-  updateWidget(widgetId, widget): Observable<any> {
-    const url = this.baseurl + '/api/widget/' + widgetId;
-    return this.http.put<any>(url, widget);
-  }
+    findWidgetById(widgetId) {
+        const url = this.baseUrl + '/api/widget/' + widgetId;
+        return this._http.get(url);
+    }
 
-  deleteWidget(widgetId): Observable<any> {
-    const url = this.baseurl + '/api/widget/' + widgetId;
-    return this.http.delete<any>(url);
-  }
+    updateWidget(widgetId, widget) {
+        const url = this.baseUrl + '/api/widget/' + widgetId;
+        return this._http.put(url, widget);
+    }
 
-  reorderWidgets(startIndex, endIndex, pageId) {
+    deleteWidget(widgetId) {
+        const url = this.baseUrl + '/api/widget/' + widgetId;
+        return this._http.delete(url);
+    }
 
-    const url = this.baseurl + '/api/page/' + pageId + '/widget/reorder?start=' + startIndex + '&end=' + endIndex;
-    return this.http.get(url);
-  }
-
-  uploadImage(file: any) {
-    return this.http.post(this.baseurl + '/api/uploads', file);
-  }
-
+    reorderWidgets(startIndex, endIndex, pageId) {
+        const url = this.baseUrl + '/api/page/' + pageId + '/widget?start=' + startIndex + '&end=' + endIndex;
+        return this._http.put(url, '');
+    }
 }

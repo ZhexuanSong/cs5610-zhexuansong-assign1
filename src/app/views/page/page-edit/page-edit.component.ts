@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {PageService} from '../../../services/page.service.client';
-import {Page} from '../../../models/page.model.client';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {WebsiteService} from '../../../services/website.service.client';
+import {PageService} from '../../../services/page.service.client';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-page-edit',
@@ -10,53 +9,38 @@ import {WebsiteService} from '../../../services/website.service.client';
   styleUrls: ['./page-edit.component.css']
 })
 export class PageEditComponent implements OnInit {
-  websiteId: string;
-  pageId: string;
-  errorFlag: boolean;
-  errorMsg = 'Please enter the name.';
+    @ViewChild('f') myPageForm: NgForm;
+    websiteId: String;
+    pageId: String;
+    page: any;
 
-  curPage: Page;
-  pages: Page[] = [];
+    constructor(private pageService: PageService, private activatedRoute: ActivatedRoute) {}
 
-  constructor(private webService: WebsiteService, private pageService: PageService,
-              private router: Router, private activatedRoute: ActivatedRoute) {
-    this.curPage = new Page('', '', undefined);
-  }
-
-  ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
-      this.websiteId = params.websiteId;
-      this.pageId = params.pageId;
-      this.webService.findWebsiteById(this.websiteId).subscribe((website) => {
-        this.pages = website.pages;
-      });
-      this.pageService.findPageById(this.pageId).subscribe((data: Page) => {
-        this.curPage = data;
-      });
-    });
-  }
-
-  updateCurPage() {
-    if (this.curPage.name === '') {
-      this.errorFlag = true;
-    } else {
-      this.errorFlag = false;
-      this.pageService.updatePage(this.pageId, this.curPage).subscribe((data: Page) => {
-        this.curPage = data;
-        this.backToPages();
-      });
+    updatePage() {
+        this.page.name = this.myPageForm.value.pagename;
+        this.page.title = this.myPageForm.value.pagetitle;
+        this.pageService.updatePage(this.pageId, this.page).subscribe((page: any) => {
+            console.log('update page: ' + page._id + ' ' + page.name);
+        });
     }
-  }
+    deletePage() {
+        this.pageService.deletePage(this.pageId).subscribe((data: any) => {
+            console.log('delete page: ' + this.page._id);
+        });
+    }
 
-  backToPages() {
-    this.router.navigate(['/profile/website/' + this.websiteId + '/page']);
-  }
-
-
-  deletePage() {
-    this.pageService.deletePage(this.pageId).subscribe(() => {
-      this.backToPages();
-    });
-  }
+    ngOnInit() {
+        this.activatedRoute.params
+            .subscribe(
+                (params: any) => {
+                    this.websiteId = params['wid'];
+                    this.pageId = params['pid'];
+                }
+            );
+        this.pageService.findPageById(this.pageId).subscribe((page: any) => {
+            this.page = page;
+            console.log(this.page);
+        });
+    }
 
 }
