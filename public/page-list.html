@@ -1,65 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>Page List</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"/>
   <link href="css/style.css" rel="stylesheet"/>
 </head>
-
 <body>
+<nav class="navbar navbar-default navbar-light bg-light fixed-top">
+    <div class="float-left">
+      <a href="website-list.html"><span class="color-black fas fa-chevron-left fontawsome_icon"></span></a>
+      <a class="navbar-text navbar-brand text-bold text-padding-left" href="#">Pages</a>
+    </div>
+    <div class="float-right">
+      <a href="page-new.html"><span class="color-black fas fa-plus fontawsome_icon"></span></a>
+    </div>
 
-<body>
-<nav class="navbar navbar-expand-md navbar-light bg-light">
-  <div class="navbar-collapse collapse mr-auto" id="collapsingNavbar">
-    <ul class="navbar-nav">
-      <a class="nav-link cl-icon-padding" href="website-list.html">
-        <i class="fa fa-chevron-left"></i>
-      </a>
-      <a class="navbar-brand brand cl-icon-padding" href="#">Pages</a>
-    </ul>
-  </div>
-
-  <div>
-    <ul class="navbar-nav ml-auto">
-      <a class="nav-link cl-icon-padding" href="website-list.html"><i class="fa fa-plus"></i></a>
-    </ul>
-  </div>
 </nav>
-
-<div class="container-fluid cl-container-padding-more">
-  <ul class="list-group cl-list-group-borderless">
-    <li class="list-group-item cl-list-item-borderless">
-      <a href="page-edit.html" class="cl-text-blue"><i class="fa fa-cog pull-right"></i></a>
-      <a href="widget-list.html" class="cl-text-blue">Blog Post</a>
+<div class="container">
+  <ul class="list-group list-borderless">
+    <li class="list-group-item list-borderless">
+      <a href="widget-list.html">Blog Post</a>
+      <a href="page-edit.html"><i class="fas fa-cog fontawsome_icon float-right"></i></a>
     </li>
-    <li class="list-group-item cl-list-item-borderless">
-      <a href="page-edit.html" class="cl-text-blue"><i class="fa fa-cog pull-right"></i></a>
-      <a href="widget-list.html" class="cl-text-blue">Blogs</a>
+    <li class="list-group-item list-borderless">
+      <a href="widget-list.html">Blogs</a>
+      <a href="page-edit.html"><i class="fas fa-cog fontawsome_icon float-right"></i></a>
     </li>
-    <li class="list-group-item cl-list-item-borderless">
-      <a href="page-edit.html" class="cl-text-blue"><i class="fa fa-cog pull-right"></i></a>
-      <a href="widget-list.html" class="cl-text-blue">Home</a>
+    <li class="list-group-item list-borderless">
+      <a href="widget-list.html">Home</a>
+      <a href="page-edit.html"><i class="fas fa-cog fontawsome_icon float-right"></i></a>
     </li>
-    <li class="list-group-item cl-list-item-borderless">
-      <a href="page-edit.html" class="cl-text-blue"><i class="fa fa-cog pull-right"></i></a>
-      <a href="widget-list.html" class="cl-text-blue">About</a>
+    <li class="list-group-item list-borderless">
+      <a href="widget-list.html">About</a>
+      <a href="page-edit.html"><i class="fas fa-cog fontawsome_icon float-right"></i></a>
     </li>
-    <li class="list-group-item cl-list-item-borderless">
-      <a href="page-edit.html" class="cl-text-blue"><i class="fa fa-cog pull-right"></i></a>
-      <a href="widget-list.html" class="cl-text-blue">Contact Us</a>
+    <li class="list-group-item list-borderless">
+      <a href="widget-list.html">Contact Us</a>
+      <a href="page-edit.html"><i class="fas fa-cog fontawsome_icon float-right"></i></a>
     </li>
   </ul>
 </div>
+<nav class="navbar navbar-default navbar-light bg-light fixed-bottom">
+  <div class="float-left"> </div>
+  <div class="float-right">
+    <a href="profile.html"><span class="fas fa-user fontawsome_icon color-black"></span></a>
+  </div>
 
-<nav class="navbar fixed-bottom navbar-light bg-light">
-  <ul class="navbar-nav ml-auto">
-    <a href="profile.html" class="navbar-link navbar-text pull-right cl-icon-padding">
-      <i class="fa fa-user"></i>
-    </a>
-  </ul>
 </nav>
 </body>
 </html>

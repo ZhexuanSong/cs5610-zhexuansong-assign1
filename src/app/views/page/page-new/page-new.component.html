@@ -1,0 +1,68 @@
+<header>
+  <nav class="navbar fixed-top">
+    <div class="row row-div">
+      <div class="col-sm-4 container-fluid d-none d-sm-block">
+        <p class="navbar-text float-left">
+          <a class="navbar-link nav-black-icon" routerLink="/profile/website/{{websiteId}}/page">
+            <span class="fas fa-chevron-left fontawsome_icon top-left"></span>
+          </a>
+          <a class="navbar-black-brand" routerLink="/profile/website/{{websiteId}}/page">
+            Pages
+          </a>
+        </p>
+      </div>
+      <div class="col-sm-8 container-fluid">
+        <p class="navbar-text float-left">
+          <a routerLink="/profile/website/{{websiteId}}/page" class="navbar-link text-white d-inline d-sm-none d-md-none d-lg-none">
+            <span class="nav-black-icon fas fa-chevron-left fontawsome-icon top-left"></span>
+          </a>
+          <a class="navbar-black-brand" routerLink="/profile/website/{{websiteId}}/page/new">
+            New Page
+          </a>
+        </p>
+        <a (click)="createNewPage()" class="navbar-link navbar-text float-right nav-icon check-icon">
+          <span class="nav-black-icon fas fa-check fontawsome_icon top-right"></span>
+        </a>
+      </div>
+
+    </div>
+  </nav>
+</header>
+
+<main>
+<div class="container-fluid">
+  <div class="row row-div">
+    <div class="d-none d-sm-block col-sm-4">
+      <ul class="list-group list-borderless">
+        <li class="list-group-item list-borderless" *ngFor="let page of pages">
+          <a routerLink="/profile/website/{{websiteId}}/page/{{page._id}}/widget">{{page.name}}</a>
+          <a routerLink="/profile/website/{{websiteId}}/page/{{page._id}}"><i class="fas fa-cog fontawsome_icon float-right"></i></a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-8 right-content">
+      <div *ngIf="errorFlag" class="alert alert-danger">
+        {{errorMsg}}
+      </div>
+        <div class="text-padding-top">
+          <label for="page-name" class="text-bold">Name</label>
+          <input id="page-name" type="text" class="form-control" placeholder="Page Name" [(ngModel)]="newPage.name"/>
+        </div>
+        <div class="text-padding-top">
+          <label for="page-title" class="text-bold">Title</label>
+          <input id="page-title" type="text" class="form-control" placeholder="Page Title" [(ngModel)]="newPage.description">
+        </div>
+    </div>
+  </div>
+</div>
+</main>
+<footer>
+  <nav class="navbar fixed-bottom">
+    <div class="container-fluid">
+      <p class="navbar-text float-left"></p>
+      <a class="nav-black-icon" routerLink="/profile">
+        <span class="fas fa-user fontawsome-icon bottom-right"></span>
+      </a>
+    </div>
+  </nav>
+</footer>

@@ -1,17 +1,17 @@
-export class User {
-  _id: String;
-  username: String;
-  password: String;
-  email: String;
-  firstName: String;
-  lastName: String;
+import {Website} from './website.model.client';
 
-  constructor(_id, username, password, email, firstName, lastName) {
-    this._id = _id;
+export class User {
+  _id: string;
+  username: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+
+  constructor(username, password, firstName, lastName) {
     this.username = username;
     this.password = password;
-    this.email = email;
     this.firstName = firstName;
     this.lastName = lastName;
   }
+
 }
