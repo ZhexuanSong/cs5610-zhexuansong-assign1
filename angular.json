@@ -111,11 +111,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "yi-project1:serve"
+            "devServerTarget": "xuanproject:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "yi-project1:serve:production"
+              "devServerTarget": "xuanproject:serve:production"
             }
           }
         },
