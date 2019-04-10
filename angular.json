@@ -57,11 +57,11 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "yi-project1:build"
+            "browserTarget": "xuanproject:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "yi-project1:build:production"
+              "browserTarget": "xuanproject:build:production"
             }
           }
         },
