@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet"/>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-md navbar-custom">
+  <div class="col-1">
+    <a class="navbar-text pull-left" href="website-list.html"><i class="fa fa-chevron-left"></i></a>
+  </div>
+
+  <div class="col-3 d-none d-sm-block">
+    <a class="navbar-brand cl-icon-padding" href="#">Websites</a>
+    <a class="navbar-text pull-right" href="website-new.html"><i class="fa fa-plus"></i></a>
+  </div>
+
+  <div class="col-8">
+    <a class="navbar-brand cl-icon-padding" href="#">New Website</a>
+    <a class="navbar-text pull-right" href="website-list.html"><i class="fa fa-check"></i></a>
+  </div>
+</nav>
+
+<div class="container-fluid cl-container-padding">
+  <div class="row">
+    <div class="col-sm-4 d-none d-sm-block">
+      <ul class="list-group cl-list-group-borderless">
+        <li class="list-group-item cl-list-item-borderless">
+          <a href="website-edit.html" class="cl-text-blue"><i class="fa fa-cog float-right"></i></a>
+          <a href="page-list.html" class="cl-text-blue">Blogging App</a>
+        </li>
+        <li class="list-group-item cl-list-item-borderless">
+          <a href="website-edit.html" class="cl-text-blue"><i class="fa fa-cog float-right"></i></a>
+          <a href="page-list.html" class="cl-text-blue">Address Book App</a>
+        </li>
+        <li class="list-group-item cl-list-item-borderless">
+          <a href="website-edit.html" class="cl-text-blue"><i class="fa fa-cog float-right"></i></a>
+          <a href="page-list.html" class="cl-text-blue">Script Testing App</a>
+        </li>
+        <li class="list-group-item cl-list-item-borderless">
+          <a href="website-edit.html" class="cl-text-blue"><i class="fa fa-cog float-right"></i></a>
+          <a href="page-list.html" class="cl-text-blue">Blogger</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-xs-12 col-sm-8">
+      <form>
+        <div class="form-group">
+          <label for="website-name">Name</label>
+          <input type="text" class="form-control" id="website-name" placeholder="Name">
+        </div>
+        <div class="form-group">
+          <label for="website-description">Description</label>
+          <textarea id="website-description" class="form-control" rows="5" placeholder="Description"></textarea>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+<nav class="navbar fixed-bottom navbar-light navbar-custom">
+  <ul class="navbar-nav ml-auto">
+    <a href="profile.html" class="navbar-link navbar-text pull-right cl-text-white">
+      <i class="fa fa-user"></i>
+    </a>
+  </ul>
+</nav>
+</body>
+</html>

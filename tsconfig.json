@@ -1,4 +1,8 @@
 {
+  "include": [
+    "src/**/*",
+    "node_modules/ngx-quill-editor/*"
+  ],
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",

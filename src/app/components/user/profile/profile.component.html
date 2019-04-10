@@ -1,0 +1,92 @@
+
+<nav class="navbar navbar-expand-md navbar-custom">
+  <div class="navbar-collapse collapse mr-auto" id="collapsingNavbar">
+    <ul class="navbar-nav">
+      <a class="navbar-brand" routerLink="/profile">
+        Profile
+      </a>
+      <a (click)="updateUser()"
+         [routerLink]="['/profile']"
+         class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
+        <span class="fa fa-ok"></span>
+      </a>
+    </ul>
+  </div>
+</nav>
+
+
+<div class="container cl-container-padding">
+
+  <div *ngIf="updateFlag" class="alert alert-success">
+    {{updateMsg}}
+  </div>
+
+  <div *ngIf="errorFlag" class="alert alert-danger">
+    {{errorMsg}}
+  </div>
+
+  <form>
+
+    <div class="form-group" *ngIf="user">
+      <label for="username">Username</label>
+      <input type="text"
+             class="form-control"
+             id="username"
+             placeholder="Username"
+             [(ngModel)]="username"
+             [ngModelOptions]="{standalone: true}"/>
+    </div>
+
+    <div class="form-group" *ngIf="user">
+      <label for="email">Email address</label>
+      <input [ngModelOptions]="{standalone: true}"
+             type="email"
+             class="form-control"
+             id="email"
+             placeholder="alice@wonderland.com"
+             [(ngModel)]="user.email"
+             [ngModelOptions]="{standalone: true}"/>
+    </div>
+
+    <div class="form-group" *ngIf="user">
+      <label for="first-name">First Name</label>
+      <input [ngModelOptions]="{standalone: true}"
+             type="text"
+             class="form-control"
+             id="first-name"
+             placeholder="Alice"
+             [(ngModel)]="user.firstName"
+             [ngModelOptions]="{standalone: true}"/>
+    </div>
+
+    <div class="form-group" *ngIf="user">
+      <label for="last-name">Last Name</label>
+      <input type="text"
+             class="form-control"
+             id="last-name"
+             placeholder="Wonderland"
+             [ngModelOptions]="{standalone: true}"
+             [(ngModel)]="user.lastName"/>
+    </div>
+  </form>
+
+  <a class="btn btn-primary btn-block"
+     [routerLink]="['/user', 'website']">Websites</a>
+
+  <a class="btn btn-danger  btn-block"
+     routerLink="/login">Logout</a>
+
+  <button class="btn btn-danger btn-block"
+          (click)="delete()"
+          type="button">Delete User</button>
+
+</div>
+
+<nav class="navbar fixed-bottom navbar-light navbar-custom">
+  <ul class="navbar-nav ml-auto">
+    <a routerLink="/user/:uid" class="navbar-link navbar-text pull-right cl-icon-padding">
+      <i class="fa fa-user"></i>
+    </a>
+  </ul>
+</nav>
+

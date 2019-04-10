@@ -1,12 +1,13 @@
 export class Website {
-    name: String;
-    userId: String;
-    description: String;
+  _id: String;
+  name: String;
+  developerId: String;
+  description: String;
 
-    constructor(name: String, userId: String, description: String) {
-        this.name = name;
-        this.userId = userId;
-        this.description = description;
-    }
-
+  constructor(_id: String, name: String, developerId: String, description: String) {
+    this._id = _id;
+    this.name = name;
+    this.developerId = developerId;
+    this.description = description;
+  }
 }

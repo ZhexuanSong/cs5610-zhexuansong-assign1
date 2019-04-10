@@ -1,106 +1,105 @@
+import {User} from '../models/user.model.client';
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from '../../environments/environment';
-import {SharedService} from './shared.service.client';
-import {map} from 'rxjs/operators';
-import { Router} from '@angular/router';
+import { environment } from '../../environments/environment';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
+import {SharedService} from './shared.service';
+import {Router} from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
 
-    constructor(private _http: HttpClient, private sharedService: SharedService, private _router: Router) {}
+  constructor(private _http: HttpClient,
+              private sharedService: SharedService,
+              private router: Router) {}
 
-    baseUrl = environment.baseUrl;
-    options = new HttpHeaders().set('Content-Type', 'application/json');
+  baseUrl = environment.baseUrl;
+  options = {
+    withCredentials: true
+  };
 
-    createUser(user: any) {
-        return this._http.post(this.baseUrl + '/api/user/', user);
-    }
+  static getNewUser() {
+    return new User(undefined, undefined, undefined, undefined, undefined, undefined);
+  }
 
-    findUserById(userId: String) {
-        return this._http.get(this.baseUrl + '/api/user/' + userId);
-    }
+  login(username: String, password: String) {
+    this.options.withCredentials = true; // jga
 
-    updateUser(user: any) {
-        console.log('user client update');
-        return this._http.put(this.baseUrl + '/api/user/' + user._id, user);
-    }
+    const body = {
+      username : username,
+      password : password
+    };
 
-    findUserByCredential(username: String, password: String) {
-        const url = this.baseUrl + '/api/user?username=' + username + '&password=' + password;
-        console.log(url);
-        return this._http.get(url);
-    }
+    return this._http.post(this.baseUrl + '/api/login', body, this.options);
+  }
 
-    deleteUserById(userId: String) {
-        const req_url = this.baseUrl + '/api/user/' + userId;
-        return this._http.delete(req_url);
-    }
+  logout() {
+    this.options.withCredentials = true;
 
-    login(username: String, password: String) {
-        const body = {
-            username : username,
-            password : password
-        };
-        return this._http.post(this.baseUrl + '/api/login', body, {headers: this.options, withCredentials: true});
-            // .pipe(map(
-            //         (res: Response) => {
-            //             const data = res.json();
-            //             return data;
-            //         }
-            //     ));
-    }
+    return this._http.post(this.baseUrl + '/api/logout', '', this.options);
+  }
 
-    logout() {
-        return this._http.post(this.baseUrl + '/api/logout', '', {headers: this.options, withCredentials: true});
-    // .pipe(map(
-    //         (res: Response) => {
-    //             const data = res.json();
-    //             return data;
-    //         }
-    //     ));
-    }
+  register(username: String, password: String) {
+    this.options.withCredentials = true;
+    const body = {
+      username: username,
+      password: password
+    };
+    return this._http.post(this.baseUrl + '/api/register', body, this.options);
+  }
 
-    register(username: String, password: String) {
-
-        const user = {
-            username : username,
-            password : password
-        };
-
-        return this._http.post(this.baseUrl + '/api/register', user, {withCredentials: true});
-
-            // .pipe(map(
-            //     async (res: Response) => {
-            //         const data = await res.json();
-            //         console.log('user client: ' + data);
-            //         return data;
-            //     }
-            // ));
-    }
-
-    loggedIn() {
-        return this._http.get(this.baseUrl + '/api/loggedIn', {headers: this.options, withCredentials: true})
-            .pipe(map(
-                (res: any) => {
-                    // const user = JSON.stringify(res);
-                    const user = res;
-                    console.log('user client loggedIn: ' + user);
-                    if (user !== '0') {
-                        this.sharedService.user = user; // setting user so as to share with all components
-                        return true;
-                    } else {
-                        this._router.navigate(['/login']);
-                        return false;
-                    }
-                }
-            ));
-    }
-
-    // facebook() {
-    //     return this._http.get('/facebook/login');
-    // }
+  loggedIn() {
+    this.options.withCredentials = true;
+    // return this._http.post(this.baseUrl + '/api/loggedIn', '', this.options).
+    // pipe(map(
+    //   (res: any) => {
+    //     const user = res.json();
+    //     if (user !== 0) {
+    //       console.log('loggedIn: ' + user['username']);
+    //       this.sharedService.user = user;
+    //       return true;
+    //     } else {
+    //       console.log('loggedIn: fail');
+    //       this.router.navigate(['/login']);
+    //       return false;
+    //     }
+    //   }));
 
 
+    return this._http.post(this.baseUrl + '/api/loggedIn', '', this.options)
+      .pipe( map((user)  => {
+        if (user !== 0) {
+          this.sharedService.user = user; // setting user as global variable using shared service
+          return true;
+        } else {
+          this.router.navigate(['/login']);
+          return false;
+        }
+      }));
+  }
+
+  createUser(user: User) {
+    return this._http.post(this.baseUrl + '/api/user', user);
+  }
+
+  findUserByUsername(username: String) {
+    return this._http.get(this.baseUrl + '/api/user?username=' + username);
+  }
+
+  findUserByCredentials(username: String, password: String) {
+    return this._http.get(this.baseUrl + '/api/user?username=' + username + '&password=' + password);
+  }
+
+  findUserById(userId: String) {
+    return this._http.get(this.baseUrl + '/api/user/' + userId);
+  }
+
+
+  updateUser(userId: String, user: User) {
+    return this._http.put(this.baseUrl + '/api/user/' + userId, user);
+  }
+
+  deleteUser(userId: String) {
+    return this._http.delete(this.baseUrl + '/api/user/' + userId);
+  }
 }
-

@@ -1,36 +1,52 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { Page } from '../models/page.model.client';
 import {environment} from '../../environments/environment';
+import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class PageService {
+  constructor(private _http: HttpClient) { }
 
-    baseUrl = environment.baseUrl;
+  baseUrl = environment.baseUrl;
 
-    constructor(private _http: HttpClient) {
-    }
+  static getNewPage() {
+    return new Page(undefined, undefined, undefined, undefined);
+  }
 
-    createPage(websiteId: String, page: any) {
-        return this._http.post(this.baseUrl + '/api/website/' + websiteId + '/page', page);
-    }
+  createPage(websiteId: String, page: Page) {
+    return this._http.post(this.baseUrl + '/api/website/' + websiteId + '/page', page);
+      // .pipe(map(
+      // (res: any) => res.json()));
+  }
 
-    findPagesByWebsiteId(websiteId) {
-        const url = this.baseUrl + '/api/website/' + websiteId + '/page';
-        return this._http.get(url);
-    }
+  findPageByWebsiteId(websiteId: String) {
+    return this._http.get(this.baseUrl + '/api/website/' + websiteId + '/page');
+      // .pipe(map(
+      //   (res: any) => res.json()));
+  }
 
-    findPageById(pageId) {
-        const url = this.baseUrl + '/api/page/' + pageId;
-        return this._http.get(url);
-    }
+  // findPageByWebsiteId2(websiteId: String) {
+  //   return this.pages.filter(function (page) {
+  //     return page.websiteId === websiteId;
+  //   });
+  // }
 
-    updatePage(pageId, page) {
-        const url = this.baseUrl + '/api/page/' + pageId;
-        return this._http.put(url, page);
-    }
+  findPageById(pageId: String) {
+    return this._http.get(this.baseUrl + '/api/page/' + pageId);
+      // .pipe(map(
+      //   (res: any) => res.json()));
+  }
 
-    deletePage(pageId) {
-        const url = this.baseUrl + '/api/page/' + pageId;
-        return this._http.delete(url);
-    }
+  updatePage(pageId: String, page: Page) {
+    return this._http.put(this.baseUrl + '/api/page/' + pageId, page);
+      // .pipe(map(
+      //   (res: any) => res.json()));
+  }
+
+  deletePage(pageId: String) {
+    return this._http.delete(this.baseUrl + '/api/page/' + pageId);
+      // .pipe(map(
+      //   (res: any) => res.json()));
+  }
 }

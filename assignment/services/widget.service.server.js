@@ -1,156 +1,160 @@
-module.exports= function(app){
+module.exports = function (app) {
 
-    let widgets = [
-        { _id: "123", widgetType: "HEADER", name: ' ', pageId: "321", size: "2", text: "GIZMODO", url: "", width: "", height: 100, rows: 0, class: '', icon: '', deletable: false, formatted: false, placeholder: '' },
-        { _id: "234", widgetType: "HEADER", name: ' ', pageId: "321", size: "4", text: "Lorem ipsum", url: "", width: "", height: 100, rows: 0, class: '', icon: '', deletable: false, formatted: false, placeholder: '' },
-        { _id: "345", widgetType: "IMAGE", pageId: "321", size: "", text: "", width: "100%", url: "http://lorempixel.com/400/200/" },
-        { _id: "456", widgetType: "HTML", name: 'html name', pageId: "321", size: "", text: "<p>Lorem ipsum</p>", url: "", width: "", height: 100, rows: 0, class: '', icon: '', deletable: false, formatted: false, placeholder: '' },
-        { _id: "567", widgetType: "HEADER", name: ' ', pageId: "321", size: "4", text: "Lorem ipsum", url: "", width: "", height: 100, rows: 0, class: '', icon: '', deletable: false, formatted: false, placeholder: '' },
-        { _id: "678", widgetType: "YOUTUBE", name: ' ', pageId: "321", size: "", text: "", url: 'https://www.youtube.com/embed/mFkli0wD4-w', width: "100%", height: 100, rows: 0, class: '', icon: '', deletable: false, formatted: false, placeholder: '' },
-        { _id: "789", widgetType: "HTML", name: 'html name', pageId: "321", size: "", text: "<p>Lorem ipsum</p>", url: "", width: "", height: 100, rows: 0, class: '', icon: '', deletable: false, formatted: false, placeholder: '' }
-    ];
+  const widgetModel = require("../models/widget/widget.model.server");
 
-    let widgetModel = require('../model/widget/widget.model.server');
-    let multer = require('multer'); // npm install multer --save
-    const path = require('path');
-    let storage = multer.diskStorage({
-        destination: function (req, file, cb) {
-            cb(null, __dirname + '/../../dist/xuanproject/assets/uploads/')
-        },
-        filename: function (req, file, cb) {
-            cb(null, Date.now() + path.extname(file.originalname)) //Appending extension
-        }
-    })
+  const multer = require('multer'); // npm install multer --save
+  const upload = multer({dest: __dirname + '/../../src/assets/uploads'});
+  const baseUrl = "";
 
-    let upload = multer({ storage: storage });
+  app.post("/api/page/:pageId/widget", createWidget);
+  app.get("/api/page/:pageId/widget", findAllWidgetsForPage);
+  app.get("/api/widget/:widgetId", findWidgetById);
+  app.put("/api/widget/:widgetId", updateWidget);
+  app.delete("/api/widget/:widgetId", deleteWidget);
 
-    /* John pappy's - declare APIs at top and write functions below */
+  // REORDER
+  app.put("/api/page/:pageId/widget?", reorderWidget);
 
-    app.post("/api/page/:pageId/widget", createWidget);
-    app.get("/api/page/:pageId/widget",findAllWidgetsForPage);
-    app.get("/api/widget/:widgetId",findWidgetById);
-    app.put("/api/widget/:widgetId",updateWidget);
-    app.delete("/api/widget/:widgetId",deleteWidget);
+  // UPLOAD
+  app.post ("/api/upload", upload.single('myFile'), uploadImage);
 
-    app.put("/api/page/:pageId/widget?",reorderWidgets);
+  // const widgets = [
+  //   {_id: '1', type: 'HEADER', pageId: '321', size: '2', text: 'GIZMODO'},
+  //   {_id: '2', type: 'HEADER', pageId: '321', size: '4', text: 'Lorem ipsum'},
+  //   {_id: '3', type: 'IMAGE', pageId: '321', size: '2', text: 'text', width: '100%',
+  //     url: 'http://lorempixel.com/400/200/'},
+  //   {_id: '4', type: 'IMAGE', pageId: '321', size: '2', text: 'my image', width: '100%',
+  //     url: 'http://food.fnr.sndimg.com/content/dam/images/food/fullset/2009/11/4/2/FNM_120109-Sugar-Fix-006_s4x3.jpg'
+  //     + '.rend.hgtvcom.616.462.suffix/1382539033745.jpeg'},
+  //   {_id: '5', type: 'YOUTUBE', pageId: '321', size: '2', text: 'text', width: '100%',
+  //     url: 'https://www.youtube.com/embed/d5nCbSNS9mA'}
+  // ];
 
-    //UPLOAD
-    app.post ("/api/upload", upload.single('myFile'), uploadImage);
+  function uploadImage(req, res) {
+    const userId = req.body.userId;
+    const websiteId = req.body.websiteId;
+    const pageId = req.body.pageId;
+    const widgetId = req.body.widgetId;
+    const width = req.body.width;
+    const name = req.body.name;
+    const text = req.body.text;
+    const myFile = req.file;
 
-    function createWidget (req,res) {
-        let widget = req.body;
-        let pageId = req.params['pageId'];
-        widgetModel
-            .createWidget(pageId, widget)
-            .then(function (widget) {
-                console.log('widget server service: ' + widget);
-                res.json(widget);
-            }, function (err) {
-                res.status(400).send(err);
-            });
+    console.log(req.file);
+
+    const callbackUrl = baseUrl + '/user/' + userId + "/website/" + websiteId
+      + "/page/" + pageId + "/widget";
+
+    if(myFile == null) {
+      res.redirect(callbackUrl + '/' + widgetId);
+      return;
     }
 
-    function findAllWidgetsForPage (req,res) {
-        let pageId = req.params.pageId;
-        widgetModel
-            .findAllWidgetsForPage(pageId)
-            .then(function (widgets) {
-                    res.json(widgets);
-                },
-                function (err) {
-                    res.status(404).send(err);
-                });
+    const originalname = myFile.originalname; // file name on user's computer
+    const filename = myFile.filename;     // new file name in upload folder
+    const path = myFile.path;         // full path of uploaded file
+    const destination = myFile.destination;  // folder where file is saved to
+    const size = myFile.size;
+    const mimetype = myFile.mimetype;
+
+    if (widgetId === '') {
+      let widget = {type: 'IMAGE', _pageId: pageId, url: 'uploads/' + filename};
+      widgetModel.createWidget(pageId, widget).then(function(newWidget) {
+        console.log('created widget image (from upload image)');
+        res.redirect(callbackUrl + '/' + newWidget._id);
+      });
+      return;
     }
 
-    function findWidgetById (req,res) {
-        let widgetId  = req.params.widgetId;
-        widgetModel
-            .findWidgetById(widgetId)
-            .then(function (widget) {
-                    res.json(widget);
-                },
-                function (err) {
-                    res.status(404).send(err);
-                });
-    }
+    const widget =  {url: 'uploads/' + filename};
+    widgetModel.updateWidget(widgetId, widget)
+      .then(function (response) {
+        console.log('updated widget image (from upload image): widgetId=' + widgetId);
+        res.status(200);
+      }, function (err) {
+        console.log(err);
+        res.status(500);
+      });
+    res.redirect(callbackUrl + '/' + widgetId);
+  }
 
-    function updateWidget (req,res) {
-        let widgetId  = req.params.widgetId;
-        console.log('widget server update: ' + widgetId);
-        let widget = req.body;
-        widgetModel
-            .updateWidget(widgetId, widget)
-            .then(function (stats) {
-                    console.log('widget server update: ' + stats);
-                    res.json(stats);
-                },
-                function (err) {
-                    res.status(404).send(err);
-                });
-    }
+  function reorderWidget(req, res) {
+    const pageId = req.params['pageId'];
+    const startIndex = parseInt(req.query.initial);
+    const endIndex = parseInt(req.query.final);
+    widgetModel
+      .reorderWidget(pageId, startIndex, endIndex)
+      .then(function(response) {
+        console.log('reordered widget: pageId=' + pageId + ' initial=' + startIndex + ' final=' + endIndex);
+        res.status(200).json({});
+      }, function(err) {
+        res.status(500);
+      });
+  }
 
-    function deleteWidget (req,res) {
-        let widgetId  = req.params.widgetId;
-        widgetModel
-            .deleteWidget(widgetId);
-    }
+  function createWidget(req, res) {
+    const widget = req.body;
+    const pageId = req.params['pageId'];
+    widget._pageId = pageId;
+    widgetModel.createWidget(pageId, widget).then(function(response) {
+        console.log('created widget: ' + response);
+        widgetModel.findAllWidgetsForPage(pageId)
+          .then(function(widgets) {
+          res.status(200).json(widgets);
+        })
+      }, function(err) {
+        console.log(err);
+        res.status(500);
+      });
+  }
 
+  function findAllWidgetsForPage(req, res) {
+    const pageId = req.params['pageId'];
+    widgetModel.findAllWidgetsForPage(pageId)
+      .then(function(widgets) {
+        res.status(200).json(widgets);
+        console.log('found all widgets for page: ' + widgets);
+      }, function(err) {
+        console.log(err);
+        res.status(500);
+      });
+  }
 
-    function reorderWidgets(req,res) {
-        let startIndex = parseInt(req.query.start);
-        let endIndex = parseInt(req.query["end"]);
-        let pageId = req.params['pageId'];
-        widgetModel
-            .reorderWidgets(pageId, startIndex, endIndex);
-    }
+  function findWidgetById(req, res) {
+    const widgetId = req.params['widgetId'];
+    widgetModel.findWidgetById(widgetId)
+      .then(function(widget){
+        console.log('found widget by id: ' + widget);
+        res.status(200).json(widget);
+      }, function(err) {
+        console.log(err);
+        res.status(500);
+      });
+  }
 
-    /* pattern matching usies only base URL. it ignores anything after ?
-     app.get("/api/user/:userId", findUserById);
-     app.get("/api/user/:userId", findUserById);
-     are the same URLs to Express!     */
-    function uploadImage(req, res) {
-        let userId = req.body.userId;
-        let websiteId = req.body.websiteId;
-        let pageId = req.body.pageId;
+  function updateWidget(req, res) {
+    const widgetId = req.params['widgetId'];
+    const widget = req.body;
+    widgetModel.updateWidget(widgetId, widget)
+      .then(function(response) {
+        res.status(200).json({});
+        console.log('updated widget: widgetId = ' + widgetId);
+      }, function(err) {
+        console.log(err);
+        res.status(500);
+      });
+  }
 
+  function deleteWidget(req, res) {
+    const widgetId = req.params['widgetId'];
+    widgetModel.deleteWidget(widgetId)
+      .then(function(response){
+        res.status(200).json({});
+        console.log('deleted widget: widgetId = ' + widgetId);
+      }, function(err) {
+        console.log(err);
+        res.status(500);
+      });
+  }
 
-        let widgetId      = req.body.widgetId;
-        let width         = req.body.width;
-        let myFile        = req.file;
-
-        // let baseUrl = 'http://localhost:3200';
-        // const callbackUrl = baseUrl + "/website/" + websiteId
-        //     + "/page/" + pageId + "/widget/" + widgetId;
-        // console.log('widget server callbackUrl: ' + callbackUrl);
-        if(myFile == null) {
-            res.redirect('/#/website/' + websiteId + '/page/' + pageId + '/widget/' + widgetId);
-            // res.redirect('back');
-            return;
-        }
-
-
-        let originalname  = myFile.originalname; // file name on user's computer
-        let filename      = myFile.filename;     // new file name in upload folder
-        let path          = myFile.path;         // full path of uploaded file
-        let destination   = myFile.destination;  // folder where file is saved to
-        let size          = myFile.size;
-        let mimetype      = myFile.mimetype;
-
-        let url = '/assets/uploads/' + filename;
-        console.log(url);
-
-        widgetModel.findWidgetById(widgetId).then(
-            function (widget) {
-                widget.url = url;
-                widgetModel.updateWidget(widgetId, widget).then(function (widget) {
-                    console.log('widget server updated url: ');
-                    // res.json(widget);
-                    res.redirect('/#/website/' + websiteId + '/page/' + pageId + '/widget/' + widgetId);
-                });
-            }
-        );
-        //
-
-        // res.redirect('back');
-    }
 };
