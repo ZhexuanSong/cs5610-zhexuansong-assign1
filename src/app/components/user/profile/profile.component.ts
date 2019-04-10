@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../services/user.service.client';
 import {User} from '../../../models/user.model.client';
+import {SharedService} from '../../../services/shared.service';
 
 @Component({
   selector: 'app-profile',
@@ -10,23 +11,32 @@ import {User} from '../../../models/user.model.client';
 })
 
 export class ProfileComponent implements OnInit {
-  user: User;
+  user: any;
   username: String;
+  errorFlag: boolean;
+  errorMsg: String;
   updateFlag: boolean;
   updateMsg: String;
-  userErrorFlag: boolean;
-  userErrorMsg: String;
+  alert: String;
 
-  constructor(private userService: UserService, private route: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private userService: UserService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private sharedService: SharedService) { }
 
   updateUser() {
-    this.updateFlag = false;
-    this.userErrorFlag = false;
+    this.errorFlag = false;
     if (this.username !== this.user.username) {
+      if (this.username === '') {
+        this.errorFlag = true;
+        this.errorMsg = 'Please enter username!';
+        return;
+      }
       this.userService.findUserByUsername(this.username).subscribe(
-        (user: User) => {
-          if (typeof user._id !== 'undefined') {
-            this.userErrorFlag = true;
+        (user: any) => {
+          if (user) {
+            this.errorFlag = true;
+            this.errorMsg = 'The username is in use. Please enter a different name.';
           } else {
             this.user.username = this.username;
             this.update();
@@ -41,8 +51,7 @@ export class ProfileComponent implements OnInit {
 
   update() {
     this.userService.updateUser(this.user._id, this.user).subscribe(
-      (user: User) => {
-        this.user = user;
+      (response: any) => {
         this.updateFlag = true;
       },
       (error: any) => {
@@ -51,35 +60,34 @@ export class ProfileComponent implements OnInit {
     );
   }
   logout() {
-    this.route.navigate(['/login']);
+    this.userService.logout()
+      .subscribe(
+        (data: any) => {
+          this.sharedService.user = '';
+          this.router.navigate(['/login']);
+        }
+      );
   }
   delete() {
     this.userService.deleteUser(this.user._id).subscribe(
-      (user: User) => {
+      (response: any) => {
         console.log('delete user: ' + this.user._id);
-        this.route.navigate(['/login']);
+        this.router.navigate(['/login']);
       },
       (error: any) => console.log(error)
     );
   }
 
    ngOnInit() {
+     this.getUser();
      this.updateFlag = false;
-     this.userErrorFlag = false;
+     this.errorFlag = false;
      this.updateMsg = 'Profile updated!';
-     this.userErrorMsg = 'The username already exists! Please use a different name.';
-
-     this.activatedRoute.params.subscribe((params: any) => {
-       return this.userService.findUserById(params['uid']).subscribe(
-         (user: User) => {
-           this.user = user;
-           this.username = this.user.username;
-         },
-         (error: any) => {
-           console.log(error);
-         }
-       );
-     });
+     this.alert = '* Please enter username';
   }
 
+  getUser() {
+    this.user = this.sharedService.user;
+    this.username = this.user.username;
+  }
 }

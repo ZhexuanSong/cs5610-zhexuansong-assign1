@@ -25,7 +25,7 @@ module.exports = function (app) {
     website._userId = userId;
     websiteModel.createWebsiteForUser(website)
       .then(function(response) {
-        console.log('created website: ' + response);
+        // console.log('created website: ' + response);
         websiteModel.findAllWebsitesForUser(userId)
           .then(function (websites){
             res.status(200).json(websites);

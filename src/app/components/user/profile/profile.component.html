@@ -2,14 +2,14 @@
 <nav class="navbar navbar-expand-md navbar-custom">
   <div class="navbar-collapse collapse mr-auto" id="collapsingNavbar">
     <ul class="navbar-nav">
-      <a class="navbar-brand" routerLink="/user/{{user?._id}}">
+      <a class="navbar-brand" routerLink="/profile">
         Profile
       </a>
-      <!--<a (click)="updateUser()"-->
-         <!--routerLink="/user/{{user?._id}}"-->
-         <!--class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">-->
-        <!--<span class="fa fa-ok"></span>-->
-      <!--</a>-->
+      <a (click)="updateUser()"
+         [routerLink]="['/profile']"
+         class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
+        <span class="fa fa-ok"></span>
+      </a>
     </ul>
   </div>
 </nav>
@@ -21,8 +21,8 @@
     {{updateMsg}}
   </div>
 
-  <div *ngIf="userErrorFlag" class="alert alert-danger">
-    {{userErrorMsg}}
+  <div *ngIf="errorFlag" class="alert alert-danger">
+    {{errorMsg}}
   </div>
 
   <form>
@@ -43,7 +43,7 @@
              type="email"
              class="form-control"
              id="email"
-             placeholder="xuan@song.com"
+             placeholder="alice@wonderland.com"
              [(ngModel)]="user.email"
              [ngModelOptions]="{standalone: true}"/>
     </div>
@@ -54,7 +54,7 @@
              type="text"
              class="form-control"
              id="first-name"
-             placeholder="xuan"
+             placeholder="Alice"
              [(ngModel)]="user.firstName"
              [ngModelOptions]="{standalone: true}"/>
     </div>
@@ -64,14 +64,14 @@
       <input type="text"
              class="form-control"
              id="last-name"
-             placeholder="song"
+             placeholder="Wonderland"
              [ngModelOptions]="{standalone: true}"
              [(ngModel)]="user.lastName"/>
     </div>
   </form>
 
   <a class="btn btn-primary btn-block"
-     routerLink="./website">Websites</a>
+     [routerLink]="['/user', 'website']">Websites</a>
 
   <a class="btn btn-danger  btn-block"
      routerLink="/login">Logout</a>

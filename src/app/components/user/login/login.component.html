@@ -13,6 +13,7 @@
                name="username"
                type="text"
                class="form-control"
+               [ngClass]="{'red-border-class': !username.valid && username.touched}"
                ngModel
                required
                #username="ngModel"/>
@@ -38,6 +39,12 @@
     <button class="btn btn-success btn-block"
             (click)="register()"
             type="button">Register</button>
+    <a class="btn btn-info btn-block"
+       href="/facebook/login"
+       type="button">
+      <span class="fa fa-facebook"></span>
+      Facebook
+    </a>
   </form>
 
 </div>

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-custom">
   <div class="navbar-collapse collapse mr-auto" id="collapsingNavbar">
     <ul class="navbar-nav">
-      <a class="nav-link cl-icon-padding" routerLink="..">
+      <a class="nav-link cl-icon-padding" [routerLink]="['/profile']">
         <i class="fa fa-chevron-left"></i>
       </a>
       <a class="navbar-brand cl-icon-padding" routerLink=".">Websites</a>
@@ -32,7 +32,7 @@
 
 <nav class="navbar fixed-bottom navbar-light navbar-custom">
   <ul class="navbar-nav ml-auto">
-    <a routerLink=".." class="navbar-link navbar-text pull-right cl-text-white">
+    <a [routerLink]="['/profile']" class="navbar-link navbar-text pull-right cl-text-white">
       <i class="fa fa-user"></i>
     </a>
   </ul>

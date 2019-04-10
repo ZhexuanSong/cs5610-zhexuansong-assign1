@@ -4,8 +4,23 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const app = express();
 
+const passport      = require('passport');
+const cookieParser  = require('cookie-parser');
+const session       = require('express-session');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+// const secret = process.env.SECRET || "this is the secret";
+
+// const secret = process.env.SECRET || "this is the secret";
+const secret = !!process.env.SESSION_SECRET ? process.env.SESSION_SECRET : 'local_secret'
+app.use(cookieParser());
+app.use(session({ secret: secret }));
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 // Point static path to dist -- For building -- REMOVE
 app.use(express.static(path.join(__dirname, 'dist/my-project')));

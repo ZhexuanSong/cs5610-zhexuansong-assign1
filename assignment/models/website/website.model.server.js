@@ -15,12 +15,12 @@ module.exports = WebsiteModel;
 function createWebsiteForUser(website) {
   const promise = WebsiteModel.create(website);
   promise.then(function(responseWebsite) {
-      userModel.findUserById(website._userId)
-        .then(function(user) {
-          user.websites.push(responseWebsite);
-          return user.save();
-        })
-    });
+    userModel.findUserById(website._userId)
+      .then(function(user) {
+        user.websites.push(responseWebsite);
+        return user.save();
+      })
+  });
   return promise;
 }
 

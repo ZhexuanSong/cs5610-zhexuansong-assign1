@@ -36,7 +36,7 @@ import {FlickrService} from './services/flickr.service.client';
 import {SharedService} from './services/shared.service';
 import {OrderByPipe} from './components/widget/widget-list/oder-by-pipe.pipe';
 import { SortableDirective } from './components/widget/widget-list/sortable.directive';
-
+import {AuthGuard} from './services/auth-guard.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,7 +68,7 @@ import { SortableDirective } from './components/widget/widget-list/sortable.dire
     HttpClientModule,
     QuillEditorModule
   ],
-  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService, SharedService],
+  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService, SharedService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

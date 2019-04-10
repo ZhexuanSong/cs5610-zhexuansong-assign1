@@ -3,8 +3,12 @@
 
   <h1>Register</h1>
 
-  <div *ngIf="userErrorFlag" class="alert alert-danger">
-    {{userErrorMsg}}
+  <div *ngIf="errorFlag" class="alert alert-danger">
+    {{errorMsg}}
+  </div>
+
+  <div *ngIf="passwordFlag" class="alert alert-warning">
+    {{passwordMsg}}
   </div>
 
   <form (ngSubmit)="register()" #f="ngForm">
@@ -15,9 +19,11 @@
              placeholder="username"
              type="text"
              class="form-control"
+             [ngClass]="{'red-border-class': errorFlag}"
              ngModel
              required
              #username="ngModel"/>
+      <span class="alert-class" *ngIf="errorFlag">{{errorAlert}}</span>
     </div>
 
     <div class="form-group">
@@ -26,9 +32,11 @@
              placeholder="password"
              type="password"
              class="form-control"
+             [ngClass]="{'red-border-class': passwordFlag}"
              ngModel
              required
              #password="ngModel"/>
+      <span class="alert-class" *ngIf="passwordFlag">{{passwordAlert}}</span>
     </div>
 
     <div class="form-group">
@@ -42,9 +50,6 @@
              #v_password="ngModel"/>
     </div>
 
-    <div *ngIf="pwErrorFlag" class="alert alert-danger">
-      {{pwErrorMsg}}
-    </div>
 
     <button class="btn btn-primary btn-block"
             type="submit"
