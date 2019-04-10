@@ -1,70 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>Widget Image</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"/>
   <link href="css/style.css" rel="stylesheet"/>
 </head>
-
 <body>
-
-<nav class="navbar navbar-expand-md navbar-light bg-light">
-  <div class="navbar-collapse collapse" id="collapsingNavbar">
-    <ul class="navbar-nav">
-      <a class="nav-link cl-icon-padding" href="widget-list.html">
-        <i class="fa fa-chevron-left"></i>
-      </a>
-      <a class="navbar-brand cl-icon-padding" href="#">Widgets Edit</a>
-    </ul>
+<nav class="navbar navbar-light bg-light fixed-top">
+  <div class="row container-fluid">
+    <div class="float-left">
+      <a href="widget-list.html"><span class="color-black fas fa-chevron-left fontawsome_icon"></span></a>
+      <a class="navbar-text navbar-brand text-bold text-padding-left" href="#">Widgets Edit</a>
+    </div>
+    <div class="text-brand float-right text-padding-top">
+      <a class="color-black" href="#"></a>
+    </div>
+    <div class="float-right ml-auto text-padding-top">
+      <a href="widget-list.html"><span class="color-black fas fa-check fontawsome_icon"></span></a>
+    </div>
   </div>
 
-  <div>
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link cl-icon-padding" href="widget-list.html"><i class="fa fa-check"></i></a>
-      </li>
-    </ul>
-  </div>
 </nav>
-
-<div class="container cl-container-padding">
+<div class="container">
   <form>
-    <div class="form-group">
-      <label for="image-name">Name</label>
-      <input type="text" class="form-control" id="image-name" placeholder="Name">
+    <div class="form-group text-padding-top">
+      <label for="image name" class="text-bold">Name</label>
+      <input id="image name" type="text" class="form-control" placeholder="Name"/>
     </div>
     <div class="form-group">
-      <label for="image-text">Text</label>
-      <input type="text" class="form-control" id="image-text" placeholder="Text">
+      <label for="image-text" class="text-bold">Title</label>
+      <input id="image-text" type="text" class="form-control" placeholder="Text">
     </div>
     <div class="form-group">
-      <label for="image-URL">URL</label>
-      <input type="text" class="form-control" id="image-URL" placeholder="URL">
+      <label for="image-url" class="text-bold">URL</label>
+      <input id="image-url" type="url" class="form-control" placeholder="URL"/>
     </div>
     <div class="form-group">
-      <label for="image-width">Width</label>
-      <input type="text" class="form-control" id="image-width" placeholder="100%">
+      <label for="image-width" class="text-bold">Width</label>
+      <input id="image-width" type="text" class="form-control" placeholder="100%"/>
     </div>
+
     <div class="form-group">
-      <label for="exampleInputFile">Upload</label>
-      <input type="file" class="form-control" id="exampleInputFile">
+      <label for="widget-file" class="text-bold">Upload</label>
+      <input id="widget-file" type="file">
     </div>
   </form>
+
   <a class="btn btn-primary btn-block" href="#">Upload Image</a>
-  <a class="btn btn-danger  btn-block" href="widget-list.html">Delete</a>
+  <a class="btn btn-danger btn-block" href="widget-list.html">Delete</a>
+
 </div>
 
-<nav class="navbar fixed-bottom navbar-light bg-light">
-  <ul class="navbar-nav ml-auto">
-    <a href="profile.html" class="navbar-link navbar-text pull-right cl-icon-padding">
-      <i class="fa fa-user"></i>
-    </a>
-  </ul>
+<nav class="navbar navbar-light bg-light fixed-bottom">
+  <div class="float-left"> </div>
+  <div class="float-right">
+    <a href="profile.html"><span class="fas fa-user fontawsome_icon color-black"></span></a>
+  </div>
+
 </nav>
-
-
 </body>
 </html>

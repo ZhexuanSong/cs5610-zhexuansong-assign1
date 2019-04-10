@@ -1,76 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>Website New</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"/>
   <link href="css/style.css" rel="stylesheet"/>
 </head>
-
 <body>
-
-<nav class="navbar navbar-expand-md navbar-custom">
-  <div class="col-1">
-    <a class="navbar-text pull-left" href="website-list.html"><i class="fa fa-chevron-left"></i></a>
+<nav class="navbar fixed-top navbar-light bg-light">
+  <div class="d-lg-none d-inline margin-right">
+    <a href="website-list.html">
+    <span class="fas fa-chevron-left color-black"></span></a>
   </div>
-
-  <div class="col-3 d-none d-sm-block">
-    <a class="navbar-brand cl-icon-padding" href="#">Websites</a>
-    <a class="navbar-text pull-right" href="website-new.html"><i class="fa fa-plus"></i></a>
-  </div>
-
-  <div class="col-8">
-    <a class="navbar-brand cl-icon-padding" href="#">New Website</a>
-    <a class="navbar-text pull-right" href="website-list.html"><i class="fa fa-check"></i></a>
+  <div class="row row-in-navbar">
+    <div class="d-none d-lg-block col-4 navbar-item navbar-left">
+      <a href="website-list.html">
+        <i class="fas fa-chevron-left fontawsome_icon color-black"></i></a>
+      <a class="navbar-text navbar-brand text-bold text-padding-left color-black" href="#">
+        Websites</a>
+    </div>
+    <div class="col-8">
+      <a class="color-black navbar-text navbar-brand text-bold" href="#">
+        New Website</a>
+      <a href="website-list.html">
+        <span class="fas fa-check fontawsome-icon float-right text-padding-top color-black"></span></a>
+    </div>
   </div>
 </nav>
-
-<div class="container-fluid cl-container-padding">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-sm-4 d-none d-sm-block">
-      <ul class="list-group cl-list-group-borderless">
-        <li class="list-group-item cl-list-item-borderless">
-          <a href="website-edit.html" class="cl-text-blue"><i class="fa fa-cog float-right"></i></a>
-          <a href="page-list.html" class="cl-text-blue">Blogging App</a>
+    <div class="d-none d-lg-block col-4">
+      <ul class="list-group list-borderless">
+        <li class="list-group-item list-borderless">
+          <a href="page-list.html">Address Book App</a>
+          <a href="website-edit.html"><i class="fas fa-cog fontawsome_icon float-right"></i></a>
         </li>
-        <li class="list-group-item cl-list-item-borderless">
-          <a href="website-edit.html" class="cl-text-blue"><i class="fa fa-cog float-right"></i></a>
-          <a href="page-list.html" class="cl-text-blue">Address Book App</a>
+        <li class="list-group-item list-borderless">
+          <a href="page-list.html">Blogger</a>
+          <a href="website-edit.html"><i class="fas fa-cog fontawsome_icon float-right"></i></a>
         </li>
-        <li class="list-group-item cl-list-item-borderless">
-          <a href="website-edit.html" class="cl-text-blue"><i class="fa fa-cog float-right"></i></a>
-          <a href="page-list.html" class="cl-text-blue">Script Testing App</a>
+        <li class="list-group-item list-borderless">
+          <a href="page-list.html">Blogging App</a>
+          <a href="website-edit.html"><i class="fas fa-cog fontawsome_icon float-right"></i></a>
         </li>
-        <li class="list-group-item cl-list-item-borderless">
-          <a href="website-edit.html" class="cl-text-blue"><i class="fa fa-cog float-right"></i></a>
-          <a href="page-list.html" class="cl-text-blue">Blogger</a>
+        <li class="list-group-item list-borderless">
+          <a href="page-list.html">Script Testing App</a>
+          <a href="website-edit.html"><i class="fas fa-cog fontawsome_icon float-right"></i></a>
         </li>
       </ul>
     </div>
 
-    <div class="col-xs-12 col-sm-8">
+    <div class="col-8">
       <form>
-        <div class="form-group">
-          <label for="website-name">Name</label>
-          <input type="text" class="form-control" id="website-name" placeholder="Name">
+        <div class="text-padding-top">
+          <label for="website-name" class="text-bold">Name</label>
+          <input id="website-name" type="text" class="form-control" placeholder="Name"/>
         </div>
-        <div class="form-group">
-          <label for="website-description">Description</label>
-          <textarea id="website-description" class="form-control" rows="5" placeholder="Description"></textarea>
+        <div class="text-padding-top">
+          <label for="web-description" class="text-bold">Description</label>
+          <textarea id="web-description" class="form-control" rows="5" placeholder="Description"></textarea>
         </div>
       </form>
     </div>
   </div>
-
 </div>
 
-<nav class="navbar fixed-bottom navbar-light navbar-custom">
-  <ul class="navbar-nav ml-auto">
-    <a href="profile.html" class="navbar-link navbar-text pull-right cl-text-white">
-      <i class="fa fa-user"></i>
+<nav class="navbar fixed-bottom navbar-light bg-light">
+  <div class="container-fluid">
+    &nbsp;
+    <a href="profile.html">
+      <span class="fas fa-user fontawsome-icon color-black"></span>
     </a>
-  </ul>
+  </div>
 </nav>
 </body>
 </html>

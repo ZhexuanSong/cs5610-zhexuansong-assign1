@@ -1,12 +1,13 @@
-const mongoose = require("mongoose");
+var mongoose = require('mongoose');
+var widgetSchema = require('../widget/widget.schema.server')
 
-const PageSchema = mongoose.Schema({
-  _websiteId: {type: mongoose.Schema.ObjectId, ref: 'WebsiteModel'},
-  name: {type: String, required: true},
+var pageSchema = new mongoose.Schema({
+  websiteId: {type: mongoose.Schema.Types.ObjectId, ref: "Website"},
+  name: String,
   title: String,
   description: String,
-  widgets: [{type: mongoose.Schema.Types.ObjectId, ref: 'WidgetModel'}],
-  dateCreated: {type: Date, default: Date.now} //Date.now is the current time
-}, {collection: "page"});
+  widgets: [widgetSchema],
+  dateCreate:{type: Date, default: Date.now()}
+},{collection: 'Pages'});
 
-module.exports = PageSchema;
+module.exports = pageSchema;

@@ -1,11 +1,11 @@
-const mongoose = require("mongoose");
-
-const WebsiteSchema = mongoose.Schema({
-  _userId: {type: mongoose.Schema.ObjectId, ref: 'UserModel'},
-  name: {type: String, required: true},
+var mongoose = require('mongoose');
+var pageSchema = require('../page/page.schema.server');
+var websiteSchema = new mongoose.Schema({
+  name: String,
   description: String,
-  pages: [{type: mongoose.Schema.Types.ObjectId, ref: 'PageModel'}],
-  dateCreated: {type: Date, default: Date.now} //Date.now is the current time
-}, {collection: "website"});
+  developerId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+  pages: [pageSchema],
+  dateCreated: {type: Date, default:Date.now()}
+}, {collection: 'Websites'});
 
-module.exports = WebsiteSchema;
+module.exports = websiteSchema;

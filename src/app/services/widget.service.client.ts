@@ -1,54 +1,48 @@
+import {Widget} from '../models/widget.model.client';
 import {Injectable} from '@angular/core';
-import { Widget } from '../models/widget.model.client';
-import { map } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class WidgetService {
+  constructor(private http: HttpClient) {}
+  baseurl = environment.baseUrl;
 
-  constructor(private _http: HttpClient) {}
-  baseUrl = environment.baseUrl;
-
-  static getNewWidget() {
-    return new Widget(undefined, undefined, undefined, undefined,
-      undefined, undefined, undefined, undefined);
+  createWidget(pageId, widget): Observable<any> {
+    const url = this.baseurl + '/api/page/' + pageId + '/widget';
+    return this.http.post<Widget>(url, widget);
   }
 
-  createWidget(pageId: String, widget: Widget) {
-    return this._http.post(this.baseUrl + '/api/page/' + pageId + '/widget', widget);
-      // .pipe(map(
-      //   (res: any) => res.json()));
+  findWidgetsByPageId(pageId): Observable<any[]> {
+    const url = this.baseurl + '/api/page/' + pageId + '/widget';
+    return this.http.get<any[]>(url);
   }
 
-  findWidgetsByPageId(pageId: String) {
-    return this._http.get(this.baseUrl + '/api/page/' + pageId + '/widget');
-      // .pipe(map(
-      //   (res: any) => res.json()));
+  findWidgetById(widgetId): Observable<any> {
+    const url = this.baseurl + '/api/widget/' + widgetId;
+    return this.http.get<any>(url);
+
   }
 
-  findWidgetById(widgetId: String) {
-    return this._http.get(this.baseUrl + '/api/widget/' + widgetId);
-      // .pipe(map(
-      //   (res: any) => res.json()));
+  updateWidget(widgetId, widget): Observable<any> {
+    const url = this.baseurl + '/api/widget/' + widgetId;
+    return this.http.put<any>(url, widget);
   }
 
-  updateWidget(widgetId: String, widget: Widget) {
-    return this._http.put(this.baseUrl + '/api/widget/' + widgetId, widget);
-      // .pipe(map(
-      //   (res: any) => res.json()));
+  deleteWidget(widgetId): Observable<any> {
+    const url = this.baseurl + '/api/widget/' + widgetId;
+    return this.http.delete<any>(url);
   }
 
-  deleteWidget(widgetId: String) {
-    return this._http.delete(this.baseUrl + '/api/widget/' + widgetId);
-      // .pipe(map(
-      //   (res: any) => res.json()));
+  reorderWidgets(startIndex, endIndex, pageId) {
+
+    const url = this.baseurl + '/api/page/' + pageId + '/widget/reorder?start=' + startIndex + '&end=' + endIndex;
+    return this.http.get(url);
   }
 
-  reorderWidgets(pageId: String, startIndex: String, endIndex: String, widgets: Widget[]) {
-    return this._http.put(this.baseUrl + '/api/page/' + pageId
-      + '/widget?initial=' + startIndex + '&final=' + endIndex, widgets);
-      // .pipe(map(
-      //   (res: any) => res.json()));
+  uploadImage(file: any) {
+    return this.http.post(this.baseurl + '/api/uploads', file);
   }
+
 }

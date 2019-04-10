@@ -1,0 +1,20 @@
+<div class="container">
+
+  <div *ngIf="errorFlag" class="alert alert-danger">
+    {{errorMsg}}
+  </div>
+  <h1>
+    {{title}}
+  </h1>
+  <div>
+      <input [(ngModel)]="user.username" type="text" class="form-control" placeholder="username"/>
+      <input [(ngModel)]="user.password" type="password" class="form-control" placeholder="password"/>
+      <input [(ngModel)]="vpassword" type="password" class="form-control" placeholder="verify password"/>
+      <input [(ngModel)]="user.firstName" type="text" class="form-control" placeholder="last name"/>
+      <input [(ngModel)]="user.lastName" type="text" class="form-control" placeholder="first name"/>
+
+    <a (click)="register()" class="btn btn-primary btn-block color-white">Register</a>
+    <a routerLink="/login" class="btn btn-success btn-block color-white">Cancel</a>
+  </div>
+
+</div>

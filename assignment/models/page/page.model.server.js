@@ -1,57 +1,106 @@
-const mongoose = require("mongoose");
-const PageSchema = require("./page.schema.server");
-const PageModel = mongoose.model('PageModel', PageSchema);
+var mongoose = require('mongoose');
 
-const websiteModel = require("../website/website.model.server");
+var pageSchema = require('./page.schema.server');
+var websiteModel = require('../website/website.model.server');
+var userModel = require('../user/user.model.server');
+var pageModel = mongoose.model('Page', pageSchema);
 
-PageModel.createPage = createPage;
-PageModel.findAllPagesForWebsite = findAllPagesForWebsite;
-PageModel.findPageById = findPageById;
-PageModel.updatePage = updatePage;
-PageModel.deletePage = deletePage;
+pageModel.createPage = createPage;
+pageModel.findAllPagesByWebsite = findAllPagesByWebsite;
+pageModel.findPageById = findPageById;
+pageModel.updatePage = updatePage;
+pageModel.deletePage = deletePage;
 
-module.exports = PageModel;
+pageModel.createPageWidgets = createPageWidgets;
+pageModel.updatePageWidgets = updatePageWidgets;
+pageModel.deletePageWidgets = deletePageWidgets;
 
+
+module.exports = pageModel;
 function createPage(websiteId, page) {
-  const promise = PageModel.create(page);
-  promise
-    .then(function(responsePage) {
-      websiteModel.findWebsiteById(websiteId)
-        .then(function(website) {
-          website.pages.push(responsePage);
-          website.save();
-        })
+  return pageModel.create(page)
+    .then((newPage) => {
+      createPageInWeb(websiteId,newPage);
+      return newPage;
     });
-  return promise;
 }
 
-function findAllPagesForWebsite(websiteId) {
-  return PageModel.find({_websiteId: websiteId})
-    .populate('_websiteId', 'name')
-    .exec();
+function findAllPagesByWebsite(websiteId) {
+  return pageModel.find({websiteId:websiteId});
 }
-
-function findPageById(pageId) {
-  return PageModel.findById({_id: pageId});
+function findPageById(pageId){
+  return pageModel.findById(pageId);
 }
-
 function updatePage(pageId, page) {
-  return PageModel.update({_id: pageId}, page);
+  updatePageInWeb(page);
+  return pageModel.findByIdAndUpdate(pageId, page, {new: true, safe:true})
+    .then((newPage) => {
+      console.log(newPage.widgets);
+    });
 }
 
 function deletePage(pageId) {
-  return findPageById(pageId).then(function(page) {
-    PageModel.remove({_id: pageId}).then(function() {
-      websiteModel.findWebsiteById(page._websiteId).then(function(website) {
-        if (website != null) {
-          for (let i = 0; i < website.pages.length; i++) {
-            if (website.pages[i].equals(pageId)) {
-              website.pages.splice(i, 1);
-              return website.save();
-            }
-          }
-        }
-      })
-    })
-  });
+  deletePageInWeb(pageId);
+  return pageModel.findByIdAndRemove(pageId);
+}
+
+function createPageInWeb(websiteId, page) {
+  websiteModel.createWebsitePages(websiteId, page);
+}
+
+function updatePageInWeb(page) {
+  websiteModel.updateWebsitePages(page.websiteId, page);
+}
+
+function deletePageInWeb(pageId) {
+  pageModel.findPageById(pageId)
+    .then((page) => {
+       websiteModel.deleteWebsitePages(page.websiteId, pageId);
+    });
+}
+
+function createPageWidgets(pageId, widget) {
+   pageModel.findByIdAndUpdate(pageId,
+    {$push: {"widgets": widget}},
+    {safe: true, new: true},
+    () => {
+      pageModel.findPageById(pageId)
+        .then((page) => {
+          pageModel.updatePage(pageId, page);
+        });
+    }
+    );
+}
+
+function updatePageWidgets(pageId, widget) {
+  return pageModel.findPageById(pageId)
+    .then((page) => {
+      const index = findIndex(page.widgets, widget);
+      page.widgets.splice(index, 1);
+      page.widgets.splice(index, 0, widget);
+      return page.save().then((page) => {
+        pageModel.updatePage(pageId, page);
+      });
+    });
+}
+function findIndex(array, target) {
+  for (let i = 0;i<array.length;i++) {
+    if (array[i]._id.toString() === target._id.toString()) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+ function deletePageWidgets(pageId, widgetId) {
+  pageModel.findByIdAndUpdate(pageId,
+    {$pull: {'widgets': {_id: widgetId}}},
+    {safe: true, new: true},
+    () => {
+      pageModel.findPageById(pageId)
+        .then((page) => {
+          pageModel.updatePage(pageId, page);
+        });
+    }
+    );
 }
