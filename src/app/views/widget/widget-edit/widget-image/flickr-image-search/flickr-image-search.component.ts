@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {FlickrService} from '../../../../../services/flickr.service.client';
-import {ActivatedRoute, Router} from '@angular/router';
 import {WidgetService} from '../../../../../services/widget.service.client';
-import {Widget} from '../../../../../models/widget.model.client';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-flickr-image-search',
@@ -10,47 +9,45 @@ import {Widget} from '../../../../../models/widget.model.client';
   styleUrls: ['./flickr-image-search.component.css']
 })
 export class FlickrImageSearchComponent implements OnInit {
-  websiteId: string;
-  pageId: string;
-  widgetId: string;
 
-  widget: Widget;
-
+  websiteId: String;
+  pageId: String;
+  widgetId: String;
   photos: [any];
-  errors: string;
-  searchText: string;
+  error: String;
+  searchText: String;
 
-  constructor(private router: Router, private filckrService: FlickrService, private activatedROute: ActivatedRoute,
-              private widgetService: WidgetService) {
-
-  }
+  constructor(private flickrService: FlickrService, private widgetService: WidgetService, private router: Router,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.activatedROute.params.subscribe(params => {
-      this.websiteId = params.websiteId;
-      this.pageId = params.pageId;
-      this.widgetId = params.widgetId;
-      this.widgetService.findWidgetById(this.widgetId).subscribe((data: Widget) => {
-        this.widget = data;
-      });
-    });
 
+    // fetch userId, pageId and websiteId from url
+    this.activatedRoute.params
+        .subscribe(
+            (params: any) => {
+              this.websiteId = params['wid'];
+              this.pageId = params['pid'];
+              this.widgetId = params['wgid'];
+            }
+        );
   }
 
   searchPhotos() {
-    if (!this.searchText) {
-      alert('Please input the search infor');
-    } else {
-      this.filckrService.searchPhotos(this.searchText).subscribe((data: any) => {
-        let val = data;
-        val = val.replace('jsonFlickrApi(', '');
-        val = val.substring(0, val.length - 1);
-        val = JSON.parse(val);
-        this.photos = val.photos.photo;
-      });
-    }
-
+      this.flickrService
+          .searchPhotos(this.searchText)
+          .subscribe(
+              (data: any) => {
+                  let val = data;
+                  val = val.replace('jsonFlickrApi(', '');
+                  val = val.substring(0, val.length - 1);
+                  val = JSON.parse(val);
+                  this.photos = val.photos.photo;
+              }
+          );
   }
+
+
 
   selectPhoto(photo) {
     let url = 'https://farm' + photo.farm + '.staticflickr.com/' + photo.server;
@@ -58,23 +55,24 @@ export class FlickrImageSearchComponent implements OnInit {
 
     console.log('flickr: ' + url);
 
-    const widget = new Widget(this.widget.type, undefined, this.pageId, this.widget.size,
-      this.widget.text, this.widget.width, url, undefined, undefined, undefined);
-
-    widget._id = this.widget._id;
+    const widget = {
+      websiteId : this.websiteId,
+      pageId : this.pageId,
+      url: url
+    };
 
     this.widgetService
-      .updateWidget(this.widgetId, widget)
-      .subscribe(
-        (data: any) => {
-          if (data) { this.router.navigate(['/profile/website/' + this.websiteId + '/page/' +
-          this.pageId + '/widget']);
-          } else {
-            this.errors = 'failed!';
-          }
-        }
-      );
+        .updateWidget(this.widgetId, widget)
+        .subscribe(
+            (data: any) => {
+              const result = data;
+              if (result) { this.router.navigate(['/website/' + this.websiteId + '/page/' +
+              this.pageId + '/widget/' + this.widgetId] );
+              } else {
+                this.error = 'failed!';
+              }
+            }
+        );
   }
-
 
 }

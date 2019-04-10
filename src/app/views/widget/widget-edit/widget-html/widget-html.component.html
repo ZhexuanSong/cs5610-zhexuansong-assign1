@@ -1,46 +1,41 @@
-<header>
-  <nav class="navbar fixed-top">
-    <div class="container-fluid">
-      <p class="navbar-text float-left">
-        <a routerLink="/profile/website/{{websiteId}}/page/{{pageId}}/widget/" class="navbar-link">
-          <span class="nav-black-icon fas fa-chevron-left fontawsome_icon top-left"></span>
-        </a>
-        <a class="navbar-black-brand" routerLink="/profile/website/{{websiteId}}/page/{{pageId}}/widget/{{widgetId}}/html">
-          Edit Widget
-        </a>
-      </p>
-      <a (click)="widgetOperation()" class="navbar-link navbar-text float-right check-icon">
-        <span class="nav-black-icon fas fa-check fontawsome_icon top-right">
-        </span>
-      </a>
-    </div>
-  </nav>
-</header>
-<main>
-  <div class="container">
-    <div *ngIf="errorFlag" class="alert alert-danger">
-      {{errorMsg}}
-    </div>
-    <div class="form-group text-padding-top">
-      <label for="html-name" class="text-bold">Name</label>
-      <input id="html-name" type="text" class="form-control" placeholder="Name" [(ngModel)]="widget.name"/>
-    </div>
-    <div class="form-group">
-      <label for="text" class="text-bold">Text</label>
-      <quill-editor id="text" [(ngModel)]="widget.text"></quill-editor>
-    </div>
-    <a *ngIf="!isNewWidget" class="btn btn-danger btn-block" (click)="deleteWidget()">Delete</a>
-    <a routerLink="/profile/website/{{websiteId}}/page/{{pageId}}/widget/" class="btn btn-success btn-block">Cancel</a>
+<form (ngSubmit)="updateWidget()" #f="ngForm">
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light justify-content-start">
+  <a class="nav-item nav-link" routerLink="/website/{{websiteId}}/page/{{pageId}}/widget">
+    <i class="fas fa-chevron-left black-icons"></i></a>
+  <a class="navbar-brand  white-icons">Widget Edit</a>
+  <a class="nav-item nav-link ml-auto" (click)="updateWidget()"
+     routerLink="/website/{{websiteId}}/page/{{pageId}}/widget">
+    <i class="fas fa-check black-icons"></i></a>
+</nav>
 
+<div class="container move-up">
+  <div *ngIf="flag"
+       class="alert alert-danger">
+    {{error}}
   </div>
-</main>
-<footer>
-  <nav class="navbar fixed-bottom">
-    <div class="container-fluid">
-      <p class="navbar-text float-left"></p>
-      <a class="nav-black-icon" routerLink="/profile">
-        <span class="fas fa-user fontawsome-icon bottom-right"></span>
-      </a>
+    <div class="form-group" *ngIf="widget">
+      <label for="Name">Name</label>
+      <input ngModel required #widgetname="ngModel"
+             type="text"
+             class="form-control"
+             id="Name"
+             name="widgetname"
+             placeholder="Name"
+             [(ngModel)]="widget.name"
+             required>
+      <span class="help-block" *ngIf="!widgetname.valid">
+      Please enter widget name!
+    </span>
     </div>
-  </nav>
-</footer>
+    <div *ngIf="widget">
+      <quill-editor [(ngModel)]="widget.text" name="text"></quill-editor>
+    </div>
+  <p></p>
+  <a class="btn btn-danger  btn-block" (click)="deleteWidget()"
+     routerLink="/website/{{websiteId}}/page/{{pageId}}/widget">Delete</a>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-primary bg-light justify-content-start fixed-bottom">
+  <a class="nav-item nav-link ml-auto navblack" routerLink="/profile"><i class="  fas fa-user"></i></a>
+</nav>
+</form>

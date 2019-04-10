@@ -1,82 +1,68 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {WidgetService} from '../../../../services/widget.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Widget} from '../../../../models/widget.model.client';
+import {NgForm} from '@angular/forms';
 
 @Component({
-  selector: 'app-widget-youtube',
-  templateUrl: './widget-youtube.component.html',
-  styleUrls: ['./widget-youtube.component.css']
+    selector: 'app-widget-youtube',
+    templateUrl: './widget-youtube.component.html',
+    styleUrls: ['./widget-youtube.component.css']
 })
 export class WidgetYoutubeComponent implements OnInit {
+    @ViewChild('f') myWidgetForm: NgForm;
+    flag = false; // setting error flag as false by default
+    websiteId: string;
+    pageId: string;
+    widgetId: string;
+    widget: any;
 
-  websiteId: string;
-  errorFlag: boolean;
-  errorMsg = 'Please enter the name and url.';
-  pageId: string;
-  widgetId: string;
-  widget: Widget;
-  isNewWidget: boolean;
+    constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute) { }
 
-  constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute, private router: Router) {
-    this.widget = new Widget( 'YOUTUBE', '', '', undefined, undefined, undefined, '', undefined, undefined,  undefined);
-  }
+    ngOnInit() {
+        this.activatedRoute.params.subscribe(
+            (params: any) => {
+                this.websiteId = params['wid'];
+                this.pageId = params['pid'];
+                this.widgetId = params['wgid'];
+            }
+        );
+        this.widgetService.findWidgetById(this.widgetId)
+            .subscribe(
+                (data: any) => {
+                    this.widget = data;
+                    console.log('youtube: ' + this.widget);
+                },
+                (error: any) => console.log(error)
+            );
+    }
 
-  ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
-      this.websiteId = params.websiteId;
-      this.pageId = params.pageId;
-      this.widgetId = params.widgetId;
-      if (this.widgetId) {
-        this.widgetService.findWidgetById(this.widgetId).subscribe((data: Widget) => {
-          this.widget = data;
-          this.isNewWidget = false;
+    updateWidget() {
+
+        this.widget.name = this.myWidgetForm.value.widgetname;
+        // if name field is undefined then set error 'flag' to true making 'error' and 'alert' message visible
+        console.log('update youtube: ' + this.widget.url);
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = this.widget.url.match(regExp);
+            this.widget.url = 'https://www.youtube.com/embed/' + match[2];
+        console.log('safe youtube url: ' + this.widget.url);
+        if (this.widget['name'] === undefined) {
+            this.flag = true;
+        } else {
+            this.widgetService.updateWidget(this.widget._id, this.widget).subscribe(
+                (widget: any) => {
+                    console.log('update widget header: ');
+                });
+        }
+    }
+
+  //  https://www.youtube.com/embed/mFkli0wD4-w
+ //        https://www.youtube.com/embed/vw2SaHkGfss
+
+    deleteWidget() {
+
+        this.widgetService.deleteWidget(this.widgetId).subscribe((data: any) => {
         });
-      } else {
-        this.isNewWidget = true;
-      }
-    });
+
     }
 
-  widgetOperation() {
-    if (this.isNewWidget) {
-      this.createNewWidget();
-    } else {
-      this.updateCurWidget();
-    }
-  }
-
-  private createNewWidget() {
-    if (!this.widget.name || !this.widget.url || this.widget.name === '' || this.widget.url === '') {
-      this.errorFlag = true;
-    } else {
-      this.errorFlag = false;
-      this.widgetService.createWidget(this.pageId, this.widget).subscribe((data: Widget) => {
-        this.widget = data;
-        this.backToWidgets();
-      });
-    }
-  }
-
-  private updateCurWidget() {
-    if (!this.widget.name || !this.widget.url || this.widget.name === '' || this.widget.url === '') {
-      this.errorFlag = true;
-    } else {
-      this.errorFlag = false;
-      this.widgetService.updateWidget(this.widgetId, this.widget).subscribe((data: Widget) => {
-        this.widget = data;
-        this.backToWidgets();
-      });
-    }
-  }
-
-  deleteWidget() {
-    this.widgetService.deleteWidget(this.widgetId).subscribe(() => {
-      this.backToWidgets();
-    });
-  }
-
-  backToWidgets() {
-    this.router.navigate(['/profile/website/' + this.websiteId + '/page/' + this.pageId + '/widget']);
-  }
 }

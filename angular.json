@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "myWeb5610": {
+    "xuanproject": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/myWeb5610",
+            "outputPath": "dist/xuanproject",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -25,8 +25,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -58,18 +57,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "myWeb5610:build"
+            "browserTarget": "yi-project1:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "myWeb5610:build:production"
+              "browserTarget": "yi-project1:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "myWeb5610:build"
+            "browserTarget": "yi-project1:build"
           }
         },
         "test": {
@@ -103,7 +102,7 @@
         }
       }
     },
-    "myWeb5610-e2e": {
+    "yi-project1-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -112,11 +111,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "myWeb5610:serve"
+            "devServerTarget": "yi-project1:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "myWeb5610:serve:production"
+              "devServerTarget": "yi-project1:serve:production"
             }
           }
         },
@@ -132,5 +131,5 @@
       }
     }
   },
-  "defaultProject": "myWeb5610"
+  "defaultProject": "yi-project1"
 }

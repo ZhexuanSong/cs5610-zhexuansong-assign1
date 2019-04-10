@@ -1,9 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
-import {NgForm} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Router} from '@angular/router';
+
 import {UserService} from '../../../services/user.service.client';
-import {User} from '../../../models/user.model.client';
-import {SharedService} from '../../../services/shared.service';
+
+import {NgForm} from '@angular/forms';
+import { ViewChild } from '@angular/core';
+import {SharedService} from '../../../services/shared.service.client';
 
 @Component({
   selector: 'app-login',
@@ -11,37 +13,41 @@ import {SharedService} from '../../../services/shared.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  @ViewChild('f') loginForm: NgForm;
-
-  title: string;
+  @ViewChild('f') myLoginForm: NgForm;
   username: string;
   password: string;
+
   errorFlag: boolean;
-  errorMsg = 'Invalid username or password! Please re-enter!';
+  errorMsg = 'Invalid username or password !';
 
-  constructor(private userService: UserService, private router: Router, private sharedService: SharedService) {
-    this.title = 'login';
-    this.errorFlag = false;
-  }
+  constructor(private router: Router, private _userService: UserService, private sharedService: SharedService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   login() {
-    this.username = this.loginForm.value.username;
-    this.password = this.loginForm.value.password;
-    if (this.username && this.password) {
-      this.userService.login(this.username, this.password).subscribe(
-        (data: any) => {
-          if (data) {
-            if (data.message !== 'Invalid username or password.') {
-              this.sharedService.user = data;
-              this.router.navigate(['profile']);
-            } else {
-              this.errorFlag = true;
-            }
-          }
-        });
-    }
+
+    // fetching data from loginForm
+    this.username = this.myLoginForm.value.username;
+    this.password = this.myLoginForm.value.password;
+
+      this._userService.login(this.username, this.password)
+          .subscribe(
+              (user: any) => {
+                  console.log(user);
+                  this.sharedService.user = user;
+                  this.router.navigate(['/profile']); },
+              (error: any) => {
+                  console.log(error);
+                  this.errorFlag = true;
+              }
+          );
   }
+
+  // facebook() {
+  //     this._userService.facebook().subscribe((user: any) => {
+  //         console.log(user);
+  //         this.sharedService.user = user;
+  //     });
+  // }
+
 }

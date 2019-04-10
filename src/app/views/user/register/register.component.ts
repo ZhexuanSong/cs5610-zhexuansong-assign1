@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {User} from '../../../models/user.model.client';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserService} from '../../../services/user.service.client';
 import {Router} from '@angular/router';
+import {NgForm} from '@angular/forms';
+import {SharedService} from '../../../services/shared.service.client';
 
 @Component({
   selector: 'app-register',
@@ -9,41 +10,37 @@ import {Router} from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
-  title: string;
-  user: User;
+  @ViewChild('f') myRegisterForm: NgForm;
+  user = {username: '', password: ''};
+  v_password: string;
   errorFlag: boolean;
-  errorMsg = '';
-  vpassword = '';
+  errorMsg = 'Password mis-matching!';
 
-  constructor(private router: Router, private userService: UserService) {
-    this.title = 'Register';
-    this.errorFlag = false;
-    this.user = new User( '', '', undefined, undefined);
-  }
+  constructor(private userService: UserService, private router: Router, private sharedService: SharedService) { }
 
   register() {
-    this.errorFlag = this.user.username === '' || this.user.password === '' || this.vpassword === '';
-    if (this.errorFlag) {
-      this.errorMsg = 'Please enter your register information.';
+    this.user.username = this.myRegisterForm.value.username;
+    this.user.password = this.myRegisterForm.value.password;
+    this.v_password = this.myRegisterForm.value.v_password;
+    if ( this.v_password === this.user.password) {
+      this.errorFlag = false;
+      this.userService.register(this.user.username, this.user.password)
+          .subscribe(
+              (data: any) => {
+                this.sharedService.user = data;
+                console.log(data.name);
+                this.router.navigate(['/profile']);
+              },
+              (error: any) => {
+                this.errorMsg = error._body;
+              }
+          );
+
     } else {
-      if (this.vpassword === this.user.password) {
-        this.errorFlag = false;
-        this.userService.register(this.user).subscribe((data: any) => {
-          if (data.message === 'User already exists') {
-            alert('User already exists. Please use another username');
-          } else {
-            this.router.navigate(['profile']);
-          }
-        });
-      } else {
-        this.errorMsg = 'Sorry, password mist-matching.';
-        this.errorFlag = true;
-      }
+      this.errorFlag = true;
     }
   }
 
   ngOnInit() {
   }
-
 }

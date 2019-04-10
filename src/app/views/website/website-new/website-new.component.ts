@@ -1,9 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Website} from '../../../models/website.model.client';
 import {WebsiteService} from '../../../services/website.service.client';
-import {UserService} from '../../../services/user.service.client';
-import {SharedService} from '../../../services/shared.service';
+import {ActivatedRoute} from '@angular/router';
+import {NgForm} from '@angular/forms';
+import {SharedService} from '../../../services/shared.service.client';
 
 @Component({
   selector: 'app-website-new',
@@ -11,38 +10,35 @@ import {SharedService} from '../../../services/shared.service';
   styleUrls: ['./website-new.component.css']
 })
 export class WebsiteNewComponent implements OnInit {
+  @ViewChild('f') myWebForm: NgForm;
+  userId: String;
+  websiteId: String;
+  website: any;
+  websites: any;
 
-  userId: string;
-  errorFlag: boolean;
-  errorMsg = 'Please enter the name.';
-  website: Website;
-  websites: Website[] = [];
+  constructor(private websiteService: WebsiteService, private activatedRoute: ActivatedRoute, private sharedService: SharedService) { }
 
-  constructor(private userService: UserService, private router: Router, private websiteService: WebsiteService,
-              private activatedRouter: ActivatedRoute, private sharedService: SharedService) {
-    this.website = new Website( '', '', undefined);
-  }
-
-  createNewWeb() {
-    if (this.website.name === '') {
-      this.errorFlag = true;
-    } else {
-      this.errorFlag = false;
-      this.websiteService.createWebsite(this.userId, new Website(this.website.name, undefined, this.website.description))
-        .subscribe((data) => {
-          this.website = data;
-          this.router.navigate(['/profile/website']);
-        });
-    }
+  createWebsite() {
+    this.website = {
+      name: this.myWebForm.value.websitename,
+      description: this.myWebForm.value.description,
+      _user: this.userId,
+    };
+    this.websiteService.createWebsite(this.userId, this.website).subscribe((website: any) => {
+      this.website = website;
+      this.websiteId = website._id;
+    });
   }
 
   ngOnInit() {
-    this.activatedRouter.params.subscribe(params => {
-      this.userId = this.sharedService.user._id;
-      this.userService.findUserById(this.userId).subscribe((user) => {
-        this.websites = user.websites;
-      });
-    });
+    const user = this.sharedService.user;
+    this.userId = user._id;
+    console.log(this.userId);
+    this.websiteService.findWebsitesByUser(this.userId)
+        .subscribe((data: any) => {
+          this.websites = data;
+        });
+    console.log(this.websites);
   }
 
 }

@@ -1,69 +1,34 @@
-<header>
-  <nav class="navbar fixed-top">
-    <div class="row row-div">
-      <div class="col-sm-4 container-fluid d-none d-sm-block">
-        <p class="navbar-text float-left">
-          <a class="navbar-link nav-black-icon" routerLink="/profile/website/{{websiteId}}/page">
-            <span class="fas fa-chevron-left fontawsome_icon top-left"></span>
-          </a>
-          <a class="navbar-black-brand" routerLink="/profile/website/{{websiteId}}/page">
-            Pages
-          </a>
-        </p>
-      </div>
-      <div class="col-sm-8 container-fluid">
-        <p class="navbar-text float-left">
-          <a routerLink="/profile/website/{{websiteId}}/page" class="navbar-link text-white d-inline d-sm-none d-md-none d-lg-none">
-            <span class="nav-black-icon fas fa-chevron-left fontawsome-icon top-left"></span>
-          </a>
-          <a class="navbar-black-brand" routerLink="/profile/website/{{websiteId}}/page/{{pageId}}">
-            Edit Page
-          </a>
-        </p>
-        <a (click)="updateCurPage()" class="navbar-link navbar-text float-right nav-icon check-icon">
-          <span class="nav-black-icon fas fa-check fontawsome_icon top-right"></span>
-        </a>
-      </div>
+<form (ngSubmit)="updatePage()" #f="ngForm">
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light justify-content-start">
+  <a class="nav-item nav-link" routerLink="/website/{{websiteId}}/page">
+    <i class="fas fa-chevron-left black-icons"></i></a>
+  <a class="navbar-brand  white-icons" [routerLink]="">Edit Page</a>
+  <a class="nav-item nav-link ml-auto" (click)="updatePage()"
+     routerLink="/website/{{websiteId}}/page"><i class="fas fa-check black-icons"></i></a>
+</nav>
 
+<div class="container move-up" *ngIf="page">
+    <div class="form-group">
+        <label for="page-name">Name</label>
+        <input type="text" id="page-name" placeholder="Page Name" class="form-control" name="pagename"
+               ngModel required #pagename="ngModel" [(ngModel)]="page.name">
     </div>
-  </nav>
-</header>
-<main>
-  <div class="container-fluid">
-  <div class="row row-div">
-    <div class="d-none d-sm-block col-sm-4">
-      <ul class="list-group list-borderless">
-        <li class="list-group-item list-borderless" *ngFor="let page of pages">
-          <a routerLink="{{page._id}}/widget">{{page.name}}</a>
-          <a routerLink="/profile/website/{{websiteId}}/page/{{page._id}}"><i class="fas fa-cog fontawsome_icon float-right"></i></a>
-        </li>
-      </ul>
+    <span class="help-block" *ngIf="!pagename.valid && pagename.touched">
+      Please enter pagename!
+    </span>
+
+    <div class="form-group">
+        <label for="page-title">Title</label>
+        <input type="text" id="page-title" placeholder="Page Title" class="form-control" name="pagetitle"
+               ngModel required #pagetitle="ngModel" [(ngModel)]="page.title">
     </div>
-    <div class="col-sm-8 right-content">
-      <div *ngIf="errorFlag" class="alert alert-danger">
-        {{errorMsg}}
-      </div>
-        <div class="text-padding-top">
-          <label for="page-name" class="text-bold">Name</label>
-          <input [(ngModel)]="curPage.name" id="page-name" type="text" class="form-control" placeholder="Page Name"/>
-        </div>
-        <div class="text-padding-top">
-          <label for="page-title" class="text-bold">Title</label>
-          <input [(ngModel)]="curPage.description" id="page-title" type="text" class="form-control" placeholder="Page Title">
-        </div>
-      <a (click)="deletePage()" class="btn btn-danger btn-block margin-top">Delete</a>
-    </div>
-  </div>
+    <a class="btn btn-danger  btn-block move-up" (click)="deletePage()"
+       routerLink="/website/{{websiteId}}/page">Delete</a>
 </div>
-</main>
-
-<footer>
-  <nav class="navbar fixed-bottom">
-    <div class="container-fluid">
-      <p class="navbar-text float-left"></p>
-      <a class="nav-black-icon" routerLink="/profile">
-        <span class="fas fa-user fontawsome-icon bottom-right"></span>
-      </a>
-    </div>
-  </nav>
-</footer>
+<nav class="navbar fixed-bottom bg-light navbar-light justify-content-end">
+  <div class="container-fuild">
+    <a routerLink="/profile" class="navbar-link navbar-text float-right">
+      <i class="fas fa-user blue"></i></a>
+  </div>
+</nav>
+</form>

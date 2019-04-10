@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {WidgetService} from '../../../../services/widget.service.client';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Widget} from '../../../../models/widget.model.client';
+import {WidgetService} from '../../../../services/widget.service.client';
 import {environment} from '../../../../../environments/environment';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-widget-image',
@@ -10,99 +10,55 @@ import {environment} from '../../../../../environments/environment';
   styleUrls: ['./widget-image.component.css']
 })
 export class WidgetImageComponent implements OnInit {
+    @ViewChild('f') myWidgetForm: NgForm;
+    flag = false; // setting error flag as false by default
+    websiteId: string;
+    pageId: string;
+    widgetId: string;
+    userId: string;
+    widget: any;
+    widgets: any;
+    baseUrl = environment.baseUrl;
 
-  websiteId: string;
-  pageId: string;
-  widgetId: string;
-  errorFlag: boolean;
-  errorMsg = 'Please enter the name.';
-  widget: Widget;
-  isNewWidget: boolean;
-  baseUrl: string;
-  file: File;
-  constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute, private router: Router) {
-    this.widget = new Widget( 'IMAGE', '', '', undefined, undefined, undefined,
-      '', undefined, undefined, undefined);
-    this.baseUrl = environment.baseUrl;
-  }
+    constructor(private widgetService: WidgetService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
-  ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
-      this.websiteId = params.websiteId;
-      this.pageId = params.pageId;
-      this.widgetId = params.widgetId; if (this.widgetId) {
-        this.widgetService.findWidgetById(this.widgetId).subscribe((data: Widget) => {
-          this.widget = data;
-          this.isNewWidget = false;
-        });
-      } else {
-        this.isNewWidget = true;
-      }
-    });
+    ngOnInit() {
+        this.activatedRoute.params.subscribe(
+            (params: any) => {
+                this.websiteId = params['wid'];
+                this.pageId = params['pid'];
+                this.widgetId = params['wgid'];
+            }
+        );
+        this.widgetService.findWidgetById(this.widgetId)
+            .subscribe(
+                (data: any) => this.widget = data,
+                (error: any) => console.log(error)
+            );
     }
 
-  widgetOperation() {
-    if (this.isNewWidget) {
-      this.createNewWidget();
-    } else {
-      this.updateCurWidget();
-    }
-  }
+    updateWidget() {
 
-  private createNewWidget() {
-    if (!this.widget.name || this.widget.name === '') {
-      this.errorFlag = true;
-    } else {
-      this.errorFlag = false;
-      this.widgetService.createWidget(this.pageId, this.widget).subscribe((data: Widget) => {
-        this.widget = data;
-        this.backToWidgets();
-      });
-    }
-  }
-
-  private updateCurWidget() {
-    if (!this.widget.name || this.widget.name === '') {
-      this.errorFlag = true;
-    } else {
-      this.errorFlag = false;
-      this.widgetService.updateWidget(this.widgetId, this.widget).subscribe((data: Widget) => {
-        this.widget = data;
-        this.backToWidgets();
-      });
-  }
-  }
-
-  deleteWidget() {
-    this.widgetService.deleteWidget(this.widgetId).subscribe(() => {
-      this.backToWidgets();
-    });
-  }
-
-  backToWidgets() {
-    this.router.navigate(['/profile/website/' + this.websiteId + '/page/' + this.pageId + '/widget']);
-  }
-
-  upload() {
-    if (this.file === undefined) {
-      alert('no file');
-    } else {
-      const data = new FormData();
-      data.append('myFile', this.file);
-      data.append('widgetId', this.widgetId);
-      this.widgetService.uploadImage(data).subscribe((mes: any) => {
-        this.backToWidgets();
-        if (mes.message === 'file uploaded') {
-          alert('File Uploaded');
+        this.widget.name = this.myWidgetForm.value.widgetname;
+        console.log('start update widget image: ');
+        // if name field is undefined then set error 'flag' to true making 'error' and 'alert' message visible
+        if (this.widget['name'] === undefined) {
+            console.log('fail update widget image: ');
+            this.flag = true;
         } else {
-          alert('No file uploaded');
+            console.log('trying update widget image: ');
+            this.widgetService.updateWidget(this.widget._id, this.widget).subscribe(
+                (widget: any) => {
+                    console.log('update widget image: ');
+                });
         }
-      });
     }
-  }
 
-  onFileChanged(event) {
-    this.file = event.target.files[0];
-  }
+    deleteWidget() {
 
+        this.widgetService.deleteWidget(this.widgetId).subscribe((data: any) => {
+            console.log('widget deleted: ' + data._id);
+        });
+
+    }
 }

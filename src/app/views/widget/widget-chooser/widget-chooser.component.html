@@ -1,61 +1,43 @@
-<header>
-  <nav class="navbar fixed-top">
-    <div class="container-fluid">
-      <p class="navbar-text float-left">
-        <a routerLink="/profile/website/{{websiteId}}/page/{{pageId}}/widget" class="navbar-link">
-          <span class="nav-black-icon fas fa-chevron-left fontawsome_icon top-left"></span>
-        </a>
-        <a class="navbar-black-brand" routerLink="/profile/website/{{websiteId}}/page/{{pageId}}/widget/new">
-          Choose Widget
-        </a>
-      </p>
-    </div>
-  </nav>
-</header>
-<main>
-<div class="container container-padding">
-  <ul class="list-group list-borderless">
-    <li class="list-group-item list-borderless">
-      <a routerLink="header">Header</a>
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light justify-content-start">
+  <a class="nav-item nav-link" routerLink="/website/{{websiteId}}/page/{{pageId}}/widget">
+    <i class="fas fa-chevron-left black-icons"></i></a>
+  <a class="navbar-brand  white-icons" [routerLink]="">Choose Widget</a>
+</nav>
+
+<div class="container-fluid cl-container-padding">
+  <ul class="list-group cl-list-group-borderless">
+    <li class="list-group-item border-0">
+      <a [routerLink]="" (click)="createWidget('HEADER')" >Header</a>
     </li>
-    <li class="list-group-item list-borderless">
-      <a routerLink="/profile/website/{{websiteId}}/page/{{pageId}}/widget/new">Label</a>
+    <li class="list-group-item border-0">
+      <a [routerLink]="" >Label</a>
     </li>
-    <li class="list-group-item list-borderless">
-      <a routerLink="html">HTML</a>
+    <li class="list-group-item border-0">
+      <a [routerLink]="" (click)="createWidget('HTML')">HTML</a>
     </li>
-    <li class="list-group-item list-borderless">
-      <a routerLink="text">Text Input</a>
+    <li class="list-group-item border-0">
+      <a [routerLink]="" (click)="createWidget('TEXT')">Text Input</a>
     </li>
-    <li class="list-group-item list-borderless">
-      <a routerLink="/profile/website/{{websiteId}}/page/{{pageId}}/widget/new">Link</a>
+    <li class="list-group-item border-0">
+      <a [routerLink]="">Link</a>
     </li>
-    <li class="list-group-item list-borderless">
-      <a routerLink="/profile/website/{{websiteId}}/page/{{pageId}}/widget/new">Button</a>
+    <li class="list-group-item border-0">
+      <a [routerLink]="">Button</a>
     </li>
-    <li class="list-group-item list-borderless">
-      <a routerLink="image">Image</a>
+    <li class="list-group-item border-0">
+      <a [routerLink]="" (click)="createWidget('IMAGE')">Image</a>
     </li>
-    <li class="list-group-item list-borderless">
-      <a routerLink="youtube">Youtube</a>
+    <li class="list-group-item border-0">
+      <a [routerLink]="" (click)="createWidget('YOUTUBE')">YouTube</a>
     </li>
-    <li class="list-group-item list-borderless">
-      <a routerLink="/profile/website/{{websiteId}}/page/{{pageId}}/widget/new">Data Table</a>
+    <li class="list-group-item border-0">
+      <a [routerLink]="">Data Table</a>
     </li>
-    <li class="list-group-item list-borderless">
-      <a routerLink="/profile/website/{{websiteId}}/page/{{pageId}}/widget/new">Repeater</a>
+    <li class="list-group-item border-0">
+      <a [routerLink]="">Repeater</a>
     </li>
   </ul>
-  <a class="btn btn-danger btn-block" routerLink="/profile/website/{{websiteId}}/page/{{pageId}}/widget">Cancel</a>
 </div>
-</main>
-<footer>
-  <nav class="navbar fixed-bottom">
-    <div class="container-fluid">
-      <p class="navbar-text float-left"></p>
-      <a class="nav-black-icon" routerLink="/profile">
-        <span class="fas fa-user fontawsome-icon bottom-right"></span>
-      </a>
-    </div>
-  </nav>
-</footer>
+<nav class="navbar navbar-expand-lg navbar-primary bg-light justify-content-start fixed-bottom">
+  <a class="nav-item nav-link ml-auto navblack" routerLink="/profile"><i class="  fas fa-user"></i></a>
+</nav>
