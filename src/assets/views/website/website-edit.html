@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="initial-scale = 1.25, user-scalable = no">
+  <meta charset="UTF-8">
+  <title>website-edit</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="container-fluid ct-no-padding">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <div class="row">
+        <div class="col-4 hide-section">
+          <a href="website-list.html"><i class="fa fa-chevron-left white-icon" aria-hidden="true"></i></a>
+          <strong class="heading-padding">Websites</strong>
+          <a class="float-right" href="website-new.html"><i class="fa fa-plus white-icon" aria-hidden="true"></i>
+          </a>
+        </div>
+
+        <div class="col-lg-8 col-md-12">
+          <a href="website-list.html"><i class="fa fa-chevron-left show-section white-icon"
+                                                                 aria-hidden="true"></i></a>
+          <strong class="heading-padding">Edit Website</strong>
+          <a class="float-right" href="website-list.html"><i class="fa fa-check white-icon"
+                                                                                   aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="card-group">
+      <div class="card col-4 p-0 hide-section">
+        <div class="card-body list-no-right-p">
+          <ul class="list-group">
+            <li class="list-group-item no-border"><a href="../page/page-list.html">Address Book App</a><a class="float-right" href="website-edit.html"><i
+              class="fa fa-cog"
+              aria-hidden="true"></i></a>
+            </li>
+            <li class="list-group-item no-border"><a href="../page/page-list.html">Blogger</a><a class="float-right" href="website-edit.html"><i class="fa fa-cog"
+                                                                                                  aria-hidden="true"></i></a>
+            </li>
+            <li class="list-group-item no-border"><a href="../page/page-list.html">Blogging App</a><a class="float-right" href="website-edit.html"><i class="fa fa-cog"
+                                                                                                       aria-hidden="true"></i></a>
+            </li>
+            <li class="list-group-item no-border"><a href="../page/page-list.html">Script Testing App</a><a class="float-right" href="website-edit.html"><i
+              class="fa fa-cog"
+              aria-hidden="true"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card p-0 col-lg-8 col-md-12">
+        <div class="card-body">
+          <div class="form-group">
+            <label class="lab-no-m"><strong>Website Name</strong></label>
+            <input type="text" class="form-control" placeholder="Blogger">
+            <label class="lab-no-m"><strong>Website Description</strong></label>
+            <textarea class="form-control text-muted" rows="5">Blogger is a blog-publishing service that allows multi-user blogs with time-stamped entries. It was developed by Pyra Labs, which was bought by Google in 2003. Generally, the blogs are hosted by Google at a subdomain of blogspot.com. Blogs can also be hosted in the registered custom domain of the blogger (like www.example.com).[4] A user can have up to 100 blogs per account.
+            </textarea>
+          </div>
+          <a href="website-list.html" class="btn btn-danger btn-block text-white">Delete</a>
+
+        </div>
+      </div>
+
+    </div>
+    <div class="card-footer bg-primary text-white">
+      <a class="float-right white-icon" href="../user/profile.html"><i class="fa fa-user" aria-hidden="true"></i></a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

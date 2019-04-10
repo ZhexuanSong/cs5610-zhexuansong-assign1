@@ -1,49 +1,75 @@
-import { Component, OnInit } from '@angular/core';
-import {UserService} from '../../../services/user.service.client';
-import {ActivatedRoute} from '@angular/router';
-import {SharedService} from '../../../services/shared.service.client';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {UserService} from '../../../services/user.services.client';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NgForm} from '@angular/forms';
+import {User} from '../../../models/user.model.client';
+import {SharedService} from '../../../services/shared.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['../../../app.component.css']
 })
-
 export class ProfileComponent implements OnInit {
+  @ViewChild('f') loginForm: NgForm;
+  userId: String;
+  user: {};
+  username: String;
+  email: String;
+  firstName: String;
+  lastName: String;
 
-    userId: String;
-    user: any;
-    username: String;
+  constructor(private userService: UserService,
+              private sharedService: SharedService, private activatedRoute: ActivatedRoute, private router: Router) {
+  }
 
-    constructor(private userService: UserService, private activatedRoute: ActivatedRoute, private sharedService: SharedService) { }
+  ngOnInit() {
+    this.getUser();
+    /*this.activatedRoute.params.subscribe(params => {
+      return this.userService.findUserById(params['uid']).subscribe(
+        (returnUser: User) => {
+          this.userId = params['uid'];
+          this.user = returnUser;
+          this.username = this.user.username;
+          this.email = this.user.email;
+          this.firstName = this.user.firstName;
+          this.lastName = this.user.lastName;
+          this.email = this.user.email;
+        }
+      );
+    });
+*/
+  }
 
-    updateUser() {
-            this.sharedService.user = this.user;
-            console.log(this.user);
-            return this.userService.updateUser(this.user).subscribe(
-                data => console.log('updated' + data)
-            );
-    }
+  getUser() {
+    this.user = this.sharedService.user;
+    this.username = this.user['username'];
+    this.firstName = this.user['firstName'];
+    this.lastName = this.user['lastName'];
+    this.email = this.user['email'];
+    this.userId = this.user['_id'];
+  }
 
-    deleteUser() {
-        return this.userService.deleteUserById(this.user._id).subscribe((user: any) => {
-            this.sharedService.user = '';
-            console.log('user deleted' + user);
-        });
-    }
+  logout() {
+    this.userService.logout()
+      .subscribe(
+        (data: any) => this.router.navigate(['/login'])
+      );
+  }
 
-    ngOnInit() {
-        this.user = this.sharedService.user;
-        console.log('user from sharedService: ' + this.user._id);
-        this.userService.findUserById(this.user._id).subscribe(
-            (user: any) => {
-                this.user = user;
-                console.log('user from db: ' + this.user);
-            });
-    }
+  update() {
+    this.user['username'] = this.loginForm.value.username;
+    this.user['firstName'] = this.loginForm.value.firstName;
+    this.user['lastName'] = this.loginForm.value.lastName;
+    this.user['email'] = this.loginForm.value.email;
+    this.userService.updateUser(this.userId, this.user).subscribe((data: any) => {
+      this.router.navigate(['/user', this.userId]);
+    });
+  }
 
-    logout() {
-        this.userService.logout()
-            .subscribe();
-    }
+  delete() {
+    this.userService.deleteUser(this.userId).subscribe((returnUser: User) => {
+      this.router.navigate(['/login']);
+    });
+  }
 }

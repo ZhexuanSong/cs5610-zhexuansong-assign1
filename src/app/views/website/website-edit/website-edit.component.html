@@ -1,70 +1,82 @@
-<form (ngSubmit)="updateWebsite()" #f="ngForm">
-<div class="container-fluid m-0 p-0">
-  <div class="row">
-    <div class="col-4 p-0 d-none d-sm-block">
-      <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary justify-content-start">
-        <a class="nav-item nav-link navblack" routerLink="/website">
-          <i class="fas fa-chevron-left white-icons move-left"></i></a>
-        <a class="navbar-brand" [routerLink]="">Websites</a>
-        <a class="nav-item nav-link ml-auto" routerLink="/website/new">
-          <i class=" navblack fas fa-plus white-icons"></i></a>
-      </nav>
-    </div>
-    <div class="col-12 col-sm-8 p-0">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-start">
-        <a class="nav-item nav-link navblack d-sm-none" routerLink="/website">
-          <i class="fas fa-chevron-left white-icons move-left"></i></a>
-        <a class="navbar-brand pl-4 " [routerLink]="">Edit Website</a>
-        <a class="nav-item nav-link ml-auto" (click)="updateWebsite()"  routerLink="/website">
-          <i class=" navblack fas fa-check white-icons move-right"></i></a>
-      </nav>
-    </div>
-  </div>
-</div>
-
-
-<div class="container-fluid">
-  <div class="row"><div class="container col-4 d-none d-sm-block move-up">
-    <ul class="list-group border-0" *ngIf="websites">
-      <!--<div -->
-        <div *ngFor="let website of websites">
-          <li class="list-group-item border-0 ">
-            <a routerLink="/website/{{website._id}}"><span><i class="fas fa-cog float-right setting"></i></span></a>
-            <a routerLink="./page">{{website.name}}</a>
-          </li>
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<div class="container-fluid ct-no-padding">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <div class="row">
+        <div class="col-4 hide-section">
+          <a routerLink="/user/{{userId}}/website"><i class="fa fa-chevron-left white-icon" aria-hidden="true"></i></a>
+          <strong class="heading-padding">Websites</strong>
+          <a class="float-right" routerLink="/user/{{userId}}/website/new"><i class="fa fa-plus white-icon"
+                                                                              aria-hidden="true"></i>
+          </a>
         </div>
-      <!--</div>-->
-    </ul>
-  </div>
 
-<div class="col-12 col-sm-8 move-up">
-  <div class="form-group" *ngIf="website">
-    <div class="form-group">
-      <label for="website-name">Website Name</label>
-      <input type="text" id="website-name" placeholder="Name" class="form-control" name="websitename"
-             ngModel required #websitename="ngModel" [(ngModel)]="website.name">
+        <div class="col-lg-8 col-md-12">
+          <a routerLink="/user/{{userId}}/website"><i class="fa fa-chevron-left show-section white-icon"
+                                                      aria-hidden="true"></i></a>
+          <strong class="heading-padding">Edit Website</strong>
+          <button class="btn btn-link float-right icon-no-padding" (click)="f.ngSubmit.emit()"><i
+            class="fa fa-check white-icon"
+            aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
     </div>
-    <span class="help-block" *ngIf="!websitename.valid && websitename.touched">
-      Please enter website name!
-    </span>
+    <div class="card-group">
+      <div class="card col-4 p-0 hide-section">
+        <div class="card-body list-no-right-p">
+          <ul class="list-group">
+            <div *ngFor="let website of websites">
+              <li class="list-group-item no-border"><a
+                routerLink="/user/{{userId}}/website/{{website._id}}/page">{{website.name}}</a><a
+                class="float-right"
+                routerLink="../{{website._id}}">
+                <i class="fa fa-cog" aria-hidden="true"></i>
+              </a></li>
+            </div>
+          </ul>
+        </div>
+      </div>
 
-    <div class="form-group">
-      <label for="website-description">Website Description</label>
-      <textarea id="website-description" class="form-control" rows="5" placeholder="Description" name="description"
-                ngModel required #description="ngModel" [(ngModel)]="website.description"></textarea>
+      <div class="card p-0 col-lg-8 col-md-12">
+        <div *ngIf="errorFlag"
+             class="alert alert-danger">
+          {{errorMsg}}
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="update()" #f="ngForm">
+            <div class="form-group">
+              <label class="lab-no-m"><strong>Website Name</strong></label>
+              <input
+                [(ngModel)]="name"
+                type="text"
+                class="form-control"
+                name="name"
+                placeholder="{{name}}">
+              <label class="lab-no-m"><strong>Website Description</strong></label>
+              <textarea
+                [(ngModel)]="description"
+                class="form-control text-muted"
+                type="text"
+                name="description"
+                rows="5">{{description}}
+            </textarea>
+            </div>
+          </form>
+          <button routerLink="/user/{{userId}}/website" (click)="delete()" class="btn btn-danger btn-block text-white">
+            Delete
+          </button>
+
+        </div>
+      </div>
+
     </div>
-  </div>
-    <a class="btn btn-danger  btn-block move-up" routerLink="/website"
-       (click)="deleteWebsite()">Delete</a>
+    <div class="card-footer bg-primary text-white">
+      <a class="float-right white-icon" routerLink="/user/{{userId}}"><i class="fa fa-user" aria-hidden="true"></i></a>
+    </div>
   </div>
 </div>
-  </div>
-
-<nav class="navbar fixed-bottom bg-primary navbar-dark justify-content-end">
-  <div class="container-fuild">
-    <a routerLink="/profile" class="navbar-link navbar-text float-right ">
-      <i class="fas fa-user white-icons"></i>
-    </a>
-  </div>
-</nav>
-</form>
+</body>
+</html>

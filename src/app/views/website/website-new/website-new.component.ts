@@ -1,44 +1,52 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {WebsiteService} from '../../../services/website.service.client';
-import {ActivatedRoute} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {SharedService} from '../../../services/shared.service.client';
+import {WebsiteService} from '../../../services/website.service.client';
+import {Website} from '../../../models/website.model.client';
+import {ActivatedRoute, Router} from '@angular/router';
+import {SharedService} from '../../../services/shared.service';
 
 @Component({
   selector: 'app-website-new',
   templateUrl: './website-new.component.html',
-  styleUrls: ['./website-new.component.css']
+  styleUrls: ['../../../app.component.css']
 })
 export class WebsiteNewComponent implements OnInit {
-  @ViewChild('f') myWebForm: NgForm;
-  userId: String;
+  @ViewChild('f') websiteForm: NgForm;
+  errorFlag: boolean;
+  errorMsg: String;
   websiteId: String;
-  website: any;
-  websites: any;
+  name: String;
+  description: String;
+  userId: String;
+  websites = [];
+  user: {};
 
-  constructor(private websiteService: WebsiteService, private activatedRoute: ActivatedRoute, private sharedService: SharedService) { }
-
-  createWebsite() {
-    this.website = {
-      name: this.myWebForm.value.websitename,
-      description: this.myWebForm.value.description,
-      _user: this.userId,
-    };
-    this.websiteService.createWebsite(this.userId, this.website).subscribe((website: any) => {
-      this.website = website;
-      this.websiteId = website._id;
-    });
+  constructor(private websiteService: WebsiteService,
+              private sharedService: SharedService, private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
-    const user = this.sharedService.user;
-    this.userId = user._id;
-    console.log(this.userId);
-    this.websiteService.findWebsitesByUser(this.userId)
-        .subscribe((data: any) => {
-          this.websites = data;
-        });
-    console.log(this.websites);
+    this.errorMsg = 'Please enter a website name';
+    this.errorFlag = false;
+    this.getUser();
   }
 
+  create() {
+    const website = new Website('', '', '', '');
+    website.name = this.websiteForm.value.name;
+    if (website.name === undefined || website.name.trim() === '') {
+      this.errorFlag = true;
+    } else {
+      website.description = this.websiteForm.value.description;
+      website.developerId = this.userId;
+      return this.websiteService.createWebsite(this.userId, website).subscribe((returnWebsite: Website) => {
+        this.router.navigate(['../'], {relativeTo: this.activatedRoute} );
+      });
+    }
+  }
+
+  getUser() {
+    this.user = this.sharedService.user;
+    this.userId = this.user['_id'];
+  }
 }

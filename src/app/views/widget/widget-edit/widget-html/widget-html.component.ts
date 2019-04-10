@@ -1,7 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
 import {WidgetService} from '../../../../services/widget.service.client';
 import {NgForm} from '@angular/forms';
+import {Widget} from '../../../../models/widget.model.client';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-widget-html',
@@ -9,59 +10,77 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./widget-html.component.css']
 })
 export class WidgetHtmlComponent implements OnInit {
-    @ViewChild('f') myWidgetForm: NgForm;
-    flag = false; // setting error flag as false by default
-    error: string;
-    alert: string;
-    websiteId: string;
-    pageId: string;
-    widgetId: string;
-    widget: any;
-    widgets: any;
 
-    constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute) { }
+  @ViewChild('f') widgetForm: NgForm;
+  pageId: String;
+  wgid: String;
+  widget: Widget;
+  text: String;
+  name: String;
+  errorFlag: boolean;
+  errorMsg: String;
 
-    ngOnInit() {
 
-        // initialize error and alert text
-        this.error = 'Enter the name of the widget';
-        this.alert = '* Enter the widget name';
+  constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute, private router: Router) {
+  }
 
-        this.activatedRoute.params
-            .subscribe(
-                (params: any) => {
-                    this.websiteId = params['wid'];
-                    this.pageId = params['pid'];
-                    this.widgetId = params['wgid'];
-                }
-            );
-
-        this.widgetService.findWidgetById(this.widgetId)
-            .subscribe(
-                (data: any) => this.widget = data,
-                (error: any) => console.log(error)
-            );
-    }
-
-    updateWidget() {
-        this.widget.name = this.myWidgetForm.value.widgetname;
-        // if name field is undefined then set error 'flag' to true making 'error' and 'alert' message visible
-        if (this.widget['name'] === undefined) {
-            this.flag = true;
-        } else {
-            this.widgetService.updateWidget(this.widget._id, this.widget).subscribe(
-                (widget: any) => {
-                    console.log('update widget header: ');
-                });
+  ngOnInit() {
+    this.errorFlag = false;
+    this.errorMsg = 'Please enter a widget name.';
+    this.activatedRoute.params
+      .subscribe(
+        params => {
+          this.wgid = params['wgid'];
+          this.pageId = params['pid'];
+          if (this.wgid !== undefined) {
+            return this.widgetService.findWidgetById(this.wgid).subscribe((returnWidget: Widget) => {
+              this.widget = returnWidget;
+              this.text = this.widget.text;
+              this.name = this.widget.name;
+            });
+          } else {
+            this.widget = new Widget('', '', 'Html', '', '', '', '', '', 0, '', false);
+            this.text = this.widget.text;
+            this.name = this.widget.name;
+          }
         }
-    }
+      );
 
-    deleteWidget() {
+  }
 
-        this.widgetService.deleteWidget(this.widgetId).subscribe((data: any) => {
-            console.log('widget deleted' + data._id);
+
+  updateOrCreate() {
+    this.widget.text = this.widgetForm.value.text;
+    this.widget.name = this.widgetForm.value.name;
+    this.widget.widgetType = 'Html';
+    if (this.wgid !== undefined) {
+      if (this.widget.name === undefined || this.widget.name.trim() === '') {
+        this.errorFlag = true;
+      } else {
+        return this.widgetService.updateWidget(this.wgid, this.widget).subscribe((returnWidget: Widget) => {
+          this.router.navigate(['../'], {relativeTo: this.activatedRoute});
         });
-
+      }
+    } else {
+      if (this.widget.name === undefined || this.widget.name.trim() === '') {
+        this.errorFlag = true;
+      } else {
+        return this.widgetService.createWidget(this.pageId, this.widget).subscribe((returnWidget: Widget) => {
+          this.widget = returnWidget;
+          this.router.navigate(['../../'], {relativeTo: this.activatedRoute});
+        });
+      }
     }
+  }
+
+  delete() {
+    if (this.wgid !== undefined) {
+      return this.widgetService.deleteWidget(this.wgid).subscribe((returnWidget: Widget) => {
+      });
+    } else {
+      this.router.navigate(['../../'], {relativeTo: this.activatedRoute});
+    }
+  }
+
 
 }

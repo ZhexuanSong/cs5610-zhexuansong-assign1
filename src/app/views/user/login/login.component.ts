@@ -1,53 +1,41 @@
-import { Component, OnInit } from '@angular/core';
-import { Router} from '@angular/router';
-
-import {UserService} from '../../../services/user.service.client';
-
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import { ViewChild } from '@angular/core';
-import {SharedService} from '../../../services/shared.service.client';
+import {UserService} from '../../../services/user.services.client';
+import {SharedService} from '../../../services/shared.service';
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['../../../app.component.css']
 })
 export class LoginComponent implements OnInit {
-  @ViewChild('f') myLoginForm: NgForm;
-  username: string;
-  password: string;
-
+  @ViewChild('f') loginForm: NgForm;
+  username: String;
+  password: String;
   errorFlag: boolean;
-  errorMsg = 'Invalid username or password !';
+  errorMsg: String;
 
-  constructor(private router: Router, private _userService: UserService, private sharedService: SharedService) { }
-
-  ngOnInit() {}
-
-  login() {
-
-    // fetching data from loginForm
-    this.username = this.myLoginForm.value.username;
-    this.password = this.myLoginForm.value.password;
-
-      this._userService.login(this.username, this.password)
-          .subscribe(
-              (user: any) => {
-                  console.log(user);
-                  this.sharedService.user = user;
-                  this.router.navigate(['/profile']); },
-              (error: any) => {
-                  console.log(error);
-                  this.errorFlag = true;
-              }
-          );
+  constructor(private userService: UserService, private sharedService: SharedService, private router: Router) {
   }
 
-  // facebook() {
-  //     this._userService.facebook().subscribe((user: any) => {
-  //         console.log(user);
-  //         this.sharedService.user = user;
-  //     });
-  // }
+  login() {
+    this.username = this.loginForm.value.username;
+    this.password = this.loginForm.value.password;
+    this.userService.login(this.username, this.password)
+      .subscribe((data: any) => {
+          this.sharedService.user = data;
+          this.router.navigate(['/user', data._id]);
+        },
+        (error: any) => {
+          this.errorFlag = true;
+        });
+  }
+
+  ngOnInit() {
+    this.errorFlag = false;
+    this.errorMsg = 'Wrong username or password!';
+  }
 
 }

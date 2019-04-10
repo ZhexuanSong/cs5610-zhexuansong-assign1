@@ -1,22 +1,36 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary justify-content-start">
-  <a class="nav-item nav-link" routerLink="/profile"><i class="fas fa-chevron-left white-icons"></i></a>
-  <a class="navbar-brand  white-icons" [routerLink]="">Websites</a>
-  <a class="nav-item nav-link ml-auto" routerLink="./new"><i class="fas fa-plus white-icons"></i></a>
-</nav>
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<div class="container-fluid ct-no-padding">
+  <div class="card fixed-top no-border">
+    <div class="card-header bg-primary text-white">
+      <a routerLink="/user/{{userId}}"><i class="fa fa-chevron-left white-icon" aria-hidden="true"></i></a>
+      <strong class="heading-padding">Websites</strong>
+      <a class="float-right" routerLink="/user/{{userId}}/website/new"><i class="fa fa-plus white-icon"
+                                                                          aria-hidden="true"></i>
+      </a>
 
-<div class="container move-up" *ngIf="websites">
-    <ul class="list-group border-0">
-      <li class="list-group-item border-0 " *ngFor="let website of websites">
-        <a routerLink="./{{website._id}}"><span><i class="fas fa-cog float-right setting"></i></span></a>
-        <a routerLink="./{{website._id}}/page">{{website.name}}</a>
-      </li>
-    </ul>
-</div>
+    </div>
+    <div class="card-body list-no-right-p">
+      <ul class="list-group">
+        <div *ngFor="let website of websites">
+          <li class="list-group-item no-border"><a
+            routerLink="/user/{{userId}}/website/{{website._id}}/page">{{website.name}}</a><a
+            class="float-right"
+            routerLink="/user/{{userId}}/website/{{website._id}}">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+          </a></li>
+        </div>
 
-<nav class="navbar fixed-bottom bg-primary navbar-dark justify-content-end">
-  <div class="container-fuild">
-    <a routerLink="/profile" class="navbar-link navbar-text float-right">
-      <i class="fas fa-user white-icons"></i>
-    </a>
+      </ul>
+    </div>
+    <div class="card-footer bg-primary text-white fixed-bottom">
+      <a class="float-right white-icon" routerLink="/user/{{userId}}"><i class="fa fa-user" aria-hidden="true"></i>
+      </a>
+    </div>
   </div>
-</nav>
+
+
+</div>
+</body>
+</html>

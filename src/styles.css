@@ -1,54 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
-#title {
-    text-align: center;
-    margin-top: 20px;
+@media (max-width: 992px) {
+  .hide-section {
+    display: none;
+  }
+  .card-footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }
+  .card{
+    border: none;
+  }
 }
-.padding {
-    padding: 30px;
+@media (min-width: 992px) {
+  .show-section {
+    display: none;
+  }
 }
-.site {
-    color: #1d2786;
-    font-size: 16pt;
-    margin: auto;
-}
-label {
-    font-weight: bold;
-}
-.input {
-    margin-bottom: 10px
-}
-#hidden {
-    color: #007bff;
-}
-.setting {
-    margin-top: 5px;
-}
-.white-icons {
-    color: white;
-}
-.black-icons {
-    color: black;
-}
-.move-left {
-    margin-left: 20px;
-}
-.move-right {
-    margin-right: 20px
-}
-.move-up {
-    margin-top: 20px;
-}
-.move-down {
-    margin-top: 15px
-}
-.blue {
-    color: #007bff;
-}
-.content {
-    margin-bottom: 80px;
+input, textarea{
+  margin-bottom: 10px;
 }
 
-.fa-bars {
-    margin-left: 5px;
+.heading-padding{
+  padding-left:5px;
 }
-
+.ct-no-padding{
+  padding: 0;
+}
+.no-frame-padding{
+  padding: 50px;
+}
+.black-icon{
+  color: black;
+}
+.white-icon{
+  color: white;
+}
+.icon-no-padding{
+  padding: 0px;
+}
+.card-padding-bottom{
+  padding-bottom: 50px;
+}

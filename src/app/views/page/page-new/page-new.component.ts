@@ -1,33 +1,51 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {PageService} from '../../../services/page.service.client';
 import {NgForm} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Page} from '../../../models/page.model.client';
+import {PageService} from '../../../services/page.service.client';
 
 @Component({
   selector: 'app-page-new',
   templateUrl: './page-new.component.html',
-  styleUrls: ['./page-new.component.css']
+  styleUrls: ['../../../app.component.css']
 })
 export class PageNewComponent implements OnInit {
-    @ViewChild('f') myPageForm: NgForm;
-    websiteId: String;
-    constructor(private pageService: PageService, private activatedRoute: ActivatedRoute) {}
-    createPage() {
-        const page = {
-            name: this.myPageForm.value.pagename,
-            title: this.myPageForm.value.pagetitle,
-            _website: this.websiteId,
-        }
-        this.pageService.createPage(this.websiteId, page).subscribe((data: any) => {
-            console.log('create page: ' + data._id + ' ' + data.name);
-        });
-    }
 
-    ngOnInit() {
-        this.activatedRoute.params.subscribe(
-            (params: any) => {
-                this.websiteId = params['wid'];
-            }
-        );
+  @ViewChild('f') pageForm: NgForm;
+  websiteId: String;
+  name: String;
+  title: String;
+  userId: String;
+  errorFlag: boolean;
+  errorMsg: String;
+
+  constructor(private pageService: PageService, private activatedRoute: ActivatedRoute, private router: Router) {
+  }
+
+  ngOnInit() {
+    this.errorFlag = false;
+    this.errorMsg = 'Please enter a page name.';
+    this.activatedRoute.params
+      .subscribe(
+        params => {
+          this.userId = params['uid'];
+          this.websiteId = params['wid'];
+        }
+      );
+  }
+
+  create() {
+    const page = new Page('', '', this.websiteId, '');
+    page.name = this.pageForm.value.name;
+    if (page.name === undefined || page.name.trim() === '') {
+      this.errorFlag = true;
+    } else {
+      page.title = this.pageForm.value.title;
+      return this.pageService.createPage(this.websiteId, page).subscribe((returnPage: Page) => {
+        this.router.navigate(['../'], {relativeTo: this.activatedRoute});
+
+      });
     }
+  }
+
 }

@@ -1,101 +1,90 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light justify-content-start">
-  <a class="nav-item nav-link" routerLink="/website/{{websiteId}}/page">
-    <i class="fas fa-chevron-left black-icons"></i></a>
-  <a class="navbar-brand  white-icons" >Widgets</a>
-  <a class="nav-item nav-link ml-auto" routerLink="/website/{{websiteId}}/page/{{pageId}}/widget/new">
-    <i class="fas fa-plus black-icons"></i></a>
-</nav>
-
-<div class="content container cl-container-padding mt-5" *ngIf="widgets">
-  <div class="widget-list" appSortable (newIndexes)="reorderWidgets($event)">
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<div class="container-fluid ct-no-padding">
+  <div class="card no-border card-padding-bottom">
+    <div class="card-header">
+      <a routerLink="../.."><i class="fa fa-chevron-left black-icon" aria-hidden="true"></i></a>
+      <strong class="heading-padding text-muted">Widgets</strong>
+      <a class="float-right" routerLink="./new"><i class="fa fa-plus black-icon" aria-hidden="true"></i></a>
+    </div>
+    <div class="card-body p-2 no-border">
+      <div appWbdvSortable (newIndexes)="reorderWidgets($event)">
       <div *ngFor="let widget of widgets | orderBy">
-        <table class="table table-borderless">
-          <tbody>
-          <tr>
-            <td>
-              <div [ngSwitch]="widget.widgetType">
+        <div [ngSwitch]="widget.widgetType">
+          <div *ngSwitchCase="'Text'">
+            <span class="fa fa-align-justify pull-right" aria-hidden="true"></span>
+            <a routerLink="./{{widget._id}}">
+              <span class="fa fa-cog pull-right"></span>
+            </a>
+            <div *ngIf="widget.formatted">
+              <quill-editor [(ngModel)]="widget.text"></quill-editor>
+            </div>
 
-                <div *ngSwitchCase="'HEADER'">
-                  <div class="float-right">
-                    <a routerLink="/website/{{websiteId}}/page/{{pageId}}/widget" class="float-right">
-                      <i class="fas fa-bars"></i></a>
-                    <a routerLink="/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
-                      <i class="fas fa-cog"></i></a>
-                  </div>
-                  <p [ngStyle]="{'font-size': widget.size+'00%', 'text-align': 'center'}">{{widget.text}}</p>
-                </div>
-                <div *ngSwitchCase="'TEXT'">
-                  <div class="float-right">
-                    <a routerLink="/website/{{websiteId}}/page/{{pageId}}/widget" class="float-right">
-                      <i class="fas fa-bars"></i></a>
-                    <a routerLink="/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
-                      <i class="fas fa-cog"></i></a>
-                  </div>
-                  <div *ngIf="widget.formatted">
-                    <quill-editor [(ngModel)]="widget.text" name="text"></quill-editor>
-                  </div>
+            <input *ngIf="!widget.formatted && (!widget.rows || widget.rows <= 1)"
+                   placeholder="{{widget.placeholder}}"
+                   class="form-control"/>
 
-                  <input *ngIf="!widget.formatted && (!widget.rows || widget.rows===1)"
-                         placeholder="{{widget.placeholder}}" class="form-control"/>
+            <textarea *ngIf="!widget.formatted && (widget.rows > 1)"
+                      rows="{{widget.rows}}"
+                      placeholder="{{widget.placeholder}}"
+                      class="form-control">{{widget.text}}</textarea>
+          </div>
 
-                  <textarea *ngIf="!widget.formatted && (widget.rows > 1)"
-                            rows="{{widget.rows}}" placeholder="{{widget.placeholder}}"
-                            class="form-control">{{widget.text}}</textarea>
-                </div>
+          <div *ngSwitchCase="'Html'">
+            <span class="fa fa-align-justify pull-right" aria-hidden="true"></span>
+            <a routerLink="./{{widget._id}}">
+              <span class="fa fa-cog pull-right"></span>
+            </a>
+            <div [innerHtml] = "widget.text"></div>
+          </div>
 
-                <div *ngSwitchCase="'IMAGE'">
-                  <div class="float-right">
-                    <a routerLink="/website/{{websiteId}}/page/{{pageId}}/widget" class="float-right">
-                      <i class="fas fa-bars"></i></a>
-                    <a routerLink="/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
-                      <i class="fas fa-cog"></i></a>
-                  </div>
-                  <img class="img-responsive img-rounded cl-widget-images" [src]="widget.url" [width]="toNumber(widget.width) * 640">
-                </div>
+          <div *ngSwitchCase="'Heading'">
+            <span class="fa fa-align-justify pull-right" aria-hidden="true"></span>
+            <a routerLink="./{{widget._id}}">
+              <span class="fa fa-cog pull-right"></span>
+            </a>
+            <div [ngSwitch]="widget.size">
+              <h1 *ngSwitchCase="1">{{widget.text}}</h1>
+              <h2 *ngSwitchCase="2">{{widget.text}}</h2>
+              <h3 *ngSwitchCase="3">{{widget.text}}</h3>
+              <h4 *ngSwitchCase="4">{{widget.text}}</h4>
+              <h5 *ngSwitchCase="5">{{widget.text}}</h5>
+              <h6 *ngSwitchCase="6">{{widget.text}}</h6>
+            </div>
+          </div>
 
-
-                <div *ngSwitchCase="'YOUTUBE'"  class="youtube-widget">
-                  <div class="float-right">
-                    <a routerLink="/website/{{websiteId}}/page/{{pageId}}/widget" class="float-right">
-                      <i class="fas fa-bars"></i></a>
-                    <a routerLink="/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
-                      <i class="fas fa-cog"></i></a>
-                  </div>
-                  <div class="embed-responsive embed-responsive-16by9" >
-                    <iframe [width]="toNumber(widget.width) * 640" [height]="toNumber(widget.width) * 360"
-                            [src]="sanitizer.bypassSecurityTrustResourceUrl(widget.url)" frameborder="0" allowfullscreen></iframe>
-                    <a routerLink="/website/{{websiteId}}/page/{{pageId}}/widget" class="pull-right">
-                      <span class="glyphicon glyphicon-menu-hamburger"></span></a>
-                    <a routerLink="/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}" class="pull-right">
-                      <span class="glyphicon glyphicon-cog"></span></a>
-                  </div>
-                </div>
-
-                <div *ngSwitchCase="'HTML'">
-                  <div class="float-right">
-                    <a routerLink="/website/{{websiteId}}/page/{{pageId}}/widget" class="float-right">
-                      <i class="fas fa-bars"></i></a>
-                    <a routerLink="/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
-                      <i class="fas fa-cog"></i></a>
-                  </div>
-                  <div [innerHTML]="widget.text"></div>
-                </div>
+          <div *ngSwitchCase="'Youtube'">
+            <div>
+              <span class="fa fa-align-justify pull-right"></span>
+              <a routerLink="./{{widget._id}}">
+                <span class="fa fa-cog pull-right"></span>
+              </a>
+              <div class="embed-responsive embed-responsive-16by9">
+                <iframe  class="embed-responsive-item" [src]= getUrl(widget.url)></iframe>
               </div>
-            </td>
-          </tr>
-          </tbody>
-        </table>
+            </div>
+          </div>
+
+          <div *ngSwitchCase="'Image'">
+            <span class="fa fa-align-justify pull-right"></span>
+            <a routerLink="./{{widget._id}}">
+              <span class="fa fa-cog pull-right"></span>
+            </a>
+            <img class="img-width" src="{{widget.url}}">
+          </div>
+        </div>
       </div>
   </div>
+      <div class="card-footer fixed-bottom">
+        <a class="float-right" routerLink="../../../../.."><i class="fa fa-user" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 
-<nav class="navbar navbar-expand-lg navbar-primary bg-light justify-content-start fixed-bottom">
-  <a class="nav-item nav-link navblack " routerLink="/website/{{websiteId}}/page/{{pageId}}/widget">
-    <i class="fas fa-play"></i></a>
-  <a class="nav-item nav-link navblack" routerLink="/website/{{websiteId}}/page/{{pageId}}/widget">
-    <i class="fas fa-eye"></i></a>
-  <a class="nav-item nav-link ml-auto navblack" routerLink="/profile"><i class="  fas fa-user"></i></a>
-</nav>
-
+</body>
+</html>
 

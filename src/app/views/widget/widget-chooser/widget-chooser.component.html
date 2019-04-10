@@ -1,43 +1,30 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light justify-content-start">
-  <a class="nav-item nav-link" routerLink="/website/{{websiteId}}/page/{{pageId}}/widget">
-    <i class="fas fa-chevron-left black-icons"></i></a>
-  <a class="navbar-brand  white-icons" [routerLink]="">Choose Widget</a>
-</nav>
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<div class="container-fluid ct-no-padding">
+  <div class="card fixed-top">
+    <div class="card-header">
+      <a routerLink="../"><i class="fa fa-chevron-left black-icon" aria-hidden="true"></i></a>
+      <strong class="heading-padding text-muted">Choose Widget</strong>
 
-<div class="container-fluid cl-container-padding">
-  <ul class="list-group cl-list-group-borderless">
-    <li class="list-group-item border-0">
-      <a [routerLink]="" (click)="createWidget('HEADER')" >Header</a>
-    </li>
-    <li class="list-group-item border-0">
-      <a [routerLink]="" >Label</a>
-    </li>
-    <li class="list-group-item border-0">
-      <a [routerLink]="" (click)="createWidget('HTML')">HTML</a>
-    </li>
-    <li class="list-group-item border-0">
-      <a [routerLink]="" (click)="createWidget('TEXT')">Text Input</a>
-    </li>
-    <li class="list-group-item border-0">
-      <a [routerLink]="">Link</a>
-    </li>
-    <li class="list-group-item border-0">
-      <a [routerLink]="">Button</a>
-    </li>
-    <li class="list-group-item border-0">
-      <a [routerLink]="" (click)="createWidget('IMAGE')">Image</a>
-    </li>
-    <li class="list-group-item border-0">
-      <a [routerLink]="" (click)="createWidget('YOUTUBE')">YouTube</a>
-    </li>
-    <li class="list-group-item border-0">
-      <a [routerLink]="">Data Table</a>
-    </li>
-    <li class="list-group-item border-0">
-      <a [routerLink]="">Repeater</a>
-    </li>
-  </ul>
+    </div>
+    <div class="card-body list-no-right-p">
+      <ul class="list-group">
+          <li class="list-group-item no-border"><a routerLink="./heading">Heading</a></li>
+        <li class="list-group-item no-border"><a routerLink="./image">Image</a></li>
+        <li class="list-group-item no-border"><a routerLink="./youtube">Youtube</a></li>
+        <li class="list-group-item no-border"><a routerLink="./text">Text</a></li>
+        <li class="list-group-item no-border"><a routerLink="./html">Html</a></li>
+
+      </ul>
+    </div>
+    <div class="card-footer">
+      <a class="float-right" routerLink="../../../../../.."><i class="fa fa-user" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+
+
 </div>
-<nav class="navbar navbar-expand-lg navbar-primary bg-light justify-content-start fixed-bottom">
-  <a class="nav-item nav-link ml-auto navblack" routerLink="/profile"><i class="  fas fa-user"></i></a>
-</nav>
+</body>
+</html>

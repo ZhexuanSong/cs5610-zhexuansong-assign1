@@ -1,49 +1,73 @@
-let mongoose = require('mongoose');
-let userSchema = require('./user.schema.server');
+var mongoose = require("mongoose");
+var UserSchema = require("./user.schema.server")();
+var User = mongoose.model("User", UserSchema);
+var pageModel = require("../page/page.model.server");
+var widgetModel = require("../widget/widget.model.server");
+var websiteModel = require("../website/website.model.server");
 
-let userModel = mongoose.model("User",userSchema);
+User.createUser = createUser;
+User.findUserById = findUserById;
+User.findUserByCredentials = findUserByCredentials;
+User.deleteUser = deleteUser;
+User.updateUser = updateUser;
+User.findUserByUsername = findUserByUsername;
+User.findFacebookUser = findFacebookUser;
+
+function findFacebookUser(id) {
+  return User.findOne({"facebook.id": id});
+}
+
+function findUserById(userId) {
+  return User.findById({_id: userId});
+}
+
+function findUserByUsername(username) {
+  return User.findOne({username: username});
+}
+
+function updateUser(userId, user) {
+  delete user._id;
+  return User
+    .update({_id: userId}, {
+        $set: {
+          username: user.username,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email
+        }
+      }
+    );
+}
 
 
-userModel.createUser = createUser;
-userModel.findUserById = findUserById;
-userModel.findUserByUserName = findUserByUserName;
-userModel.findByCredential = findByCredential;
-userModel.updateUser = updateUser;
-userModel.deleteUser = deleteUser;
-userModel.findUserByFacebookId = findUserByFacebookId;
+function deleteUser(userId) {
+  websiteModel.find({developerId: userId}).then(function (websites) {
+    websites.forEach(function (website) {
+      pageModel.find({_website: website._id}).then(function (pages) {
+        pages.forEach(function (page) {
+          widgetModel.remove({_page: page._id}).exec();
+        })
+      })
+    })
+  });
 
-module.exports = userModel;
+  websiteModel.find({developerId: userId}).then(function (websites) {
+    websites.forEach(function (website) {
+      pageModel.remove({_website: website._id}).exec();
+    })
+  });
 
-  function findUserByFacebookId(facebookId) {
-    return userModel.findOne({'facebook.id': facebookId});
+  websiteModel.remove({developerId: userId}).exec();
+  return User.remove({_id: userId});
+}
+
+function findUserByCredentials(username, password) {
+  return User.findOne({username: username, password: password});
 }
 
 function createUser(user) {
-    console.log("model"+user);
-    return userModel.create(user);
+  user._id = mongoose.Types.ObjectId();
+  return User.create(user);
 }
 
-function findUserById(id) {
-    return userModel.findById(id);
-}
-
-function findUserByUserName(username) {
-    return userModel.findOne({username:username});
-}
-
-function findByCredential(username,password){
-    return userModel.findOne({username:username,password:password});
-}
-
-function updateUser(userId,user) {
-    console.log('user model update: ' + user);
-    delete user._id;
-    return userModel.findOneAndUpdate(userId,user);
-}
-
-function deleteUser(userId){
-    return userModel.findOneAndRemove(userId).then(function (user) {
-        console.log('user model delete: ' + user);
-        return user;
-    });
-}
+module.exports = User;

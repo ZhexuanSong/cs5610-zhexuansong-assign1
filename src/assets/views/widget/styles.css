@@ -1,0 +1,67 @@
+@media (max-width: 992px) {
+  .hide-section {
+    display: none;
+  }
+  .card-footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }
+  .card{
+    border: none;
+  }
+}
+@media (min-width: 992px) {
+  .show-section {
+    display: none;
+  }
+}
+input, textarea{
+  margin-bottom: 10px;
+}
+
+.heading-padding{
+  padding-left:10px;
+}
+.ct-no-padding{
+  padding: 0;
+}
+.no-frame-padding{
+  padding-top: 100px;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.black-icon{
+  color: black;
+}
+.white-icon{
+  color: white;
+}
+.no-border{
+  border:0;
+}
+.list-no-right-p{
+  padding-right: 0;
+}
+.lab-no-m{
+  margin: 0;
+}
+.title-p{
+  padding-top: 10px;
+  padding-left: 20px
+}
+.setting-p{
+  padding-right: 18px;
+}
+.card-p-bottom{
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 30px
+}
+.text-ptop{
+  padding-top:10px;
+}
+a:link{
+  text-decoration: none;
+}

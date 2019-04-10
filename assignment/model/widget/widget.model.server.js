@@ -1,102 +1,77 @@
-let mongoose = require('mongoose');
+var mongoose = require("mongoose");
+var WidgetSchema = require("./widget.schema.server")();
+var Widget = mongoose.model("Widget", WidgetSchema);
 
-let widgetSchema = require('./widget.schema.server');
-let widgetModel = mongoose.model("Widgets", widgetSchema);
-let pageModel = require('../page/page.model.server');
+Widget.findAllWidgetsForPage = findAllWidgetsForPage;
+Widget.updateWidget = updateWidget;
+Widget.createWidget = createWidget;
+Widget.findWidgetById = findWidgetById;
+Widget.deleteWidget = deleteWidget;
+Widget.reorderWidgets = reorderWidgets;
+Widget.updatePosition = updatePosition;
 
-module.exports = widgetModel;
+function updatePosition(pageId, position) {
+  return Widget.find({_page: pageId}, function (err, widgets) {
+    widgets.forEach(function (widget) {
+      if (widget.position > position) {
+        widget.position--;
+        widget.save();
+      }
+    })
+  })
+}
 
-widgetModel.createWidget = createWidget;
-widgetModel.findAllWidgetsForPage = findAllWidgetsForPage;
-widgetModel.findWidgetById = findWidgetById;
-widgetModel.updateWidget = updateWidget;
-widgetModel.deleteWidget = deleteWidget;
-widgetModel.reorderWidgets = reorderWidget;
-
-
-function createWidget(pageId,widget) {
-    widget._page = pageId;
-    return widgetModel.create(widget)
-        .then(
-            function (widget) {
-                pageModel.findPageById(pageId)
-                    .then(
-                        function (page) {
-                            widget.position = page.widgets.length;
-                            page.widgets.push(widget);
-                            widget.save();
-                            page.save();
-                        }
-                    );
-                return widget;
-            }
-        );
+function reorderWidgets(pageId, startIndex, endIndex) {
+  return Widget.find({_page: pageId}, function (err, widgets) {
+    widgets.forEach(function (widget) {
+      if (startIndex < endIndex) {
+        if (widget.position === startIndex) {
+          widget.position = endIndex;
+          widget.save();
+        } else if (widget.position > startIndex
+          && widget.position <= endIndex) {
+          widget.position--;
+          widget.save();
+        }
+      } else {
+        if (widget.position === startIndex) {
+          widget.position = endIndex;
+          widget.save();
+        } else if (widget.position < startIndex
+          && widget.position >= endIndex) {
+          widget.position++;
+          widget.save();
+        }
+      }
+    });
+  });
 }
 
 function findAllWidgetsForPage(pageId) {
-    return widgetModel.find({_page:pageId});
-}
-
-function findWidgetById(widgetId) {
-    return widgetModel.findById(widgetId);
+  return Widget.find({_page: pageId});
 }
 
 function updateWidget(widgetId, widget) {
-    return widgetModel.findByIdAndUpdate(widgetId,widget);
+  delete widget._id;
+  return Widget
+    .update({_id: widgetId}, {
+      $set: widget
+    })
+}
+
+function createWidget(pageId, widget) {
+  widget._id = mongoose.Types.ObjectId();
+  widget._page = pageId;
+  return Widget.create(widget);
+
+}
+
+function findWidgetById(widgetId) {
+  return Widget.findById(widgetId);
 }
 
 function deleteWidget(widgetId) {
-    return findWidgetById(widgetId).then(function(widget) {
-        widgetModel.remove({_id: widgetId}).then(function() {
-            updatePosition(widget._page, widget.position).then(function() {
-                pageModel.findPageById(widget._page).then(function(page) {
-                    if (page != null) {
-                        for (let i = 0; i < page.widgets.length; i++) {
-                            if (page.widgets[i]._id.equals(widgetId)) {
-                                page.widgets.splice(i, 1);
-                                return page.save();
-                            }
-                        }
-                    }
-                })
-            })
-        })
-    })
+  return Widget.remove({_id: widgetId});
 }
 
-function updatePosition (pageId, position) {
-    return widgetModel.find({_page: pageId}).then(function(widgets) {
-        widgets.forEach(function(widget) {
-            if (widget.position > position){
-                widget.position--;
-                widget.save();
-            }
-        })
-    })
-}
-
-function reorderWidget(pageId, start, end) {
-    console.log('start: ' + start + ' end: ' + end);
-    return widgetModel.find({_page: pageId}).then(function(widgets) {
-        widgets.forEach(function(widget) {
-            if (start < end) {
-                if (widget.position === start) {
-                    widget.position = end;
-                    widget.save();
-                } else if (widget.position > start && widget.position <= end) {
-                    widget.position--;
-                    widget.save();
-                }
-            } else {
-                if (widget.position === start){
-                    widget.position = end;
-                    widget.save();
-                } else if (widget.position < start && widget.position >= end){
-                    widget.position++;
-                    widget.save();
-                }
-            }
-        });
-        console.log('reorder model all: ' + widgets);
-    })
-}
+module.exports = Widget;

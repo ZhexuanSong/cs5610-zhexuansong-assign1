@@ -1,36 +1,56 @@
-<nav class="navbar sticky-top navbar-dark bg-primary">
-  <span class="navbar-brand">Profile</span>
-  <a class="nav-item nav-link ml-auto" [routerLink]="" (click)="updateUser()">
-      <i class="fas fa-check white-icons"></i></a>
-</nav>
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<div class="container-fluid ct-no-padding">
+  <div class="card fixed-top no-border">
 
-<div class="container">
-    <div class="form-group move-down" *ngIf="user">
-      <label for="username">Username</label>
-      <input type="text" class="form-control" id="username" placeholder="Username" [(ngModel)]="user.username">
+    <div class="card-header bg-primary text-white">
+      <strong class="heading-padding">Profile</strong>
+      <a class="btn btn-link float-right icon-no-padding" (click)="f.ngSubmit.emit()"><i class="fa fa-check white-icon"></i></a>
     </div>
-    <div class="form-group" *ngIf="user">
-      <label for="email">Email address</label>
-      <input type="email" class="form-control" id="email" placeholder="alice@wonderland.com" [(ngModel)]="user.email">
-    </div>
-    <div class="form-group" *ngIf="user">
-      <label for="first-name">First Name</label>
-      <input type="text" class="form-control" id="first-name" placeholder="Alice" [(ngModel)]="user.firstName">
-    </div>
-    <div class="form-group" *ngIf="user">
-      <label for="last-name">Last Name</label>
-      <input type="text" class="form-control" id="last-name" placeholder="Wonderland" [(ngModel)]="user.lastName">
+    <div class="card-body">
+      <div class="form-group">
+        <form (ngSubmit)="update()" #f="ngForm">
+
+          <label class="lab-no-m"><strong>Username</strong></label>
+          <input [(ngModel)]="username"
+                 type="text"
+                 class="form-control"
+                 name="username"
+                 placeholder={{username}}>
+          <label class="lab-no-m"><strong>Email</strong></label>
+          <input [(ngModel)]="email"
+                 type="text"
+                 class="form-control"
+                 name="email"
+                 placeholder={{email}}>
+          <label class="lab-no-m"><strong>First Name</strong></label>
+          <input [(ngModel)]="firstName"
+                 type="text"
+                 class="form-control"
+                 name="firstName"
+                 placeholder={{firstName}}>
+          <label class="lab-no-m"><strong>Last Name</strong></label>
+          <input [(ngModel)]="lastName"
+                 type="text"
+                 class="form-control"
+                 name="lastName"
+                 placeholder={{lastName}}>
+        </form>
+
+      </div>
+      <a routerLink="/user/{{userId}}/website" class="btn btn-primary btn-block text-white">Website</a>
+      <a routerLink="/login" (click)="delete()" class="btn btn-danger btn-block text-white">Delete</a>
+
+      <a (click)="logout()" class="btn btn-danger btn-block text-white">Logout</a>
     </div>
 
-  <a class="btn btn-primary btn-block"
-     routerLink="/website">Websites</a>
-    <a class="btn btn-danger btn-block"
-       (click)="deleteUser()" routerLink="/login">Delete User</a>
-  <a class="btn btn-danger  btn-block"
-     (click)="logout()" routerLink="/login">Logout</a>
+    <div class="card-footer bg-primary text-white fixed-bottom">
+      <a class="btn btn-link float-right white-icon icon-no-padding" routerLink="/user/{{userId}}"><i class="fa fa-user" aria-hidden="true"></i></a>
+    </div>
+  </div>
+
+
 </div>
-
-<nav class="navbar fixed-bottom navbar-dark bg-primary">
-  <a class = "navbar-brand" id="hidden">hidden bottom</a>
-</nav>
-
+</body>
+</html>

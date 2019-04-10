@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="initial-scale = 1.25, user-scalable = no">
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="styles.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="container-fluid no-frame-padding">
+  <strong><h3>Login</h3></strong>
+  <input [(ngModel)]="username" type="text" class="form-control" placeholder="username">
+  <input [(ngModel)]="password" type="password" class="form-control" placeholder="password">
+  <a href="profile.html" class="btn btn-primary btn-block text-white" (click)="login(username,password)">Login</a>
+  <a href="register.html" class="btn btn-success btn-block text-white" (click)="register()">Register</a>
+
+</div>
+
+</body>
+</html>
