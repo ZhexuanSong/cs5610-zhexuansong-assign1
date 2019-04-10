@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
 
-const secret = !!process.env.SESSION_SECRET ? process.env.SESSION_SECRET : 'local_secret';
+const secret = process.env.SESSION_SECRET ||'local_secret';
 app.use(cookieParser());
 app.use(session({ secret: secret}));
 
