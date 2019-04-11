@@ -1,32 +1,35 @@
-var mongoose = require('mongoose');
-var PageSchema = require('./page.schema.server.js');
-var Page = mongoose.model('Page', PageSchema);
+let mongoose = require('mongoose');
 
-Page.createPage = createPage;
-Page.findAllPagesForWebsite = findAllPagesForWebsite;
-Page.findPageById = findPageById;
-Page.updatePage = updatePage;
-Page.deletePage = deletePage;
+let pageSchema = require('./page.schema.server');
+let pageModel = mongoose.model("Page",pageSchema);
+let websiteModel = require('../website/website.model.server');
 
-module.exports = Page;
+pageModel.createPage = createPage;
+pageModel.findAllPagesForWebsite = findAllPagesForWebsite;
+pageModel.findPageById = findPageById;
+pageModel.updatePage = updatePage;
+pageModel.deletePage = deletePage;
+module.exports = pageModel;
 
-function createPage(websiteId, page) {
-  page._website = websiteId;
-  return Page.create(page);
+function createPage(webId,page) {
+    page._website = webId;
+    console.log('page model: ' + page._website);
+    return pageModel.create(page)
+        .then(
+            function (createdPage) {
+                return createdPage;
+            }
+        );
 }
-
 function findAllPagesForWebsite(websiteId) {
-  return Page.find({ _website: websiteId });
+    return pageModel.find({_website:websiteId.toString()});
 }
-
-function findPageById(pageId) {
-  return Page.findById(pageId);
+function findPageById(pageId){
+    return pageModel.findById(pageId);
 }
-
-function updatePage(pageId, page) {
-  return Page.findByIdAndUpdate(pageId, page, {new: true});
+function updatePage(pageId,page) {
+    return pageModel.findByIdAndUpdate(pageId,page);
 }
-
 function deletePage(pageId) {
-  return Page.findByIdAndRemove(pageId);
+    return pageModel.findByIdAndRemove(pageId);
 }

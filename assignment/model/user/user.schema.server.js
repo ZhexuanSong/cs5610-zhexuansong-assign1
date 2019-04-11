@@ -1,25 +1,15 @@
+let mongoose = require('mongoose');
+let websiteSchema = require('../website/website.schema.server');
 
-var mongoose = require('mongoose');
+let userSchema = new mongoose.Schema({
+    username: String,
+    password: String,
+    firstName: String,
+    lastName: String,
+    phone: String,
+    email: String,
+    dateCreated: {type: Date, default: Date.now()},
+    websites: [websiteSchema]
+},{collection:'Users'});
 
-var UserSchema = mongoose.Schema({
-  username: String,
-  password: String,
-  firstName: String,
-  lastName: String,
-  email: String,
-  phone: String,
-  websites: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Website'
-  }],
-  dateCreated: {
-    type: Date,
-    default: Date.now
-  },
-  facebook: {
-    id: String,
-    token: String,
-  }
-}, { collection: 'user' });
-
-module.exports = UserSchema;
+module.exports = userSchema;

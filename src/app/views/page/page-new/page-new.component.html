@@ -1,0 +1,25 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light justify-content-start">
+  <a class="nav-item nav-link" routerLink="/user/{{userId}}/website/{{websiteId}}/page">
+    <i class="fas fa-chevron-left black-icons"></i></a>
+  <a class="navbar-brand  white-icons" [routerLink]="">New Page</a>
+  <a class="nav-item nav-link ml-auto" routerLink=".." (click)="createPage()">
+    <i class="fas fa-check black-icons"></i></a>
+</nav>
+
+<div class="container move-up">
+    <div class="form-group">
+      <label for="page-name">Name</label>
+      <input type="text" class="form-control" id="page-name" placeholder="Page Name" [(ngModel)]="page.name">
+    </div>
+    <div class="form-group">
+      <label for="page-title">Title</label>
+      <input type="text" class="form-control" id="page-title" placeholder="Page Title" [(ngModel)]="page.title">
+    </div>
+</div>
+<nav class="navbar fixed-bottom bg-light navbar-light justify-content-end">
+  <div class="container-fuild">
+    <a routerLink="/user/{{userId}}" class="navbar-link navbar-text float-right">
+      <i class="fas fa-user blue"></i>
+    </a>
+  </div>
+</nav>

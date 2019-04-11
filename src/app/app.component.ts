@@ -1,12 +1,10 @@
-import {Component} from '@angular/core';
-import {User} from './models/user.model.client';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'web5610';
-  user: User;
+export class AppComponent{
+  title = 'yi-project1';
 }

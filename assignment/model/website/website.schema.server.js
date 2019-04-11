@@ -1,20 +1,13 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
+let pageSchema = require('../page/page.schema.server');
 
-var WebsiteSchema = mongoose.Schema({
-  _user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
-  name: String,
-  description: String,
-  pages: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Page'
-  }],
-  dateCreated: {
-    type: Date,
-    default: Date.now
-  }
-}, { collection: 'website' });
+let websiteSchema = mongoose.Schema({
+        _user: {type: mongoose.Schema.ObjectId, ref: "User"},
+        name: String,
+        description: String,
+        pages: [pageSchema],
+        dateCreate:{type: Date, default: Date.now()}
+    },{collection: "Websites"}
+);
 
-module.exports = WebsiteSchema;
+module.exports = websiteSchema;

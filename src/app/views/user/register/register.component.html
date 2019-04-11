@@ -1,0 +1,23 @@
+<div class="container">
+  <h1>Register</h1>
+
+  <div *ngIf="errorFlag"
+       class="alert alert-danger">
+    {{errorMsg}}
+
+  </div>
+
+  <label>Username</label>
+  <input [(ngModel)]="user.username" type="text" class="form-control input"placeholder="alice"/>
+  <br/>
+  <label>Password</label>
+  <input [(ngModel)]="user.password" type="password" class="form-control input" placeholder="#######"/>
+  <br/>
+  <label>Verify Password</label>
+  <input [(ngModel)]="v_password" type="password" class="form-control input" placeholder="#######"/>
+  <br/>
+  <button class="btn btn-primary btn-block" (click)="register()">Register</button>
+  <button class="btn btn-danger  btn-block" routerLink="/login">Cancel</button>
+</div>
+
+

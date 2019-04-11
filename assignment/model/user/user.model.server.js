@@ -1,42 +1,42 @@
-var mongoose = require('mongoose');
-var UserSchema = require('./user.schema.server.js');
-var User = mongoose.model('User', UserSchema);
-// mongoose.set('useFindAndModify', false);
+let mongoose = require('mongoose');
+let userSchema = require('./user.schema.server');
 
-User.createUser = createUser;
-User.findUserById = findUserById;
-User.findUserByUsername = findUserByUsername;
-User.findUserByCredentials = findUserByCredentials;
-User.updateUser = updateUser;
-User.deleteUser = deleteUser;
-User.findUserByFacebookId = findUserByFacebookId;
+let userModel = mongoose.model("User",userSchema);
 
-module.exports = User;
 
-function findUserByFacebookId(facebookId) {
-  return User.findOne({'facebook.id': facebookId});
-}
+userModel.createUser = createUser;
+userModel.findUserById = findUserById;
+userModel.findUserByUserName = findUserByUserName;
+userModel.findByCredential = findByCredential;
+userModel.updateUser = updateUser;
+userModel.deleteUser = deleteUser;
+
+module.exports = userModel;
 
 function createUser(user) {
-  return User.create(user);
+    console.log("model"+user);
+    return userModel.create(user);
 }
 
-function findUserById(userId) {
-  return User.findById(userId);
+function findUserById(id) {
+    return userModel.findById(id);
 }
 
-function findUserByUsername(username) {
-  return User.findOne({ username: username });
+function findUserByUserName(username) {
+    return userModel.findOne({username:username});
 }
 
-function findUserByCredentials(username, password) {
-  return User.findOne({ username: username, password: password });
+function findByCredential(username,password){
+    return userModel.findOne({username:username,password:password});
 }
 
-function updateUser(userId, user) {
-  return User.findByIdAndUpdate(userId, user, {new: true});
+function updateUser(userId,user) {
+    return userModel.findOneAndUpdate(userId,user);
 }
 
-function deleteUser(userId) {
-  return User.findByIdAndRemove(userId);
+function deleteUser(userId){
+    return userModel.findOneAndRemove(userId).then(function (user) {
+        console.log('user model: ' + user);
+        return user;
+    });
 }
