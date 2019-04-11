@@ -1,38 +1,48 @@
+<form (ngSubmit)="updateWidget()" #f="ngForm">
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light justify-content-start">
-  <a class="nav-item nav-link" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget">
+  <a class="nav-item nav-link" routerLink="/website/{{websiteId}}/page/{{pageId}}/widget">
     <i class="fas fa-chevron-left black-icons"></i></a>
   <a class="navbar-brand  white-icons">Widget Edit</a>
   <a class="nav-item nav-link ml-auto" (click)="updateWidget()"
-     routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget">
+     routerLink="/website/{{websiteId}}/page/{{pageId}}/widget">
     <i class="fas fa-check black-icons"></i></a>
 </nav>
 
-<div class="container move-up">
-  <div class="form-group" *ngIf="widget">
-    <label for="heading-text">Text</label>
-    <input type="text" class="form-control" id="heading-text" placeholder="Text" [(ngModel)]="widget.text">
+<div class="container move-up" *ngIf="widget">
+  <div class="form-group">
+    <label for="heading-name">Name</label>
+    <input type="text" class="form-control" id="heading-name" placeholder="Name" name="widgetname"
+           ngModel required #widgetname="ngModel" [(ngModel)]="widget.name">
   </div>
+  <span class="help-block" *ngIf="!widgetname.valid">
+      Please enter widget name!
+    </span>
+
   <div class="form-group" *ngIf="widget">
     <label for="heading-rows">Rows</label>
-    <input type="number" class="form-control" id="heading-rows" placeholder="1" [(ngModel)]="widget.rows">
+    <input type="number" class="form-control" id="heading-rows" placeholder="1" name="rows" [(ngModel)]="widget.rows">
   </div>
+
   <div class="form-group" *ngIf="widget">
-    <label for="heading-name">Name</label>
-    <input type="text" class="form-control" id="heading-name" placeholder="Name" [(ngModel)]="widget.name">
+    <label for="heading-text">Text</label>
+    <input type="text" class="form-control" id="heading-text" placeholder="Text" name="text" [(ngModel)]="widget.text">
   </div>
+
   <div class="input-group" *ngIf="widget">
     <input type="text"
            readonly
            value="Formatted"
+           name="text"
            class="form-control"/>
     <span class="input-group-addon">
-        <input [(ngModel)]="widget.formatted" type="checkbox"/>
+        <input [(ngModel)]="widget.formatted" name="formatted" type="checkbox"/>
     </span>
   </div>
   <a class="btn btn-danger  btn-block" (click)="deleteWidget()"
-     routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget">Delete</a>
+     routerLink="/website/{{websiteId}}/page/{{pageId}}/widget">Delete</a>
 </div>
 
 <nav class="navbar navbar-expand-lg navbar-primary bg-light justify-content-start fixed-bottom">
-  <a class="nav-item nav-link ml-auto navblack" routerLink="/user/{{userId}}"><i class="  fas fa-user"></i></a>
+  <a class="nav-item nav-link ml-auto navblack" routerLink="/profile"><i class="  fas fa-user"></i></a>
 </nav>
+</form>

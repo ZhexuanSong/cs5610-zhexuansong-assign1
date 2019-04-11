@@ -1,9 +1,10 @@
+<form (ngSubmit)="updateWidget()" #f="ngForm">
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light justify-content-start">
-  <a class="nav-item nav-link" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget">
+  <a class="nav-item nav-link" routerLink="/website/{{websiteId}}/page/{{pageId}}/widget">
     <i class="fas fa-chevron-left black-icons"></i></a>
   <a class="navbar-brand  white-icons">Widget Edit</a>
   <a class="nav-item nav-link ml-auto" (click)="updateWidget()"
-     routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget">
+     routerLink="/website/{{websiteId}}/page/{{pageId}}/widget">
     <i class="fas fa-check black-icons"></i></a>
 </nav>
 
@@ -12,28 +13,29 @@
        class="alert alert-danger">
     {{error}}
   </div>
-  <form novalidate name="model.myform">
     <div class="form-group" *ngIf="widget">
       <label for="Name">Name</label>
-      <input [(ngModel)]="widget.name"
+      <input ngModel required #widgetname="ngModel"
              type="text"
              class="form-control"
              id="Name"
-             name="widname"
+             name="widgetname"
              placeholder="Name"
+             [(ngModel)]="widget.name"
              required>
-      <span class="alert-class"
-            *ngIf="flag">{{alert}}</span>
+      <span class="help-block" *ngIf="!widgetname.valid">
+      Please enter widget name!
+    </span>
     </div>
     <div *ngIf="widget">
       <quill-editor [(ngModel)]="widget.text" name="text"></quill-editor>
     </div>
-  </form>
   <p></p>
   <a class="btn btn-danger  btn-block" (click)="deleteWidget()"
-     routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget">Delete</a>
+     routerLink="/website/{{websiteId}}/page/{{pageId}}/widget">Delete</a>
 </div>
 
 <nav class="navbar navbar-expand-lg navbar-primary bg-light justify-content-start fixed-bottom">
-  <a class="nav-item nav-link ml-auto navblack" routerLink="/user/{{userId}}"><i class="  fas fa-user"></i></a>
+  <a class="nav-item nav-link ml-auto navblack" routerLink="/profile"><i class="  fas fa-user"></i></a>
 </nav>
+</form>

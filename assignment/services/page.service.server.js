@@ -20,7 +20,7 @@ module.exports = function (app) {
         pageModel.createPage(websiteId,page)
             .then(
                 function (page) {
-                    console.log(page);
+                    console.log('page server create' + page);
                     res.json(page);
                 },
                 function (error) {
@@ -34,7 +34,7 @@ module.exports = function (app) {
         pageModel.findAllPagesForWebsite(websiteId)
             .then(
                 function (pages) {
-                    console.log('server service: ' + pages);
+                    console.log('page server find all pages: ' + pages);
                     res.json(pages);
                 },
                 function (err) {

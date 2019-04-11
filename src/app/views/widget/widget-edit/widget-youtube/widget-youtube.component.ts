@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {WidgetService} from '../../../../services/widget.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NgForm} from '@angular/forms';
 
 @Component({
     selector: 'app-widget-youtube',
@@ -8,9 +9,8 @@ import {ActivatedRoute, Router} from '@angular/router';
     styleUrls: ['./widget-youtube.component.css']
 })
 export class WidgetYoutubeComponent implements OnInit {
-
+    @ViewChild('f') myWidgetForm: NgForm;
     flag = false; // setting error flag as false by default
-    userId: string;
     websiteId: string;
     pageId: string;
     widgetId: string;
@@ -21,7 +21,6 @@ export class WidgetYoutubeComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute.params.subscribe(
             (params: any) => {
-                this.userId = params['uid'];
                 this.websiteId = params['wid'];
                 this.pageId = params['pid'];
                 this.widgetId = params['wgid'];
@@ -39,6 +38,7 @@ export class WidgetYoutubeComponent implements OnInit {
 
     updateWidget() {
 
+        this.widget.name = this.myWidgetForm.value.widgetname;
         // if name field is undefined then set error 'flag' to true making 'error' and 'alert' message visible
         console.log('update youtube: ' + this.widget.url);
             const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;

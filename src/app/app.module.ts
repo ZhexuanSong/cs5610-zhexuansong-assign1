@@ -33,6 +33,8 @@ import { SharedService } from './services/shared.service.client';
 import { FlickrImageSearchComponent } from './views/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
 import { FlickrService } from './services/flickr.service.client';
 import { OrderByPipe } from './views/widget/widget-list/order.pipe';
+// import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {AuthGuard} from './services/auth.service.client';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,7 @@ import { OrderByPipe } from './views/widget/widget-list/order.pipe';
     HttpClientModule,
     QuillModule,
   ],
-  providers: [UserService, WebsiteService, PageService, WidgetService, SharedService, FlickrService],
+  providers: [UserService, WebsiteService, PageService, WidgetService, SharedService, FlickrService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

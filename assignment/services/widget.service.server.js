@@ -15,7 +15,7 @@ module.exports= function(app){
     const path = require('path');
     let storage = multer.diskStorage({
         destination: function (req, file, cb) {
-            cb(null, __dirname + '/../../dist/xuan-project1/assets/uploads/')
+            cb(null, __dirname + '/../../dist/xuanproject/assets/uploads/')
         },
         filename: function (req, file, cb) {
             cb(null, Date.now() + path.extname(file.originalname)) //Appending extension
@@ -76,13 +76,12 @@ module.exports= function(app){
 
     function updateWidget (req,res) {
         let widgetId  = req.params.widgetId;
-        console.log('widget server service: ' + widgetId);
+        console.log('widget server update: ' + widgetId);
         let widget = req.body;
-        console.log('widget server service: ' + widget);
         widgetModel
             .updateWidget(widgetId, widget)
             .then(function (stats) {
-                    console.log('widget server service: ' + stats);
+                    console.log('widget server update: ' + stats);
                     res.json(stats);
                 },
                 function (err) {
@@ -119,12 +118,13 @@ module.exports= function(app){
         let width         = req.body.width;
         let myFile        = req.file;
 
-        //let baseUrl = 'http://localhost:3200';
-        let baseUrl = 'http://webdev-zhexuan-cs5610.herokuapp.com';
-        const callbackUrl = baseUrl + '/user/' + userId + "/website/" + websiteId
-            + "/page/" + pageId + "/widget";
+        // let baseUrl = 'http://localhost:3200';
+        // const callbackUrl = baseUrl + "/website/" + websiteId
+        //     + "/page/" + pageId + "/widget/" + widgetId;
+        // console.log('widget server callbackUrl: ' + callbackUrl);
         if(myFile == null) {
-            res.redirect(callbackUrl + "/" + widgetId);
+            res.redirect('/#/website/' + websiteId + '/page/' + pageId + '/widget/' + widgetId);
+            // res.redirect('back');
             return;
         }
 
@@ -143,10 +143,14 @@ module.exports= function(app){
             function (widget) {
                 widget.url = url;
                 widgetModel.updateWidget(widgetId, widget).then(function (widget) {
-                    console.log('widget server: ' + widget);
+                    console.log('widget server updated url: ');
+                    // res.json(widget);
+                    res.redirect('/#/website/' + websiteId + '/page/' + pageId + '/widget/' + widgetId);
                 });
             }
         );
-        res.redirect(callbackUrl + "/" + widgetId);
+        //
+
+        // res.redirect('back');
     }
 };

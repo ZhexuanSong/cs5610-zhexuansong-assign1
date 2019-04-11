@@ -10,7 +10,6 @@ import {PageService} from '../../../services/page.service.client';
 
 export class PageListComponent implements OnInit {
 
-    userId: String;
     websiteId: String;
     pages: any;
     constructor(private pageService: PageService, private activatedRoute: ActivatedRoute) { }
@@ -18,7 +17,6 @@ export class PageListComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute.params.subscribe(
             (params: any) => {
-                this.userId = params['uid'];
                 this.websiteId = params['wid'];
             }
         );

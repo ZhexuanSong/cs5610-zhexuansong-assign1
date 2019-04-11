@@ -1,25 +1,23 @@
+<form (ngSubmit)="updateWidget()" #f="ngForm">
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light justify-content-start">
-  <a class="nav-item nav-link" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget">
+  <a class="nav-item nav-link" routerLink="/website/{{websiteId}}/page/{{pageId}}/widget">
       <i class="fas fa-chevron-left black-icons"></i></a>
   <a class="navbar-brand  white-icons">Widget Edit</a>
   <a class="nav-item nav-link ml-auto" (click)="updateWidget()"
-     routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget">
+     routerLink="/website/{{websiteId}}/page/{{pageId}}/widget">
     <i class="fas fa-check black-icons"></i></a>
 </nav>
 
-<div class="container cl-container-padding move-up">
+<div class="container cl-container-padding move-up" *ngIf="widget">
 
-    <form>
-
-        <div class="form-group" *ngIf="widget">
+        <div class="form-group" >
             <label for="image-name">Name</label>
-            <input [(ngModel)]="widget.name"
-                   name="name"
-                   type="text"
-                   class="form-control"
-                   id="image-name"
-                   placeholder="name"/>
+            <input type="text" class="form-control" id="image-name" placeholder="Name" name="widgetname"
+                   ngModel required #widgetname="ngModel" [(ngModel)]="widget.name">
         </div>
+        <span class="help-block" *ngIf="!widgetname.valid">
+          Please enter widget name!
+        </span>
 
         <div class="form-group" *ngIf="widget">
             <label for="image-text">Text</label>
@@ -63,13 +61,14 @@
             <button type="submit" class="btn btn-block btn-primary">Upload Image</button>
             <br/>
         </form>
-    </form>
     <a class="btn btn-primary btn-block "
-       [routerLink]="['/user/'+userId+'/website/'+websiteId+'/page/'+pageId+'/widget/'+widgetId+'/flickr']" >Choose From Flickr</a>
-    <a class="btn btn-danger  btn-block" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget"
+       [routerLink]="['/website/'+websiteId+'/page/'+pageId+'/widget/'+widgetId+'/flickr']" >Choose From Flickr</a>
+    <a class="btn btn-danger  btn-block" routerLink="/website/{{websiteId}}/page/{{pageId}}/widget"
         (click)="deleteWidget()">Delete</a>
 </div>
 
 <nav class="navbar navbar-expand-lg navbar-primary bg-light justify-content-start fixed-bottom">
-  <a class="nav-item nav-link ml-auto navblack" routerLink="/user/{{userId}}"><i class="  fas fa-user"></i></a>
+  <a class="nav-item nav-link ml-auto navblack" routerLink="/profile"><i class="  fas fa-user"></i></a>
 </nav>
+
+</form>

@@ -1,25 +1,31 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light justify-content-start">
-  <a class="nav-item nav-link" routerLink="/user/{{userId}}/website/{{websiteId}}/page">
-    <i class="fas fa-chevron-left black-icons"></i></a>
-  <a class="navbar-brand  white-icons" [routerLink]="">New Page</a>
-  <a class="nav-item nav-link ml-auto" routerLink=".." (click)="createPage()">
-    <i class="fas fa-check black-icons"></i></a>
-</nav>
+<form (ngSubmit)="createPage()" #f="ngForm">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light justify-content-start">
+      <a class="nav-item nav-link" routerLink="/website/{{websiteId}}/page">
+        <i class="fas fa-chevron-left black-icons"></i></a>
+      <a class="navbar-brand  white-icons" [routerLink]="">New Page</a>
+      <a class="nav-item nav-link ml-auto" routerLink=".." (click)="createPage()" >
+        <i class="fas fa-check black-icons"></i></a>
+    </nav>
 
-<div class="container move-up">
-    <div class="form-group">
-      <label for="page-name">Name</label>
-      <input type="text" class="form-control" id="page-name" placeholder="Page Name" [(ngModel)]="page.name">
+    <div class="container move-up">
+
+        <div class="form-group">
+            <label for="page-name">Name</label>
+            <input type="text" id="page-name" placeholder="Page Name" class="form-control" name="pagename" ngModel required #pagename="ngModel">
+        </div>
+        <span class="help-block" *ngIf="!pagename.valid">
+            Please enter pagename!
+        </span>
+
+        <div class="form-group">
+            <label for="page-title">Title</label>
+            <input type="text" id="page-title" placeholder="Page Title" class="form-control" name="pagetitle" ngModel required #pagetitle="ngModel">
+        </div>
     </div>
-    <div class="form-group">
-      <label for="page-title">Title</label>
-      <input type="text" class="form-control" id="page-title" placeholder="Page Title" [(ngModel)]="page.title">
-    </div>
-</div>
-<nav class="navbar fixed-bottom bg-light navbar-light justify-content-end">
-  <div class="container-fuild">
-    <a routerLink="/user/{{userId}}" class="navbar-link navbar-text float-right">
-      <i class="fas fa-user blue"></i>
-    </a>
-  </div>
-</nav>
+    <nav class="navbar fixed-bottom bg-light navbar-light justify-content-end">
+      <div class="container-fuild">
+        <a routerLink="/profile" class="navbar-link navbar-text float-right">
+          <i class="fas fa-user blue"></i>
+        </a>
+      </div>
+    </nav>

@@ -21,6 +21,8 @@ function createWebsite(userId, website) {
                 userModel.findUserById(userId)
                     .then(
                         function (user) {
+                            console.log('website model create: user' + JSON.stringify(user));
+                            if (user.websites) user.websites = [];
                             user.websites.push(website);
                             userModel.updateUser(userId,user);
                             user.save();

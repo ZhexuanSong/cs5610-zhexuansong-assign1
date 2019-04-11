@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {WidgetService} from '../../../../services/widget.service.client';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-widget-header',
@@ -8,11 +9,10 @@ import {WidgetService} from '../../../../services/widget.service.client';
   styleUrls: ['./widget-header.component.css']
 })
 export class WidgetHeaderComponent implements OnInit {
-
+    @ViewChild('f') myWidgetForm: NgForm;
     flag = false; // setting error flag as false by default
     error: string;
     alert: string;
-    userId: string;
     websiteId: string;
     pageId: string;
     widgetId: string;
@@ -30,21 +30,23 @@ export class WidgetHeaderComponent implements OnInit {
         this.activatedRoute.params
             .subscribe(
                 (params: any) => {
-                    this.userId = params['uid'];
                     this.websiteId = params['wid'];
                     this.pageId = params['pid'];
                     this.widgetId = params['wgid'];
+                    this.widgetService.findWidgetById(this.widgetId).subscribe(
+                        (widget: any) => {
+                            this.widget = widget;
+                            console.log(this.widget);
+                        }
+                    );
                 }
+
             );
-        this.widgetService.findWidgetById(this.widgetId).subscribe(
-            (widget: any) => {
-                this.widget = widget;
-            }
-        );
     }
 
     updateWidget() {
 
+        this.widget.name = this.myWidgetForm.value.widgetname;
         // if name field is undefined then set error 'flag' to true making 'error' and 'alert' message visible
         if (this.widget['name'] === undefined) {
             this.flag = true;

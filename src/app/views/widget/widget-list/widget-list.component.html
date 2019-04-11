@@ -1,8 +1,8 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light justify-content-start">
-  <a class="nav-item nav-link" routerLink="/user/{{userId}}/website/{{websiteId}}/page">
+  <a class="nav-item nav-link" routerLink="/website/{{websiteId}}/page">
     <i class="fas fa-chevron-left black-icons"></i></a>
   <a class="navbar-brand  white-icons" >Widgets</a>
-  <a class="nav-item nav-link ml-auto" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new">
+  <a class="nav-item nav-link ml-auto" routerLink="/website/{{websiteId}}/page/{{pageId}}/widget/new">
     <i class="fas fa-plus black-icons"></i></a>
 </nav>
 
@@ -17,18 +17,18 @@
 
                 <div *ngSwitchCase="'HEADER'">
                   <div class="float-right">
-                    <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget" class="float-right">
+                    <a routerLink="/website/{{websiteId}}/page/{{pageId}}/widget" class="float-right">
                       <i class="fas fa-bars"></i></a>
-                    <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
+                    <a routerLink="/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
                       <i class="fas fa-cog"></i></a>
                   </div>
                   <p [ngStyle]="{'font-size': widget.size+'00%', 'text-align': 'center'}">{{widget.text}}</p>
                 </div>
                 <div *ngSwitchCase="'TEXT'">
                   <div class="float-right">
-                    <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget" class="float-right">
+                    <a routerLink="/website/{{websiteId}}/page/{{pageId}}/widget" class="float-right">
                       <i class="fas fa-bars"></i></a>
-                    <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
+                    <a routerLink="/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
                       <i class="fas fa-cog"></i></a>
                   </div>
                   <div *ngIf="widget.formatted">
@@ -45,9 +45,9 @@
 
                 <div *ngSwitchCase="'IMAGE'">
                   <div class="float-right">
-                    <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget" class="float-right">
+                    <a routerLink="/website/{{websiteId}}/page/{{pageId}}/widget" class="float-right">
                       <i class="fas fa-bars"></i></a>
-                    <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
+                    <a routerLink="/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
                       <i class="fas fa-cog"></i></a>
                   </div>
                   <img class="img-responsive img-rounded cl-widget-images" [src]="widget.url" [width]="toNumber(widget.width) * 640">
@@ -56,26 +56,26 @@
 
                 <div *ngSwitchCase="'YOUTUBE'"  class="youtube-widget">
                   <div class="float-right">
-                    <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget" class="float-right">
+                    <a routerLink="/website/{{websiteId}}/page/{{pageId}}/widget" class="float-right">
                       <i class="fas fa-bars"></i></a>
-                    <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
+                    <a routerLink="/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
                       <i class="fas fa-cog"></i></a>
                   </div>
                   <div class="embed-responsive embed-responsive-16by9" >
                     <iframe [width]="toNumber(widget.width) * 640" [height]="toNumber(widget.width) * 360"
                             [src]="sanitizer.bypassSecurityTrustResourceUrl(widget.url)" frameborder="0" allowfullscreen></iframe>
-                    <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget" class="pull-right">
+                    <a routerLink="/website/{{websiteId}}/page/{{pageId}}/widget" class="pull-right">
                       <span class="glyphicon glyphicon-menu-hamburger"></span></a>
-                    <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}" class="pull-right">
+                    <a routerLink="/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}" class="pull-right">
                       <span class="glyphicon glyphicon-cog"></span></a>
                   </div>
                 </div>
 
                 <div *ngSwitchCase="'HTML'">
                   <div class="float-right">
-                    <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget" class="float-right">
+                    <a routerLink="/website/{{websiteId}}/page/{{pageId}}/widget" class="float-right">
                       <i class="fas fa-bars"></i></a>
-                    <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
+                    <a routerLink="/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
                       <i class="fas fa-cog"></i></a>
                   </div>
                   <div [innerHTML]="widget.text"></div>
@@ -91,11 +91,11 @@
 
 
 <nav class="navbar navbar-expand-lg navbar-primary bg-light justify-content-start fixed-bottom">
-  <a class="nav-item nav-link navblack " routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget">
+  <a class="nav-item nav-link navblack " routerLink="/website/{{websiteId}}/page/{{pageId}}/widget">
     <i class="fas fa-play"></i></a>
-  <a class="nav-item nav-link navblack" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget">
+  <a class="nav-item nav-link navblack" routerLink="/website/{{websiteId}}/page/{{pageId}}/widget">
     <i class="fas fa-eye"></i></a>
-  <a class="nav-item nav-link ml-auto navblack" routerLink="/user/{{userId}}"><i class="  fas fa-user"></i></a>
+  <a class="nav-item nav-link ml-auto navblack" routerLink="/profile"><i class="  fas fa-user"></i></a>
 </nav>
 
 

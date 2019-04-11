@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PageService} from '../../../services/page.service.client';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-page-edit',
@@ -8,16 +9,16 @@ import {PageService} from '../../../services/page.service.client';
   styleUrls: ['./page-edit.component.css']
 })
 export class PageEditComponent implements OnInit {
-
-    userId: String;
+    @ViewChild('f') myPageForm: NgForm;
     websiteId: String;
-    pages: any;
     pageId: String;
     page: any;
 
     constructor(private pageService: PageService, private activatedRoute: ActivatedRoute) {}
 
     updatePage() {
+        this.page.name = this.myPageForm.value.pagename;
+        this.page.title = this.myPageForm.value.pagetitle;
         this.pageService.updatePage(this.pageId, this.page).subscribe((page: any) => {
             console.log('update page: ' + page._id + ' ' + page.name);
         });
@@ -32,15 +33,14 @@ export class PageEditComponent implements OnInit {
         this.activatedRoute.params
             .subscribe(
                 (params: any) => {
-                    this.userId = params['uid'];
                     this.websiteId = params['wid'];
                     this.pageId = params['pid'];
                 }
             );
         this.pageService.findPageById(this.pageId).subscribe((page: any) => {
             this.page = page;
+            console.log(this.page);
         });
-        console.log(this.page);
     }
 
 }

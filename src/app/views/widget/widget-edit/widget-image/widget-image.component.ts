@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {WidgetService} from '../../../../services/widget.service.client';
 import {environment} from '../../../../../environments/environment';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-widget-image',
@@ -9,12 +10,12 @@ import {environment} from '../../../../../environments/environment';
   styleUrls: ['./widget-image.component.css']
 })
 export class WidgetImageComponent implements OnInit {
-
+    @ViewChild('f') myWidgetForm: NgForm;
     flag = false; // setting error flag as false by default
-    userId: string;
     websiteId: string;
     pageId: string;
     widgetId: string;
+    userId: string;
     widget: any;
     widgets: any;
     baseUrl = environment.baseUrl;
@@ -24,7 +25,6 @@ export class WidgetImageComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute.params.subscribe(
             (params: any) => {
-                this.userId = params['uid'];
                 this.websiteId = params['wid'];
                 this.pageId = params['pid'];
                 this.widgetId = params['wgid'];
@@ -39,13 +39,17 @@ export class WidgetImageComponent implements OnInit {
 
     updateWidget() {
 
+        this.widget.name = this.myWidgetForm.value.widgetname;
+        console.log('start update widget image: ');
         // if name field is undefined then set error 'flag' to true making 'error' and 'alert' message visible
         if (this.widget['name'] === undefined) {
+            console.log('fail update widget image: ');
             this.flag = true;
         } else {
+            console.log('trying update widget image: ');
             this.widgetService.updateWidget(this.widget._id, this.widget).subscribe(
                 (widget: any) => {
-                    console.log('update widget header: ');
+                    console.log('update widget image: ');
                 });
         }
     }

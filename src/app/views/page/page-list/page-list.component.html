@@ -1,5 +1,5 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light justify-content-start">
-  <a class="nav-item nav-link" routerLink="/user/{{userId}}/website"><i class="fas fa-chevron-left black-icons"></i></a>
+  <a class="nav-item nav-link" routerLink="/website"><i class="fas fa-chevron-left black-icons"></i></a>
   <a class="navbar-brand  white-icons" [routerLink]="">Pages</a>
   <a class="nav-item nav-link ml-auto" routerLink="./new">
     <i class="fas fa-plus black-icons"></i></a>
@@ -8,16 +8,16 @@
   <div class="container move-up" *ngIf="pages">
     <ul class="list-group border-0">
       <li class="list-group-item border-0 " *ngFor="let page of pages">
-        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{page._id}}"><span>
+        <a routerLink="/website/{{websiteId}}/page/{{page._id}}"><span>
         <i class="fas fa-cog float-right setting"></i></span></a>
-        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{page._id}}/widget">{{page.name}}</a>
+        <a routerLink="/website/{{websiteId}}/page/{{page._id}}/widget">{{page.name}}</a>
       </li>
     </ul>
 </div>
 
 <nav class="navbar fixed-bottom bg-light navbar-light justify-content-end">
   <div class="container-fuild">
-    <a routerLink="/user/{{userId}}" class="navbar-link navbar-text float-right">
+    <a routerLink="/profile" class="navbar-link navbar-text float-right">
       <i class="fas fa-user blue"></i>
     </a>
   </div>

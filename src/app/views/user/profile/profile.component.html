@@ -23,11 +23,11 @@
     </div>
 
   <a class="btn btn-primary btn-block"
-     routerLink="/user/{{userId}}/website">Websites</a>
+     routerLink="/website">Websites</a>
     <a class="btn btn-danger btn-block"
        (click)="deleteUser()" routerLink="/login">Delete User</a>
   <a class="btn btn-danger  btn-block"
-     routerLink="/login">Logout</a>
+     (click)="logout()" routerLink="/login">Logout</a>
 </div>
 
 <nav class="navbar fixed-bottom navbar-dark bg-primary">
