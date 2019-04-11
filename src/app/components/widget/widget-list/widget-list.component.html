@@ -1,0 +1,101 @@
+<body>
+<nav class="navbar fixed-top cl-grey-navbar">
+  <div class="container-fluid">
+    <div>
+      <a routerLink="../"
+         class="navbar-brand cl-text-black cl-icon-padding">
+        <i class="fas fa-angle-left"></i>
+      </a>
+      <h1 class="navbar-brand cl-text-black cl-text-bold cl-text-grey">
+        Widgets
+      </h1>
+    </div>
+    <a routerLink="./new"
+       class="navbar-brand cl-text-black float-right cl-icon-padding">
+      <i class="fas fa-plus"></i>
+    </a>
+  </div>
+</nav>
+
+<div class="container cl-container-padding-more">
+  <div appSortable (newIndexes) = "onNewIndexes($event)">
+    <div *ngFor="let widget of widgets">
+      <div *ngIf="widget.widgetType === 'HEADING'">
+        <div class="float-right">
+          <a class="float-right cl-text-blue fa fa-bars"></a>
+          <a routerLink="{{widget._id}}"
+             class="fa fa-cog cl-text-blue"></a>
+        </div>
+        <font size="{{widget.size}}"> {{widget.text}}</font>
+      </div>
+
+      <div *ngIf="widget.widgetType === 'IMAGE'">
+        <div class="float-right">
+          <a class="float-right cl-text-blue fa fa-bars"></a>
+          <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}"
+             class="fa fa-cog cl-text-blue"></a>
+        </div>
+        <img class="img-responsive img-rounded cl-widget-images" [style.width]="widget.width" src="{{widget.url}}">
+      </div>
+
+      <div *ngIf="widget.widgetType === 'YOUTUBE'">
+        {{getSantizeUrl(widget.url)}}
+        <div class="float-right">
+          <a class="float-right cl-text-blue fa fa-bars"></a>
+          <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}"
+             class="fas fa-cog cl-text-blue"></a>
+        </div>
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="e2e-iframe-trusted-src" [src]="getSantizeUrl(widget.url)" frameborder="0"></iframe>
+        </div>
+      </div>
+
+      <div *ngIf="widget.widgetType == 'HTML'">
+        <div class="float-right">
+          <a class="float-right cl-text-blue fa fa-bars"></a>
+          <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}"
+             class="fa fa-cog cl-text-blue"></a>
+        </div>
+        <h3>{{widget.name}}</h3>
+        <div [innerHTML]="widget.text"></div>
+      </div>
+
+      <div *ngIf="widget.widgetType == 'TEXT'">
+        <div class="float-right">
+          <a class="float-right cl-text-blue fa fa-bars"></a>
+          <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}"
+             class="fa fa-cog cl-text-blue"></a>
+        </div>
+        <div *ngIf="widget.formatted">
+          <quill-editor [(ngModel)]="widget.text" name="text"></quill-editor>
+        </div>
+
+        <input *ngIf="!widget.formatted && (!widget.rows || widget.rows===1)"
+               placeholder="{{widget.placeholder}}" class="form-control"/>
+
+        <textarea *ngIf="!widget.formatted && (widget.rows > 1)"
+                  rows="{{widget.rows}}" placeholder="{{widget.placeholder}}"
+                  class="form-control">{{widget.text}}</textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<nav class="navbar fixed-bottom cl-grey-navbar">
+  <div class="container-fluid">
+    <div>
+      <a class="navbar-brand cl-icon-padding cl-text-blue">
+        <i class="fas fa-play cl-text-grey"></i>
+      </a>
+      <a class="navbar-brand cl-icon-padding cl-text-blue">
+        <i class="fas fa-eye cl-text-grey"></i>
+      </a>
+    </div>
+    <a routerLink="/profile" class="navbar-brand cl-icon-padding cl-text-blue float-right">
+      <i class="fas fa-user cl-text-blue"></i>
+    </a>
+  </div>
+</nav>
+
+</body>

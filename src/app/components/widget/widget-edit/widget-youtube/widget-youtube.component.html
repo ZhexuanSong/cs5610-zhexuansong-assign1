@@ -1,0 +1,53 @@
+<div *ngIf="errorFlag"
+     class="alert alert-danger text-center">
+  {{errorMsg}}
+</div>
+<nav class="navbar fixed-top cl-grey-navbar">
+  <div class="container-fluid">
+    <div>
+      <a [routerLink]="['..']" class="navbar-brand cl-text-black cl-icon-padding">
+        <i class="fas fa-angle-left"></i>
+      </a>
+      <h1 class="navbar-brand cl-text-black cl-text-bold cl-text-grey">
+        Widgets Edit
+      </h1>
+    </div>
+    <a (click)="updateWidget()" class="navbar-brand cl-text-black float-right cl-icon-padding">
+      <i class="fas fa-check"></i>
+    </a>
+  </div>
+</nav>
+
+<div class="container">
+  <form>
+    <div class="form-group">
+      <label for="youtube-name">Name</label>
+      <input [(ngModel)]="widget.name" name="name" type="text" class="form-control" id="youtube-name"
+             placeholder="Colyplay-Scientist">
+    </div>
+    <div class="form-group">
+      <label for="youtube-text">Text</label>
+      <input [(ngModel)]="widget.text" name="text" type="text" class="form-control" id="youtube-text" placeholder="Text">
+    </div>
+    <div class="form-group">
+      <label for="youtube-URL">URL</label>
+      <input [(ngModel)]="widget.url" name="url" type="text" class="form-control" id="youtube-URL"
+             placeholder="https://www.youtube.com/watch?v=-w4VyQLjw3Y">
+    </div>
+    <div class="form-group">
+      <label for="youtube-width">Width</label>
+      <input [(ngModel)]="widget.width" name="width" type="text" class="form-control" id="youtube-width"
+             placeholder="100%">
+    </div>
+  </form>
+  <a class="btn btn-danger btn-block" (click)="deleteWidget()">Delete</a>
+</div>
+
+<nav class="navbar fixed-bottom cl-grey-navbar">
+  <div class="container-fluid justify-content-end">
+    <a routerLink="/profile" class="navbar-brand cl-icon-padding cl-text-blue">
+      <span class="fas fa-user"></span>
+    </a>
+  </div>
+</nav>
+

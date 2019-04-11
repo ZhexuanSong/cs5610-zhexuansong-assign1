@@ -1,0 +1,40 @@
+<body>
+<nav class="navbar fixed-top cl-grey-navbar">
+  <div class="container-fluid">
+    <div>
+      <a routerLink="../.."
+         class="navbar-brand cl-text-black cl-icon-padding">
+        <i class="fas fa-angle-left"></i>
+      </a>
+      <h1 class="navbar-brand cl-text-black cl-text-bold cl-text-grey" routerLink=".">
+        Pages
+      </h1>
+    </div>
+    <a routerLink="./new"
+       class="navbar-brand cl-text-black float-right cl-icon-padding">
+      <i class="fas fa-plus"></i>
+    </a>
+
+  </div>
+</nav>
+
+<div class="container">
+  <ul class="pages">
+    <li *ngFor="let page of pages"
+        class="list-group-item cl-list-item-borderless d-flex justify-content-between">
+      <a routerLink="./{{page._id}}/widget"
+         class="cl-text-blue">{{page.name}}</a>
+      <a routerLink="./{{page._id}}"
+         class="cl-text-blue"><span class="fas fa-cog cl-text-blue"></span></a>
+    </li>
+  </ul>
+</div>
+
+<nav class="navbar fixed-bottom cl-grey-navbar">
+  <div class="container-fluid justify-content-end">
+    <a routerLink="/profile" class="navbar-brand cl-icon-padding">
+      <span class="fas fa-user cl-text-blue"></span>
+    </a>
+  </div>
+</nav>
+</body>

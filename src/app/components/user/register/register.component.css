@@ -1,0 +1,7 @@
+.help-block {
+  color: red;
+  font-size: 0.8rem;
+}
+.help-block::before {
+  content: '* ';
+}
