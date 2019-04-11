@@ -9,7 +9,7 @@ module.exports = function (app) {
 
     app.post("/api/user", createUser);
     //app.get("/api/user?username=*", findUserByName);
-    app.get("/api/user?", findUserByCredentials);
+    app.get("/api/user", findUserByCredentials);
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);
     app.delete("/api/user/:userId", deleteUser);
@@ -19,11 +19,11 @@ module.exports = function (app) {
 
     app.post ('/api/register', register);
 
-    app.get ('/api/loggedin', loggedin);
+    app.post('/api/loggedin', loggedin);
 
     app.get ('/facebook/login', passport.authenticate('facebook', { scope : 'email' }));
     app.get('/auth/facebook/callback', 
-        passport.authenticate('facebook', {  successRedirect: '/profile/',  failureRedirect: '/login' }));
+        passport.authenticate('facebook', {  successRedirect: '/profile',  failureRedirect: '/login' }));
 
     const facebookConfig = {
         clientID: process.env.FACEBOOK_CLIENT_ID,
