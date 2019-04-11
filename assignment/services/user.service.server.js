@@ -23,7 +23,7 @@ module.exports = function (app) {
 
     app.get ('/facebook/login', passport.authenticate('facebook', { scope : 'email' }));
     app.get('/auth/facebook/callback', 
-        passport.authenticate('facebook', {  successRedirect: '/#/profile/',  failureRedirect: '/#/login' }));
+        passport.authenticate('facebook', {  successRedirect: '/profile/',  failureRedirect: '/login' }));
 
     const facebookConfig = {
         clientID: process.env.FACEBOOK_CLIENT_ID,
