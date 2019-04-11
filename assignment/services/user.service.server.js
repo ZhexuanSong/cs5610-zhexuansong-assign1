@@ -79,14 +79,7 @@ module.exports = function (app) {
     }
 
     function loggedin(req, res) {
-        let isAuthenticated = req.isAuthenticated();
-        console.log('server loggedin authenticated: ' + isAuthenticated);
-        let user = '0';
-        if (isAuthenticated) {
-            user = req.user;
-        }
-        console.log('server loggedin: ' + user);
-        res.json(user);
+        res.send(req.isAuthenticated() ? req.user : '0');
     }
 
     function register (req, res) {
