@@ -13,9 +13,7 @@ export class UserService {
     baseUrl = environment.baseUrl;
     options = new HttpHeaders().set('Content-Type', 'application/json');
 
-    createUser(user: any) {
-        return this._http.post(this.baseUrl + '/api/user/', user);
-    }
+
 
     findUserById(userId: String) {
         return this._http.get(this.baseUrl + '/api/user/' + userId);
@@ -80,7 +78,7 @@ export class UserService {
     }
 
     loggedIn() {
-        return this._http.get(this.baseUrl + '/api/loggedIn', {headers: this.options, withCredentials: true})
+        return this._http.post(this.baseUrl + '/api/loggedIn', {headers: this.options, withCredentials: true})
             .pipe(map(
                 (res: any) => {
                     // const user = JSON.stringify(res);
