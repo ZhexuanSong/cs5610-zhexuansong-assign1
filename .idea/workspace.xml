@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e31a430e-6943-4a61-a096-f8b69cce855e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/dist/xuanproject/3rdpartylicenses.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/02408ac568cb79c8c9e7e1a0c50165cc" beforeDir="false" afterPath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/02408ac568cb79c8c9e7e1a0c50165cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/042a0cbcd50a039a282d9741f5f2932f" beforeDir="false" afterPath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/042a0cbcd50a039a282d9741f5f2932f" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/1552954900594.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/1552954900594.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/356e29d99357053b5a06435f99c84931" beforeDir="false" afterPath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/356e29d99357053b5a06435f99c84931" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/361f9a7507510c59c75ffde8b6b69fa1" beforeDir="false" afterPath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/361f9a7507510c59c75ffde8b6b69fa1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/4ec2162b9e4e79ef59adcca65ed2bac0" beforeDir="false" afterPath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/4ec2162b9e4e79ef59adcca65ed2bac0" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/a3ac0ec416be1223cde98c5eb5e491fe" beforeDir="false" afterPath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/a3ac0ec416be1223cde98c5eb5e491fe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/dea0d8eeaa474386f6202d306cddb223" beforeDir="false" afterPath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/dea0d8eeaa474386f6202d306cddb223" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/xuanproject/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/dist/xuanproject/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/xuanproject/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/xuanproject/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/xuanproject/main.65acb0620952f4fe1579.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/xuanproject/polyfills.f5ce8ecea387adbb1689.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/xuanproject/runtime.b57bf819d5bdce77f1c7.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/xuanproject/styles.a6c0ae912e7b34313b40.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-    </list>
+    <list default="true" id="e31a430e-6943-4a61-a096-f8b69cce855e" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -47,8 +29,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
+            <state relative-caret-position="195">
+              <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
             </state>
           </provider>
         </entry>
@@ -268,18 +250,17 @@
       <workItem from="1550794879734" duration="1777000" />
       <workItem from="1550802628009" duration="3712000" />
       <workItem from="1554946808082" duration="1057000" />
-      <workItem from="1554948291573" duration="271000" />
+      <workItem from="1554948291573" duration="371000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33509000" />
+    <option name="totallyTimeSpent" value="33609000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="5" y="23" width="1400" height="761" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49886104" visible="true" weight="0.24945612" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49886104" visible="true" weight="0.24945612" />
       <window_info id="Structure" order="1" sideWeight="0.5011389" side_tool="true" weight="0.24945612" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -293,7 +274,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.17638266" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.17638266" />
       <window_info anchor="bottom" id="TypeScript" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -430,8 +411,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
+        <state relative-caret-position="195">
+          <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
         </state>
       </provider>
     </entry>
