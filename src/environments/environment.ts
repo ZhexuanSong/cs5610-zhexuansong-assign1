@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:3200'
+  baseUrl: 'https://webdev-zhexuan-cs5610.herokuapp.com'
 };
 
 /*
