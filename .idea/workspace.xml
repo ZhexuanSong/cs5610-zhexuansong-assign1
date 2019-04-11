@@ -2,7 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e31a430e-6943-4a61-a096-f8b69cce855e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/dist/xuanproject/3rdpartylicenses.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/02408ac568cb79c8c9e7e1a0c50165cc" beforeDir="false" afterPath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/02408ac568cb79c8c9e7e1a0c50165cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/042a0cbcd50a039a282d9741f5f2932f" beforeDir="false" afterPath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/042a0cbcd50a039a282d9741f5f2932f" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/1552954900594.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/1552954900594.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/356e29d99357053b5a06435f99c84931" beforeDir="false" afterPath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/356e29d99357053b5a06435f99c84931" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/361f9a7507510c59c75ffde8b6b69fa1" beforeDir="false" afterPath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/361f9a7507510c59c75ffde8b6b69fa1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/4ec2162b9e4e79ef59adcca65ed2bac0" beforeDir="false" afterPath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/4ec2162b9e4e79ef59adcca65ed2bac0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/a3ac0ec416be1223cde98c5eb5e491fe" beforeDir="false" afterPath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/a3ac0ec416be1223cde98c5eb5e491fe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/dea0d8eeaa474386f6202d306cddb223" beforeDir="false" afterPath="$PROJECT_DIR$/dist/xuanproject/assets/uploads/dea0d8eeaa474386f6202d306cddb223" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/xuanproject/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/dist/xuanproject/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/xuanproject/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/xuanproject/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/xuanproject/main.65acb0620952f4fe1579.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/xuanproject/polyfills.f5ce8ecea387adbb1689.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/xuanproject/runtime.b57bf819d5bdce77f1c7.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/xuanproject/styles.a6c0ae912e7b34313b40.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/dist/" />
@@ -29,25 +45,29 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/server.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="398">
+              <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/environments/environment.prod.ts">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test.ts">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/polyfills.ts">
+        <entry file="file://$PROJECT_DIR$/src/tslint.json">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="32" column="23" lean-forward="true" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
+            <state relative-caret-position="480">
+              <caret line="32" column="23" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -55,8 +75,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package-lock.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-274">
-              <caret line="129" column="24" lean-forward="true" selection-start-line="129" selection-start-column="24" selection-end-line="129" selection-end-column="24" />
+            <state relative-caret-position="1935">
+              <caret line="129" column="24" selection-start-line="129" selection-start-column="24" selection-end-line="129" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -70,7 +90,7 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="-134" />
+              <first_editor />
               <second_editor />
             </state>
           </provider>
@@ -120,7 +140,6 @@
         <option value="$PROJECT_DIR$/dist/my-project/index.html" />
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/src/index.html" />
         <option value="$PROJECT_DIR$/src/app/views/user/register/register.component.html" />
         <option value="$PROJECT_DIR$/src/app/app.component.html" />
@@ -129,6 +148,7 @@
         <option value="$PROJECT_DIR$/src/app/components/user/profile/profile.component.html" />
         <option value="$PROJECT_DIR$/src/app/user.service.ts" />
         <option value="$PROJECT_DIR$/src/app/components/user/profile/profile.component.ts" />
+        <option value="$PROJECT_DIR$/server.js" />
       </list>
     </option>
   </component>
@@ -248,22 +268,24 @@
       <workItem from="1550794879734" duration="1777000" />
       <workItem from="1550802628009" duration="3712000" />
       <workItem from="1554946808082" duration="1057000" />
+      <workItem from="1554948291573" duration="271000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33238000" />
+    <option name="totallyTimeSpent" value="33509000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="5" y="23" width="1400" height="761" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49886104" visible="true" weight="0.24945612" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49886104" visible="true" weight="0.24945612" />
       <window_info id="Structure" order="1" sideWeight="0.5011389" side_tool="true" weight="0.24945612" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32924962" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32884902" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39969373" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -271,7 +293,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.17764166" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.17638266" />
       <window_info anchor="bottom" id="TypeScript" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -282,18 +304,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/app/app.component.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/app.component.spec.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-564">
-          <folding>
-            <element signature="e#0#55#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/views/user/register/register.component.html" />
     <entry file="file://$PROJECT_DIR$/src/index.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -338,142 +348,75 @@
     <entry file="file://$PROJECT_DIR$/src/app/views/page/page-edit/page-edit.component.ts" />
     <entry file="file://$PROJECT_DIR$/src/app/views/user/login/login.component.ts" />
     <entry file="file://$PROJECT_DIR$/src/app/views/user/login/login.component.html" />
-    <entry file="file://$PROJECT_DIR$/dist/my-project/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/my-project/polyfills.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="7" column="7" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/page-new.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/website-new.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/widget-youtube.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/profile.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/profilebar/profilebar.component.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/page.service.spec.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/page.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-74" />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/my-project/index.html" />
+    <entry file="file://$PROJECT_DIR$/dist/my-project/polyfills.js" />
+    <entry file="file://$PROJECT_DIR$/public/login.html" />
+    <entry file="file://$PROJECT_DIR$/public/page-new.html" />
+    <entry file="file://$PROJECT_DIR$/public/website-new.html" />
+    <entry file="file://$PROJECT_DIR$/public/widget-youtube.html" />
+    <entry file="file://$PROJECT_DIR$/public/index.html" />
+    <entry file="file://$PROJECT_DIR$/public/profile.html" />
+    <entry file="file://$PROJECT_DIR$/src/app/components/profilebar/profilebar.component.html" />
+    <entry file="file://$PROJECT_DIR$/src/app/page.service.spec.ts" />
+    <entry file="file://$PROJECT_DIR$/src/app/page.service.ts" />
     <entry file="file://$PROJECT_DIR$/tsconfig.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/tslint.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/user.service.spec.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/user/profile/profile.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="598">
-          <caret line="30" column="25" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#68#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/user/register/register.component.html">
+    <entry file="file://$PROJECT_DIR$/src/app/user.service.spec.ts" />
+    <entry file="file://$PROJECT_DIR$/src/app/components/user/profile/profile.component.ts" />
+    <entry file="file://$PROJECT_DIR$/src/app/components/user/register/register.component.html" />
+    <entry file="file://$PROJECT_DIR$/src/app/components/user/register/register.component.ts" />
+    <entry file="file://$PROJECT_DIR$/src/app/components/website/website-edit/website-edit.component.html" />
+    <entry file="file://$PROJECT_DIR$/src/app/user.service.ts" />
+    <entry file="file://$PROJECT_DIR$/src/app/website.service.ts" />
+    <entry file="file://$PROJECT_DIR$/src/app/components/user/profile/profile.component.html" />
+    <entry file="file://$PROJECT_DIR$/src/app/components/user/profile/profile.component.spec.ts" />
+    <entry file="file://$PROJECT_DIR$/src/app/components/website/website-edit/website-edit.component.ts" />
+    <entry file="file://$PROJECT_DIR$/src/test.ts">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/user/register/register.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#61#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/website/website-edit/website-edit.component.html">
+    <entry file="file://$PROJECT_DIR$/src/polyfills.ts">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/user.service.ts">
+    <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="480">
+          <caret line="32" column="23" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/website.service.ts">
+    <entry file="file://$PROJECT_DIR$/package-lock.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1935">
+          <caret line="129" column="24" selection-start-line="129" selection-start-column="24" selection-end-line="129" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/user/profile/profile.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+    <entry file="file://$PROJECT_DIR$/Procfile">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/user/profile/profile.component.spec.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#73#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/src/styles.css">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/website/website-edit/website-edit.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#68#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/src/tsconfig.app.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tslint.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/environments/environment.prod.ts">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/environments/environment.ts">
       <provider selected="true" editor-type-id="text-editor">
@@ -485,45 +428,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/polyfills.ts">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
+    <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="32" column="23" lean-forward="true" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
+        <state relative-caret-position="398">
+          <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Procfile">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="-134" />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/styles.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test.ts">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsconfig.app.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package-lock.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-274">
-          <caret line="129" column="24" lean-forward="true" selection-start-line="129" selection-start-column="24" selection-end-line="129" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/environments/environment.prod.ts">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>
