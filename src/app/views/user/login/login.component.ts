@@ -43,11 +43,5 @@ export class LoginComponent implements OnInit {
           );
   }
 
-  // facebook() {
-  //     this._userService.facebook().subscribe((user: any) => {
-  //         console.log(user);
-  //         this.sharedService.user = user;
-  //     });
-  // }
 
 }

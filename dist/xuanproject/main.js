@@ -72,16 +72,16 @@ var routes = [
     { path: 'login', component: _views_user_login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"] },
     { path: 'register', component: _views_user_register_register_component__WEBPACK_IMPORTED_MODULE_5__["RegisterComponent"] },
     { path: 'profile', component: _views_user_profile_profile_component__WEBPACK_IMPORTED_MODULE_4__["ProfileComponent"], canActivate: [_services_auth_service_client__WEBPACK_IMPORTED_MODULE_16__["AuthGuard"]] },
-    { path: 'website', component: _views_website_website_list_website_list_component__WEBPACK_IMPORTED_MODULE_6__["WebsiteListComponent"] },
-    { path: 'website/new', component: _views_website_website_new_website_new_component__WEBPACK_IMPORTED_MODULE_7__["WebsiteNewComponent"] },
-    { path: 'website/:wid', component: _views_website_website_edit_website_edit_component__WEBPACK_IMPORTED_MODULE_8__["WebsiteEditComponent"] },
-    { path: 'website/:wid/page', component: _views_page_page_list_page_list_component__WEBPACK_IMPORTED_MODULE_9__["PageListComponent"] },
-    { path: 'website/:wid/page/new', component: _views_page_page_new_page_new_component__WEBPACK_IMPORTED_MODULE_10__["PageNewComponent"] },
-    { path: 'website/:wid/page/:pid', component: _views_page_page_edit_page_edit_component__WEBPACK_IMPORTED_MODULE_11__["PageEditComponent"] },
-    { path: 'website/:wid/page/:pid/widget', component: _views_widget_widget_list_widget_list_component__WEBPACK_IMPORTED_MODULE_12__["WidgetListComponent"] },
-    { path: 'website/:wid/page/:pid/widget/new', component: _views_widget_widget_chooser_widget_chooser_component__WEBPACK_IMPORTED_MODULE_13__["WidgetChooserComponent"] },
+    { path: 'website', component: _views_website_website_list_website_list_component__WEBPACK_IMPORTED_MODULE_6__["WebsiteListComponent"], canActivate: [_services_auth_service_client__WEBPACK_IMPORTED_MODULE_16__["AuthGuard"]] },
+    { path: 'website/new', component: _views_website_website_new_website_new_component__WEBPACK_IMPORTED_MODULE_7__["WebsiteNewComponent"], canActivate: [_services_auth_service_client__WEBPACK_IMPORTED_MODULE_16__["AuthGuard"]] },
+    { path: 'website/:wid', component: _views_website_website_edit_website_edit_component__WEBPACK_IMPORTED_MODULE_8__["WebsiteEditComponent"], canActivate: [_services_auth_service_client__WEBPACK_IMPORTED_MODULE_16__["AuthGuard"]] },
+    { path: 'website/:wid/page', component: _views_page_page_list_page_list_component__WEBPACK_IMPORTED_MODULE_9__["PageListComponent"], canActivate: [_services_auth_service_client__WEBPACK_IMPORTED_MODULE_16__["AuthGuard"]] },
+    { path: 'website/:wid/page/new', component: _views_page_page_new_page_new_component__WEBPACK_IMPORTED_MODULE_10__["PageNewComponent"], canActivate: [_services_auth_service_client__WEBPACK_IMPORTED_MODULE_16__["AuthGuard"]] },
+    { path: 'website/:wid/page/:pid', component: _views_page_page_edit_page_edit_component__WEBPACK_IMPORTED_MODULE_11__["PageEditComponent"], canActivate: [_services_auth_service_client__WEBPACK_IMPORTED_MODULE_16__["AuthGuard"]] },
+    { path: 'website/:wid/page/:pid/widget', component: _views_widget_widget_list_widget_list_component__WEBPACK_IMPORTED_MODULE_12__["WidgetListComponent"], canActivate: [_services_auth_service_client__WEBPACK_IMPORTED_MODULE_16__["AuthGuard"]] },
+    { path: 'website/:wid/page/:pid/widget/new', component: _views_widget_widget_chooser_widget_chooser_component__WEBPACK_IMPORTED_MODULE_13__["WidgetChooserComponent"], canActivate: [_services_auth_service_client__WEBPACK_IMPORTED_MODULE_16__["AuthGuard"]] },
     { path: 'website/:wid/page/:pid/widget/:wgid', component: _views_widget_widget_edit_widget_edit_component__WEBPACK_IMPORTED_MODULE_14__["WidgetEditComponent"] },
-    { path: 'website/:wid/page/:pid/widget/:wgid/flickr', component: _views_widget_widget_edit_widget_image_flickr_image_search_flickr_image_search_component__WEBPACK_IMPORTED_MODULE_15__["FlickrImageSearchComponent"] },
+    { path: 'website/:wid/page/:pid/widget/:wgid/flickr', component: _views_widget_widget_edit_widget_image_flickr_image_search_flickr_image_search_component__WEBPACK_IMPORTED_MODULE_15__["FlickrImageSearchComponent"], canActivate: [_services_auth_service_client__WEBPACK_IMPORTED_MODULE_16__["AuthGuard"]] },
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -522,9 +522,6 @@ var UserService = /** @class */ (function () {
         this.baseUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl;
         this.options = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('Content-Type', 'application/json');
     }
-    UserService.prototype.createUser = function (user) {
-        return this._http.post(this.baseUrl + '/api/user/', user);
-    };
     UserService.prototype.findUserById = function (userId) {
         return this._http.get(this.baseUrl + '/api/user/' + userId);
     };
@@ -579,7 +576,7 @@ var UserService = /** @class */ (function () {
     };
     UserService.prototype.loggedIn = function () {
         var _this = this;
-        return this._http.get(this.baseUrl + '/api/loggedIn', { headers: this.options, withCredentials: true })
+        return this._http.post(this.baseUrl + '/api/loggedIn', { headers: this.options, withCredentials: true })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (res) {
             // const user = JSON.stringify(res);
             var user = res;
@@ -2394,7 +2391,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 var environment = {
     production: false,
-    baseUrl: 'http://localhost:3200'
+    baseUrl: 'http://localhost:4200'
 };
 /*
  * For easier debugging in development mode, you can import the following file
